@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod, abstractclassmethod
 import argparse
 import os
+import sys
 
 import config
 import git
@@ -27,19 +28,34 @@ class CommitCommand(CliCommand):
             "-m", "--message",
             metavar="MSG",
             help="Commit message to use.",
-            default="daily checkpoint"
+            default=(cm.commit_message or "checkpoint")
+        )
+        parser.add_argument(
+            "-r", "--remote",
+            metavar="REMOTE",
+            help="Name of the configured Git remote to push to.",
+            default=(cm.commit_remote or "origin"),
         )
         parser.add_argument(
             "-l", "--local",
             help="Don't push the results to any configured remote repository.",
-            action="store_true"
+            action="store_true",
         )
 
     def execute(self, args: argparse.Namespace) -> None:
+        if cm.commit_require_branch:
+            current_branch = git.read("rev-parse", "--abbrev-ref", "HEAD")
+            if current_branch != cm.commit_require_branch:
+                print(f"You are on the '{current_branch}' branch, "
+                      f"but your TZK configuration requires you to be on the "
+                      f"'{cm.commit_require_branch}' branch to commit.",
+                      file=sys.stderr)
+                sys.exit(1)
+
         git.exec("add", "-A")
         git.exec("commit", "-m", args.message)
         if not args.local:
-            git.exec("push", "backup")
+            git.exec("push", args.remote)
 
 
 class ListenCommand(CliCommand):
