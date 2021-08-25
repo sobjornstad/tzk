@@ -22,17 +22,28 @@ class CommitCommand(CliCommand):
     @classmethod
     def setup_arguments(self, parser: argparse.ArgumentParser) -> None:
         parser.add_argument(
-            "-m, --message",
+            "-m", "--message",
             metavar="MSG",
             help="Commit message to use.",
-            default="daily checkpoint")
+            default="daily checkpoint"
+        )
+        parser.add_argument(
+            "-l", "--local",
+            help="Don't push the results to any configured remote repository.",
+            action="store_true"
+        )
 
     def execute(self, args: argparse.Namespace) -> None:
-        os.chdir("zk-wiki")
         git.exec("add", "-A")
         git.exec("commit", "-m", args.message)
-        git.exec("push", "backup")
+        if not args.local:
+            git.exec("push", "backup")
 
+
+import config
+
+os.chdir("zk-wiki")
+# TODO: confirm we're in the right directory
 
 parser = argparse.ArgumentParser()
 subparsers = parser.add_subparsers()
@@ -42,6 +53,4 @@ for command in CliCommand.__subclasses__():
     command.setup_arguments(subparser)
 
 args = parser.parse_args()
-print(type(args))
-9/0
 args._cls().execute(args)
