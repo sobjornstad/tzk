@@ -1,27 +1,37 @@
 from abc import ABC, abstractmethod, abstractclassmethod
 import argparse
+import os
+
+import git
 
 
 class CliCommand(ABC):
     @abstractclassmethod
-    def setup_arguments(self, parser):
+    def setup_arguments(self, parser: argparse.ArgumentParser) -> None:
         raise NotImplementedError
 
     @abstractmethod
-    def execute(self, parser):
+    def execute(self, parser: argparse.ArgumentParser) -> None:
         raise NotImplementedError
 
 
 class CommitCommand(CliCommand):
     cmd = "commit"
-    help = "Do a commit"
+    help = "Commit all changes to the wiki repository."
 
     @classmethod
-    def setup_arguments(self, parser):
-        pass
+    def setup_arguments(self, parser: argparse.ArgumentParser) -> None:
+        parser.add_argument(
+            "-m, --message",
+            metavar="MSG",
+            help="Commit message to use.",
+            default="daily checkpoint")
 
-    def execute(self, args):
-        print(f"We have committed!")
+    def execute(self, args: argparse.Namespace) -> None:
+        os.chdir("zk-wiki")
+        git.exec("add", "-A")
+        git.exec("commit", "-m", args.message)
+        git.exec("push", "backup")
 
 
 parser = argparse.ArgumentParser()
@@ -32,4 +42,6 @@ for command in CliCommand.__subclasses__():
     command.setup_arguments(subparser)
 
 args = parser.parse_args()
+print(type(args))
+9/0
 args._cls().execute(args)
