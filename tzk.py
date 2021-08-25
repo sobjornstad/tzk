@@ -2,7 +2,9 @@ from abc import ABC, abstractmethod, abstractclassmethod
 import argparse
 import os
 
+import config
 import git
+import tw
 
 
 class CliCommand(ABC):
@@ -40,7 +42,43 @@ class CommitCommand(CliCommand):
             git.exec("push", "backup")
 
 
-import config
+class ListenCommand(CliCommand):
+    cmd = "listen"
+    help = "Start a TiddlyWiki server in the current directory."
+
+    @classmethod
+    def setup_arguments(self, parser: argparse.ArgumentParser) -> None:
+        parser.add_argument(
+            "-p", "--port",
+            metavar="PORT",
+            help="Port to listen on.",
+            default=str(cm.listen_port or "8080"),
+        )
+        parser.add_argument(
+            "--username",
+            metavar="USERNAME",
+            default=cm.listen_username or "",
+            help="Username to use for basic authentication, if any.",
+        )
+        parser.add_argument(
+            "--password",
+            metavar="PASSWORD",
+            default=cm.listen_password or "",
+            help="Password to use for basic authentication, if any.",
+        )
+    
+    def execute(self, args: argparse.Namespace) -> None:
+        tw.exec(
+            [
+                ("listen",
+                 f"port={args.port}",
+                 f"username={args.username}",
+                 f"password={args.password}")
+            ]
+        )
+
+
+cm = config.ConfigurationManager()
 
 os.chdir("zk-wiki")
 # TODO: confirm we're in the right directory
