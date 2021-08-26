@@ -166,7 +166,12 @@ if not args._cls.cmd == "init":
         os.chdir(cm.wiki_folder)
     except FileNotFoundError:
         fail(f"Tried to change directory into the wiki_folder '{cm.wiki_folder}' "
-            f"specified in your config file, but that directory does not exist.")
-    # TODO: confirm we're in the right directory
+             f"specified in your config file, but that directory does not exist.")
+
+    if not os.path.exists("tiddlywiki.info"):
+        fail(f"After changing directory into {cm.wiki_folder} per your config file: "
+             f"Expected a 'tiddlywiki.info' file in {os.getcwd()}. "
+             f"Please check that your wiki is initialized "
+             f"and you specified the correct wiki_folder_name.")
 
 args._cls().execute(args)
