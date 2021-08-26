@@ -5,7 +5,7 @@ from pathlib import Path
 import re
 import shutil
 import tempfile
-from typing import List, Set, Tuple
+from typing import Dict, List, Set, Tuple
 
 import git
 import tw
@@ -185,3 +185,76 @@ def compile_html_file(
         Path(output_folder)
     )
     info(f"Successfully copied built output to {os.path.abspath(output_folder)}.")
+
+
+def _private_people_replacement_table() -> Dict[str, str]:
+    def _initials_from_tiddler_name(name: str) -> str:
+        m = re.match(r"^(?:Mr|Ms|Mx|The)(?P<camel_case_name>.*?)\.tid", name)
+        assert m
+        return '.'.join(i for i in m.group('camel_case_name') if i.isupper()) + '.'
+
+
+    # Build table of private people and their transformed initials.
+    tiddlers = (Path.cwd() / "tiddlers").glob("**/*.tid")
+    person_tiddlers = (i for i in tiddlers if re.match("^(Mr|Ms|Mx|The)", i.name))
+    private_person_tiddlers = []
+    for pt in person_tiddlers:
+        with pt.open() as f:
+            for line in f:
+                if line.startswith("tags:"):
+                    if re.search(r'\bPublic\b', line):
+                        # If there's a tags line in the file and it contains the
+                        # Public tag, we skip it.
+                        break
+                    else:
+                        # Otherwise, if there's a tags line in the file and it
+                        # doesn't contain the Public tag, it's private.
+                        private_person_tiddlers.append(pt)
+                        break
+                if not line.strip():
+                    # And if there's no tags line in the file at all,
+                    # it's private by default.
+                    private_person_tiddlers.append(pt)
+                    break
+    return {
+        i.name.replace('.tid', ''): _initials_from_tiddler_name(i.name)
+        for i in private_person_tiddlers
+    }
+
+
+@tzk_builder
+def replace_private_people() -> None:
+    "Replace the names of people who are not marked Public with their initials"
+    assert 'public_wiki_folder' in build_state
+
+    replacement_table = _private_people_replacement_table()
+    tid_files = (Path(build_state['public_wiki_folder']) / "tiddlers").glob("**/*.tid")
+
+    for tiddler in tid_files:
+        dirty = False
+        with tiddler.open() as f:
+            lines = f.readlines()
+        for idx, line in enumerate(lines):
+            for replace_person, replace_initials in replacement_table.items():
+                if replace_person in line:
+                    if '|' + replace_person + ']]' in line:
+                        # link with the person as the target only;
+                        # beware that you might have put something private in the text
+                        lines[idx] = line.replace(replace_person,
+                                                  'PrivatePerson')
+                    elif '[[' + replace_person + ']]' in line:
+                        # link with the person as the target and text
+                        lines[idx] = line.replace(replace_person,
+                                                  replace_initials + '|PrivatePerson')
+                    else:
+                        # camel-case link or unlinked reference in text;
+                        # or spurious substring, so rule that out with the '\b' search
+                        lines[idx] = re.sub(
+                            r"\b" + re.escape(replace_person) + r"\b",
+                            f'<<privateperson "{replace_initials}">>',
+                            line
+                        )
+                    dirty = True
+        if dirty:
+            with tiddler.open("w") as f:
+                f.writelines(lines)
