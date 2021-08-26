@@ -208,7 +208,7 @@ class BuildCommand(CliCommand):
 
 parser = argparse.ArgumentParser()
 subparsers = parser.add_subparsers()
-for command in CliCommand.__subclasses__():
+for command in sorted(CliCommand.__subclasses__(), key=lambda i: i.__name__):
     subparser = subparsers.add_parser(command.cmd, help=command.help)
     subparser.set_defaults(_cls=command)
     command.setup_arguments(subparser)  # type: ignore
