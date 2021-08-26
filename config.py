@@ -16,9 +16,10 @@ class ConfigurationManager:
             if child.is_file() and child.name.endswith('.py'):
                 mod_name = child.name.rsplit('.', 1)[0]
                 if mod_name == 'tzk_config':
+                    sys.path.insert(0, Path("__file__").parent)
                     sys.path.insert(0, str(self.config_path))
                     self.conf_mod = importlib.import_module(mod_name)
-                    del sys.path[0]
+                    del sys.path[0:1]
                     break
         else:
             fail(

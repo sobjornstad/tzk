@@ -3,6 +3,7 @@ import argparse
 import os
 import shutil
 import sys
+import traceback
 from typing import Optional
 
 from config import cm
@@ -145,6 +146,52 @@ class InitCommand(CliCommand):
         self._precheck()
         tw.install(args.wiki_name, args.tiddlywiki_version_spec, args.author)
 
+
+class BuildCommand(CliCommand):
+    cmd = "build"
+    help = ("Build another wiki or derivative product, "
+            "such as a public version of the wiki, "
+            "from this TZK repository.")
+
+    @classmethod
+    def setup_arguments(cls, parser: argparse.ArgumentParser) -> None:
+        parser.add_argument(
+            "product",
+            metavar="PRODUCT",
+            help="Name of the product you want to build (defined in your config file).",
+        )
+
+    def _precheck(self, product: str) -> None:
+        if cm.products is None:
+            fail("No 'products' dictionary is defined in your config file.")
+        if product not in cm.products:
+            fail(f"No '{product}' product found in the products dictionary "
+                 f"in your config file. (Available: {', '.join(cm.products.keys())})")
+        if not cm.products[product]:
+            fail(f"No build steps are defined in the '{product}' product "
+                 f"in your config file.")
+
+    def execute(self, args: argparse.Namespace) -> None:
+        self._precheck(args.product)
+
+        steps = cm.products[args.product]
+        print(f"tzk: Starting build of product '{args.product}'.")
+        print(f"tzk: Found {len(steps)} build steps.")
+
+        for idx, step in enumerate(steps, 1):
+            if hasattr(step, 'name'):
+                print(f"\ntzk: Step {idx}/{len(steps)}: {step.name}")
+            else:
+                print(f"\ntzk: Step {idx}/{len(steps)}")
+            try:
+                step()
+            except Exception as e:
+                print(f"\ntzk: Build of product '{args.product}' failed on step {failed}. "
+                      f"The original error follows:")
+                traceback.print_exc()
+                sys.exit(1)
+
+        print(f"\ntzk: Build of product '{args.product}' completed successfully.")
 
 
 parser = argparse.ArgumentParser()
