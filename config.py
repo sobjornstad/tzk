@@ -1,4 +1,5 @@
 import datetime
+import functools
 import importlib
 import os
 from pathlib import Path
@@ -53,5 +54,6 @@ class ConfigurationManager:
                 f.write(f"\n# Added automatically by tzk at {now}\n")
                 f.write(f'{attr} = "{value}"\n')
             return True
+
 
 cm = ConfigurationManager()

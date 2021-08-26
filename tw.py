@@ -7,7 +7,7 @@ import subprocess
 from textwrap import dedent
 from typing import Optional, Sequence
 
-from config import cm
+import config
 import git
 
 
@@ -96,12 +96,12 @@ def _save_wikifolder_to_config(wiki_name: str) -> bool:
     Return True if the option ended set to wiki_name, False otherwise.
     """
     print("tzk: Writing new wiki folder to config file...")
-    if not cm.write_attr("wiki_folder", wiki_name):
-        if cm.wiki_folder == wiki_name:
+    if not config.cm.write_attr("wiki_folder", wiki_name):
+        if config.cm.wiki_folder == wiki_name:
             print("tzk: (Looks like it was already there.)")
         else:
             print(f"tzk: WARNING: The wiki_folder option in your config appears "
-                  f"to be set to '{cm.wiki_folder}', rather than the wiki folder "
+                  f"to be set to '{config.cm.wiki_folder}', rather than the wiki folder "
                   f"you're initializing, {wiki_name}. Please check your config file "
                   "and update this option if necessary.")
             return False

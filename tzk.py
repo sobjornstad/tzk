@@ -9,7 +9,7 @@ from typing import Optional
 from config import cm
 import git
 import tw
-from util import fail
+from util import BuildError, fail
 
 
 class CliCommand(ABC):
@@ -179,17 +179,28 @@ class BuildCommand(CliCommand):
         print(f"tzk: Found {len(steps)} build steps.")
 
         for idx, step in enumerate(steps, 1):
-            if hasattr(step, 'name'):
-                print(f"\ntzk: Step {idx}/{len(steps)}: {step.name}")
+            if hasattr(step, '__doc__'):
+                print(f"\ntzk: Step {idx}/{len(steps)}: {step.__doc__}")
             else:
                 print(f"\ntzk: Step {idx}/{len(steps)}")
             try:
                 step()
-            except Exception as e:
-                print(f"\ntzk: Build of product '{args.product}' failed on step {failed}. "
+            except BuildError as e:
+                print(f"tzk: ERROR: {str(e)}")
+                print(f"\ntzk: Build of product '{args.product}' failed on step {idx}, "
+                      f"backed by builder '{step.__name__}'.")
+                sys.exit(1)
+            except Exception:
+                print(f"\ntzk: Build of product '{args.product}' failed on step {idx}: "
+                      f"unhandled exception. "
                       f"The original error follows:")
                 traceback.print_exc()
                 sys.exit(1)
+
+        for idx, step in enumerate(steps, 1):
+            if hasattr(step, 'cleaner'):
+                print(f"\ntzk: Running cleanup routine for step {idx}...")
+                step.cleaner()
 
         print(f"\ntzk: Build of product '{args.product}' completed successfully.")
 
