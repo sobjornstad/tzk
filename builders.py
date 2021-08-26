@@ -4,12 +4,13 @@ import os
 from pathlib import Path
 import re
 import shutil
+import subprocess
 import tempfile
-from typing import Dict, List, Set, Tuple
+from typing import Dict, List, Set, Sequence, Tuple
 
 import git
 import tw
-from util import BuildError
+from util import BuildError, pushd
 
 
 def _lazy_evaluable(func):
@@ -153,8 +154,8 @@ def save_attachments_externally(attachment_filter: str = "[is[image]]",
 @tzk_builder
 def compile_html_file(
         wiki_name: str = "index.html",
-        output_folder: str = "public_site/",
-        remove_output: bool = False,
+        output_folder: str = "output/public_site/",
+        overwrite: bool = True,
         externalize_attachments: bool = False,
         attachment_filter: str = "[is[image]]",
         canonical_uri_template: str = "$:/core/templates/canonical-uri-external-image",
@@ -172,17 +173,15 @@ def compile_html_file(
     commands.append(("render", "$:/core/save/all", wiki_name, "text/plain"))
 
     tw.exec(commands, base_wiki_folder=build_state['public_wiki_folder'])
-    if os.path.exists(output_folder) and not remove_output:
+    if os.path.exists(output_folder) and not overwrite:
         stop(f"The output folder '{os.path.abspath(output_folder)}' already exists. "
-             f"(To delete the output folder if it exists, set remove_output = True "
-             f"for this builder.)")
-    elif os.path.exists(output_folder) and remove_output:
-        info(f"Removing existing output folder {os.path.abspath(output_folder)}.")
-        shutil.rmtree(output_folder)
+             f"(To overwrite any files existing in the output folder, "
+             f"set overwrite = True for this builder.)")
 
     shutil.copytree(
         Path(build_state['public_wiki_folder']) / "output",
-        Path(output_folder)
+        Path(output_folder),
+        dirs_exist_ok=True
     )
     info(f"Successfully copied built output to {os.path.abspath(output_folder)}.")
 
@@ -282,15 +281,41 @@ def publish_wiki_to_github(
         output_folder: str = "output/public_site/",
         commit_message: str = "publish checkpoint",
         remote: str = "origin",
-        refspec: str = "master") -> None:
+        refspec: str = "master",
+        push = True) -> None:
     "Publish the wiki to GitHub"
 
-    os.chdir(output_folder)
-    if not os.path.isdir(".git"):
-        info(f"The output folder {output_folder} doesn't appear to be a Git repository. "
-             f"I'll try to make it one.")
-        git.exec("init")
+    with pushd(output_folder):
+        if not os.path.isdir(".git"):
+            info(f"The output folder {output_folder} doesn't appear to be a Git repository. "
+                f"I'll try to make it one.")
+            git.exec("init")
 
-    git.exec("add", "-A")
-    git.exec("commit", "-m", commit_message)
-    git.exec("push", remote, refspec)
+        git.exec("add", "-A")
+        rc = git.rc("commit", "-m", commit_message)
+        if rc == 0:
+            if push:
+                git.exec("push", remote, refspec)
+        elif rc == 1:
+            info("No changes to commit or publish. "
+                "You probably rebuilt without changing the wiki in between.")
+        else:
+            stop(f"'git commit' returned unknown return code {rc}.")
+
+
+@tzk_builder
+def shell(shell_command: str) -> None:
+    "Run an arbitrary shell command"
+    info("$ " + shell_command)
+    try:
+        output = subprocess.check_output(shell_command, shell=True, text=True)
+    except subprocess.CalledProcessError as e:
+        if e.output.strip():
+            stop(f"Command exited with return code {e.returncode}:\n{e.output}")
+        else:
+            stop(f"Command exited with return code {e.returncode} (no output).")
+    else:
+        if output.strip():
+            info(f"Command exited with return code 0:\n{output}")
+        else:
+            info(f"Command exited with return code 0 (no output).")

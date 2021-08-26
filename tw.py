@@ -1,4 +1,3 @@
-from contextlib import contextmanager
 import functools
 import json
 import os
@@ -9,24 +8,12 @@ from typing import Optional, Sequence
 
 import config
 import git
+from util import pushd
 
 
 @functools.lru_cache(1)
 def _npm_bin() -> str:
     return subprocess.check_output(("npm", "bin"), text=True).strip()
-
-@contextmanager
-def _pushd(directory: str):
-    """
-    Change directory into the directory /directory/ until the end of the with-block,
-    then return to previous directory.
-    """
-    old_directory = os.getcwd()
-    try:
-        os.chdir(directory)
-        yield
-    finally:
-        os.chdir(old_directory)
 
 def _tw_path() -> str:
     return _npm_bin() + "/tiddlywiki"
@@ -86,7 +73,7 @@ def _init_tw(wiki_name: str) -> None:
         os.mkdir(wiki_name)
     except FileExistsError:
         pass
-    with _pushd(wiki_name):
+    with pushd(wiki_name):
         subprocess.check_call((_tw_path(), "--init"))
 
 

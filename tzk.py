@@ -9,7 +9,7 @@ from typing import Optional
 from config import cm
 import git
 import tw
-from util import BuildError, fail
+from util import BuildError, fail, numerize
 
 
 class CliCommand(ABC):
@@ -166,6 +166,7 @@ class BuildCommand(CliCommand):
             help="Function name of a builder to skip even if part of the PRODUCT. "
                  "This option can be specified multiple times.",
             action="append",
+            default=[],
         )
 
     def _precheck(self, product: str) -> None:
@@ -183,7 +184,7 @@ class BuildCommand(CliCommand):
 
         steps = cm.products[args.product]
         print(f"tzk: Starting build of product '{args.product}'.")
-        print(f"tzk: Found {len(steps)} build steps.")
+        print(f"tzk: Found {len(steps)} build {numerize(len(steps), 'step')}.")
 
         for idx, step in enumerate(steps, 1):
             if hasattr(step, '__doc__'):
