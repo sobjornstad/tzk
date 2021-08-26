@@ -39,8 +39,10 @@ def _whoami() -> str:
         return "user"
 
 
-def exec(args: Sequence[Sequence[str]]) -> int:
+def exec(args: Sequence[Sequence[str]], base_wiki_folder: str = None) -> int:
     call_args = [_tw_path()]
+    if base_wiki_folder is not None:
+        call_args.append(base_wiki_folder)
     for tw_arg in args:
         call_args.append(f"--{tw_arg[0]}")
         for inner_arg in tw_arg[1:]:

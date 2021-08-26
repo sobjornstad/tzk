@@ -85,7 +85,7 @@ new_output_folder.cleaner = lambda: shutil.rmtree(build_state['public_wiki_folde
 @tzk_builder
 def export_public_tiddlers(export_filter: str) -> None:
     "Export public tiddlers to public wiki folder"
-    assert 'public_wiki_folder' in build_state
+    assert 'public_wiki_folder' in build_state, "new_output_folder builder must run first"
     tw.exec((
         ("savewikifolder", build_state['public_wiki_folder'], export_filter),
     ))
@@ -106,8 +106,9 @@ def _find_kill_phrases(phrases: Set[str]):
     return failures
 
 @tzk_builder
-def check_for_kill_phrases(kill_phrase_file: str = None):
+def check_for_kill_phrases(kill_phrase_file: str = None) -> None:
     "Fail build if any of a series of regexes appears in a tiddler's source"
+    assert 'public_wiki_folder' in build_state, "new_output_folder builder must run first"
     if kill_phrase_file is None:
         kill_phrase_file = "tiddlers/_system/config/zettelkasten/Build/KillPhrases.tid"
 
@@ -128,3 +129,16 @@ def check_for_kill_phrases(kill_phrase_file: str = None):
             result.append(f"'{failed_regex.pattern}' matched file {trimmed_file}:\n"
                           f"    {failed_line.strip()}")
         stop('\n'.join(result))
+
+@tzk_builder
+def save_attachments_externally(attachment_filter: str = "[is[image]]",
+                                extimage_folder: str = "images") -> None:
+    "Save embedded files in the wiki into an external folder"
+    assert 'public_wiki_folder' in build_state
+    tw.exec(
+        (
+            ("savetiddlers", attachment_filter, extimage_folder),
+        ),
+        base_wiki_folder=build_state['public_wiki_folder']
+    )
+

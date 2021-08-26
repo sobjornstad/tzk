@@ -197,6 +197,7 @@ class BuildCommand(CliCommand):
                 traceback.print_exc()
                 sys.exit(1)
 
+        # TODO: This should run in a finally() block; leaving for now as it's convenient for development :)
         for idx, step in enumerate(steps, 1):
             if hasattr(step, 'cleaner'):
                 print(f"\ntzk: Running cleanup routine for step {idx}...")
