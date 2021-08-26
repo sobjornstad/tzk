@@ -1,10 +1,11 @@
 from contextlib import contextmanager
 import functools
+import os
 from pathlib import Path
 import re
 import shutil
 import tempfile
-from typing import Set
+from typing import List, Set, Tuple
 
 import git
 import tw
@@ -42,6 +43,11 @@ tzk_builder = _lazy_evaluable
 def stop(message: str) -> None:
     "Stop the build due to an error condition."
     raise BuildError(message)
+
+
+def info(message: str) -> None:
+    "Print information about this build step to the console."
+    print(message)
 
 
 # Global state available to all builders.
@@ -84,7 +90,7 @@ new_output_folder.cleaner = lambda: shutil.rmtree(build_state['public_wiki_folde
 
 @tzk_builder
 def export_public_tiddlers(export_filter: str) -> None:
-    "Export public tiddlers to public wiki folder"
+    "Export public tiddlers to a temp wiki"
     assert 'public_wiki_folder' in build_state, "new_output_folder builder must run first"
     tw.exec((
         ("savewikifolder", build_state['public_wiki_folder'], export_filter),
@@ -107,7 +113,7 @@ def _find_kill_phrases(phrases: Set[str]):
 
 @tzk_builder
 def check_for_kill_phrases(kill_phrase_file: str = None) -> None:
-    "Fail build if any of a series of regexes appears in a tiddler's source"
+    "Fail build if any of a series of regexes appears in a tiddler's source in the temp wiki"
     assert 'public_wiki_folder' in build_state, "new_output_folder builder must run first"
     if kill_phrase_file is None:
         kill_phrase_file = "tiddlers/_system/config/zettelkasten/Build/KillPhrases.tid"
@@ -132,9 +138,10 @@ def check_for_kill_phrases(kill_phrase_file: str = None) -> None:
 
 @tzk_builder
 def save_attachments_externally(attachment_filter: str = "[is[image]]",
-                                extimage_folder: str = "images") -> None:
-    "Save embedded files in the wiki into an external folder"
+                                extimage_folder: str = "extimage") -> None:  # TODO: or must this be extimage as the template suggests?
+    "Save embedded files in the temp wiki into an external folder"
     assert 'public_wiki_folder' in build_state
+
     tw.exec(
         (
             ("savetiddlers", attachment_filter, extimage_folder),
@@ -142,3 +149,39 @@ def save_attachments_externally(attachment_filter: str = "[is[image]]",
         base_wiki_folder=build_state['public_wiki_folder']
     )
 
+
+@tzk_builder
+def compile_html_file(
+        wiki_name: str = "index.html",
+        output_folder: str = "public_site/",
+        remove_output: bool = False,
+        externalize_attachments: bool = False,
+        attachment_filter: str = "[is[image]]",
+        canonical_uri_template: str = "$:/core/templates/canonical-uri-external-image",
+    ) -> None:
+    "Compile a single HTML file from the temp wiki"
+    assert 'public_wiki_folder' in build_state
+
+    commands: List[Tuple[str, ...]] = []
+    if externalize_attachments:
+        commands.extend([
+            ("setfield", attachment_filter, "_canonical_uri",
+             canonical_uri_template, "text/plain"),
+            ("setfield", attachment_filter, "text", "", "text/plain"),
+        ])
+    commands.append(("render", "$:/core/save/all", wiki_name, "text/plain"))
+
+    tw.exec(commands, base_wiki_folder=build_state['public_wiki_folder'])
+    if os.path.exists(output_folder) and not remove_output:
+        stop(f"The output folder '{os.path.abspath(output_folder)}' already exists. "
+             f"(To delete the output folder if it exists, set remove_output = True "
+             f"for this builder.)")
+    elif os.path.exists(output_folder) and remove_output:
+        info(f"Removing existing output folder {os.path.abspath(output_folder)}.")
+        shutil.rmtree(output_folder)
+
+    shutil.copytree(
+        Path(build_state['public_wiki_folder']) / "output",
+        Path(output_folder)
+    )
+    info(f"Successfully copied built output to {os.path.abspath(output_folder)}.")
