@@ -258,3 +258,20 @@ def replace_private_people() -> None:
         if dirty:
             with tiddler.open("w") as f:
                 f.writelines(lines)
+
+
+@tzk_builder
+def set_tiddler_values(mappings: Dict[str, str]) -> None:
+    "Set the 'text' field of selected config or other tiddlers to new values"
+    assert 'public_wiki_folder' in build_state
+
+    for tiddler, new_text in mappings.items():
+        tiddler_path = (Path(build_state['public_wiki_folder']) / "tiddlers" / tiddler)
+        with tiddler_path.open("r") as f:
+            tiddler_lines = f.readlines()
+        first_blank_line_index = next(idx
+                                      for idx, value in enumerate(tiddler_lines)
+                                      if not value.strip())
+        with tiddler_path.open("w") as f:
+            f.writelines(tiddler_lines[0:first_blank_line_index+1])
+            f.write(new_text)
