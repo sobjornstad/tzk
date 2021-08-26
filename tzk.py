@@ -160,6 +160,13 @@ class BuildCommand(CliCommand):
             metavar="PRODUCT",
             help="Name of the product you want to build (defined in your config file).",
         )
+        parser.add_argument(
+            "-s", "--skip-builder",
+            metavar="BUILDER_NAME",
+            help="Function name of a builder to skip even if part of the PRODUCT. "
+                 "This option can be specified multiple times.",
+            action="append",
+        )
 
     def _precheck(self, product: str) -> None:
         if cm.products is None:
@@ -180,18 +187,23 @@ class BuildCommand(CliCommand):
 
         for idx, step in enumerate(steps, 1):
             if hasattr(step, '__doc__'):
-                print(f"\ntzk: Step {idx}/{len(steps)}: {step.__doc__}")
+                print(f"tzk: Step {idx}/{len(steps)}: {step.__doc__}")
             else:
-                print(f"\ntzk: Step {idx}/{len(steps)}")
+                print(f"tzk: Step {idx}/{len(steps)}")
+
+            if step.__name__ in args.skip_builder:
+                print(f"tzk: Skipping step {idx} due to --skip-builder parameter.")
+                continue
+
             try:
                 step()
             except BuildError as e:
                 print(f"tzk: ERROR: {str(e)}")
-                print(f"\ntzk: Build of product '{args.product}' failed on step {idx}, "
+                print(f"tzk: Build of product '{args.product}' failed on step {idx}, "
                       f"backed by builder '{step.__name__}'.")
                 sys.exit(1)
             except Exception:
-                print(f"\ntzk: Build of product '{args.product}' failed on step {idx}: "
+                print(f"tzk: Build of product '{args.product}' failed on step {idx}: "
                       f"unhandled exception. "
                       f"The original error follows:")
                 traceback.print_exc()
@@ -200,10 +212,10 @@ class BuildCommand(CliCommand):
         # TODO: This should run in a finally() block; leaving for now as it's convenient for development :)
         for idx, step in enumerate(steps, 1):
             if hasattr(step, 'cleaner'):
-                print(f"\ntzk: Running cleanup routine for step {idx}...")
+                print(f"tzk: Running cleanup routine for step {idx}...")
                 step.cleaner()
 
-        print(f"\ntzk: Build of product '{args.product}' completed successfully.")
+        print(f"tzk: Build of product '{args.product}' completed successfully.")
 
 
 parser = argparse.ArgumentParser()

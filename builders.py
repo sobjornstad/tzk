@@ -275,3 +275,22 @@ def set_tiddler_values(mappings: Dict[str, str]) -> None:
         with tiddler_path.open("w") as f:
             f.writelines(tiddler_lines[0:first_blank_line_index+1])
             f.write(new_text)
+
+
+@tzk_builder
+def publish_wiki_to_github(
+        output_folder: str = "output/public_site/",
+        commit_message: str = "publish checkpoint",
+        remote: str = "origin",
+        refspec: str = "master") -> None:
+    "Publish the wiki to GitHub"
+
+    os.chdir(output_folder)
+    if not os.path.isdir(".git"):
+        info(f"The output folder {output_folder} doesn't appear to be a Git repository. "
+             f"I'll try to make it one.")
+        git.exec("init")
+
+    git.exec("add", "-A")
+    git.exec("commit", "-m", commit_message)
+    git.exec("push", remote, refspec)
