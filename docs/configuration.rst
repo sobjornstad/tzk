@@ -37,12 +37,21 @@ is difficult and not all that useful,
 so the ``tzk commit`` command is made available
 to quickly stage, commit, and (if you wish) push all changes in the repository in one go.
 
-To enable pushes,
+If you want to push your changes to some remote location,
+such as a GitHub repository,
 add a new Git remote (e.g., ``git remote add origin https://github.com/you/YourRepository``)
 and set the ``commit_remote`` option in your tzk config to the remote name
 (here, ``origin``).
 You can selectively skip pushing for a particular commit
 with the ``--local`` switch to ``tzk commit``.
+
+.. note::
+   If you want to push a wiki that contains only some of your content
+   to GitHub in a form that others can browse,
+   don't try to set it up here --
+   use a :func:`publish_wiki_to_github() <tzk.builders.publish_wiki_to_github>` builder
+   at the end of the ``public`` build product.
+   See :ref:`Builders` for more information.
 
 
 Environment

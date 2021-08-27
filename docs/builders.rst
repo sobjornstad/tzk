@@ -4,7 +4,8 @@ Builders
 
 .. currentmodule:: tzk.builders
 
-*Builders* are small executable chunks that together can be linked into a useful build process.
+*Builders* are small executable chunks
+that can be linked together to form a useful build process.
 Products are built by applying builders in sequence.
 Please see the existing ``products`` dictionary and associated comments
 in the :ref:`config file <Configuring tzk>` for how these are specified.

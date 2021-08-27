@@ -30,7 +30,7 @@ def tzk_builder(func):
     Decorator which makes a function lazy-evaluable: that is, when it's
     initially called, it returns a zero-argument lambda with the arguments
     initially passed wrapped up in it. Calling that lambda has the effect
-    of executing the function.
+    of executing the builder.
 
     We use this in TZK to allow the user to use function calls in her config
     to define the build steps, while not requiring her to write a bunch of
