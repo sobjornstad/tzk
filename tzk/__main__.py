@@ -272,6 +272,24 @@ def chdir_to_wiki():
 
 
 def launch():
+    # If this isn't a tzk directory but we have an environment variable listing one,
+    # go there before doing anything else.
+    if (not os.path.exists("tzk_config.py")
+            and os.environ.get('TZK_DIRECTORY')
+            and sys.argv[1] != "init"):  # we can't init an existing TZK_DIRECTORY
+        try:
+            os.chdir(os.environ['TZK_DIRECTORY'])
+        except (FileNotFoundError, NotADirectoryError):
+            fail(f"The current directory contains no 'tzk_config.py' "
+                 f"and the TZK_DIRECTORY environment variable is set to "
+                 f"'{os.environ['TZK_DIRECTORY']}', so I tried to go there, "
+                 f"but it doesn't exist or is not a directory.")
+        if not os.path.exists("tzk_config.py"):
+            fail(f"The current directory contains no 'tzk_config.py' "
+                 f"and the TZK_DIRECTORY environment variable is set to "
+                 f"'{os.environ['TZK_DIRECTORY']}', so I tried to go there, "
+                 f"but there's no tzk_config.py there either.")
+
     parser = argparse.ArgumentParser()
 
     subparsers = parser.add_subparsers()
