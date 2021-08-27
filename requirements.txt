@@ -1,0 +1,11 @@
+# this package
+-e .
+
+# docs
+sphinx==3.5.4  # newer versions display function names in the wrong color?
+sphinx_rtd_theme==0.5.2
+
+# dev tools
+setuptools
+twine
+wheel

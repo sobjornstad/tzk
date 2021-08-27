@@ -6,7 +6,7 @@ from pathlib import Path
 import sys
 from typing import Any
 
-from util import fail
+from tzk.util import fail
 
 
 class ConfigurationManager:
@@ -56,4 +56,7 @@ class ConfigurationManager:
             return True
 
 
-cm = ConfigurationManager()
+def cm(cache=[]):
+    if not cache:
+        cache.append(ConfigurationManager())
+    return cache[0]
