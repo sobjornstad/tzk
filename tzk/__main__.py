@@ -211,43 +211,51 @@ class BuildCommand(CliCommand):
         print(f"tzk: Starting build of product '{args.product}'.")
         print(f"tzk: Found {len(steps)} build {numerize(len(steps), 'step')}.")
 
+        failed = False
         # For each build step...
-        for idx, step in enumerate(steps, 1):
-            # Explain what we're doing. Use first line of the builder's docstring
-            # as a summary, if present.
-            if hasattr(step, '__doc__'):
-                short_description = step.__doc__.strip().split('\n')[0].rstrip('.')
-                print(f"tzk: Step {idx}/{len(steps)}: {short_description}")
-            else:
-                print(f"tzk: Step {idx}/{len(steps)}")
+        try:
+            for idx, step in enumerate(steps, 1):
+                # Explain what we're doing. Use first line of the builder's docstring
+                # as a summary, if present.
+                if hasattr(step, '__doc__'):
+                    short_description = step.__doc__.strip().split('\n')[0].rstrip('.')
+                    print(f"tzk: Step {idx}/{len(steps)}: {short_description}")
+                else:
+                    print(f"tzk: Step {idx}/{len(steps)}")
 
-            # If the user asked to skip this builder on the command line, do so.
-            if step.__name__ in args.skip_builder:
-                print(f"tzk: Skipping step {idx} due to --skip-builder parameter.")
-                continue
+                # If the user asked to skip this builder on the command line, do so.
+                if step.__name__ in args.skip_builder:
+                    print(f"tzk: Skipping step {idx} due to --skip-builder parameter.")
+                    continue
 
-            # Execute step and handle any errors.
-            try:
+                # Execute step and handle any errors.
                 step()
-            except BuildError as e:
-                print(f"tzk: ERROR: {str(e)}")
-                print(f"tzk: Build of product '{args.product}' failed on step {idx}, "
-                      f"backed by builder '{step.__name__}'.")
-                sys.exit(1)
-            except Exception:
-                print(f"tzk: Build of product '{args.product}' failed on step {idx}: "
-                      f"unhandled exception. "
-                      f"The original error follows:")
-                traceback.print_exc()
-                sys.exit(1)
 
-        # TODO: This should run in a finally() block; leaving for now as it's convenient for development :)
-        for idx, step in enumerate(steps, 1):
-            if hasattr(step, 'cleaner'):
-                print(f"tzk: Running cleanup routine for step {idx}...")
-                step.cleaner()
+        except BuildError as e:
+            failed = True
+            print(f"tzk: ERROR: {str(e)}")
+            print(f"tzk: Build of product '{args.product}' failed on step {idx}, "
+                    f"backed by builder '{step.__name__}'. ")
+            print(f"tzk: Add '--skip-builder {step.__name__}' if you'd like "
+                    f"to skip this step.")
 
-        print(f"tzk: Build of product '{args.product}' completed successfully.")
+        except Exception:
+            failed = True
+            print(f"tzk: Build of product '{args.product}' failed on step {idx}: "
+                    f"unhandled exception. "
+                    f"The original error follows:")
+            traceback.print_exc()
+
+        finally:
+            for idx, step in enumerate(steps, 1):
+                if hasattr(step, 'cleaner'):
+                    print(f"tzk: Running cleanup routine registered by step {idx}...")
+                    step.cleaner()
+
+        if failed:
+            sys.exit(1)
+        else:
+            print(f"tzk: Build of product '{args.product}' completed successfully.")
 
 
 def chdir_to_wiki():
