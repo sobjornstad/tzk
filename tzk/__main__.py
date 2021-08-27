@@ -60,6 +60,8 @@ class CommitCommand(CliCommand):
         )
 
     def execute(self, args: argparse.Namespace) -> None:
+        cm().require_config()
+        chdir_to_wiki()
         if cm().commit_require_branch:
             current_branch = git.read("rev-parse", "--abbrev-ref", "HEAD")
             if current_branch != cm().commit_require_branch:
@@ -99,6 +101,8 @@ class ListenCommand(CliCommand):
         )
     
     def execute(self, args: argparse.Namespace) -> None:
+        cm().require_config()
+        chdir_to_wiki()
         try:
             tw.exec(
                 [
@@ -198,6 +202,8 @@ class BuildCommand(CliCommand):
                  f"in your config file.")
 
     def execute(self, args: argparse.Namespace) -> None:
+        cm().require_config()
+        chdir_to_wiki()
         self._precheck(args.product)
 
         # Find the build steps for the product the user specified.
@@ -244,6 +250,27 @@ class BuildCommand(CliCommand):
         print(f"tzk: Build of product '{args.product}' completed successfully.")
 
 
+def chdir_to_wiki():
+    """
+    For most operations, we want the current directory to be the wiki folder.
+    """
+    if not cm().wiki_folder:
+        fail("No 'wiki_folder' option found in config. Set this option to the name "
+            "of the wiki subfolder within the current directory.")
+
+    try:
+        os.chdir(cm().wiki_folder)
+    except FileNotFoundError:
+        fail(f"Tried to change directory into the wiki_folder '{cm().wiki_folder}' "
+            f"specified in your config file, but that directory does not exist.")
+
+    if not os.path.exists("tiddlywiki.info"):
+        fail(f"After changing directory into {cm().wiki_folder} per your config file: "
+            f"Expected a 'tiddlywiki.info' file in {os.getcwd()}. "
+            f"Please check that your wiki is initialized "
+            f"and you specified the correct wiki_folder_name.")
+
+
 def launch():
     parser = argparse.ArgumentParser()
 
@@ -258,25 +285,6 @@ def launch():
         # no subcommand was given
         parser.print_help()
         sys.exit(0)
-
-    # For all operations except 'init', we start in the wiki folder.
-    # (For init, we're actually *creating* the wiki folder.)
-    if not args._cls.cmd == "init":
-        if not cm().wiki_folder:
-            fail("No 'wiki_folder' option found in config. Set this option to the name "
-                "of the wiki subfolder within the current directory.")
-
-        try:
-            os.chdir(cm().wiki_folder)
-        except FileNotFoundError:
-            fail(f"Tried to change directory into the wiki_folder '{cm().wiki_folder}' "
-                f"specified in your config file, but that directory does not exist.")
-
-        if not os.path.exists("tiddlywiki.info"):
-            fail(f"After changing directory into {cm().wiki_folder} per your config file: "
-                f"Expected a 'tiddlywiki.info' file in {os.getcwd()}. "
-                f"Please check that your wiki is initialized "
-                f"and you specified the correct wiki_folder_name.")
 
     args._cls().execute(args)
 

@@ -26,14 +26,27 @@ class ConfigurationManager:
                     del sys.path[0:1]
                     break
         else:
-            fail(
-                f"Your TZK config file could not be found. "
-                f"Please ensure there is a file called tzk_config.py "
-                f"in the current directory.")
+            # no config file
+            self.conf_mod = None
 
     def __getattr__(self, attr):
-        return getattr(self.conf_mod, attr, None)
+        if self.conf_mod is None:
+            return None
+        else:
+            return getattr(self.conf_mod, attr, None)
 
+    def has_config(self) -> bool:
+        return self.conf_mod is not None
+
+    def require_config(self) -> None:
+        """
+        Quit with exit status 1 if no config file was found.
+        """
+        if not self.has_config():
+            fail(f"No tzk_config.py found in the current directory. "
+                 f"(Try 'tzk init' if you want to create a new one.)")
+
+    #TODO: trash this function
     def write_attr(self, attr: str, value: str) -> bool:
         """
         Try to add a simple attribute = string value config parameter to the

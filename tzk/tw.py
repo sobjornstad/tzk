@@ -166,7 +166,7 @@ def install(wiki_name: str, tw_version_spec: str, author: Optional[str]):
 
     _init_npm(wiki_name, tw_version_spec, author)
     _init_tw(wiki_name)
-    warnings |= not _save_wikifolder_to_config(wiki_name)
+    #warnings |= not _save_wikifolder_to_config(wiki_name)  ## TODO: now write entire config
     _add_filesystem_plugins(wiki_name)
     _init_gitignore()
     _initial_commit()
