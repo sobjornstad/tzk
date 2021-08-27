@@ -14,6 +14,15 @@ from tzk.util import fail
 
 class ConfigurationManager:
     def __init__(self):
+        self.initialize_cm()
+
+    def __getattr__(self, attr):
+        if self.conf_mod is None:
+            return None
+        else:
+            return getattr(self.conf_mod, attr, None)
+
+    def initialize_cm(self):
         self.config_path = Path.cwd()
 
         for child in sorted(self.config_path.iterdir()):
@@ -28,12 +37,6 @@ class ConfigurationManager:
         else:
             # no config file
             self.conf_mod = None
-
-    def __getattr__(self, attr):
-        if self.conf_mod is None:
-            return None
-        else:
-            return getattr(self.conf_mod, attr, None)
 
     def has_config(self) -> bool:
         return self.conf_mod is not None

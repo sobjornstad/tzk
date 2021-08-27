@@ -19,10 +19,12 @@ wiki_folder = "wiki"
 ### COMMITTING ####
 # Default commit message to use with 'tzk commit'.
 # You can always use 'tzk commit -m' to use a different message on the fly.
-commit_message = "daily checkpoint"
+commit_message = "checkpoint"
 
 # Git remote to push changes to when you run 'tzk commit'.
-commit_remote = "origin"
+# If you never want to push changes, set this to the empty string ("").
+commit_remote = ""
+#commit_remote = "origin"
 
 # Uncomment if you want to abort 'tzk commit' if you're not on a specific branch.
 #commit_require_branch = "master"
@@ -67,12 +69,13 @@ _public_export_filt = r"""
 # you can write your own, or you can run arbitrary shell commands
 # using a 'builders.shell("my shell command here"),' builder.
 products = {
-    # The default configuration contains a single product for building a public wiki.
+    # The default configuration contains a single product for building a public wiki;
+    # use 'tzk build public' to build it. You can add as many products as you want.
     'public': [
         builders.new_output_folder(),
-        builders.export_public_tiddlers(_public_export_filt),
+        builders.export_public_tiddlers(export_filter=_public_export_filt),
         builders.replace_private_people(),
-        builders.set_tiddler_values({
+        builders.set_tiddler_values(mappings={
             '$__config_sib_CurrentEditionPublicity.tid': 'public',
             '$__config_sib_IsPublicEdition.tid': 'false',
             '$__config_DefaultSidebarTab.tid': '$:/sib/SideBar/Explore',
@@ -97,4 +100,9 @@ products = {
         builders.save_attachments_externally(),
         builders.compile_html_file(externalize_attachments=True),
     ],
+    # If you want a second product, add it like this:
+    #'secondproduct': [
+    #    builders.new_output_folder(),
+    #    ... and so on ...
+    #],
 }

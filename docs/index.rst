@@ -10,7 +10,8 @@ for Soren Bjornstad's Zettelkasten edition of TiddlyWiki.
    :caption: Contents
 
    installation
-   operations
+   configuration
+   builders
 
 
 Indices and tables

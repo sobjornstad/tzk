@@ -1,19 +1,13 @@
 """
 *Builders* are small executable chunks that together can be linked into a useful build
-process. Aside from two helper functions (:func:`stop()` and :func:`info()`)
-to fail the build and display an informational message, respectively, all other
-functions in this module are builders.
+process.
 
-Builders are decorated with ``@tzk_builder``, a synonym for
-:func:`_lazy_evaluable()`, which causes them to be lazy-evaluated: that is,
-when they're initially called in the configuration, instead of running the
-function and returning its result, a zero-argument function with all of the
-arguments wrapped up is returned, to be run at a later time. This allows the
-configuration file to be read at any time to retrieve information about the
-defined products without actually running any build steps.
-
-You can write and use custom builders right within your config file
-by decorating them with ``@builders.tzk_builder``.
+Builders are decorated with :func:`tzk_builder`, which causes them to be
+lazy-evaluated: that is, when they're initially called in the configuration,
+instead of running the function and returning its result, a zero-argument
+function with all of the arguments wrapped up is returned, to be run at a later
+time. This allows the configuration file to be read at any time to retrieve
+information about the defined products without actually running any build steps.
 """
 
 from contextlib import contextmanager
@@ -139,7 +133,10 @@ def new_output_folder():
     assert 'public_wiki_folder' not in build_state
     build_state['public_wiki_folder'] = tempfile.mkdtemp()
 
-new_output_folder.cleaner = lambda: shutil.rmtree(build_state['public_wiki_folder'])
+def new_output_folder_cleaner():
+    if 'public_wiki_folder' in build_state:
+        shutil.rmtree(build_state['public_wiki_folder'])
+new_output_folder.cleaner = new_output_folder_cleaner
 
 
 @tzk_builder
@@ -232,7 +229,7 @@ def save_attachments_externally(attachment_filter: str = "[is[image]]",
     on each image tiddler to point to this new location.
     For the latter step, use the
     ``externalize_attachments``, ``attachment_filter``, and ``canonical_uri_template``
-    parameters to the ``compile_html_file`` step.
+    parameters to the :func:`compile_html_file` step.
 
     :param attachment_filter: The tiddlers to be saved to the external folder;
                               by default, ``[is[image]]``.
@@ -429,11 +426,13 @@ def set_tiddler_values(mappings: Dict[str, str]) -> None:
     flags or other wikitext solutions within the wiki -- for instance, changing the
     subtitle or what buttons are visible. It's also used to implement feature flags
     in the first place by changing the ``$:/config/sib/CurrentEditionPublicity``
-    tiddler to ``public``, so the minimal functional wiki will use:
-    
-    ```python
-    {'$__config_sib_CurrentEditionPublicity.tid': 'public',}
-    ```
+    tiddler to ``public``, so at minimum, the build of a public wiki should use:
+
+    .. code-block:: python
+
+        builders.set_tiddler_values({
+            '$__config_sib_CurrentEditionPublicity.tid': 'public',
+        })
 
     :param mappings: A dictionary whose keys are tiddler names
                      and whose values are the values to be inserted

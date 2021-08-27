@@ -45,13 +45,13 @@ class CommitCommand(CliCommand):
             "-m", "--message",
             metavar="MSG",
             help="Commit message to use.",
-            default=(cm().commit_message or "checkpoint")
+            default=cm().commit_message,
         )
         parser.add_argument(
             "-r", "--remote",
             metavar="REMOTE",
-            help="Name of the configured Git remote to push to.",
-            default=(cm().commit_remote or "origin"),
+            help="Name of the Git remote to push to.",
+            default=cm().commit_remote,
         )
         parser.add_argument(
             "-l", "--local",
@@ -70,8 +70,7 @@ class CommitCommand(CliCommand):
                      f"'{cm().commit_require_branch}' branch to commit.")
 
         git.exec("add", "-A")
-        git.exec("commit", "-m", args.message)
-        if not args.local:
+        if git.rc("commit", "-m", args.message) == 0 and args.remote and not args.local:
             git.exec("push", args.remote)
 
 
@@ -270,7 +269,7 @@ def chdir_to_wiki():
         os.chdir(cm().wiki_folder)
     except FileNotFoundError:
         fail(f"Tried to change directory into the wiki_folder '{cm().wiki_folder}' "
-            f"specified in your config file, but that directory does not exist.")
+             f"specified in your config file, but that directory does not exist.")
 
     if not os.path.exists("tiddlywiki.info"):
         fail(f"After changing directory into {cm().wiki_folder} per your config file: "
