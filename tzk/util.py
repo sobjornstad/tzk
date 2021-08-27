@@ -1,3 +1,6 @@
+"""
+util.py - miscellaneous utility functions
+"""
 from contextlib import contextmanager
 import os
 import sys
@@ -9,11 +12,13 @@ class BuildError(Exception):
 
 
 def fail(msg: str, exit_code: int = 1) -> NoReturn:
+    "Print message to stderr and quit with exit code 1."
     print(msg, file=sys.stderr)
     sys.exit(exit_code)
 
 
-def numerize(number: int, singular: str, plural: str = None):
+def numerize(number: int, singular: str, plural: str = None) -> str:
+    "Render a string in the singular or plural as appropriate."
     if plural is None:
         plural = singular + 's'
 

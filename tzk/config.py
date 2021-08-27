@@ -1,3 +1,6 @@
+"""
+config.py - read and manage the TZK config file
+"""
 import datetime
 import functools
 import importlib
@@ -57,6 +60,14 @@ class ConfigurationManager:
 
 
 def cm(cache=[]):
+    """
+    Call this function to retrieve the singleton ConfigurationManager object,
+    reading and initializing it if necessary.
+
+    Since so much happens when the ConfigurationManager is initialized,
+    this has to go in a function so that autodoc doesn't blow up
+    when it tries to import the module.
+    """
     if not cache:
         cache.append(ConfigurationManager())
     return cache[0]

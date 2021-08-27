@@ -13,15 +13,26 @@ from tzk.util import BuildError, fail, numerize
 
 
 class CliCommand(ABC):
+    """
+    Base class for subcommands of tzk.
+    """
+    #: The text of the subcommand to be used on the command line.
     cmd = None   # type: str
+    #: Help string for argparse to display for this subcommand.
     help = None  # type: str
 
     @abstractclassmethod
     def setup_arguments(cls, parser: argparse.ArgumentParser) -> None:
+        """
+        Given the :arg:`parser`, add any arguments this subcommand wants to accept.
+        """
         raise NotImplementedError
 
     @abstractmethod
-    def execute(self, parser: argparse.Namespace) -> None:
+    def execute(self, args: argparse.Namespace) -> None:
+        """
+        Given the :arg:`args` passed to this subcommand, do whatever the command does.
+        """
         raise NotImplementedError
 
 
@@ -182,21 +193,27 @@ class BuildCommand(CliCommand):
     def execute(self, args: argparse.Namespace) -> None:
         self._precheck(args.product)
 
+        # Find the build steps for the product the user specified.
         steps = cm().products[args.product]
         print(f"tzk: Starting build of product '{args.product}'.")
         print(f"tzk: Found {len(steps)} build {numerize(len(steps), 'step')}.")
 
+        # For each build step...
         for idx, step in enumerate(steps, 1):
+            # Explain what we're doing. Use first line of the builder's docstring
+            # as a summary, if present.
             if hasattr(step, '__doc__'):
                 short_description = step.__doc__.strip().split('\n')[0].rstrip('.')
                 print(f"tzk: Step {idx}/{len(steps)}: {short_description}")
             else:
                 print(f"tzk: Step {idx}/{len(steps)}")
 
+            # If the user asked to skip this builder on the command line, do so.
             if step.__name__ in args.skip_builder:
                 print(f"tzk: Skipping step {idx} due to --skip-builder parameter.")
                 continue
 
+            # Execute step and handle any errors.
             try:
                 step()
             except BuildError as e:
@@ -231,10 +248,12 @@ def launch():
 
     args = parser.parse_args()
     if not hasattr(args, '_cls'):
+        # no subcommand was given
         parser.print_help()
         sys.exit(0)
 
     # For all operations except 'init', we start in the wiki folder.
+    # (For init, we're actually *creating* the wiki folder.)
     if not args._cls.cmd == "init":
         if not cm().wiki_folder:
             fail("No 'wiki_folder' option found in config. Set this option to the name "
