@@ -1,3 +1,4 @@
+import datetime
 import functools
 import json
 import os
@@ -15,8 +16,10 @@ from tzk.util import pushd
 def _npm_bin() -> str:
     return subprocess.check_output(("npm", "bin"), text=True).strip()
 
+
 def _tw_path() -> str:
     return _npm_bin() + "/tiddlywiki"
+
 
 @functools.lru_cache(1)
 def _whoami() -> str:
@@ -51,12 +54,26 @@ def exec(args: Sequence[Sequence[str]], base_wiki_folder: str = None) -> int:
     return subprocess.call(call_args)
 
 
+def _init_tzk_config() -> None:
+    print("tzk: Creating new tzk_config.py...")
+    with open(Path(__file__).parent / "default_config.py") as f:
+        default_config = f.read()
+
+    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    generation_details = f"Created automatically by 'tzk init' at {now}."
+    default_config = default_config.replace('<<GENERATION_DETAILS>>',
+                                            generation_details)
+
+    with open("tzk_config.py", "w") as f:
+        f.write(default_config)
+
+
 def _init_npm(wiki_name: str, tw_version_spec: str, author: str) -> None:
     """
     Create a package.json file for this repository, requiring TiddlyWiki
     at the specified version, and install the npm dependencies.
     """
-    print("tzk: Creating package.json...")
+    print("tzk: Creating new package.json...")
     PACKAGE_JSON = dedent("""
     {
         "name": "%(wiki_name)s",
@@ -89,26 +106,6 @@ def _init_tw(wiki_name: str) -> None:
         pass
     with pushd(wiki_name):
         subprocess.check_call((_tw_path(), "--init"))
-
-
-def _save_wikifolder_to_config(wiki_name: str) -> bool:
-    """
-    Set the wiki_folder config option to the wiki_name we initialized with,
-    if it's not already set in the config.
-
-    Return True if the option ended set to wiki_name, False otherwise.
-    """
-    print("tzk: Writing new wiki folder to config file...")
-    if not config.cm().write_attr("wiki_folder", wiki_name):
-        if config.cm().wiki_folder == wiki_name:
-            print("tzk: (Looks like it was already there.)")
-        else:
-            print(f"tzk: WARNING: The wiki_folder option in your config appears "
-                  f"to be set to '{config.cm().wiki_folder}', rather than the wiki folder "
-                  f"you're initializing, {wiki_name}. Please check your config file "
-                  "and update this option if necessary.")
-            return False
-    return True
 
 
 def _add_filesystem_plugins(wiki_name: str) -> None:
@@ -159,20 +156,17 @@ def install(wiki_name: str, tw_version_spec: str, author: Optional[str]):
     Install TiddlyWiki on Node.js in the current directory and set up a new wiki.
     """
     # assert: caller has checked npm and git are installed
-    warnings = False
 
     if author is None:
         author = _whoami()
 
+    _init_tzk_config()
     _init_npm(wiki_name, tw_version_spec, author)
     _init_tw(wiki_name)
-    #warnings |= not _save_wikifolder_to_config(wiki_name)  ## TODO: now write entire config
     _add_filesystem_plugins(wiki_name)
     _init_gitignore()
     _initial_commit()
 
-    if warnings:
-        print("tzk: Initialization completed with warnings. Read the output and "
-              "make any changes required, then run 'tzk listen' to start the server.")
-    else:
-        print("tzk: Initialized successfully. Run 'tzk listen' to start the server.")
+    print("tzk: Initialized successfully. "
+          "Review the 'tzk_config.py' in a text editor and make any changes desired, "
+          "then run 'tzk listen' to start the server.")

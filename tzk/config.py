@@ -46,31 +46,6 @@ class ConfigurationManager:
             fail(f"No tzk_config.py found in the current directory. "
                  f"(Try 'tzk init' if you want to create a new one.)")
 
-    #TODO: trash this function
-    def write_attr(self, attr: str, value: str) -> bool:
-        """
-        Try to add a simple attribute = string value config parameter to the
-        config file, if it doesn't already exist. More complicated data types
-        are not supported.
-
-        Return:
-            False if the attribute already has a value.
-            True if successful.
-
-        Raises:
-            File access errors if the config file is inaccessible.
-        """
-
-        if hasattr(self.conf_mod, attr):
-            return False
-        else:
-            setattr(self.conf_mod, attr, value)
-            with open(self.config_path / "tzk_config.py", "a") as f:
-                now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                f.write(f"\n# Added automatically by tzk at {now}\n")
-                f.write(f'{attr} = "{value}"\n')
-            return True
-
 
 def cm(cache=[]):
     """
