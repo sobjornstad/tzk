@@ -367,7 +367,8 @@ def replace_private_people(initialer: Callable[[str], str] = None) -> None:
     you might prefer not to make everything you said about them
     easily searchable on the internet.
     This is more challenging than simply not marking their tiddlers public,
-    since 
+    since there will also probably be links to their tiddlers in other tiddlers --
+    and those links contain their full names, if you put them in the title.
 
     This builder replaces all links, bracketed or WikiCamelCase,
     to the names of all people *not* tagged Public
