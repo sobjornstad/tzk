@@ -65,16 +65,21 @@ _public_export_filt = r"""
 # See the "Builders" section of the tzk documentation
 # for details on the available builders and their parameters.
 #
-# If you want to do something that's not covered by the existing builders,
+# If you want to do something that's not covered by the builders shipped with tzk,
 # you can write your own, or you can run arbitrary shell commands
 # using a 'builders.shell("my shell command here"),' builder.
 products = {
     # The default configuration contains a single product for building a public wiki;
     # use 'tzk build public' to build it. You can add as many products as you want.
     'public': [
+        # Create a temporary folder to hold the public wiki as we work on it.
         builders.new_output_folder(),
+        # Pull the tiddlers matching the filter we defined above from our private wiki
+        # and put them in a new public wiki in the temporary folder.
         builders.export_public_tiddlers(export_filter=_public_export_filt),
+        # Replace the names of people who don't have public tiddlers with their initials.
         builders.replace_private_people(),
+        # Change the 'text' field of these tiddlers to new values.
         builders.set_tiddler_values(mappings={
             '$__config_sib_CurrentEditionPublicity.tid': 'public',
             '$__config_sib_IsPublicEdition.tid': 'false',
@@ -96,8 +101,14 @@ products = {
             '$__config_ViewToolbarButtons_Visibility_$__sib_Buttons_CopyPublicZettelkastenLink.tid': 'hide',
             '$__config_ViewToolbarButtons_Visibility_DoCopyTitleReference.tid': 'hide',
         }),
+        # Fail the build if kill phrases (things we definitely don't want to make
+        # public, configured within the wiki) are found in the build.
         builders.check_for_kill_phrases(),
+        # Save images to separate files.
         builders.save_attachments_externally(),
+        # Create a single HTML file from the public wiki, externalizing the images
+        # as we do, and copy it and the extimages folder to the output/public_wiki
+        # folder inside our private wiki.
         builders.compile_html_file(externalize_attachments=True),
     ],
     # If you want a second product, add it like this:

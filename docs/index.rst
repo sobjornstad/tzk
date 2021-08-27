@@ -1,8 +1,8 @@
 tzk
 ===
 
-**tzk** (pronounced /tə'zɪːk/)
-is a custom build tool and utility CLI
+**tzk** (pronounced /tə'ziːk/, tuh-ZEEK)
+is a build tool and utility CLI
 for Soren Bjornstad's Zettelkasten edition of TiddlyWiki.
 
 .. toctree::
