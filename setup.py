@@ -22,6 +22,8 @@ setuptools.setup(
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Operating System :: OS Independent",
     ],
@@ -30,5 +32,5 @@ setuptools.setup(
             "tzk = tzk.__main__:launch"
         ],
     },
-    python_requires='>=3.8',
+    python_requires='>=3.6',
 )

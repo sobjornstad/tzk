@@ -3,6 +3,7 @@ util.py - miscellaneous utility functions
 """
 from contextlib import contextmanager
 import os
+import shutil
 import sys
 from typing import NoReturn
 
@@ -40,3 +41,17 @@ def pushd(directory: str):
         yield
     finally:
         os.chdir(old_directory)
+
+def require_dependencies() -> None:
+    """
+    Raise an exception if dependencies of tzk aren't available.
+    """
+    if shutil.which("npm") is None:
+        fail("npm is not available. "
+                "Please install NPM and make it available on your PATH.\n"
+                "https://docs.npmjs.com/downloading-and-installing-node-js-and-npm")
+
+    if shutil.which("git") is None:
+        fail("Git is not available. "
+                "Please install Git and make it available on your PATH.\n"
+                "https://git-scm.com/book/en/v2/Getting-Started-Installing-Git")

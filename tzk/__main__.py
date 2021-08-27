@@ -1,7 +1,6 @@
 from abc import ABC, abstractmethod, abstractclassmethod
 import argparse
 import os
-import shutil
 import sys
 import traceback
 from typing import Optional
@@ -9,7 +8,7 @@ from typing import Optional
 from tzk.config import cm
 from tzk import git
 from tzk import tw
-from tzk.util import BuildError, fail, numerize
+from tzk.util import BuildError, fail, numerize, require_dependencies
 
 
 class CliCommand(ABC):
@@ -141,13 +140,7 @@ class InitCommand(CliCommand):
         )
 
     def _precheck(self):
-        if shutil.which("npm") is None:
-            fail("TZK requires NPM. Please install NPM and make it available on your PATH.\n"
-                 "https://docs.npmjs.com/downloading-and-installing-node-js-and-npm")
-
-        if shutil.which("git") is None:
-            fail("TZK requires Git. Please install Git and make it available on your PATH.\n"
-                 "https://git-scm.com/book/en/v2/Getting-Started-Installing-Git")
+        require_dependencies()
 
         if os.path.exists("package.json"):
             fail("A 'package.json' file already exists in the current directory. "
@@ -156,6 +149,20 @@ class InitCommand(CliCommand):
     def execute(self, args: argparse.Namespace) -> None:
         self._precheck()
         tw.install(args.wiki_name, args.tiddlywiki_version_spec, args.author)
+
+
+class PreflightCommand(CliCommand):
+    cmd = "preflight"
+    help = "Check if tzk and all its dependencies are correctly installed."
+
+    @classmethod
+    def setup_arguments(cls, parser: argparse.ArgumentParser) -> None:
+        pass
+
+    def execute(self, args: argparse.Namespace) -> None:
+        require_dependencies()
+        print("You're all set! Change into a directory you want to "
+              "turn into your tzk repository and run 'tzk init'.")
 
 
 class BuildCommand(CliCommand):
