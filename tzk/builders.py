@@ -444,11 +444,20 @@ def set_tiddler_values(mappings: Dict[str, str]) -> None:
 
     for tiddler, new_text in mappings.items():
         tiddler_path = (Path(build_state['public_wiki_folder']) / "tiddlers" / tiddler)
-        with tiddler_path.open("r") as f:
-            tiddler_lines = f.readlines()
-        first_blank_line_index = next(idx
-                                      for idx, value in enumerate(tiddler_lines)
-                                      if not value.strip())
+        try:
+            with tiddler_path.open("r") as f:
+                tiddler_lines = f.readlines()
+        except FileNotFoundError:
+            stop(f"File {tiddler_path} not found. "
+                 f"(Did you forget to end the name with '.tid'?)")
+
+        if not str(tiddler_path).endswith('.tid'):
+            # will be a separate meta file, so the whole thing is the text field
+            first_blank_line_index = 0
+        else:
+            first_blank_line_index = next(idx
+                                        for idx, value in enumerate(tiddler_lines)
+                                        if not value.strip())
         with tiddler_path.open("w") as f:
             f.writelines(tiddler_lines[0:first_blank_line_index+1])
             f.write(new_text)
