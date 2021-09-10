@@ -4,3 +4,4 @@ venv/
 *.egg-info/
 docs/_build/
 tzk/editions/
+dist/
