@@ -20,6 +20,8 @@ You can use the following builders in your configuration file out of the box:
 
 .. autofunction:: compile_html_file
 
+.. autofunction:: editionify
+
 .. autofunction:: export_public_tiddlers
 
 .. autofunction:: new_output_folder
@@ -58,21 +60,28 @@ Custom builders
 ===============
 
 If the existing builders don't cover something you're hoping to do to build a product,
-you can write your own directly within your config file.
+you can write your own builder as a Python function directly within your config file.
 
 As an example, let's suppose that we want to publish our wiki to an S3 bucket
 fronted by CloudFront on Amazon Web Services.
 We can work with AWS using the ``aws`` CLI,
-if we've set that up on our computer.
-We first write a builder function in our ``tzk_config.py``,
+if we've set that up on our computer
+(we could also use the ``boto3`` Python library,
+which is cleaner but slightly longer
+and requires us to muck around with ``pip``,
+so we'll do it through the CLI in this example).
+We first write a builder function decorated with :func:`builders.tzk_builder() <tzk_builder>`
+in our ``tzk_config.py``,
 anywhere above the ``products`` dictionary:
 
 .. code-block:: python
 
+    from pathlib import Path
     import subprocess
 
     @builders.tzk_builder
     def publish_to_aws(target_uri: str, cloudfront_distribution_id: str):
+        "Publish output to Amazon S3"
         source_folder = Path(builders.build_state['public_wiki_folder']) / "output"
         # Sync the output folder to S3, deleting any files that have been removed.
         subprocess.call(("aws", "s3", "sync", "--delete", source_folder, target_uri))
@@ -85,7 +94,10 @@ The :func:`new_output_folder()` builder
 populates this ``public_wiki_folder`` attribute early in the default build process,
 so that it contains the path to the temporary wiki that build steps happen within.
 
-Then we add a call to this builder within the list for this product,
+The first line of the docstring, in this case ``"Publish output to Amazon S3"``,
+is used as the description of the step in output, with any period at the end removed.
+
+Then we add a call to this builder within the list of steps for this product,
 with whatever parameters we like:
 
 .. code-block:: python
@@ -107,11 +119,26 @@ not ``builders.publish_to_aws``,
 since this builder is located directly within the config file
 rather than in the external ``tzk.builders`` module that comes with tzk.
 
+.. tip::
+    If you do something in a builder that needs to be cleaned up later,
+    like creating a temporary file,
+    assign a cleanup function to the ``cleaner`` attribute of your builder:
+    ::
+
+        def aws_cleanup():
+            # nothing really needs to be cleaned up, but if it did we'd do it here
+            pass
+        publish_to_aws.cleaner = aws_cleanup
+
+    Cleanup functions will run after all steps are done,
+    regardless of whether the build succeeds or fails.
+
 
 Shell commands
 ==============
 
-If a builder seems like overkill for your use case,
+If a custom builder seems like overkill
+or you're not familiar with Python,
 you can also run simple shell commands using the :func:`shell()` builder.
 
 Our AWS example would look like this:
@@ -129,10 +156,12 @@ Our AWS example would look like this:
         ],
     }
 
-Notice the need to include quotes within the string in :func:`builders.shell`;
+Notice the need to include quotes within the string in :func:`shell`;
 the same quoting rules as when running shell commands directly apply.
 Also notice that we had to access the compiled HTML file from
-``output/public_site``, since we can no longer use the ``build_state`` dictionary.
+``output/public_site``,
+since we can no longer refer to the ``build_state`` dictionary
+to learn where the temporary output folder is.
 Paths are relative to the private wiki's root directory
 (the directory containing the ``tiddlywiki.info`` file)
 while builders are running.

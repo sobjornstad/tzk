@@ -216,7 +216,7 @@ class BuildCommand(CliCommand):
             for idx, step in enumerate(steps, 1):
                 # Explain what we're doing. Use first line of the builder's docstring
                 # as a summary, if present.
-                if hasattr(step, '__doc__'):
+                if hasattr(step, '__doc__') and step.__doc__ is not None:
                     short_description = step.__doc__.strip().split('\n')[0].rstrip('.')
                     print(f"tzk: Step {idx}/{len(steps)}: {short_description}")
                 else:

@@ -53,7 +53,7 @@ _public_export_filt = r"""
     -[prefix[$:/temp]]
     -[prefix[$:/state]]
     -[prefix[$:/sib/StorySaver/saved]]
-    -[prefix[$:/sib/checkify/]]
+    -[prefix[$:/checkify/]]
     -[[$:/config/zettelkasten/Build/KillPhrases]]
 """
 

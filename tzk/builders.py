@@ -12,6 +12,7 @@ information about the defined products without actually running any build steps.
 
 from contextlib import contextmanager
 import functools
+import json
 import os
 from pathlib import Path
 import re
@@ -124,8 +125,8 @@ def new_output_folder():
     """
     Create a new temporary folder to hold intermediate steps of the product being built.
     
-    The path to this temporary folder will be stored in the 'public_wiki_folder'
-    key of the builders.build_state dictionary. Future build steps can access
+    The path to this temporary folder will be stored in the ``public_wiki_folder``
+    key of the ``builders.build_state`` dictionary. Future build steps can access
     the work in progress here. A cleaner is registered to delete this folder
     when all steps complete, so any finished product should be copied out by a
     later build step once it is complete.
@@ -421,7 +422,7 @@ def replace_private_people(initialer: Callable[[str], str] = None) -> None:
 @tzk_builder
 def set_tiddler_values(mappings: Dict[str, str]) -> None:
     """
-    Set the 'text' field of selected config or other tiddlers to arbitrary new values.
+    Set the ``text`` field of selected config or other tiddlers to arbitrary new values.
 
     This can be used to make customizations that can't easily be done with feature
     flags or other wikitext solutions within the wiki -- for instance, changing the
@@ -524,3 +525,33 @@ def shell(shell_command: str) -> None:
             info(f"Command exited with return code 0:\n{output}")
         else:
             info(f"Command exited with return code 0 (no output).")
+
+
+@tzk_builder
+def editionify(target_folder: str, description: str) -> None:
+    """
+    Copy the output folder to a target location and set its edition description.
+
+    This generates a TiddlyWiki edition based on the temporary output. By
+    copying it into an appropriate location or setting the environment variable
+    :envvar:`TIDDLYWIKI_EDITION_PATH` to the parent directory of the edition's folder,
+    it's possible to quickly generate new TiddlyWikis based on the edition
+    "template" (``tiddlywiki --init EDITION_NAME``, where the ``EDITION_NAME`` is the
+    name of the folder).
+
+    :param target_folder: The folder to copy the output folder to.
+                          Note that the output folder will be merged into this folder
+                          if it exists.
+    :param description:   The description of this edition to use in the new edition's
+                          ``tiddlywiki.info`` file.
+    """
+    shutil.copytree(
+        build_state['public_wiki_folder'],
+        target_folder,
+        dirs_exist_ok=True
+    )
+    with (Path(target_folder) / "tiddlywiki.info").open("r") as f:
+        tinfo = json.load(f)
+    tinfo['description'] = description
+    with (Path(target_folder) / "tiddlywiki.info").open("w") as f:
+        json.dump(tinfo, f)

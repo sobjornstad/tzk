@@ -105,7 +105,13 @@ def _init_tw(wiki_name: str) -> None:
     except FileExistsError:
         pass
     with pushd(wiki_name):
-        subprocess.check_call((_tw_path(), "--init"))
+        old_edition_path = os.environ.get('TIDDLYWIKI_EDITION_PATH')
+        os.environ['TIDDLYWIKI_EDITION_PATH'] = str(Path(__file__).parent / "editions")
+        try:
+            subprocess.check_call((_tw_path(), "--init", "tzk"))
+        finally:
+            if old_edition_path:
+                os.environ['TIDDLYWIKI_EDITION_PATH'] = old_edition_path
 
 
 def _add_filesystem_plugins(wiki_name: str) -> None:
@@ -148,7 +154,9 @@ def _initial_commit() -> None:
 
     print("tzk: Committing changes to repository...")
     git.exec("add", "-A")
-    git.exec("commit", "-m", "Initial commit")
+    output = git.read("commit", "-m", "Initial commit")
+    # Print just a summary since there are going to be a lot of files.
+    print('\n'.join(output.split('\n')[0:2]))
 
 
 def install(wiki_name: str, tw_version_spec: str, author: Optional[str]):
