@@ -436,7 +436,7 @@ def set_tiddler_values(mappings: Dict[str, str]) -> None:
             '$__config_sib_CurrentEditionPublicity.tid': 'public',
         })
 
-    :param mappings: A dictionary whose keys are tiddler names
+    :param mappings: A dictionary whose keys are tiddler filenames
                      and whose values are the values to be inserted
                      in those tiddlers' ``text`` fields.
     """
@@ -461,6 +461,23 @@ def set_tiddler_values(mappings: Dict[str, str]) -> None:
         with tiddler_path.open("w") as f:
             f.writelines(tiddler_lines[0:first_blank_line_index+1])
             f.write(new_text)
+
+
+@tzk_builder
+def delete_tiddlers(tiddlers: Sequence[str]) -> None:
+    """
+    Delete selected tiddlers from the output.
+
+    This is hopefully self-explanatory.
+
+    .. code-block:: python
+
+    :param mappings: A list of filenames of tiddlers to delete.
+    """
+    assert 'public_wiki_folder' in build_state
+    for tiddler in tiddlers:
+        tiddler_path = (Path(build_state['public_wiki_folder']) / "tiddlers" / tiddler)
+        tiddler_path.unlink()
 
 
 @tzk_builder
