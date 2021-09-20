@@ -12,6 +12,13 @@ from typing import Any
 from tzk.util import fail
 
 
+DEFAULT_INIT_OPTS = {
+    'wiki_name': 'wiki',
+    'tw_version_spec': '^5.1.23',
+    'author': None,
+}
+
+
 class ConfigurationManager:
     def __init__(self):
         self.initialize_cm()

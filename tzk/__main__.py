@@ -1,14 +1,16 @@
 from abc import ABC, abstractmethod, abstractclassmethod
 import argparse
 import os
+from pathlib import Path
+import shutil
 import sys
 import traceback
 from typing import Optional
 
-from tzk.config import cm
+from tzk.config import cm, DEFAULT_INIT_OPTS
 from tzk import git
 from tzk import tw
-from tzk.util import BuildError, fail, numerize, require_dependencies
+from tzk.util import BuildError, fail, numerize, require_dependencies, pushd
 
 
 class CliCommand(ABC):
@@ -127,19 +129,19 @@ class InitCommand(CliCommand):
             "-n", "--wiki-name",
             metavar="NAME",
             help="The wiki will be installed in a subfolder of the current directory, called NAME.",
-            default="wiki",
+            default=DEFAULT_INIT_OPTS['wiki_name'],
         )
         parser.add_argument(
             "-v", "--tiddlywiki-version-spec",
             metavar="SPEC",
             help="NPM version spec for the version of TiddlyWiki to start your package.json at.",
-            default="^5.1.23",
+            default=DEFAULT_INIT_OPTS['tw_version_spec'],
         )
         parser.add_argument(
             "-a", "--author",
             metavar="AUTHOR_NAME",
             help="The author to be credited in the package.json, if not your current username.",
-            default=None,
+            default=DEFAULT_INIT_OPTS['author'],
         )
 
     def _precheck(self):
@@ -255,6 +257,93 @@ class BuildCommand(CliCommand):
             sys.exit(1)
         else:
             print(f"tzk: Build of product '{args.product}' completed successfully.")
+
+
+class ConvertCommand(CliCommand):
+    cmd = "convert"
+    help = "Convert a tzk repository to a single-file wiki or vice versa."
+
+    @classmethod
+    def setup_arguments(cls, parser: argparse.ArgumentParser) -> None:
+        parser.add_argument(
+            "source",
+            metavar="SOURCE",
+            help="Wiki to convert. "
+                 "Either a folder containing a tzk_config.py file or an HTML file.",
+        )
+        parser.add_argument(
+            "destination",
+            metavar="DEST",
+            help="Output location for the converted wiki. "
+                 "Either a folder (existing or not) or the name of an HTML file."
+        )
+        parser.add_argument(
+            "-f", "--force",
+            action="store_true",
+            help="Overwrite the destination location if it already exists.",
+        )
+
+    def _precheck(self, args: argparse.Namespace) -> None:
+        if not os.path.exists(args.source):
+            fail(f"The source location '{args.source}' does not exist.")
+        if os.path.exists(args.destination) and not args.force:
+            fail(f"The destination location '{args.source}' already exists. "
+                 f"(Use --force to overwrite it.)")
+
+
+    def execute(self, args: argparse.Namespace) -> None:
+        require_dependencies()
+        self._precheck(args)
+
+        source = Path(args.source).absolute()
+        destination = Path(args.destination)
+        source_type = 'file' if source.is_file() else 'folder'
+        dest_type = 'file' if destination.name.endswith(".html") else 'folder'
+
+        # If types are the same, there's nothing to convert...
+        if source_type == dest_type:
+            fail("The source or the destination may not be of the same type. "
+                 "One must be a folder and the other an HTML file.")
+
+        # Conversion from folder to file using --render.
+        if source_type == 'folder':
+            if not Path(source / "tzk_config.py").exists():
+                fail("The source folder '{source}' does not contain "
+                     "a tzk_config.py file.")
+
+            with pushd(str(source)):
+                source_wiki_folder = cm().wiki_folder
+
+            tw.exec(
+                (
+                    ("output", str(destination.parent)),
+                    ("render", "$:/core/save/all", destination.name, "text/plain"),
+                ),
+                base_wiki_folder=source_wiki_folder
+            )
+
+        # Conversion from file to folder using --savewikifolder.
+        elif source_type == 'file':
+            if destination.exists() and args.force:
+                doing_what = "Overwriting existing"
+                shutil.rmtree(destination)
+            else:
+                doing_what = "Creating new"
+            print(f"tzk: {doing_what} tzk repository in destination '{destination}'...")
+            os.mkdir(destination)
+
+            def installer(wiki_name):
+                tw.exec(
+                    (
+                        ("load", str(source)),
+                        ("savewikifolder", wiki_name),
+                    ),
+                )
+            with pushd(str(destination)):
+                tw.install(_tw_func=installer, **DEFAULT_INIT_OPTS)  # type: ignore
+
+        else:
+            raise AssertionError(f"Invalid source type {source_type}.")
 
 
 def chdir_to_wiki():

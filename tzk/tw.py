@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 import subprocess
 from textwrap import dedent
-from typing import Optional, Sequence
+from typing import Callable, Optional, Sequence
 
 from tzk import config
 from tzk import git
@@ -159,9 +159,13 @@ def _initial_commit() -> None:
     print('\n'.join(output.split('\n')[0:2]))
 
 
-def install(wiki_name: str, tw_version_spec: str, author: Optional[str]):
+def install(wiki_name: str, tw_version_spec: str, author: Optional[str],
+            _tw_func: Optional[Callable[[str], None]] = None):
     """
     Install TiddlyWiki on Node.js in the current directory and set up a new wiki.
+
+    If _tw_func is provided, call it to create the TiddlyWiki in the new tzk repository
+    rather than the default routine. It receives one argument, the name of the new wiki.
     """
     # assert: caller has checked npm and git are installed
 
@@ -170,7 +174,12 @@ def install(wiki_name: str, tw_version_spec: str, author: Optional[str]):
 
     _init_tzk_config()
     _init_npm(wiki_name, tw_version_spec, author)
-    _init_tw(wiki_name)
+
+    if _tw_func is not None:
+        _tw_func(wiki_name)
+    else:
+        _init_tw(wiki_name)
+
     _add_filesystem_plugins(wiki_name)
     _init_gitignore()
     _initial_commit()
