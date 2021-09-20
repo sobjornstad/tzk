@@ -234,15 +234,15 @@ class BuildCommand(CliCommand):
             failed = True
             print(f"tzk: ERROR: {str(e)}")
             print(f"tzk: Build of product '{args.product}' failed on step {idx}, "
-                    f"backed by builder '{step.__name__}'. ")
+                  f"backed by builder '{step.__name__}'. ")
             print(f"tzk: Add '--skip-builder {step.__name__}' if you'd like "
-                    f"to skip this step.")
+                  f"to skip this step.")
 
         except Exception:
             failed = True
             print(f"tzk: Build of product '{args.product}' failed on step {idx}: "
-                    f"unhandled exception. "
-                    f"The original error follows:")
+                  f"unhandled exception. "
+                  f"The original error follows:")
             traceback.print_exc()
 
         finally:
@@ -273,9 +273,9 @@ def chdir_to_wiki():
 
     if not os.path.exists("tiddlywiki.info"):
         fail(f"After changing directory into {cm().wiki_folder} per your config file: "
-            f"Expected a 'tiddlywiki.info' file in {os.getcwd()}. "
-            f"Please check that your wiki is initialized "
-            f"and you specified the correct wiki_folder_name.")
+             f"Expected a 'tiddlywiki.info' file in {os.getcwd()}. "
+             f"Please check that your wiki is initialized "
+             f"and you specified the correct wiki_folder_name.")
 
 
 def launch():
