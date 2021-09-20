@@ -66,7 +66,7 @@ class CommitCommand(CliCommand):
             current_branch = git.read("rev-parse", "--abbrev-ref", "HEAD")
             if current_branch != cm().commit_require_branch:
                 fail(f"You are on the '{current_branch}' branch, "
-                     f"but your TZK configuration requires you to be on the "
+                     f"but your tzk configuration requires you to be on the "
                      f"'{cm().commit_require_branch}' branch to commit.")
 
         git.exec("add", "-A")
@@ -119,7 +119,7 @@ class ListenCommand(CliCommand):
 
 class InitCommand(CliCommand):
     cmd = "init"
-    help = "Set up a new TZK directory."
+    help = "Set up a new tzk directory."
 
     @classmethod
     def setup_arguments(cls, parser: argparse.ArgumentParser) -> None:
@@ -147,7 +147,7 @@ class InitCommand(CliCommand):
 
         if os.path.exists("package.json"):
             fail("A 'package.json' file already exists in the current directory. "
-                 "Perhaps you've already initialized a TZK repository here?")
+                 "Perhaps you've already initialized a tzk repository here?")
 
     def execute(self, args: argparse.Namespace) -> None:
         self._precheck()
@@ -172,7 +172,7 @@ class BuildCommand(CliCommand):
     cmd = "build"
     help = ("Build another wiki or derivative product, "
             "such as a public version of the wiki, "
-            "from this TZK repository.")
+            "from this tzk repository.")
 
     @classmethod
     def setup_arguments(cls, parser: argparse.ArgumentParser) -> None:

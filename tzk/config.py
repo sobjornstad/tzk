@@ -1,5 +1,5 @@
 """
-config.py - read and manage the TZK config file
+config.py - read and manage the tzk config file
 """
 import datetime
 import functools

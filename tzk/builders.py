@@ -34,7 +34,7 @@ def tzk_builder(func):
     initially passed wrapped up in it. Calling that lambda has the effect
     of executing the builder.
 
-    We use this in TZK to allow the user to use function calls in her config
+    We use this in tzk to allow the user to use function calls in her config
     to define the build steps, while not requiring her to write a bunch of
     ugly and confusing lambda:'s in the config. The functions that will be called
     are prepared during the config and executed later.
