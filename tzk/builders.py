@@ -10,6 +10,7 @@ time. This allows the configuration file to be read at any time to retrieve
 information about the defined products without actually running any build steps.
 """
 
+from collections.abc import Mapping
 from contextlib import contextmanager
 import functools
 import json
@@ -19,7 +20,7 @@ import re
 import shutil
 import subprocess
 import tempfile
-from typing import Callable, Dict, List, Set, Sequence, Tuple
+from typing import Callable, Dict, List, Optional, Set, Sequence, Tuple
 
 from tzk import git
 from tzk import tw
@@ -419,10 +420,83 @@ def replace_private_people(initialer: Callable[[str], str] = None) -> None:
                 f.writelines(lines)
 
 
-@tzk_builder
-def set_tiddler_values(mappings: Dict[str, str]) -> None:
+def _set_fields(mappings: Dict[str, str],
+                editing_func: Callable[[Path, List[str], str], None]) -> None:
     """
-    Set the ``text`` field of selected config or other tiddlers to arbitrary new values.
+    Read the text of a .tid file into memory and call an editing_func on it
+    in order to modify some of its fields.
+
+    :param mappings: Mapping of tiddler filenames to new values of some field
+                     (this function is field-agnostic; the editing_func should be
+                     aware of what field is to be edited).
+    :param editing_func: A function which will make the changes.
+
+    The editing_func is called once for each item in the mapping
+    and receives three arguments:
+
+    :param tiddler_path: The full path to the tiddler on the filesystem.
+                         The editing_func should write changes back to this file,
+                         if any are appropriate.
+    :param tiddler_lines: A sequence of strings, each one line of the original file.
+    :param new_text: The new field value specified for this tiddler in the provided
+                     mapping dict of tiddler name/new value.
+    """
+
+    for tiddler, new_text in mappings.items():
+        tiddler_path = (Path(build_state['public_wiki_folder']) / "tiddlers" / tiddler)
+        try:
+            with tiddler_path.open("r") as f:
+                tiddler_lines = f.readlines()
+        except FileNotFoundError:
+            stop(f"File {tiddler_path} not found. "
+                 f"(Did you forget to end the name with '.tid'?)")
+
+        editing_func(tiddler_path, tiddler_lines, new_text)
+
+
+def _set_text_field(mappings: Dict[str, str]) -> None:
+    "Set the 'text' field to a new value in each pair of tiddler name/value."
+    def editor(tiddler_path: Path, tiddler_lines: Sequence[str], new_text: str) -> None:
+        if not str(tiddler_path).endswith('.tid'):
+            # will be a separate meta file, so the whole thing is the text field
+            first_blank_line_index = 0
+        else:
+            first_blank_line_index = next(idx
+                                        for idx, value in enumerate(tiddler_lines)
+                                        if not value.strip())
+        with tiddler_path.open("w") as f:
+            f.writelines(tiddler_lines[0:first_blank_line_index+1])
+            f.write(new_text)
+    _set_fields(mappings, editor)
+
+
+def _set_nontext_field(field: str, mappings: Dict[str, str]) -> None:
+    "Set the specified /field/ to a new value in each pair of tiddler name/value."
+    def editor(tiddler_path: Path, tiddler_lines: Sequence[str], new_text: str) -> None:
+        # First check if the field exists and is currently not set to new_text...
+        line_to_change = -1
+        for idx, line in enumerate(tiddler_lines):
+            if m := re.match(f"^{field}: (?P<value>.*)", line):
+                if m.group('value') != new_text:
+                    line_to_change = idx
+                break
+
+        # ...and if so, write the file again with the change in place.
+        if line_to_change != -1:
+            with tiddler_path.open("w") as f:
+                for idx, line in enumerate(tiddler_lines):
+                    if idx == line_to_change:
+                        f.write(f"{field}: {new_text}\n")
+                    else:
+                        f.write(line)
+    _set_fields(mappings, editor)
+
+
+@tzk_builder
+def set_tiddler_values(text: Optional[Dict[str, str]] = None,
+                       **kwargs: Dict[str, str]) -> None:
+    """
+    Set fields of selected config or other tiddlers to arbitrary new values.
 
     This can be used to make customizations that can't easily be done with feature
     flags or other wikitext solutions within the wiki -- for instance, changing the
@@ -436,31 +510,22 @@ def set_tiddler_values(mappings: Dict[str, str]) -> None:
             '$__config_sib_CurrentEditionPublicity.tid': 'public',
         })
 
-    :param mappings: A dictionary whose keys are tiddler filenames
-                     and whose values are the values to be inserted
-                     in those tiddlers' ``text`` fields.
+    Any number of arguments can be provided. The name of each argument is the name of
+    the field to edit. One positional argument may be used with no name; this argument
+    is assumed to be mappings for replacing the 'text' field.
     """
     assert 'public_wiki_folder' in build_state
+    for field_name, field_mapping in kwargs.items():
+        if not isinstance(field_mapping, Mapping):
+            raise AssertionError(
+                "Arguments to set_tiddler_values must be dictionaries "
+                "mapping tiddler names to values.")
 
-    for tiddler, new_text in mappings.items():
-        tiddler_path = (Path(build_state['public_wiki_folder']) / "tiddlers" / tiddler)
-        try:
-            with tiddler_path.open("r") as f:
-                tiddler_lines = f.readlines()
-        except FileNotFoundError:
-            stop(f"File {tiddler_path} not found. "
-                 f"(Did you forget to end the name with '.tid'?)")
-
-        if not str(tiddler_path).endswith('.tid'):
-            # will be a separate meta file, so the whole thing is the text field
-            first_blank_line_index = 0
-        else:
-            first_blank_line_index = next(idx
-                                        for idx, value in enumerate(tiddler_lines)
-                                        if not value.strip())
-        with tiddler_path.open("w") as f:
-            f.writelines(tiddler_lines[0:first_blank_line_index+1])
-            f.write(new_text)
+    if text is not None:
+        _set_text_field(text)
+    
+    for field, mappings in kwargs.items():
+        _set_nontext_field(field, mappings)
 
 
 @tzk_builder
