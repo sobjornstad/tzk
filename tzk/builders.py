@@ -311,10 +311,10 @@ def compile_html_file(
              f"(To overwrite any files existing in the output folder, "
              f"set overwrite = True for this builder.)")
 
+    shutil.rmtree(output_folder)
     shutil.copytree(
         Path(build_state['public_wiki_folder']) / "output",
         Path(output_folder),
-        dirs_exist_ok=True
     )
     info(f"Successfully copied built output to {os.path.abspath(output_folder)}.")
 
@@ -566,15 +566,15 @@ def editionify(target_folder: str, description: str) -> None:
     name of the folder).
 
     :param target_folder: The folder to copy the output folder to.
-                          Note that the output folder will be merged into this folder
-                          if it exists.
+                          This folder *will be deleted* if it already exists
+                          prior to the copy.
     :param description:   The description of this edition to use in the new edition's
                           ``tiddlywiki.info`` file.
     """
+    shutil.rmtree(target_folder)
     shutil.copytree(
         build_state['public_wiki_folder'],
         target_folder,
-        dirs_exist_ok=True
     )
     with (Path(target_folder) / "tiddlywiki.info").open("r") as f:
         tinfo = json.load(f)
