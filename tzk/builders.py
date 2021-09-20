@@ -476,7 +476,8 @@ def _set_nontext_field(field: str, mappings: Dict[str, str]) -> None:
         # First check if the field exists and is currently not set to new_text...
         line_to_change = -1
         for idx, line in enumerate(tiddler_lines):
-            if m := re.match(f"^{field}: (?P<value>.*)", line):
+            m = re.match(f"^{field}: (?P<value>.*)", line)
+            if m:
                 if m.group('value') != new_text:
                     line_to_change = idx
                 break
