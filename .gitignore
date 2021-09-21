@@ -5,3 +5,4 @@ venv/
 cli_docs/_build/
 tzk/editions/
 dist/
+build/
