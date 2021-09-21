@@ -22,9 +22,9 @@ Documentation / Installation
 ============================
 
 Find a live version of the edition on the web with further instructions
-    at https://sobjornstad.github.io/tzk.
+    at https://sobjornstad.github.io/tzk/.
 You can find the documentation for the CLI
     (which handles creating the wiki,
      versioning with Git,
      and creating public and other derivative versions of the wiki)
-    at https://readthedocs.org/projects/tzk/.
+    at https://tzk.readthedocs.io/en/latest/.
