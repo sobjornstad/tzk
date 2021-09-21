@@ -13,7 +13,6 @@ information about the defined products without actually running any build steps.
 from collections.abc import Mapping
 from contextlib import contextmanager
 import functools
-import json
 import os
 from pathlib import Path
 import re
@@ -24,7 +23,7 @@ from typing import Callable, Dict, List, Optional, Set, Sequence, Tuple
 
 from tzk import git
 from tzk import tw
-from tzk.util import BuildError, pushd
+from tzk.util import alter_tiddlywiki_info, BuildError, pushd
 
 
 def tzk_builder(func):
@@ -648,8 +647,22 @@ def editionify(target_folder: str, description: str) -> None:
         build_state['public_wiki_folder'],
         target_folder,
     )
-    with (Path(target_folder) / "tiddlywiki.info").open("r") as f:
-        tinfo = json.load(f)
-    tinfo['description'] = description
-    with (Path(target_folder) / "tiddlywiki.info").open("w") as f:
-        json.dump(tinfo, f)
+
+    def editor(tinfo):
+        tinfo['description'] = description
+        return tinfo
+    alter_tiddlywiki_info(Path(target_folder) / "tiddlywiki.info", editor)
+
+
+@tzk_builder
+def add_plugins(plugins: Sequence[str]) -> None:
+    """
+    Add one or more plugins to the tiddlywiki.info file.
+
+    :param plugins: A list of plugin names (e.g., "tiddlywiki/codemirror") to add.
+    """
+    def editor(tinfo):
+        tinfo['plugins'].extend(plugins)
+        return tinfo
+    alter_tiddlywiki_info(Path(build_state['public_wiki_folder']) / "tiddlywiki.info",
+                          editor)

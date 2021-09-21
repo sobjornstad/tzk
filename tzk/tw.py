@@ -114,18 +114,28 @@ def _init_tw(wiki_name: str) -> None:
                 os.environ['TIDDLYWIKI_EDITION_PATH'] = old_edition_path
 
 
-def _add_filesystem_plugins(wiki_name: str) -> None:
+def _restore_plugins(wiki_name: str) -> None:
     """
-    Add the "tiddlywiki/filesystem" and "tiddlywiki/tiddlyweb" plugins
-    required for Node.js client-server operation to the new wiki's tiddlywiki.info.
+    Add the plugins from the edition's tiddlywiki.info to the new wiki's
+    tiddlywiki.info (for some reason, this is not done automatically). Also
+    add the two plugins required for client-server operation.
     """
-    print("tzk: Adding filesystem plugins to tiddlywiki.info...")
+    print("tzk: Adding plugins to tiddlywiki.info...")
+
     info_path = Path.cwd() / wiki_name / "tiddlywiki.info"
+    edition_path = Path(__file__).parent / "editions" / "tzk" / "tiddlywiki.info"
+
     with info_path.open("r") as f:
         info_data = json.load(f)
-    info_data['plugins'] = ["tiddlywiki/filesystem", "tiddlywiki/tiddlyweb"]
+    with edition_path.open("r") as f:
+        edition_data = json.load(f)
+    
+    plugins = {"tiddlywiki/filesystem", "tiddlywiki/tiddlyweb"}
+    plugins = plugins.union(edition_data['plugins'])
+    info_data['plugins'] = sorted(plugins)
+
     with info_path.open("w") as f:
-        json.dump(info_data, f)
+        json.dump(info_data, f, indent=4)
 
 
 def _init_gitignore() -> None:
@@ -180,7 +190,7 @@ def install(wiki_name: str, tw_version_spec: str, author: Optional[str],
     else:
         _init_tw(wiki_name)
 
-    _add_filesystem_plugins(wiki_name)
+    _restore_plugins(wiki_name)
     _init_gitignore()
     _initial_commit()
 

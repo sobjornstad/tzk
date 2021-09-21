@@ -2,14 +2,27 @@
 util.py - miscellaneous utility functions
 """
 from contextlib import contextmanager
+import json
 import os
+from pathlib import Path
 import shutil
 import sys
-from typing import NoReturn
+from typing import Any, Callable, Dict, NoReturn
 
 
 class BuildError(Exception):
     pass
+
+
+def alter_tiddlywiki_info(
+        info_path: Path,
+        edit_func: Callable[[Dict[str, Any]], Dict[str, Any]]) -> None:
+    "Change a tiddlywiki.info (or other json file) in an arbitrary manner."
+    with info_path.open("r") as f:
+        tinfo = json.load(f)
+    tinfo = edit_func(tinfo)
+    with info_path.open("w") as f:
+        json.dump(tinfo, f, indent=2)
 
 
 def fail(msg: str, exit_code: int = 1) -> NoReturn:
