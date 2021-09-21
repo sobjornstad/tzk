@@ -10,7 +10,8 @@ from typing import Optional
 from tzk.config import cm, DEFAULT_INIT_OPTS
 from tzk import git
 from tzk import tw
-from tzk.util import BuildError, fail, numerize, require_dependencies, pushd
+from tzk.util import (BuildError, fail, numerize, require_dependencies, pushd,
+                      TZK_VERSION)
 
 
 class CliCommand(ABC):
@@ -78,7 +79,7 @@ class CommitCommand(CliCommand):
 
 class ListenCommand(CliCommand):
     cmd = "listen"
-    help = "Start a TiddlyWiki server in the current directory."
+    help = "Start a TiddlyWiki server in the current tzk repository."
 
     @classmethod
     def setup_arguments(cls, parser: argparse.ArgumentParser) -> None:
@@ -121,7 +122,7 @@ class ListenCommand(CliCommand):
 
 class InitCommand(CliCommand):
     cmd = "init"
-    help = "Set up a new tzk directory."
+    help = "Set up a new tzk repository."
 
     @classmethod
     def setup_arguments(cls, parser: argparse.ArgumentParser) -> None:
@@ -168,6 +169,18 @@ class PreflightCommand(CliCommand):
         require_dependencies()
         print("You're all set! Change into a directory you want to "
               "turn into your tzk repository and run 'tzk init'.")
+
+
+class VersionCommand(CliCommand):
+    cmd = "version"
+    help = "Find out what version your tzk is at."
+
+    @classmethod
+    def setup_arguments(cls, parser: argparse.ArgumentParser) -> None:
+        pass
+
+    def execute(self, args: argparse.Namespace) -> None:
+        print(f"tzk version {TZK_VERSION}")
 
 
 class BuildCommand(CliCommand):
@@ -386,11 +399,19 @@ def launch():
                  f"'{os.environ['TZK_DIRECTORY']}', so I tried to go there, "
                  f"but there's no tzk_config.py there either.")
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        description=f"TiddlyZettelKasten {TZK_VERSION} CLI\n"
+                    f"Copyright (c) 2021 Soren Bjornstad.\n"
+                    f"MIT license; see https://github.com/sobjornstad/tzk/LICENSE for details.",
+        epilog="For full documentation, see https://tzk.readthedocs.io/en/latest/.",
+        formatter_class=argparse.RawDescriptionHelpFormatter
+    )
 
     subparsers = parser.add_subparsers()
     for command in sorted(CliCommand.__subclasses__(), key=lambda i: i.__name__):
-        subparser = subparsers.add_parser(command.cmd, help=command.help)
+        subparser = subparsers.add_parser(command.cmd,
+                                          help=command.help,
+                                          description=command.help)
         subparser.set_defaults(_cls=command)
         command.setup_arguments(subparser)  # type: ignore
 
