@@ -461,7 +461,7 @@ def _set_text_field(mappings: Dict[str, str]) -> None:
     def editor(tiddler_path: Path, tiddler_lines: Sequence[str], new_text: str) -> None:
         if not str(tiddler_path).endswith('.tid'):
             # will be a separate meta file, so the whole thing is the text field
-            first_blank_line_index = 0
+            first_blank_line_index = -1
         else:
             first_blank_line_index = next(idx
                                         for idx, value in enumerate(tiddler_lines)
