@@ -44,7 +44,13 @@ def exec(args: Sequence[Sequence[str]], base_wiki_folder: str = None) -> int:
                              during the execution of builders,
                              unless explicitly changed.
     """
-    call_args = [_tw_path()]
+    # must pushd into base wiki to find the tiddlywiki node_modules
+    if base_wiki_folder is not None:
+        with pushd(base_wiki_folder):
+            call_args = [_tw_path()]
+    else:
+        call_args = [_tw_path()]
+
     if base_wiki_folder is not None:
         call_args.append(base_wiki_folder)
     for tw_arg in args:

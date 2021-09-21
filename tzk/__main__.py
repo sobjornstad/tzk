@@ -300,7 +300,7 @@ class ConvertCommand(CliCommand):
         if not os.path.exists(args.source):
             fail(f"The source location '{args.source}' does not exist.")
         if os.path.exists(args.destination) and not args.force:
-            fail(f"The destination location '{args.source}' already exists. "
+            fail(f"The destination location '{args.destination}' already exists. "
                  f"(Use --force to overwrite it.)")
 
 
@@ -325,14 +325,14 @@ class ConvertCommand(CliCommand):
                      "a tzk_config.py file.")
 
             with pushd(str(source)):
-                source_wiki_folder = cm().wiki_folder
+                source_wiki_folder = Path.cwd() / cm(cache=[]).wiki_folder
 
             tw.exec(
                 (
                     ("output", str(destination.parent)),
                     ("render", "$:/core/save/all", destination.name, "text/plain"),
                 ),
-                base_wiki_folder=source_wiki_folder
+                base_wiki_folder=str(source_wiki_folder)
             )
 
         # Conversion from file to folder using --savewikifolder.
