@@ -1,3 +1,5 @@
+[![Documentation Status](https://readthedocs.org/projects/tzk/badge/?version=latest)](https://tzk.readthedocs.io/en/latest/?badge=latest)
+
 **tzk** (*TiddlyZettelKasten*)
     is a TiddlyWiki edition and associated CLI
     for maintaining personal notes
