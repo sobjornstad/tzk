@@ -122,11 +122,11 @@ def _init_tw(wiki_name: str) -> None:
 
 def _restore_plugins(wiki_name: str) -> None:
     """
-    Add the plugins from the edition's tiddlywiki.info to the new wiki's
-    tiddlywiki.info (for some reason, this is not done automatically). Also
-    add the two plugins required for client-server operation.
+    Add the two plugins required for client-server operation to the existing
+    ones in the edition, sort them in order, and replace the existing plugins
+    array in the tiddlywiki.info.
     """
-    print("tzk: Adding plugins to tiddlywiki.info...")
+    print("tzk: Configuring plugins in tiddlywiki.info...")
 
     info_path = Path.cwd() / wiki_name / "tiddlywiki.info"
     edition_path = Path(__file__).parent / "editions" / "tzk" / "tiddlywiki.info"
@@ -135,7 +135,7 @@ def _restore_plugins(wiki_name: str) -> None:
         info_data = json.load(f)
     with edition_path.open("r") as f:
         edition_data = json.load(f)
-    
+
     plugins = {"tiddlywiki/filesystem", "tiddlywiki/tiddlyweb"}
     plugins = plugins.union(edition_data['plugins'])
     info_data['plugins'] = sorted(plugins)
