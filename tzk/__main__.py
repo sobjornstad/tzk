@@ -402,7 +402,7 @@ def launch():
     parser = argparse.ArgumentParser(
         description=f"TiddlyZettelKasten {TZK_VERSION} CLI\n"
                     f"Copyright (c) 2021 Soren Bjornstad.\n"
-                    f"MIT license; see https://github.com/sobjornstad/tzk/LICENSE for details.",
+                    f"MIT license; see https://github.com/sobjornstad/tzk/blob/master/LICENSE for details.",
         epilog="For full documentation, see https://tzk.readthedocs.io/en/latest/.",
         formatter_class=argparse.RawDescriptionHelpFormatter
     )
