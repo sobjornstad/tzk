@@ -312,7 +312,10 @@ def compile_html_file(
              f"(To overwrite any files existing in the output folder, "
              f"set overwrite = True for this builder.)")
 
-    shutil.rmtree(output_folder)
+    try:
+        shutil.rmtree(output_folder)
+    except FileNotFoundError:
+        pass
     shutil.copytree(
         Path(build_state['public_wiki_folder']) / "output",
         Path(output_folder),
@@ -637,7 +640,10 @@ def editionify(target_folder: str, description: str) -> None:
     :param description:   The description of this edition to use in the new edition's
                           ``tiddlywiki.info`` file.
     """
-    shutil.rmtree(target_folder)
+    try:
+        shutil.rmtree(target_folder)
+    except FileNotFoundError:
+        pass
     shutil.copytree(
         build_state['public_wiki_folder'],
         target_folder,
