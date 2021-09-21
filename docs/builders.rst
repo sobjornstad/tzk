@@ -20,6 +20,8 @@ You can use the following builders in your configuration file out of the box:
 
 .. autofunction:: compile_html_file
 
+.. autofunction:: delete_tiddlers
+
 .. autofunction:: editionify
 
 .. autofunction:: export_public_tiddlers

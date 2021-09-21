@@ -80,7 +80,7 @@ products = {
         # Replace the names of people who don't have public tiddlers with their initials.
         builders.replace_private_people(),
         # Change the 'text' field of these tiddlers to new values.
-        builders.set_tiddler_values(mappings={
+        builders.set_tiddler_values(text={
             '$__config_sib_CurrentEditionPublicity.tid': 'public',
             '$__config_sib_IsPublicEdition.tid': 'false',
             '$__config_DefaultSidebarTab.tid': '$:/sib/SideBar/Explore',
