@@ -1,0 +1,83 @@
+created: 20210627163819671
+modified: 20210627200105492
+tags: $:/tags/Stylesheet
+title: $:/sib/styles/OpenTopBar
+type: text/vnd.tiddlywiki
+
+div.sib-quick-tiddler-jump {
+	background-color: <<color menubar-background>>;
+	position: fixed;
+	z-index: 850;
+	display: inline-block;
+	top: 0;
+	right: 0;
+	left: 0;
+	text-align: center;
+	height: {{$:/config/sib/TopBarHeight}};
+	overflow: auto;
+	border-bottom: 1px solid <<color muted-foreground>>;
+	padding-bottom: 3px;
+	padding-top: 3px;
+	font-size: 12px;
+}
+
+div.sib-quick-tiddler-jump a {
+	color: <<color menubar-foreground>>;
+}
+
+div.sib-quick-tiddler-jump a.tc-tiddlylink-shadow {
+	font-weight: normal;
+}
+
+div.sib-quick-tiddler-jump ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* Droppable placeholders take up no space until we drag something there. */
+div.sib-quick-tiddler-jump ul li.tc-droppable div.tc-droppable-placeholder {
+	height: 0;
+}
+
+/* TW inserts this as a placeholder after the last item. We have to resize it to match the rest. */
+div.sib-quick-tiddler-jump ul > div.tc-droppable div.tc-droppable-placeholder svg {
+	height: 0;
+	width: 1rem;
+}
+
+div.sib-quick-tiddler-jump .tc-dropzone.tc-dragover:before {
+	display: inline-block;
+}
+
+div.sib-quick-tiddler-jump ul > li.tc-droppable div,
+		div.sib-quick-tiddler-jump ul > div.tc-droppable div {
+	display: inline-block;
+}
+
+div.sib-quick-tiddler-jump .tc-droppable.tc-dragover > .tc-droppable-placeholder {
+	display: inline-block;
+	background-color: green;
+	border: 0px;
+	width: 1rem;
+	height: 1rem;
+	margin-bottom: 0;
+	margin-top: 0;
+	padding-bottom: 0;
+	padding-top: 0;
+}
+
+div.sib-quick-tiddler-jump ul li, div.sib-quick-tiddler-jump ul > div.tc-droppable {
+	display: inline-block;
+}
+
+.sib-quick-tiddler-jump ul li div:nth-child(2):after {
+	padding-left: 5px;
+	content: "·";
+	padding-right: 5px;
+}
+
+/* not last-child because there's a dropzone after it */
+.sib-quick-tiddler-jump ul li:nth-last-child(2) div:after {
+	content: "";
+}

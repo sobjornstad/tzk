@@ -1,0 +1,36 @@
+created: 20170212033753546
+modified: 20191208103301563
+tags: 
+title: $:/plugins/aaldrich/tables/pagination
+
+<$vars filteredCount="""<$count filter=<<tableFilter>>/>""" totalCount="""<$count filter=<<inputFilter>>/>""" firstCount="""<$count filter=<<getFirst>>/>""" lastCount="""<$count filter=<<getLast>>/>""" pageSetting={{!!tbl-show-pagination}} >
+<$wikify name="totalCount" text=<<totalCount>> mode="inline">
+<$wikify name="filteredCount" text=<<filteredCount>> mode="inline">
+<$set name="pageReq" filter=<<overLimit>> value=<<pageSetting>> emptyValue="true" >
+<$wikify name="pageReq" text=<<pageReq>> mode="inline">
+<$reveal type="match" state="$:/plugins/aaldrich/tables/macro!!tbl-true" text=<<pageReq>> tag="div" >
+<$set name="lastRecord" filter=<<lastRec>> value=<<lastRecord>> emptyValue={{!!tbl-page-marker}} >
+<$wikify name="lastRecord" text=<<lastRecord>> mode="inline">
+<$set name="firstRecord" filter=<<resetPagination>> value=<<firstRecord>> >
+<$wikify name="firstRecord" text=<<firstRecord>> mode="inline">
+<$wikify name="recordCount" text="""<$count filter=<<tableFilter>>/>""" mode="inline">
+<$set name="previousPage" filter=<<previousFirst>> value=<<previousPage>> emptyValue=<<firstRecord>>>
+<$wikify name="previousPage" text=<<previousPage>> mode="inline">
+<$set name="nextPage" filter=<<nextFirst>> value=<<nextPage>> emptyValue={{!!tbl-page-marker}} >
+<$wikify name="nextPage" text=<<nextPage>> mode="inline">
+{{||$:/plugins/aaldrich/tables/template/pagination/default}}
+</$wikify>
+</$set>
+</$wikify>
+</$set>
+</$wikify>
+</$wikify>
+</$set>
+</$wikify>
+</$set>
+</$reveal>  
+</$wikify>
+</$set>  
+</$wikify>
+</$wikify>
+</$vars>

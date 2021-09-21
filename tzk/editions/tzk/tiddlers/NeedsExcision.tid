@@ -1,0 +1,20 @@
+caption: Needing excision
+color: #fff12e
+created: 20200117032011552
+creator: soren
+icon: $:/core/images/new-here-button
+modified: 20201203021151197
+modifier: soren
+tags: Meta Public
+title: NeedsExcision
+type: text/vnd.tiddlywiki
+
+<$list filter="[<currentTiddler>!is[blank]]">
+Articles that are not atomic and need to be split into pieces.
+</$list>
+
+<$list filter="[<currentTiddler>is[blank]then[true]]">
+  <$list filter="[tag[NeedsExcision]]">
+		<$link /><br>
+	</$list>
+</$list>

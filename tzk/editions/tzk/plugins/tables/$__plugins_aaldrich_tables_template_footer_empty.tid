@@ -1,0 +1,9 @@
+created: 20170206022519162
+modified: 20191214044407597
+revision: 0
+tags: $:/tags/table/FooterTemplate
+tbl-column-list: tbl-expand tbl-expand-one tbl-expand-many tbl-anything tbl-index tbl-delete tbl-button tbl-checkbox tbl-radio
+title: $:/plugins/aaldrich/tables/template/footer/empty
+
+<th>
+</th>

@@ -1,0 +1,60 @@
+created: 20210307160101458
+description: Display buttons enabling a workflow where you paste content directly into TiddlyWiki and then use a custom form to turn it into a tiddler.
+modified: 20210523141850561
+tags: $:/tags/ViewTemplate
+title: $:/sib/Templates/Automatic/Untitled
+transcludedin: Tiddlers whose name begins with `Untitled` (the name you get when you paste text into TiddlyWiki).
+type: text/vnd.tiddlywiki
+
+\define make-source()
+<$action-sendmessage $message="tm-close-tiddler" $param="$:/Import"/>
+<$action-setfield $field="tags" $value="Source"/>
+<$action-setfield $field="url" $value={{!!text}}/>
+<$action-setfield $field="text" $value=""/>
+<$action-setfield $field="type" $value=""/>
+<$action-setfield $field="medium" $value="article"/>
+<$action-setfield $field="year" $value=<<now "YYYY">>/>
+\end
+
+\define finish-import()
+<$action-setfield $field="title" $value={{$:/temp/RenameTitle}}/>
+<$action-sendmessage $message="tm-close-tiddler" $param=<<currentTiddler>>/>
+<$action-deletetiddler $tiddler=<<currentTiddler>>/>
+<$action-navigate $to={{$:/temp/RenameTitle}}/>
+<$action-deletetiddler $tiddler="$:/temp/RenameTitle"/>
+\end
+
+<$list filter="[all[current]prefix[Untitled]]">
+<div class="import-options">
+<h3>Import Options</h3>
+
+<$button actions=<<make-source>>>Create Source</$button>
+<$reveal type="match" state="!!tags" text="Source">
+
+|!Tiddler Title |<$edit-text tiddler="$:/temp/RenameTitle" default="" tag="input"/>|
+|!Source Title |<$edit-text field="caption" default="" tag="input"/>|
+|!Author |<$edit-text field="author" default="" tag="input"/>|
+|!Medium |<$radio field="medium" value="article">&nbsp;Article</$radio>&ensp;<$radio field="medium" value="book">Book</$radio>|
+|!Year |<$edit-text field="year" default=<<now "YYYY">> tag="input"/>|
+|!Read status |<<read-status-selector>>|
+|!Completed |<$edit-date field="completed"/>|
+
+<$button actions=<<finish-import>>>Import</$button>
+
+</$reveal>
+</div>
+</$list>
+
+<style>
+div.import-options {
+	padding: 5px;
+	border: 2px solid <<color "tag-background">>;
+	width: 100%;
+}
+
+div.import-options h3 {
+	text-align: center;
+	margin-top: 5px;
+	margin-bottom: 0;
+}
+</style>

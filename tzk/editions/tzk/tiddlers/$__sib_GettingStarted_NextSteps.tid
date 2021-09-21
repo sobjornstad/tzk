@@ -1,0 +1,18 @@
+caption: Next steps
+created: 20210828133924602
+creator: soren
+modified: 20210828134435065
+modifier: soren
+tags: 
+title: $:/sib/GettingStarted/NextSteps
+type: text/vnd.tiddlywiki
+
+Where do you go from here?
+
+I recommend starting by ''adding some notes''! Add a couple of tiddlers for the ideas rolling around in your head. Read a book, add a source tiddler for it, and link to it in some idea tiddlers.
+
+Once you've gotten a few notes into the system, you will be in a good place to ''decide what elements of this edition you like and what things you'll want to change''. If you want to get into customizing the wiki and you don't have much experience with TiddlyWiki, check out [[Grok TiddlyWiki|https://groktiddlywiki.com/read]], a complete textbook and reference designed for learning how this stuff works from the ground up.
+
+At any time, you can click the ''tools button {{$:/core/images/theme-button}}'' on the page toolbar (upper-right corner of the wiki, right under the title) to access a wide variety of tools, settings, and documentation related to the Zettelkasten edition.
+
+If you have questions, comments, or suggestions, please feel free to get in touch at `zettelkasten@sorenbjornstad.com`.

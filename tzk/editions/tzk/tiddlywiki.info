@@ -1,0 +1,16 @@
+{
+  "plugins": [
+    "tiddlywiki/codemirror",
+    "tiddlywiki/codemirror-autocomplete",
+    "tiddlywiki/codemirror-closebrackets",
+    "tiddlywiki/codemirror-keymap-vim",
+    "tiddlywiki/codemirror-search-replace",
+    "tiddlywiki/highlight",
+    "tiddlywiki/katex"
+  ],
+  "themes": [
+    "tiddlywiki/vanilla",
+    "tiddlywiki/snowwhite"
+  ],
+  "description": "TiddlyZettelKasten (tzk) edition"
+}

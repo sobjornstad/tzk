@@ -1,0 +1,209 @@
+created: 20200815103937889
+modified: 20210328054714579
+module-type: codemirror-theme
+name: cmplus
+tags: $:/tags/Stylesheet
+title: $:/plugins/tiddlywiki/codemirror/mode/tw5/tw5.css
+type: text/vnd.tiddlywiki
+
+```
+/*
+Tiddlywiki Metadata
+----
+Name: $:/plugins/tiddlywiki/codemirror/mode/tw5/tw5.css
+
+Additional Fields - 
+module-type: codemirror-theme
+name: cmplus
+*/
+```
+
+.cm-s-cmplus{
+    line-height: 1.5em;
+    background: <<colour tiddler-editor-background>> !important;
+    color: <<colour foreground>> !important;
+}
+
+.cm-s-cmplus .CodeMirror-lines {
+    padding: 8px 0;
+}
+
+.cm-s-cmplus .CodeMirror-linenumber {
+    color: <<cmcolour linenumber>>;
+}
+
+.cm-s-cmplus .CodeMirror-gutters {
+    background-color: <<colour page-background>>;
+    padding-right: 10px;
+    z-index: 3;
+    border: none;
+}
+
+.cm-s-cmplus div.CodeMirror-cursor {
+    border-left: 3px solid <<colour very-muted-foreground>>;
+}
+
+.cm-s-cmplus .CodeMirror-activeline-background {
+    background: <<colour tiddler-editor-fields-even>>;
+}
+
+.cm-s-cmplus .CodeMirror-selected {
+    background: <<cmcolour selected>> !important;
+}
+
+.cm-s-cmplus .cm-comment {
+    font-style: italic;
+    color: <<colour muted-foreground>>;
+}
+
+.cm-s-cmplus .CodeMirror-matchingbracket {
+    text-decoration: underline;
+    color: <<cmcolour matching-bracket>> !important;
+}
+
+.cm-s-cmplus .cm-strikethrough {
+    text-decoration-color: <<colour very-muted-foreground>>;  
+}
+
+.cm-s-cmplus .cm-underlined {
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-color: <<colour very-muted-foreground>>;
+}
+
+.cm-s-cmplus .cm-superscript {
+    vertical-align: super;
+    font-size: 0.7em;
+    line-height: 0.1em;
+}
+
+.cm-s-cmplus .cm-subscript {
+    font-size: 0.7em;
+    line-height: 0.5;
+}
+
+.cm-s-cmplus .cm-macro {
+    color: <<cmcolour macro>>;
+    font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
+}
+
+.cm-s-cmplus .cm-keyword {
+    color: <<cmcolour keyword>>;
+    font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
+    font-weight: 600;
+}
+
+.cm-s-cmplus .cm-quote {
+    font-style: italic;
+    padding-left: 0.6em;
+    border-left: <<cmcolour quote>> solid 0.2em;
+}
+
+.cm-s-cmplus .cm-hr {
+    color: <<cmcolour hr>>;
+}
+
+.cm-s-cmplus .cm-h1 {
+    color: <<cmcolour h1>>;
+    font-weight: 700;
+    font-size: 1.383em;
+    line-height: 1.802em;
+}
+
+.cm-s-cmplus .cm-h2 {
+    color: <<cmcolour h2>>;
+    font-weight: 600;
+    font-size: 1.296em;
+    line-height: 1.602em;
+}
+
+.cm-s-cmplus .cm-h3 {
+    color: <<cmcolour h3>>;
+    font-weight: 500;
+    font-size: 1.215em;
+    line-height: 1.424em;
+}
+
+.cm-s-cmplus .cm-h4 {
+    color: <<cmcolour h4>>;
+    font-weight: 400;
+    font-size: 1.138em;
+    line-height: 1.266em;
+}
+
+.cm-s-cmplus .cm-h5 {
+    color: <<cmcolour h5>>;
+    font-weight: 400;
+    font-size: 1.067em;
+    line-height: 1.125em;
+}
+
+.cm-s-cmplus .cm-h6 {
+    color: <<cmcolour h6>>;
+    font-weight: 400;
+}
+
+.cm-s-cmplus .cm-link {
+    color: <<cmcolour link>>;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.cm-s-cmplus .cm-internallink {
+    color: <<cmcolour internallink>>;
+    font-weight:600;
+}
+
+.cm-s-cmplus .cm-externallink {
+    color: <<cmcolour externallink>>;
+    text-decoration: underline;
+}
+
+.cm-s-cmplus .cm-transclude {
+    color: <<cmcolour transclude>>;
+}
+
+.cm-s-cmplus .cm-pre {
+    color: <<cmcolour pre>>;		
+    font-family: {{$:/plugins/adithyab/cmplus/settings##monospace-font}};
+}
+
+.cm-s-cmplus .cm-monospace {
+    color: <<cmcolour monospace>>;
+    font-family: {{$:/plugins/adithyab/cmplus/settings##monospace-font}};
+}
+
+.cm-s-cmplus .cm-list1 {
+    color: <<cmcolour list1>>;
+    padding-left: 1em;
+    padding-right: 0.5em;
+    font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
+}
+
+.cm-s-cmplus .cm-list2 {
+    color: <<cmcolour list2>>;
+    padding-left: 2em;
+    padding-right: 0.5em;
+    font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
+}
+
+.cm-s-cmplus .cm-list3 {
+    color: <<cmcolour list3>>;
+    padding-left: 3em;
+    padding-right: 0.5em;
+    font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
+}
+
+.cm-s-cmplus .cm-list4 {
+    color: <<cmcolour list4>>;
+    padding-left: 4em;
+    padding-right: 0.5em;
+    font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
+}
+
+.cm-s-cmplus .cm-list5 {
+    color: <<cmcolour list5>>;
+    padding-left: 5em;
+    padding-right: 0.5em;
+    font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
+}

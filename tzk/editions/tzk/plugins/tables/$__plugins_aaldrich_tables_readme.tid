@@ -1,0 +1,59 @@
+created: 20170207092135594
+modified: 20191210033829409
+tags: 
+title: $:/plugins/aaldrich/tables/readme
+
+!!''~TiddlyTables'' is a plugin for ~TiddlyWiki to create advanced sortable tables.
+
+Put simply, a filter is used to return a list of tiddler titles, or ''records''. and a list of field/index names determines what ''columns'' to display. 
+
+The best way to explore the many features of ~TiddlyTables is to create a new table and start editing.
+
+#''Install'' - Drag this link into your ~TiddlyWiki: [[$:/plugins/aaldrich/tables]]
+#''Create'' - There are two ways to create a ~TiddlyTable.
+##Click the ''New Table'' button in the //Page Toolbar//: <h2>{{$:/plugins/aaldrich/tables/button/image}}</h2>
+##Manual method
+###Add ''``<<table "My New Table">>``'' to the text field of a new or existing tiddler. 
+###Save tiddler. A button is rendered on the tiddler.
+###Click ''Reset Table'' button. This creates the required //tbl// fields and renders the table.
+###//Note: `<<table>>` with no title parameter will store its fields in the current tiddler.//
+#''Edit'' - There are two ways to edit the table.
+##Graphically (recommended)
+###Click the {{$:/core/images/options-button}} Button above the table to edit ''Table Options''.
+###Click the {{$:/core/images/edit-button}} Button above the table to toggle ''Edit Mode''.
+##Manually - Edit the tiddler and modify //tbl// fields.
+#''Customize'' - ~TiddlyTables are highly customizable.
+##''Defaults'' - [[$:/plugins/aaldrich/tables/defaults]]
+
+##''Themes'' (Stylesheet) - prefix ~$:/plugins/aaldrich/tables/style...
+###Tagged ~$:/tags/Stylesheet (required)
+###Field tbl-class-name (required)
+###Global default setting - tbl-class field
+
+##''Column Templates'' - determine how columns are rendered.
+
+###Each column has three template types:
+####''Header'' - prefix ~$:/plugins/aaldrich/tables/template/header...
+#####Tagged ~$:/tags/table/HeaderTemplate (required)
+#####Global default setting - tbl-temp-default-header field
+
+####''Body'' - prefix ~$:/plugins/aaldrich/tables/template/body...
+#####Tagged ~$:/tags/table/BodyTemplate (required)
+#####Global default setting - tbl-temp-default-body field
+
+####''Footer'' - prefix ~$:/plugins/aaldrich/tables/template/footer...
+#####Tagged ~$:/tags/table/FooterTemplate (required)
+#####Global default setting - tbl-temp-default-footer field
+
+###Add fields/index names to the field ''tbl-column-list'' of a template to assign them.
+###If a field/index is not assigned to a template of a particular type, the default template for that type is used.
+###New templates can be created or cloned from an existing one.
+
+##''Expand Templates'' - prefix ~$:/plugins/aaldrich/tables/template/expand...
+###Tagged ~$:/tags/table/ExpandTemplate (required)
+###Default setting - tbl-temp-default-expand field
+
+##''Pagination Template'' - ~$:/plugins/aaldrich/tables/template/pagination/default
+###No mechanism to change on per-table basis. No tag required.
+###No default setting
+###To modify, edit the default pagination template.

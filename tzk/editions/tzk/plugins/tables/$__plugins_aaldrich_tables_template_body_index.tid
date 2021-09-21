@@ -1,0 +1,14 @@
+created: 20190714050106704
+modified: 20191215045925271
+revision: 0
+tags: $:/tags/table/BodyTemplate
+tbl-column-list: ID id tbl-index
+tbl-noedit: ID id tbl-index
+title: $:/plugins/aaldrich/tables/template/body/index
+type: 
+
+<td style="width:1.4ch;">
+<$set name="currentIndex" filter=<<getIndex>> >
+<<currentIndex>>
+</$set>
+</td>

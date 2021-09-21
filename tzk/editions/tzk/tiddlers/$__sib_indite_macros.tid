@@ -1,0 +1,11 @@
+created: 20210410020513999
+modified: 20210410031557381
+tags: $:/tags/Macro
+title: $:/sib/indite/macros
+type: text/vnd.tiddlywiki
+
+\define indite-note(txt)
+	<$list filter="[<hideNotes>match[yes]then[]else[yes]!is[blank]]" variable=_>
+		<aside>$txt$</aside>
+	</$list>
+\end

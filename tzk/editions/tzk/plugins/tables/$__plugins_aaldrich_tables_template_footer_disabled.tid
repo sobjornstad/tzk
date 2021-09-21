@@ -1,0 +1,10 @@
+created: 20170205234107408
+modified: 20191205210029064
+revision: 0
+tags: $:/tags/table/FooterTemplate
+tbl-column-list: ID id
+title: $:/plugins/aaldrich/tables/template/footer/disabled
+
+<th>
+<<currentColumn>>
+</th>

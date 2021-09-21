@@ -1,0 +1,8 @@
+title: $:/plugins/sobjornstad/TiddlyStretch/readme
+type: text/vnd.tiddlywiki
+
+TiddlyStretch allows you to conveniently write
+    [[stretchtext|https://en.wikipedia.org/wiki/StretchText]] in TiddlyWiki.
+
+* [[Documentation|https://sobjornstad.github.io/TiddlyStretch/]]
+* [[GitHub|https://github.com/sobjornstad/TiddlyStretch]]

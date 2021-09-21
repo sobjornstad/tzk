@@ -1,0 +1,11 @@
+caption: Spoiler banner
+created: 20210622003118415
+creator: soren
+description: Display a warning banner on fiction tiddlers (any tiddler with a non-empty `universe` field) noting that we don't try to hide spoilers.
+modified: 20210909130158483
+modifier: soren
+private: no
+public: no
+tags: 
+title: $:/config/zettelkasten/FeatureFlags/SpoilerBanner
+type: text/vnd.tiddlywiki

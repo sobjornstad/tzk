@@ -1,0 +1,8 @@
+created: 20210123155216014
+modified: 20210809162905890
+tags: 
+title: $:/sib/Templates/Topical/ReadingList/SmallTemplate
+type: text/vnd.tiddlywiki
+
+[<$link to={{!!title}}/>] //{{!!caption}}// ({{!!year}}), {{!!author}}.
+{{||$:/sib/Templates/Topical/ReadingList/Rating}} <$list filter="[all[current]contains:bibliography[LifetimeReading]]" variable=_>([[LT|LifetimeReading]])</$list>

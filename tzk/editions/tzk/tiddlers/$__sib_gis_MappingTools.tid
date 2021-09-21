@@ -1,0 +1,38 @@
+created: 20201129175820541
+creator: soren
+description: Show the mapping tools available for place tiddlers with location information, or prompt the user to add such information.
+list: $:/sib/gis/SatelliteMap $:/sib/gis/DrivingDirections $:/sib/gis/Info
+modified: 20210910154242175
+modifier: soren
+tags: $:/tags/ViewTemplate
+title: $:/sib/gis/MappingTools
+transcludedin: All tiddlers tagged <<tag Place>>.
+type: text/vnd.tiddlywiki
+
+\define no-gis-info()
+There is no GIS information available for this place, but you can add it (try from [[Google Maps|https://www.google.com/maps]]):
+
+{{||$:/sib/gis/AddInfo}}
+\end
+
+\define no-api-key()
+To use the mapping tools on Place tiddlers, you must configure a Maps Embed API key in Google Cloud Platform (GCP), then set the text field of the $:/config/zettelkasten/gis/GMapsApiKey tiddler to this API key. The Maps Embed API is free to use. Documentation on the API may be [[found here|https://developers.google.com/maps/documentation/embed/get-started]].
+
+If you don't want to see this message again, disable the //GIS// [[feature flag|$:/sib/Tools/FeatureFlags]].
+\end
+
+<$list filter="[all[current]tag[Place]]" variable=_>
+<$list filter=<<ff GisTools>> variable=_>
+<$list filter="[all[current]has[gis-lat]]" emptyMessage=<<no-gis-info>> variable=_>
+<$list filter="[{$:/config/zettelkasten/gis/GMapsApiKey}!is[blank]]" emptyMessage=<<no-api-key>> variable="gmapsApiKey">
+
+<<tabs 
+	tabsList:"[list[$:/sib/gis/MappingTools]]"
+	default:"$:/sib/gis/SatelliteMap"
+	retain:yes
+>>
+
+</$list>
+</$list>
+</$list>
+</$list>

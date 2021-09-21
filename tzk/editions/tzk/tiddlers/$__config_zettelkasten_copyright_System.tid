@@ -1,0 +1,15 @@
+created: 20210523151106274
+creator: soren
+modified: 20210825144239931
+modifier: soren
+tags: 
+title: $:/config/zettelkasten/copyright/System
+type: text/vnd.tiddlywiki
+
+All ''system tiddlers'' in the wiki specific to Soren's Zettelkasten Edition, that is, the parts that extend TiddlyWiki and handle the display of tiddlers, e.g., the ReferenceExplorer, are available under the MIT license (see below). The names of system tiddlers begin with `$:/`.
+
+Be aware that many system tiddlers are contributed by TiddlyWiki itself or by other plugins, which are usually licensed under the MIT or BSD license or a similar open-source license. If you're using a system tiddler which is found under `$:/sib/`, you can be sure it is included in this license grant; otherwise, you may need to check whether it's a [[shadow tiddler|https://groktiddlywiki.com/read/#Shadow%20Tiddlers]] or modified shadow tiddler that might have a different license.
+
+Visit the ''Explorer'' section of the ''Explore'' sidebar tab to find system tiddlers.
+
+<pre>{{$:/config/zettelkasten/copyright/MIT}}</pre>

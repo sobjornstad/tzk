@@ -1,0 +1,9 @@
+created: 20210522025359296
+description: Create a line of dialogue. To be used inside a div with the `dialogue` class.
+example: <div class="dialogue"><<speaker "Mother" "Did you look for cars before you ran across?">><<speaker Girl "Nope. I just ran!">></div>
+modified: 20210523135210957
+tags: $:/tags/Macro
+title: $:/sib/Macros/speaker
+type: text/vnd.tiddlywiki
+
+\define speaker(name, txt) ''$name$:''&ensp;$txt$<br>

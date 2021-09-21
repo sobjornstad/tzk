@@ -1,0 +1,12 @@
+caption: Raw notes or reflections on a conversation or meeting with someone.
+color: #ff0000
+created: 20200702013212138
+creator: soren
+icon: $:/core/images/tag-button
+modified: 20210825155537333
+modifier: soren
+tags: Meta Public
+title: Conversation
+type: text/vnd.tiddlywiki
+
+{{!!caption}}

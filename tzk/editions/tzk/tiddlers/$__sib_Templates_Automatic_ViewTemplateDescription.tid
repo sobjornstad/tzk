@@ -1,0 +1,22 @@
+created: 20210523140149097
+description: Provide a summary of the purpose, usage, and definition of the view template defined in the current tiddler.
+modified: 20210523141255035
+tags: $:/tags/ViewTemplate
+title: $:/sib/Templates/Automatic/ViewTemplateDescription
+transcludedin: All tiddlers within the $:/sib namespace that are tagged <<tag $:/tags/ViewTemplate>>.
+type: text/vnd.tiddlywiki
+
+<$list filter="[all[current]prefix[$:/sib/]tag[$:/tags/ViewTemplate]]">
+
+!! <code><$text text=<<currentTiddler>>/></code> view template
+
+; Purpose
+: {{!!description}}
+
+; Transcluded in
+: {{!!transcludedin}}
+
+; Definition
+: <$codeblock code={{{ [all[current]get[text]] }}} language="html"/>
+
+</$list>

@@ -1,0 +1,37 @@
+created: 20210606221940244
+creator: soren
+description: Show the [[rating|MediaRating]] of the current source tiddler, if any. The status is editable in the private edition.
+modified: 20210920193209324
+modifier: soren
+tags: $:/tags/ViewTemplate
+title: $:/sib/MediaRating/Display
+transcludedin: All non-system tiddlers tagged `Source`. (Unlike the source details box, this doesn't go on sinks because I don't claim to be capable of rating my own work!)
+type: text/vnd.tiddlywiki
+
+\define color-style() color: $(itemColor)$;
+
+<$list filter=<<ff MediaRating>> variable=_>
+<$list filter="[all[current]!is[system]]">
+<$list filter="[all[current]tag[Source]]" variable=_>
+
+<div style="float: right; vertical-align: center;">
+<$list filter="[[$:/config/sib/IsPublicEdition]text[true]]" variable=_>
+	<$link to="MediaRating"><span style={{{ [prefix[$:/sib/MediaRating/]caption{!!rating}get[color]addprefix[color: ]addsuffix[;]] }}}>rating</span></$link>:
+	<$select field="rating" default="">
+		<$list filter="[prefix[$:/sib/MediaRating]has[caption]!nsort[stackorder]]">
+			<$set name="itemColor" value={{!!color}}>
+				<option style=<<color-style>> value={{!!caption}}>{{!!caption}}</option>
+			</$set>
+		</$list>
+	</$select>
+</$list>
+<$list filter="[[$:/config/sib/IsPublicEdition]!text[true]]" variable=_>
+<$list filter="[all[current]has[rating]]">
+	[[rating|MediaRating]]: <span style={{{ [prefix[$:/sib/MediaRating/]caption{!!rating}get[color]addprefix[color: ]addsuffix[;]] }}}>{{!!rating}}</span>
+</$list>
+</$list>
+</div>
+
+</$list>
+</$list>
+</$list>

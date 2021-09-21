@@ -1,0 +1,34 @@
+created: 20210119014145169
+modified: 20210331005114060
+tags: $:/tags/Macro
+title: $:/sib/Reviewer/SchedulerMacros
+type: text/vnd.tiddlywiki
+
+\define inbox-setdue(newIvl, newDueDate)
+	<$action-setfield
+		ivl=<<__newIvl__>>
+		due={{{ [<__newDueDate__>trim[]] }}}/>
+\end
+
+\define getNextDueDate() <$macrocall $name=daysFromDatestamp datestamp=<<now YYYY0MM0DD>> offset=<<nextInterval>>/>
+
+\define daysFromToday(days) <$macrocall $name=daysFromDatestamp datestamp=<<now YYYY0MM0DD>> offset=<<__days__>>/>
+
+\define inbox-postpone(ivlExpr)
+	<$set name=nextInterval value=$ivlExpr$>
+	<$wikify name=nextDueDate text="<<getNextDueDate>>" mode="inline">
+		<$macrocall $name=inbox-setdue
+			newIvl=<<nextInterval>>
+			newDueDate=<<nextDueDate>> />
+	</$wikify>
+	</$set>
+\end
+
+\define read-status-selector()
+	<$select field="readstatus" default="">
+		<option value="unread">unread</option>
+		<option value="partial">partial</option>
+		<option value="read">read</option>
+		<option value="reread">reread</option>
+	</$select>
+\end

@@ -1,0 +1,44 @@
+created: 20200518210455646
+creator: soren
+modified: 20210825162854523
+modifier: soren
+tags: Public
+title: $:/sib/Templates/Topical/Build2020SessionDetails
+type: text/vnd.tiddlywiki
+
+<style>
+table.msbuild-session {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+table.msbuild-session tr td:first-child {
+	font-weight: bold;
+	text-align: right;
+}
+
+/* override non-bold style */
+table.msbuild-session > tr > th a.tc-tiddlylink {
+	font-weight: bold;
+}
+</style>
+
+<table class="msbuild-session">
+	<tr><th colspan=2>MicrosoftBuild2020 Session Details</th></tr>
+	<tr>
+		<td>Title</td>
+		<td>{{!!caption}}</td>
+	</tr>
+	<tr>
+		<td>Time</td>
+		<td><$view field="at" format="date" template="DDD YYYY-0MM-0DD 0hh:0mm" /></td>
+	</tr>
+	<tr>
+		<td>Presenter(s)</td>
+		<td>{{!!presenter}}</td>
+	</tr>
+	<tr>
+		<td>Session URL</td>
+		<td><a class="tc-tiddlylink-external" href={{!!url}}>Go</a></td>
+	</tr>
+</table>

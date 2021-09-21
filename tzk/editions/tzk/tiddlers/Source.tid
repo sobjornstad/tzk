@@ -1,0 +1,53 @@
+caption: A single source of ideas, such as a blog post, book, or musical work. Sources may be part of [[Publication]]s or [[Class]]es.
+color: #ff0000
+created: 20200115231452835
+creator: soren
+icon: $:/core/images/tag-button
+modified: 20210920171016829
+modifier: soren
+refexplorer-hide: true
+tags: Meta Public
+title: Source
+type: text/vnd.tiddlywiki
+
+{{!!caption}}
+
+{{SorenSourceInfo}}
+
+
+!! Naming
+
+The names of source tiddlers consist of a short CamelCase slug -- possibly the [[mangled|OurNamingConventions]] title, or a description of it if the title is long -- plus, if available, the publication year. The actual title of the source goes in the `caption` field.
+
+
+!! Fields
+
+As sources often need to be reformatted, displayed in tables, searched in complex ways, and so on, they should have a significant amount of metadata attached in fields.
+
+; bibliography
+: A list of [[bibliographies|Bibliography]] to include this source in.
+; caption
+: The full title and subtitle of the source, as it is known outside the wiki.
+; description
+: A one- or two-sentence explanation of what the source is. Optional, but highly recommended if the source is included in any bibliographies using the `bibliography` field.
+; medium
+: Description of what kind of source this is -- `article`, `book`, `website`, `film`, etc. Use the [[RelationshipValueTool|$:/sib/Tools/RelationshipValueTool]] for a full, up-to-date list.
+; rating
+: An appropriate MediaRating. Optional, but highly recommended if you've finished reading/consuming the source.
+; url
+: If the source is available online and not behind a paywall, a URL leading to the source. Otherwise, don't bother -- anyone who doesn't have a copy will have to do their own research anyway.
+; universe
+: If the source is fiction, an arbitrary //universe key// which is placed on all sources and ideas taking place in the same fictional world. If you're not sure what to use as a universe key, you can just use the title of the source; but if multiple sources share the same universe (say, books in a series) you'll want to use the same key for all of them.
+; year
+: If the source is not published on an ongoing basis (e.g., a website), the year of its publication. Updated editions should use the new copyright date if updated by the author, but not if the edition is merely a re-release by the publisher without substantive changes, or the addition of commentary or introductions.
+
+!!! Only used for books
+
+; format
+: `paperback`, `hardcover`, or `ebook`. Only relevant if //owned//.
+; isbn
+: The ISBN of the edition at issue, without dashes. (This can be scanned in with my barcode reader if a barcode is available.)
+; owned
+: `yes` or `no`
+; readstatus
+: `read` (fully read), `partial` (partly read), `unread` (never read), or `reread` (have read fully, but would be interested in reading again).

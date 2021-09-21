@@ -1,0 +1,86 @@
+created: 20210410004529968
+creator: soren
+modified: 20210825162735756
+modifier: soren
+tags: 
+title: $:/sib/indite/InditeChildren
+type: text/vnd.tiddlywiki
+
+\define copy-me() <$button message="tm-copy-to-clipboard" param={{!!text}} class="tc-btn-invisible tc-tiddlylink">wikitext</$button>
+
+\define copy-rendered()
+<$set name="hideNotes" value="yes">
+<$wikify name="copyText" text="{{!!text}}" output="html" mode="block">
+		<$button message="tm-copy-to-clipboard" param=<<copyText>> class="tc-btn-invisible tc-tiddlylink">html</$button>
+</$wikify>
+</$set>
+\end
+
+\define copies()
+copy <<copy-me>> · <<copy-rendered>>
+\end
+
+\define editmode()
+<$radio field="editmode" value="view">view</$radio>&nbsp;
+<$radio field="editmode" value="edit">edit</$radio>&nbsp;
+<$radio field="editmode" value="both">side-by-side</$radio>
+\end
+
+\define remove-action() <$action-listops $tiddler=<<listingTiddler>> $filter="[<listingTiddler>get[list]enlist-input[]remove<currentTiddler>]"/>
+
+\define remove() <$button class="tc-btn-invisible tc-tiddlylink" actions=<<remove-action>>>remove</$button>
+
+\define move-up-action() <$action-listops $tiddler=<<listingTiddler>> $filter="[<listingTiddler>get[list]enlist-input[]]"
+\define move-down-action() <$action-listops $tiddler=<<listingTiddler>> $filter="[<listingTiddler>get[list]enlist-input[]]"
+
+\define moves() <$button class="tc-btn-invisible tc-tiddlylink" actions=<<move-up-action>>>up</$button> · <$button class="tc-btn-invisible tc-tiddlylink" actions=<<move-down-action>>>down</$button>
+
+\define tidblock(typeName, viewBlock:"""<$transclude mode="block"/>""")
+	<$set name="thewidth" value={{{ [all[current]editmode[both]then[indite-halfwidth]else[indite-fullwidth]] }}}>
+		<$list filter="[<hideNotes>match[yes]then[]else[yes]!is[blank]]" variable=_>
+			<title-block>
+				<<__typeName__>>: <$link /><br>
+				<<remove>> · <<moves>><br>
+				<<copies>><br>
+				<<editmode>>
+			</title-block>
+		</$list>
+		<$list filter="[all[current]editmode[view]] [all[current]editmode[both]] [all[current]!has[editmode]]">
+			<div class={{{ [[indite-sbs-viewer]addsuffix[ ]addsuffix<thewidth>] }}}>
+				$viewBlock$
+			</div>
+		</$list>
+		<$list filter="[all[current]editmode[edit]] [all[current]editmode[both]]">
+			<div class={{{ [[indite-sbs-editor]addsuffix[ ]addsuffix<thewidth>] }}}>
+				<$transclude tiddler="$:/core/ui/EditTemplate/body/editor"/>
+			</div>
+		</$list>
+	</$set>
+\end
+
+\define add-here-action() <$action-listops $subfilter="[enlist{!!list}insertbefore:childTiddler<actionTiddler>]"/>
+
+<$set name="listingTiddler" value=<<currentTiddler>>>
+<$list filter={{!!list}} variable="childTiddler">
+	<title-block>
+	<$droppable actions=<<add-here-action>>>(//drop to insert tiddler here//)</$droppable>
+	</title-block>
+	
+	<$list filter="[<childTiddler>indite-class[chapter]]">
+		<<tidblock "Chapter">>
+	</$list>
+	
+	<$list filter="[<childTiddler>indite-class[epigraph]]">
+		<<tidblock "Epigraph" """<blockquote><$transclude mode="block"/></blockquote>""">>
+	</$list>
+	
+	<$list filter="[<childTiddler>indite-class[scene]]">
+		<<tidblock "Scene">>
+	</$list>
+	
+	<$list filter="[<childTiddler>!has[indite-class]]">
+		<<tidblock "Other">>
+	</$list>
+	<br>
+</$list>
+</$set>

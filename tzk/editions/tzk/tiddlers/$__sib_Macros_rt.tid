@@ -1,0 +1,11 @@
+created: 20210522020717636
+description: Create a web link to an item in [[RandomThoughts]], with the link text "RT #whatever".
+example: <<rt 12345>>
+modified: 20210523134724295
+tags: $:/tags/Macro
+title: $:/sib/Macros/rt
+type: text/vnd.tiddlywiki
+
+\define rt(refnum)
+[[RT|RandomThoughts]] [[$refnum$|https://randomthoughts.sorenbjornstad.com/#$refnum$]]
+\end

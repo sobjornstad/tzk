@@ -1,0 +1,16 @@
+created: 20210304024810329
+modified: 20210306022349469
+tags: 
+title: $:/plugins/sobjornstad/TiddlyStretch/doc/ParametersTemplate
+type: text/vnd.tiddlywiki
+
+Parameters:
+
+<dl>
+<$list filter={{!!parameters}}>
+  <$tiddler tiddler={{{ [all[tiddlers+shadows]tag[$:/plugins/sobjornstad/TiddlyStretch/doc/Parameter]name<currentTiddler>] }}}>
+    <dt><code>{{!!name}}</code></dt>
+    <dd>{{!!description}}</dd>
+  </$tiddler>
+</$list>
+</dl>

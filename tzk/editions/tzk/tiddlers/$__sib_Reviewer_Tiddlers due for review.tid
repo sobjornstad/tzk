@@ -1,0 +1,37 @@
+created: 20210119013649056
+list-before: $:/core/ui/PageTemplate/sidebar
+modified: 20210522022533184
+title: $:/sib/Reviewer/Tiddlers due for review
+type: text/vnd.tiddlywiki
+
+\define hasReviewsFilter(frag:"") [!days:due[-1]] [days:due[0]] +[tag[SpacedRepetition]has[due]$frag$]
+
+''Please retag this $:/tags/PageTemplate to use''
+
+<$list filter="[all[current]!is[blank]]">
+Tiddlers due for review:
+
+<ul>
+	<$list filter=<<hasReviewsFilter "sort[due]">> emptyMessage="Congratulations! You're all caught up.">
+		<li><$link to=<<currentTiddler>>/> (due <$view format="date" template="YYYY-0MM-0DD" field="due"/>)</li>
+	</$list>
+</ul>
+</$list>
+
+<$list filter="[all[current]then[]else[dummy]!is[blank]]">
+<div class="review-notification">
+<$list filter=<<hasReviewsFilter "first[]">>>
+	You have tiddlers due for review.
+	<$link to="$:/sib/Reviewer/Tiddlers due for review">Click here</$link> to see them.
+</$list>
+</div>
+
+<style>
+.review-notification {
+	text-align: center;
+	background-color: <<color message-background>>;
+	width: 50%;
+	margin: auto;
+}
+</style>
+</$list>

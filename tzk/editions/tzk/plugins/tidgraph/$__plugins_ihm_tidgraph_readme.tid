@@ -1,0 +1,23 @@
+created: 20151024054526558
+modified: 20151024065317719
+tags: 
+title: $:/plugins/ihm/tidgraph/readme
+
+!!How
+Simply put this in your tiddler:
+
+``<$tidgraph start="MyRootTiddler" />``
+
+There are other options covered in the [[documentation|$:/plugins/ihm/tidgraph/documentation]].
+
+!!Features
+* No third-party libraries
+* Light weight
+* Rendering of map/graph with HTML5 and SVG (no heavy png or jpg images)
+* Automatic map/graph creation, no need for dragging/connecting/etc
+* Figures out tree-graph by means of tags or links, or custom modes 
+* Collapse/expand nodes
+* User defined Node Templates!!
+
+!!Limitations
+* Layout is horizontal from left to right, if needed a vertical layout will be added later

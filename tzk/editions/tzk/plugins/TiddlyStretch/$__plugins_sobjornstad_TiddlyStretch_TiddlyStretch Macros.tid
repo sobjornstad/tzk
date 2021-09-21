@@ -1,0 +1,10 @@
+created: 20210304022132594
+description: TiddlyStretch provides four macros for creating stretchtext: `stretch`, `stretch-template`, `stretch-links`, and `stretch-template-links`.
+modified: 20210304032037222
+tags: 
+title: $:/plugins/sobjornstad/TiddlyStretch/TiddlyStretch Macros
+type: text/vnd.tiddlywiki
+
+The following four macros are used to create expandos:
+
+<<stretch-template-links "[all[tiddlers+shadows]tag[$:/plugins/sobjornstad/TiddlyStretch/doc/Macro]]" "$:/plugins/sobjornstad/TiddlyStretch/doc/st/MacroSummary" "$:/plugins/sobjornstad/TiddlyStretch/doc/st/Identity">>

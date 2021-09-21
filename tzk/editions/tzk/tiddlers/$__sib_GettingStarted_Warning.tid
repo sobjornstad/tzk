@@ -1,0 +1,16 @@
+caption: WARNING and DISCLAIMER
+created: 20210828134445553
+creator: soren
+modified: 20210920133400209
+modifier: soren
+tags: 
+title: $:/sib/GettingStarted/Warning
+type: text/vnd.tiddlywiki
+
+''tzk should be considered alpha software.'' The underlying platform, TiddlyWiki, is extremely stable, and it is highly unlikely you will lose any data as a result of using tzk, nor will the system become obsolete or unusable in the near future. However, there may not be an obvious upgrade path to newer versions, I cannot guarantee support if you encounter problems, and the edition remains primarily focused on my specific needs.
+
+In other words, it's //safe// to use tzk for your production Zettelkasten, but you should expect to have to dive into some system tiddlers to make the edition work the way you want, and you may have to do some manual merging and copy-pasting of tiddlers if you want to backport features that I add to tzk in the future to your wiki. Think of the current version of tzk as a piece of hardware that you bought: you get it as-is, and if you want changes or upgrades to it, you have to make them yourself. If you're not willing to take on that responsibility, please do not use tzk for real work.
+
+!! Why?
+
+As I am still trying to figure out how to get the most value out of TiddlyWiki and my Zettelkasten, I need to preserve my ability to rapidly make changes to my tooling. Worrying about backwards compatibility, upgrades, supportability, and changing things so they work well for other users and not just me would require a significant portion of my development time and motivation, and I don't have that time to give at the moment. If I tried to supply these things, I wouldn't be able to publish this at all. (Ordinarily I would just keep the tools to myself until they were a bit more mature, but I have gotten so many curious people casting jealous looks at my [[public Zettelkasten|https://zettelkasten.sorenbjornstad.com]] that I'm making an exception.)

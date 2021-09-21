@@ -1,0 +1,122 @@
+created: 20140901110931199
+modified: 20190509195707164
+title: $:/plugins/TheDiveO/FontAwesome/history
+type: text/vnd.tiddlywiki
+
+* ''1.2.18'' -- updates to Font Awesome 5.8.2.
+
+* ''1.2.17'' -- updates to Font Awesome 5.8.1, adding several new categories, such as "alert", "beverage", "energy", et cetera. However, most of these new categories simply rehash existing icons, so there are only few really new icons to be found in this release.
+
+* ''1.2.16'' -- updates to Font Awesome 5.7.2.
+
+* ''1.2.15'' -- updates to Font Awesome 5.6.3. This adds new categories, such as "autumn", "holliday" and "halloween" with new icons, as well as updating existing categories with additional icons.
+
+* ''1.2.14''
+** updates to Font Awesome Free 5.3.1.
+** fixes crash in `--update` command when glyph in icons.json lacks a search terms property.
+
+* ''1.2.13''
+** switches to fetching the most recent Font Awesome Free download URL via GitHub API; this way, we can get rid of the (fine!) Puppeteer package and a truckload of update overhead.
+** npm package maintenance update: move development dependencies out of the general dependencies.
+
+* ''1.2.12'' -- updates to Font Awesome Free 5.2.0. This adds new category packs for "automotive", "medical", "education", and "maps".
+
+* ''1.2.11'' -- updates to Font Awesome Free 5.1.11.
+
+* ''1.2.10'' (1.2.9)
+** updates to Font Awesome 5.1.0, which brings new categories "design", "emoji" and "travel", and their icons -- as well as some updates and icon additions.
+** updates the update mechanism to work with the new 5.1.x packaging.
+
+* ''1.2.8'' -- updates to Font Awesome Free 5.0.13. This brings three new catogies: animals, buildings, and mathematics.
+
+* ''1.2.7'' -- updates to Font Awesome Free 5.0.12 -- they really do rapid updates, do they?! Glad that updating this plugin is automated...
+
+* ''1.2.6'' -- updates to Font Awesome Free 5.0.11.
+
+* ''1.2.5'' -- updates to Font Awesome Free 5.0.10.
+
+* ''1.2.4''
+** adds unicode code point info to the cheatsheet.
+
+* ''1.2.3''
+** makes TW5FontAwesome plugin available as npm package `tw5-fontawesome`.
+** adds ~ThirdFlow plugin as npm dependency `tw5-thirdflow`.
+
+* ''1.2.2''
+** updates to Font Awesome Free 5.0.9.
+** adds new categories //Charity//, //Chat//, and //Moving//.
+** adds new "Font Awesome 5" tab to the [[Control Panel|$:/ControlPanel]] that allows customizing the plugin: enable/disable internal and external link styling.
+
+* ''1.2.1''
+** adds missing category information.
+** adds automated update of category information from the Font Awesome 5 web site, as part of the normal update process:
+*** `npm run update` updates only if there is a newer version of Font Awesome 5 Free available from https://fontawesome.com/
+*** `npm run forceupdate` updates unconditionally.
+
+* ''1.2.0''
+** updates to Font Awesome Free 5.0.8.
+** adds category filtering to the cheatsheet.
+** adds Font Awesome 5 category meta data.
+** brings a new (fully) automatic update and release mechanism:
+*** use `$ npm run update-fontawesome` to update the development files to the newest Font Awesome version that is available online.
+*** use `$ npm run release` to create the plugin release file(s).
+** upgrades to most recent version of the [[ThirdFlow|http://thediveo.github.io/ThirdFlow/]] plugin: this comes with a new automated release mechanism.
+** refactors development command `--update-fontawesome` to directly download the most recent Font Awesome 5 Free package .zip from https://fontawesome.com. The only optional parameter to this command is `force` which forces re-updating, even if the font currently installed in the dev wiki is the same version as the one downloaded.
+** upgrades ThirdFlow plugin and now uses the new automated release file generation mechanism.
+
+* ''1.1.2''
+** fixes ~TiddlyWiki-internal links to system tiddlers not showing the gear symbol in the tiddler editor preview pane.
+
+* ''1.1.1''
+** upgrades to Font Awesome 5.0.4.
+** adds update/import command to ~FontAwesome 5 demo ~TiddlyWiki to update ~~from a Font Awesome zip package~~ [//online//]. Use `--update-fontawesome` when running the plugin development ~TiddlyWiki under Node.js.
+*** The `--update-fontawesome` command ~~expects the (path and) name of a Font Awesome zip package from which it will then update itself~~ [//has no parameters, or alternatively a single parameter `force`//]. ~~There is no need to unpack the zip package.~~ For instance:<div><strike>
+
+```bash
+$ tiddlywiki editions/develop --verbose --update-fontawesome ~/Downloads/fontawesome-free-5.0.2-zip --server 8080 $:/core/save/all text/plain text/html
+```
+
+</strike></div>
+*** If for some reason you need to re-update from the same Font Awesome zip package, specify an additional `force` parameter after the zip package file name parameter. For instance:<div><strike>
+
+```bash
+$ tiddlywiki editions/develop --verbose --update-fontawesome ~/Downloads/fontawesome-free-5.0.2-zip force --server 8080 $:/core/save/all text/plain text/html
+```
+</strike></div>
+* ''1.1.0''
+** upgrades to Font Awesome 5.0.2.
+** upgrades user macros to allow to specify the Font Awesome font family: `fas` (//Font Awesome Solid//), `far` (//Font Awesome Regular//), and `fab` (//Font Awesome Brands//).
+** upgrades stylesheets to new Font Awesome font mess, introduces [[$:/plugins/TheDiveO/FontAwesome/macros/css settings]] shorthand macros to avoid lengthy CSS properties assignments in CSS rules using Font Awesome.
+* ''1.0.7''
+** fix overly greedy image URL adornments, so that they don't apply to TW5-internal images. Now, an internal [[tree.jpeg]] doesn't get adornment, while [[http://thediveo.github.io/TW5FontAwesome/fa-flag.png]] still does, so the type of document can be glanced quickly.
+** small visual improvement to `fa-lbadge` which adds a small right margin to the badge, so that the adjacent text doesn't seem to visually collide with the badge anymore.
+* ''1.0.6''
+** link adornments for image URLs (`.jpg`/`.jpeg`, `.png`, `.gif`, `.tif`/`.tiff`)
+* ''1.0.5''
+** maintenance: upgrade ThirdFlow plugin to 1.1.11.
+* ''1.0.4''
+** improved display of link adornments by removing the link underlining from the adornments.
+** fixed CSS class name bug in `fa-lbox` macro. Also added new `fa-lbadge` macro. Added documentation.
+** oh, the magic of the `list-after` field, when applied to CSS tiddlers, avoids overuse of CSS `!important` declarations.
+
+* ''1.0.3''
+** fixed CSS to ensure that our embedded Font Awesome font always takes precendence over any system-installed Font Awesome font. This ensures a consistent user experience, especially when the local Font Awesome would be an older version.
+
+* ''1.0.2''
+** fixes base64 encoding of the embedded Font Awesome woff.
+** updated documentation with a warning about system-installed fonts taking precedence.
+** updated instructions on how to update the embedded font yourself.
+
+* ''1.0.1''
+** incorporates recent Font Awesome 4.7.0.
+** CSS updated to 4.7.0 too.
+** development version contains updated Third Flow plugin.
+
+* ''1.0.0''
+** never released.
+
+* ''0.9.2-beta''
+** stable beta release with Font Awesome 4.2.0.
+
+* ''v0.0.1-beta1''
+** initial plugin release.

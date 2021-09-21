@@ -1,0 +1,25 @@
+monospace-font:monospace,"Courier New"
+selected:rgba(100,100,100,0.3)
+linenumber:<<colour primary>>
+keyword:<<colour code-foreground>>
+macro:<<colour code-foreground>>
+quote:<<colour primary>>
+pre:<<colour foreground>>
+externallink:<<colour external-link-foreground>>
+internallink:<<colour tiddler-title-foreground>>
+link:<<colour tiddler-title-foreground>>
+transclude:<<colour tiddler-title-foreground>>
+monospace:<<colour foreground>>
+list1:<<colour primary>>
+list2:<<colour primary>>
+list3:<<colour primary>>
+list4:<<colour primary>>
+list5:<<colour primary>>
+list6:<<colour primary>>
+h1:<<colour primary>>
+h2:<<colour primary>>
+h3:<<colour primary>>
+h4:<<colour primary>>
+h5:<<colour primary>>
+h6:<<colour primary>>
+hr:<<colour primary>>

@@ -1,0 +1,59 @@
+caption: A Person, Animal, or Organization exhibiting agency.
+color: #ff0000
+created: 20200115231447676
+creator: soren
+icon: $:/core/images/tag-button
+modified: 20210827234120899
+modifier: soren
+refexplorer-hide: true
+tags: Meta Public
+title: PAO
+type: text/vnd.tiddlywiki
+
+\define invalidFilter()
+[tag[PAO]!prefix[Mr]!prefix[Ms]!prefix[Mx]!prefix[The]]
+\end
+
+Tiddler type, the name of which stands for “''P''erson, ''A''nimal, or ''O''rganization.”
+
+See $:/sib/Tools/PaoList for a list of all PAOs, and $:/sib/Tools/MissingPeople to find PAOs that have been referenced but not had a tiddler created.
+
+!! Linking
+
+If a person, animal, or organization is referenced anywhere in the wiki, it should virtually always have its name written ~CamelCase to create a PAO tiddler. The tiddler need not contain any meaningful content; it can be blank except for the title and the PAO tag. This is a matter of searchability -- if you do this, you can quickly jump to all tiddlers that mention a person if all you remember is the person's name, and you can move between ideas that mention the person using the ReferenceExplorer.
+
+Sources should be connected to their authors by linking to the author or authors' PAO tiddler somewhere in the body text.
+
+
+!! Naming conventions
+
+In addition to being tagged `PAO`, PAOs should have names which begin with `Mr`, `Ms`, or `The`. The first two indicate a person/animal and indicate gender (my intention is to use `Mx` for non-binary people, but I haven't needed it yet). `The` is used for organizations. Note that the titles of tiddlers which do not represent organizations should consequently not begin with //The// to avoid confusion; see OurNamingConventions.
+
+
+!! Tags and fields
+
+P's, A's and O's need not be part of ConsensusPhysicalReality. When one comes from a work of fiction, it should additionally be tagged <<tag Character>> and have its `universe` field populated with an appropriate universe key (see the explanation in [[Source]]).
+
+
+!! Private person replacement
+
+When building a private wiki using the `tzk` build tools, the `replace_private_people()` builder may be used to replace the names of people who aren't tagged <<tag Public>> throughout the wiki, in order to prevent anything you say about those people from becoming searchable on the web.
+
+
+!! In this wiki
+
+Currently, there are <$count filter="[tag[PAO]]"/> PAOs:
+
+<ul>
+	<li><$count filter="[tag[PAO]prefix[Mr]]"/> male</li>
+	<li><$count filter="[tag[PAO]prefix[Ms]]"/> female</li>
+	<li><$count filter="[tag[PAO]prefix[The]]"/> organizations</li>
+	<li>
+		<$count filter=<<invalidFilter>>/> folks with an unrecognized PAO prefix:
+		<ul>
+			<$list filter=<<invalidFilter>> >
+				<li><<currentTiddler>></li>
+			</$list>
+		</ul>
+	</li>
+</ul>

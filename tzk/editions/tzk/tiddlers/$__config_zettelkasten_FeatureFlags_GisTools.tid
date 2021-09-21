@@ -1,0 +1,11 @@
+caption: GIS tools
+created: 20210910153740764
+creator: soren
+description: Use the Google Maps embed API to show satellite location and directions on Place tiddlers. Requires setting up an embed API in Google Cloud Platform (when you turn this feature on, an error will appear on your place tiddlers explaining how to do so).
+modified: 20210910153929369
+modifier: soren
+private: no
+public: no
+tags: 
+title: $:/config/zettelkasten/FeatureFlags/GisTools
+type: text/vnd.tiddlywiki

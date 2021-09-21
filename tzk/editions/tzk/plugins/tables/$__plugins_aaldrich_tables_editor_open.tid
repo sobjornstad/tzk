@@ -1,0 +1,29 @@
+created: 20190726023217378
+modified: 20191215055334115
+tags: 
+title: $:/plugins/aaldrich/tables/editor/open
+
+<$reveal type="nomatch" state="$:/temp/tables/editor/settings-page-vars!!tbl-edit-target" text={{!!title}} >
+<$reveal type="match" state="!!tbl-show-edit" text="true">
+<$button class="tc-btn-invisible tc-tiddlylink" tooltip="table options">
+  <$action-setfield $tiddler="$:/temp/tables/editor/settings-page-vars" tbl-edit-target={{!!title}} />
+  <$action-setfield $tiddler="$:/temp/tables/editor/settings-page-vars" tbl-edit-page="Records" />
+  <$action-sendmessage $message="tm-modal" $param="$:/plugins/aaldrich/tables/editor/view" />
+{{$:/core/images/options-button}}
+</$button>
+</$reveal>
+<$reveal type="match" state="!!tbl-show-mode" text="true">
+<$reveal type="nomatch" state="!!tbl-mode" text="edit">
+<$button class="tc-btn-invisible tc-tiddlylink" tooltip="edit mode">
+  <$action-setfield $tiddler=<<currentTable>> tbl-mode="edit" />
+{{$:/core/images/edit-button}}
+</$button>
+</$reveal>
+<$reveal type="match" state="!!tbl-mode" text="edit">
+<$button class="tc-btn-invisible tc-tiddlylink" tooltip="normal mode">
+  <$action-setfield $tiddler=<<currentTable>> tbl-mode="normal" />
+{{$:/core/images/done-button}}
+</$button>
+</$reveal>
+</$reveal>
+</$reveal>

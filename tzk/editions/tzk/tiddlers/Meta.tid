@@ -1,0 +1,14 @@
+caption: Content that is about the ZettelKasten itself or its software.
+color: #ff0000
+created: 20200115231440413
+creator: soren
+icon: $:/core/images/tag-button
+modified: 20210825160942535
+modifier: soren
+tags: Meta Public
+title: Meta
+type: text/vnd.tiddlywiki
+
+{{!!caption}}
+
+Meta tiddlers don't have any special naming conventions or fields.

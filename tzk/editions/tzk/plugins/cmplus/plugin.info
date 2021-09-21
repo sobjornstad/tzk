@@ -1,0 +1,11 @@
+{
+    "created": "20210327052508762",
+    "dependents": "$:/plugins/tiddlywiki/codemirror",
+    "description": "A better editor for TW5 - built on the Official CodeMirror Plugin",
+    "modified": "20210510224047195",
+    "name": "CMPlus",
+    "plugin-type": "plugin",
+    "tags": "",
+    "title": "$:/plugins/adithyab/cmplus",
+    "version": "0.2.1"
+}

@@ -1,0 +1,11 @@
+created: 20200511015953198
+modified: 20210622003322324
+tags: $:/tags/EditTemplate
+title: $:/sib/Templates/Automatic/Publicity/EditorPublicLine
+type: text/vnd.tiddlywiki
+
+<$list filter=<<ff EditorPublicLine>> variable=_>
+	<div style="float: right; color: #5E81AC; margin-top: 1ex;">
+		<$checkbox tag=Public> Publish this tiddler</$checkbox>
+	</div>
+</$list>

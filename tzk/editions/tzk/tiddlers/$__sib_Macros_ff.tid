@@ -1,0 +1,10 @@
+created: 20210622002240940
+description: Transclude a filter expression that returns `yes` if the specified [[feature flag|$:/sib/Tools/FeatureFlags]] is enabled for the current edition, and nothing otherwise.
+example: <$list filter=<<ff ViewerPublicLine>> variable=_ emptyMessage="The viewer public line is off in this edition.">The viewer public line is on in this edition. Transclude it here.</$list>
+modified: 20210825145522659
+modifier: soren
+tags: $:/tags/Macro
+title: $:/sib/Macros/ff
+type: text/vnd.tiddlywiki
+
+\define ff(tid) [[$:/config/zettelkasten/FeatureFlags/$tid$]get{$:/config/sib/CurrentEditionPublicity}] -[[no]]

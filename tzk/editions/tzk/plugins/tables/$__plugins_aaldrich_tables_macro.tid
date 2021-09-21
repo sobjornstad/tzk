@@ -1,0 +1,192 @@
+created: 20170205053213873
+modified: 20200103011234341
+revision: 0
+tags: $:/tags/Macro
+tbl-false: false
+tbl-true: true
+title: $:/plugins/aaldrich/tables/macro
+type: text/vnd.tiddlywiki
+
+\define table(title:)
+<$set name="currentTable" value=<<__title__>> emptyValue={{!!title}}>
+<$tiddler tiddler=<<currentTable>>>
+<!-- assign vars -->
+<$vars buttonAction={{!!tbl-button-actions}} buttonIcon={{!!tbl-button-icon}} anythingCode={{!!tbl-anything}} pageMarker={{!!tbl-page-marker}} enteredFilter={{!!tbl-filter}} enteredTitles={{!!tbl-add-records}} recordLimit={{!!tbl-limit}} sortBy={{!!tbl-sort-by}} sortType={{!!tbl-sort-type}} checkTag={{!!tbl-checkbox-tag}} checkSel={{!!tbl-checkbox-value-selected}} checkUnsel={{!!tbl-checkbox-value-unselected}} checkActions={{!!tbl-checkbox-actions-selected}} checkUnactions={{!!tbl-checkbox-actions-unselected}} >
+<$set name="tableExpand" filter="[<currentTable>get[tbl-expand]]" emptyValue={{$:/plugins/aaldrich/tables/defaults!!tbl-temp-default-expand}} value={{!!tbl-expand}}>
+<$set name="checkField" filter="[<currentTable>get[tbl-checkbox-field]]" emptyValue="modified" value={{!!tbl-checkbox-field}}>
+<$set name="sortNeg" filter="[<currentTable>field:tbl-sort-negate[true]]" emptyValue="" value="!">
+<$set name="pageFilter" filter=<<nextFirst>>  emptyValue="+[allafter{!!tbl-page-marker}]+[{!!tbl-page-marker}]" value="+[allafter:including{!!tbl-page-marker}]" >
+<$set name="includePage" filter="[<currentTable>get[tbl-page-marker]]"  emptyValue="" value=<<pageFilter>> >
+<!-- check if table can be rendered properly -->
+<$set name="hideTable" filter=<<currentTiddler>> value=<<currentTiddler>> emptyValue="$:/plugins/aaldrich/tables/template/expand/transclude" >
+<$set name="hideTable" filter="[<hideTable>]-[[$:/plugins/aaldrich/tables/template/expand/transclude]]-[[field]]+[limit[1]]" value="false" emptyValue="true">
+<$reveal type="match" state="$:/plugins/aaldrich/tables/macro!!tbl-true" text=<<hideTable>>>
+''Table transclusion error: ''use //title// parameter: `<<table "My Table">>`.
+</$reveal>
+</$set>
+<$list filter="[<hideTable>]-[[$:/plugins/aaldrich/tables/template/expand/transclude]]-[[field]]+[limit[1]]" variable="showTable">
+<!-- reveal refresh table button that adds req fields to a table using default values -->
+<$reveal type="match" state="!!tbl-columns" text="">
+<$button class="tc-btn-invisible tc-tiddlylink" >{{$:/core/images/refresh-button}} Reset Table<$action-setfield 
+tbl-add-records={{$:/plugins/aaldrich/tables/defaults!!tbl-add-records}}
+tbl-anything={{$:/plugins/aaldrich/tables/defaults!!tbl-anything}}
+tbl-button-actions={{$:/plugins/aaldrich/tables/defaults!!tbl-button-actions}}
+tbl-button-icon={{$:/plugins/aaldrich/tables/defaults!!tbl-button-icon}}
+tbl-button-tip={{$:/plugins/aaldrich/tables/defaults!!tbl-button-tip}}
+tbl-caption={{$:/plugins/aaldrich/tables/defaults!!tbl-caption}}
+tbl-checkbox-actions-selected={{$:/plugins/aaldrich/tables/defaults!!tbl-checkbox-actions-selected}}
+tbl-checkbox-actions-unselected={{$:/plugins/aaldrich/tables/defaults!!tbl-checkbox-actions-unselected}}
+tbl-checkbox-field={{$:/plugins/aaldrich/tables/defaults!!tbl-checkbox-field}}
+tbl-checkbox-tag={{$:/plugins/aaldrich/tables/defaults!!tbl-checkbox-tag}}
+tbl-checkbox-tip={{$:/plugins/aaldrich/tables/defaults!!tbl-checkbox-tip}}
+tbl-checkbox-value-selected={{$:/plugins/aaldrich/tables/defaults!!tbl-checkbox-value-selected}}
+tbl-checkbox-value-unselected={{$:/plugins/aaldrich/tables/defaults!!tbl-checkbox-value-unselected}}
+tbl-class={{$:/plugins/aaldrich/tables/defaults!!tbl-class}}
+tbl-columns={{$:/plugins/aaldrich/tables/defaults!!tbl-columns}}
+tbl-expand={{$:/plugins/aaldrich/tables/defaults!!tbl-expand}}
+tbl-filter={{$:/plugins/aaldrich/tables/defaults!!tbl-filter}}
+tbl-show-caption={{$:/plugins/aaldrich/tables/defaults!!tbl-show-caption}}
+tbl-show-colgroup={{$:/plugins/aaldrich/tables/defaults!!tbl-show-colgroup}}
+tbl-show-edit={{$:/plugins/aaldrich/tables/defaults!!tbl-show-edit}}
+tbl-show-footer={{$:/plugins/aaldrich/tables/defaults!!tbl-show-footer}}
+tbl-show-header={{$:/plugins/aaldrich/tables/defaults!!tbl-show-header}}
+tbl-show-mode={{$:/plugins/aaldrich/tables/defaults!!tbl-show-mode}}
+tbl-show-pagination={{$:/plugins/aaldrich/tables/defaults!!tbl-show-pagination}}
+tbl-limit={{$:/plugins/aaldrich/tables/defaults!!tbl-limit}}
+tbl-mode={{$:/plugins/aaldrich/tables/defaults!!tbl-mode}}
+tbl-page-marker={{$:/plugins/aaldrich/tables/defaults!!tbl-page-marker}}
+tbl-sort-by={{$:/plugins/aaldrich/tables/defaults!!tbl-sort-by}}
+tbl-sort-negate={{$:/plugins/aaldrich/tables/defaults!!tbl-sort-negate}}
+tbl-sort-type={{$:/plugins/aaldrich/tables/defaults!!tbl-sort-type}}
+tbl-style-colgroup={{$:/plugins/aaldrich/tables/defaults!!tbl-style-colgroup}}
+tbl-style-container={{$:/plugins/aaldrich/tables/defaults!!tbl-style-container}}
+tbl-style-table={{$:/plugins/aaldrich/tables/defaults!!tbl-style-table}}/>
+</$button>
+</$reveal>
+<!-- reveal table if req field (tbl-columns) exists -->
+<$reveal type="nomatch" state="!!tbl-columns" text="" tag="div" style={{!!tbl-style-container}} class={{!!tbl-class}}>
+{{||$:/plugins/aaldrich/tables/view}}
+</$reveal>
+</$list>
+</$set>
+</$set>
+</$set>
+</$set>
+</$set>
+</$set>
+</$vars>
+</$tiddler>
+</$set>
+\end
+
+\define inputFilter()
+$(enteredFilter)$[list[$(currentTable)$!!tbl-add-records]]
+\end
+
+\define resetPagination()
+$(inputFilter)$+[$(sortType)$[title]$(sortNeg)$$(sortType)$[$(sortBy)$]]+[first[]]
+\end
+
+\define veryFirst()
+$(inputFilter)$+[$(sortType)$[title]$(sortType)$[$(currentColumn)$]]+[first[]]
+\end
+
+\define veryLast()
+$(inputFilter)$+[!$(sortType)$[title]$(sortType)$[$(currentColumn)$]]+[last[]]
+\end
+
+\define previousFirst()
+$(inputFilter)$+[$(sortType)$[title]$(sortNeg)$$(sortType)$[$(sortBy)$]]+[allbefore[$(pageMarker)$]]+[last[$(recordLimit)$]]+[first[]]
+\end
+
+\define nextFirst()
+$(inputFilter)$+[$(sortType)$[title]$(sortNeg)$$(sortType)$[$(sortBy)$]]+[allafter[$(pageMarker)$]]+[limit[$(recordLimit)$]]+[last[]]
+\end
+
+\define lastRec()
+$(inputFilter)$+[$(sortType)$[title]$(sortNeg)$$(sortType)$[$(sortBy)$]]+[allafter:including[$(pageMarker)$]]+[limit[$(recordLimit)$]]+[last[]]
+\end
+
+\define getFirst()
+$(inputFilter)$+[$(sortType)$[title]$(sortNeg)$$(sortType)$[$(sortBy)$]]+[allbefore[$(pageMarker)$]]+[prepend[1]]
+\end
+
+\define getLast()
+$(inputFilter)$+[$(sortType)$[title]$(sortNeg)$$(sortType)$[$(sortBy)$]]+[allbefore:including[$(lastRecord)$]]
+\end
+
+\define tableFilter()
+$(inputFilter)$+[$(sortType)$[title]$(sortNeg)$$(sortType)$[$(sortBy)$]]$(includePage)$+[limit[$(recordLimit)$]]
+\end
+
+\define showDeleteConfirm()
+$(tableFilter)$+[limit[1]]
+\end
+
+\define checkboxFilter()
+$(inputFilter)$+[$(sortType)$[title]$(sortNeg)$$(sortType)$[$(sortBy)$]]$(includePage)$+[limit[$(recordLimit)$]!tag[$(checkTag)$]!$(checkField)$[$(checkSel)$]]
+\end
+
+\define checkboxTest()
+[[$(currentRecord)$]!tag[$(checkTag)$]!$(checkField)$[$(checkSel)$]]
+\end
+
+\define overLimit()
+$(inputFilter)$+[limit[$(recordLimit)$]]+[nth[$(totalCount)$]addprefix[zzz]][[$(currentTable)$]get[tbl-show-pagination]]+[remove[auto]reverse[]][range[$(filteredCount)$]]+[butlast[$(totalCount)$]]
+\end
+
+\define tempTable()
+$:/temp/tables/$(currentTable)$
+\end
+
+\define tempTableExpand()
+$:/temp/tables/expand/$(currentTable)$
+\end
+
+\define tempTableStyle()
+$:/temp/tables/style/$(currentTable)$
+\end
+
+\define tempTagPopup()
+$(tempTable)$/$(currentRecord)$/$(currentTiddler)$
+\end
+
+\define tempRecord()
+$(tempTable)$/$(currentRecord)$
+\end
+
+\define tempPath()
+$(tempTable)$##$(currentRecord)$
+\end
+
+\define tempPathExpand()
+$(tempTableExpand)$##$(currentRecord)$
+\end
+
+\define tableExpandRender()
+{{$(tableExpand)$}}
+\end
+
+\define buttonIconPick()
+{{$(iconPickTitle)$}}
+\end
+
+\define expandClassFilter()
+[title[$(childTable)$]get[tbl-columns]]
+\end
+
+\define expandResetNested()
+[title[$(childTable)$]get[tbl-page-marker]]
+\end
+
+\define editorPreview()
+{{$(editorTarget)$}}
+\end
+
+\define tableFilterPick()
+$(existingTableFilter)$$(existingTableFilterPrefix)$$(filterValues)$
+\end
+
+\define getIndex()
+$(inputFilter)$+[$(sortType)$[title]]+[allbefore:including[$(currentRecord)$]count[]]
+\end

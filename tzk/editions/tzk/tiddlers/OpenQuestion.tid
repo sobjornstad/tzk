@@ -1,0 +1,26 @@
+caption: Open questions
+created: 20200325232310538
+creator: soren
+description: Tiddlers that pose questions that don't currently have answers.
+modified: 20210920155901913
+modifier: soren
+tags: Meta Tool
+title: OpenQuestion
+tooltype: aggregator
+type: text/vnd.tiddlywiki
+
+<$list filter="[<currentTiddler>!is[blank]!is[system]]">
+	Target tiddler for questions I'm pondering and don't know how to answer. To get your question included, just start a phrase in the text with `OpenQuestion:`.
+
+	<ul>
+	<$list filter="[all[current]backlinks[]!is[system]![OurProjectSurface]![Questions]]">
+	<li><$link to=<<currentTiddler>>><<currentTiddler>></$link></li>
+	</$list>
+	</ul>
+</$list>
+
+<$list filter="[<currentTiddler>is[blank]then[true]]">
+  <$list filter="[[OpenQuestion]backlinks[]!is[system]![OurProjectSurface]![Questions]]">
+		<$link to=<<currentTiddler>>/><br>
+	</$list>
+</$list>

@@ -1,0 +1,79 @@
+created: 20201229225912046
+modified: 20210119030132561
+tags: $:/tags/Macro
+title: $:/sib/Reviewer/Dateops
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+
+\define g(y,m,d,offset:"0")
+<$set name=m value={{{ [<__m__>add[9]remainder[12]] }}}>
+<$set name=y value={{{ [<m>divide[10]floor[]negate[]add<__y__>] }}} >
+<$set name=y4 value={{{ [<y>divide[4]floor[]] }}}>
+<$set name=y100 value={{{ [<y>divide[100]floor[]] }}}>
+<$set name=y400 value={{{ [<y>divide[400]floor[]] }}}>
+<$set name=m306 value={{{ [<m>multiply[306]add[5]divide[10]floor[]] }}}>
+<$set name=result value={{{ [[365]multiply<y>add<y4>subtract<y100>add<y400>add<m306>add[$d$]add[$offset$]subtract[1]] }}} >
+<<result>>
+</$set></$set></$set></$set></$set></$set></$set>
+\end
+
+
+\define d(g)
+<$set name=daysperyear value="365.2425">
+<!-- y = (10000*g + 14780)/3652425 -->
+<$set name=y value={{{ [[10000]multiply<__g__>add[14780]divide[3652425]floor[]] }}}>
+<!-- ddd = g - (365*y + y/4 - y/100 + y/400) -->
+<$set name=y4 value={{{ [<y>divide[4]floor[]] }}}>
+<$set name=y100 value={{{ [<y>divide[100]floor[]] }}}>
+<$set name=y400 value={{{ [<y>divide[400]floor[]] }}}>
+<$set name=dddtest value={{{ [[365]multiply<y>add<y4>subtract<y100>add<y400>negate[]add<__g__>] }}} >
+<$set name=prioryear value={{{ [<y>subtract[1]] }}} >
+<$set name=y value={{{ [<dddtest>prefix[-]then<prioryear>] [<dddtest>!prefix[-]then<y>] }}} >
+<$set name=ddd value={{{ [[365]multiply<y>add<y4>subtract<y100>add<y400>negate[]add<__g__>] }}} >
+<!-- mi = (100*ddd + 52)/3060 -->
+<$set name=mi value={{{ [[100]multiply<ddd>add[52]divide[3060]floor[]] }}} >
+<!-- mm = (mi + 2)%12 + 1 -->
+<$set name=mm value={{{ [<mi>add[2]remainder[12]add[1]] }}} >
+<!-- y = y + (mi + 2)/12 -->
+<$set name=y value={{{ [<mi>add[2]divide[12]floor[]add<y>] }}} >
+<!-- dd= ddd - (mi*306 + 5)/10 + 1 -->
+<$set name=dd value={{{ [<mi>multiply[306]add[5]divide[10]floor[]negate[]add<ddd>add[1]] }}} >
+<<y>>, <<mm>>, <<dd>> <br/>
+</$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set></$set>
+\end
+
+\define daysfrom(y,m,d,o)
+<$wikify name=future text="<<g $y$ $m$ $d$ $o$>>">
+<$macrocall $name="d" g=<<future>>/>
+</$wikify>
+\end
+
+\define datestampFromOffset(y, m, d, o)
+<$wikify name=result text="<<daysfrom $y$ $m$ $d$ $o$>>">
+	<$vars
+		year={{{  [<result>split[,]nth[1]trim[]] }}}
+		month={{{ [<result>split[,]nth[2]trim[]] }}}
+		day={{{   [<result>split[,]nth[3]trim[]] }}}>
+	<$vars
+		paddedmonth={{{ [<month>addprefix[0]] }}}
+		paddedday={{{   [<day>addprefix[0]] }}}>
+		<<year>><$text text={{{ [<month>minlength[2]else<paddedmonth>] }}}/><$text text={{{ [<day>minlength[2]else<paddedday>] }}}/>1200
+	</$vars>
+	</$vars>
+	
+</$wikify>
+\end
+
+\define daysFromDatestamp(datestamp, offset)
+	<$vars
+	  year={{{ [<__datestamp__>split[]first[4]join[]] }}}
+	  month={{{ [<__datestamp__>split[]first[6]last[2]join[]] }}}
+	  day={{{ [<__datestamp__>split[]first[8]last[2]join[]] }}}>
+		<$macrocall $name=datestampFromOffset
+			y=<<year>> m=<<month>> d=<<day>> o=<<__offset__>> />
+  </$vars>
+\end
+
+
+<!-- First 4 macros are from here: https://groups.google.com/g/tiddlywiki/c/y_GjM302u60/m/H0eGNUQCCgAJ -->

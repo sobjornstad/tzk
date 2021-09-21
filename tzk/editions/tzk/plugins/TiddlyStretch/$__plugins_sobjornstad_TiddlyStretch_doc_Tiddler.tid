@@ -1,0 +1,7 @@
+created: 20210304024157079
+description: Name of the tiddler to stretch. This tiddler will become the current tiddler when transcluded in either the small or large form.
+modified: 20210306022349481
+name: tiddler
+tags: $:/plugins/sobjornstad/TiddlyStretch/doc/Parameter
+title: $:/plugins/sobjornstad/TiddlyStretch/doc/Tiddler
+type: text/vnd.tiddlywiki

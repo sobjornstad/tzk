@@ -1,0 +1,18 @@
+created: 20200410135331736
+creator: soren
+description: What types of tiddlers are used within this Zettelkasten?
+modified: 20210920160035899
+modifier: soren
+tags: Meta Public
+title: ZettelkastenCardType
+type: text/vnd.tiddlywiki
+
+This ZettelKasten has tiddlers (also “cards”, or “Zettel” in ZK terminology) of a number of defined //types//. Ideas, are of course, the ZK's //raison d'être//; but the other types are useful because they help to put ideas in context and link them together (e.g., what other ideas did this person have or were found in this source?). Types are identified by the red tags with tag icons next to them.
+
+Click on a type to learn more about what it's used for, its naming conventions, and the fields that should be used on tiddlers of that type.
+
+<ul>
+	<$list filter="[color[#ff0000]!has[draft.of]icon[$:/core/images/tag-button]sort[title]]">
+		<li><$link>{{!!title}}</$link> -- {{!!caption}}</li>
+	</$list>
+</ul>

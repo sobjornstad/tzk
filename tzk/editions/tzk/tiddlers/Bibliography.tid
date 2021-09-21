@@ -1,0 +1,33 @@
+caption: An aggregation of sources that might be useful to someone studying a particular topic the ZK touches on.
+color: #ff0000
+created: 20200808024704618
+creator: soren
+icon: $:/core/images/tag-button
+modified: 20210827233651142
+modifier: soren
+tags: Meta Public
+title: Bibliography
+type: text/vnd.tiddlywiki
+
+A ''bibliography'' provides a concise list of useful [[Source]]s for someone who's unfamiliar with a topic that's treated at length in the Zettelkasten, without requiring the reader (or the author, hoping to find them some references!) to aimlessly wander through the ConceptWeb hoping to find more sources.
+
+
+!! Current bibliographies in this Zettelkasten
+
+<<list-links "[!is[system]tag[Bibliography]]">>
+
+
+!! How bibliographies work
+
+Each bibliography has its own tiddler:
+
+* The tiddler can be named anything, but conventionally ends with the word `Bibliography`.
+* It should be tagged `bibliography`.
+* It should have a `bibliography` field containing a //bibliography key//, which will be used to connect it to sources. The bibliography key is usually a short string of letters and numbers, but may contain other characters if needed for some reason.
+* The body of the tiddler can contain information about the bibliography, or even interactive features, as desired. Where the sources contained in the bibliography should be displayed, transclude the bibliography-list template: `{{||$:/sib/Templates/Topical/BibliographyList}}`.
+
+A source (or a [[Publication]]) is placed in a bibliography as follows:
+
+* The bibliography key (see above) is added to the `bibliography` field of the source. `bibliography` is a list field, so a source can be contained in multiple bibliographies if appropriate; all the bibliography keys are added to this field, separated by spaces. If the bibliography key itself contains spaces, it should be placed in double square brackets, like `[[my bibliography key]]` (as with any other list field).
+* A short summary of the source should be added to the `description` field of the source; this will be used on the list.
+* The `caption`, `year`, `medium`, and, if available, `url` fields will also be used on the bibliography list and should be filled out with appropriate metadata; see [[Source]] for details.

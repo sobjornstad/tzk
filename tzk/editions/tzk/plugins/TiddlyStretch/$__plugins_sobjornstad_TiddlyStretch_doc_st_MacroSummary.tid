@@ -1,0 +1,7 @@
+created: 20210304023959526
+modified: 20210306022211394
+tags: 
+title: $:/plugins/sobjornstad/TiddlyStretch/doc/st/MacroSummary
+type: text/vnd.tiddlywiki
+
+<code>{{!!name}}</code>: {{!!description}}

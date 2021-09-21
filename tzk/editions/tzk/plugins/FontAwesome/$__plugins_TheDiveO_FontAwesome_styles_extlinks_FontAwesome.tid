@@ -1,0 +1,23 @@
+created: 20170227162302202
+list-after: $:/plugins/TheDiveO/FontAwesome/styles/extlinks
+modified: 20180328191153542
+tags: $:/tags/Stylesheet
+title: $:/plugins/TheDiveO/FontAwesome/styles/extlinks/FontAwesome
+type: text/vnd.tiddlywiki
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html
+
+<$set name="cfg" value=<<fa5-cfgpath "decorate-wk-extlinks">> >
+<$list filter=<<fa5-cfgfilterexpr>> >
+
+a[href^="http://fontawesome.io/"].tc-tiddlylink-external:before,
+a[href^="http://fontawesome.com/"].tc-tiddlylink-external:before,
+a[href^="https://fontawesome.io/"].tc-tiddlylink-external:before,
+a[href^="https://fontawesome.com/"].tc-tiddlylink-external:before {
+  <<fa-plugin-font-brands>>
+  content: '\f425\202f' !important;
+  display: inline-block;
+}
+
+</$list>
+</$set>

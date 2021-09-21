@@ -1,0 +1,22 @@
+created: 20171230212437805
+modified: 20180328191223958
+tags: $:/tags/Stylesheet
+title: $:/plugins/TheDiveO/FontAwesome/styles/tiddlylinks/system
+type: text/vnd.tiddlywiki
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html
+
+<$set name="cfg" value=<<fa5-cfgpath "decorate-syslinks">> >
+<$list filter=<<fa5-cfgfilterexpr>> >
+
+/* system tiddler titles starting with $:/... */
+.tc-tiddler-body a.tc-tiddlylink[href^="#%24%3A%2F"]:before,
+.tc-tiddler-preview-preview a.tc-tiddlylink[href^="#%24%3A%2F"]:before {
+  <<fa-plugin-font-solid>>
+  font-size: 80%;
+  content: '\f013\202f';
+  display: inline-block;
+}
+
+</$list>
+</$set>

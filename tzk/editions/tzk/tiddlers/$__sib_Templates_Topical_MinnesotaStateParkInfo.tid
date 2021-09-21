@@ -1,0 +1,74 @@
+created: 20201129205832011
+creator: soren
+description: Display information about the Minnesota state park or recreation area described by the current tiddler.
+modified: 20210825162907272
+modifier: soren
+tags: Public $:/tags/ViewTemplate
+title: $:/sib/Templates/Topical/MinnesotaStateParkInfo
+transcludedin: All tiddlers tagged <<tag MinnesotaStatePark>>.
+type: text/vnd.tiddlywiki
+
+\define dnrInfo(id)
+<$list filter={{{ [<__id__>is[blank]then[oops]] }}}>
+//Please specify the `foreignid` field//
+</$list>
+<$list filter={{{ [<__id__>!is[blank]] }}}>
+https://www.dnr.state.mn.us/state_parks/park.html?id=spk$id$#information
+</$list>
+\end
+
+\define dnrMap(id)
+<$list filter={{{ [<__id__>is[blank]then[oops]] }}}>
+//Please specify the `foreignid` field//
+</$list>
+<$list filter={{{ [<__id__>!is[blank]] }}}>
+https://files.dnr.state.mn.us/maps/state_parks/spk$id$.pdf
+</$list>
+\end
+
+\define newTitle(suffix) $(currentTiddler)$$suffix$
+
+\define detailsPart(suffix)
+<$list filter="[<currentTiddler>addsuffix[/$suffix$]is[tiddler]]" variable=sectionTitle><$details summary=$suffix$>
+
+<$transclude tiddler={{{ [all[current]addsuffix[/$suffix$]] }}} />
+
+@@margin-block-end: 0;
+<$button>
+  <$action-sendmessage $message="tm-edit-tiddler" $param=<<sectionTitle>> class="tc-btn-invisible"/>
+edit
+</$button>
+@@
+
+</$details></$list>
+\end
+
+\define buttonPart(suffix, moreTags: " Public")
+<$list filter="[<currentTiddler>addsuffix[/$suffix$]!is[tiddler]]" variable=_><$button>
+  <$action-sendmessage $message="tm-new-tiddler" title=<<newTitle "/$suffix$">> tags="Subplace$moreTags$"/>
+	{{$:/core/images/add-comment}} add <$text text={{{ [[$suffix$]lowercase[]] }}}/>
+</$button></$list>
+\end
+
+
+<!------------------ Start of template ------------------>
+
+<$list filter="[all[current]tag[MinnesotaStatePark]]" variable=_>
+
+<$list filter="[[$:/config/sib/IsPublicEdition]field:text[false]]" variable=_>
+//Please note: Campsite preferences (jealously guarded!) and visits are private and will never appear in the public wiki.//
+</$list>
+
+|!{{!!caption}}|<|
+|!Park info |<$macrocall $name=dnrInfo id={{!!foreignid}}/>|
+|!Park map |<$macrocall $name=dnrMap id={{!!foreignid}}/>|
+|!Park office |{{!!phone}}|
+|!Make reservations |https://reservemn.usedirect.com/MinnesotaWeb/|
+|!Problems with reservations |(866) 857-2757|
+|!Check-in/out at |16:00 / 16:00|
+
+<<buttonPart Travel>> <<buttonPart Amenities>> <<buttonPart Campsites "">> <<buttonPart Visits "">>
+
+<<detailsPart Travel>><<detailsPart Amenities>><<detailsPart Campsites>> <<detailsPart Visits>>
+
+</$list>

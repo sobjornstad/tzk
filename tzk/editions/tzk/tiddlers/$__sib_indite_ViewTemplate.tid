@@ -1,0 +1,29 @@
+caption: Indite view template
+created: 20210410004824597
+description: Tiddlers that are part of the Indite writing system (under development) hide the normal view template via CSS and use this one instead.
+modified: 20210523143848140
+tags: $:/tags/ViewTemplate
+title: $:/sib/indite/ViewTemplate
+transcludedin: All tiddlers tagged <<tag Indite>>.
+type: text/vnd.tiddlywiki
+
+<$list filter="[all[current]tag[Indite]]" variable=_>
+
+<$reveal tag="div" class="indite-body" type="nomatch" stateTitle=<<folded-state>> text="hide" retain="yes" animate="yes">
+
+<div style="border: 1px solid;">
+<$count filter="[all[current]list[]]"/> children (drag and drop to add or reorder):
+
+<$macrocall $name="list-links-draggable" tiddler=<<currentTiddler>> itemTemplate="$:/sib/indite/ChildListItemTemplate"/>
+
+</div>
+
+<div class="indite-text">
+
+<$transclude mode="block"/>
+
+</div>
+
+</$reveal>
+
+</$list>

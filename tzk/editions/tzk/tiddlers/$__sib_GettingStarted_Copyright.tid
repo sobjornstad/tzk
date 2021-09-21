@@ -1,0 +1,48 @@
+caption: Copyright
+created: 20210523153031971
+creator: soren
+modified: 20210920170823196
+modifier: soren
+tags: Meta
+title: $:/sib/GettingStarted/Copyright
+type: text/vnd.tiddlywiki
+
+If you're sure you will never share any part of your Zettelkasten with others, you can skip this step. Otherwise, take a moment now to decide under what terms you will share your content.
+
+The built-in licensing model for this edition involves two different licenses: one on the //content// (your actual notes) and a second on the //system tiddlers// (the custom logic that sits behind the wiki).
+
+
+<$details summary="Easy mode: Keep the existing terms">
+
+If you take this option, here's what you're letting other people do:
+
+* Your ''notes'' will be all-rights-reserved: people who have access to the notes can read them and use them under [[fair use|https://en.wikipedia.org/wiki/Fair_use]] in your jurisdiction, but can't do anything else with them.
+* Your changes to ''system tiddlers'' will be licensed under the [[MIT license|https://en.wikipedia.org/wiki/MIT_License]] (others can freely copy and reuse them in their own wikis).
+
+Assuming you are comfortable with that, this method is recommended if you are unfamiliar with open-source licensing or copyright law; simply filling in the copyright notice below will automatically ensure your stake in your content is recognized and meet your legal obligations under the MIT license of this edition.
+
+What should your copyright notice look like? This will normally be something like `Copyright © 1995 Your Name Here.` If you want the copyright date to automatically update, use `<<now YYYY>>` in place of the year.
+
+//Your copyright notice//: <$edit-text tiddler="$:/config/zettelkasten/copyright/UserNotice" tag="input" class="sib-copyright-input"/>
+
+</$details>
+<$details summary="Or alter the notices yourself">
+
+If you don't like the built-in model, you can freely change the license used for your notes by editing the tiddler [[$:/config/zettelkasten/copyright/Content]]. For instance, maybe you'd like to make your notes available under a [[Creative Commons|https://creativecommons.org/]] license.
+
+It's possible to use a different license than the MIT license for your modifications to system tiddlers, including forbidding anyone else from using them at all, by editing the [[$:/config/zettelkasten/copyright/System]] tiddler, but you ''must do so in a way that is compatible with the MIT license and preserves the original copyright notice''. Doing this correctly requires background knowledge and some attention to detail, so if you are not familiar with open-source licensing, you are probably better off sticking with the defaults and adding a copyright notice using the text box above, or having a quick chat with someone who is more familiar.
+
+You can change the copyright notice that appears in the footer of the public edition in [[$:/sib/Templates/Automatic/StoryRiverFooter]].
+
+</$details>
+
+!! Preview
+
+Visit [[CopyrightNotice]] to see what the notice will look like.
+
+
+<style>
+input.sib-copyright-input {
+	width: 100%;
+}
+</style>

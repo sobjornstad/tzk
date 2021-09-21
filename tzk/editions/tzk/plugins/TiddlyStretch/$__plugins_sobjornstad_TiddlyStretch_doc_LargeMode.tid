@@ -1,0 +1,7 @@
+created: 20210304024317434
+description: Whether to render the expanded template in `block` or `inline` mode (default: block).
+modified: 20210306022349464
+name: largeMode
+tags: $:/plugins/sobjornstad/TiddlyStretch/doc/Parameter
+title: $:/plugins/sobjornstad/TiddlyStretch/doc/LargeMode
+type: text/vnd.tiddlywiki

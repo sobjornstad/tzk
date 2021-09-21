@@ -1,0 +1,8 @@
+created: 20200516190911842
+modified: 20210308030709436
+tags: 
+title: $:/config/TiddlyRemember/TagMapping
+type: text/vnd.tiddlywiki
+
+[[Source::Zettelkasten]]
+[has[tr-tags]get[tr-tags]]

@@ -1,0 +1,30 @@
+created: 20180928194557274
+creator: Thomas Elmiger
+modified: 20200219093956524
+modifier: Thomas Elmiger
+tags: $:/tags/Macro
+title: $:/plugins/telmiger/details/accordion
+type: text/vnd.tiddlywiki
+
+\define accordion(filter:"_no_",open:"no",class:"")
+<$vars accordion-filter="""$filter$""" open="""$open$""" class="""$class$""">
+<$list filter=<<accordion-filter>>>
+<$details summary=<<currentTiddler>> open=<<open>> class=<<class>>>
+
+<$transclude tiddler=<<currentTiddler>>/>
+
+</$details>
+</$list>
+</$vars>
+\end
+
+<!-- !!! Accordion Macro for Details
+
+List tiddlers and open them in a details-summary structure
+
+!!!! Attributes
+* filter: filter to select tiddlers
+* open: set to "open" to display details on load
+* class: set a class for the details tag
+
+-->

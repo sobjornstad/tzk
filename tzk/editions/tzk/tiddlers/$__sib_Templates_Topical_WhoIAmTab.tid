@@ -1,0 +1,16 @@
+created: 20201121012833365
+creator: soren
+modified: 20210825162920735
+modifier: soren
+tags: 
+title: $:/sib/Templates/Topical/WhoIAmTab
+type: text/vnd.tiddlywiki
+
+<$tiddler tiddler=<<currentTab>>>
+<$set name="storyTiddler" value=<<currentTab>>>
+<$transclude mode="block"/>
+
+<$link to=<<currentTiddler>>><i class="fa fa-expand"/>&nbsp;Explode this section</$link>
+{{||$:/sib/refexplorer/ReferenceExplorer}}
+</$set>
+</$tiddler>

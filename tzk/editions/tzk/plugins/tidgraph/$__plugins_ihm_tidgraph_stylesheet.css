@@ -1,0 +1,134 @@
+/*Eliminate border in table and cells*/
+.ihm-tgr-table {
+   border-collapse: collapse;
+   border: none;
+   background-color: transparent;
+   padding: 0;
+   margin: 0;
+}
+
+.ihm-tgr-tablediv {
+   /* We need this margin to prevent spurius vertical scroll
+   * in tgr-container. It needs to have the SAME pixel value
+   * as top and left in tgr-svg-int class so that the SVG
+   * arrows match properly (this assures same origin coordinates
+   * for table and svg)
+   */
+   margin: 10px; 
+}
+
+.tgr-container table  td {
+   border: none;
+   background-color: transparent;
+}
+
+/*nice round box around tiddlers*/
+.tgr-container td  a  {
+ 
+}
+
+.tgr-container {
+   position:relative; 
+   left:0px; 
+   top:0px; 
+   background-color: transparent;
+   overflow: auto; /* This is needed to scroll on big maps */
+   z-index:1;
+}
+.tgr-svg-int { 
+	z-index: -1;
+	position:absolute;
+	background-color:transparent;
+	opacity: 1;
+   left: 10px;
+   top: 10px;
+}
+
+/* SVG arrows */
+.ihm-tgr-link {
+   fill: none;
+   stroke-width: 2;
+   stroke: #aeb0b5;
+}
+
+.tgr-edge-weak {
+   stroke-dasharray: 3,5;
+}
+
+.tgr-arrow {
+   fill: #aeb0b5;
+   stroke-width: 0;
+}
+
+.ihm-tgr-node-container {
+   position: relative;
+}
+
+.ihm-tgr-node-container-east {
+   margin: 6px 10px;
+}
+
+.ihm-tgr-node-container-south {
+   margin: 16px 4px;
+   display: inline-block; /*FIXME*/
+}
+
+.ihm-tgr-node-container p {
+   margin-top: 0px;
+   margin-bottom: 0px;
+}
+
+.ihm-tgr-node {
+   background-color: #dce4ef;
+   border-radius: 15px;
+   padding: 0.1em 0.4em;
+   /* border: 0px dashed #cd2026; */
+   box-shadow: 4px 4px 5px #888888;
+   text-align: center;
+   vertical-align: middle;
+   font-size: 1em;
+   color: #0071bc;
+}
+
+/* Collapse feature */
+.ihm-tgr-collapse {
+    position: absolute;
+    cursor: pointer;
+    width: 14px;
+    height: 14px;
+    right: -14px;
+}
+
+.ihm-tgr-collapse-east {
+    top: 50%;
+    transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+}
+
+.ihm-tgr-collapse-south {
+    left: 50%;
+    transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+}
+
+a.ihm-tgr-collapse:hover {
+    text-decoration: none;
+    background: #999999;
+}
+
+/* Vertical layout divs */
+.ihm-tgr-divtable {
+   display: table;
+}
+
+.ihm-tgr-node-group {
+   display: table-row;
+}
+
+.ihm-tgr-node-cell {
+   display: table-cell;
+   vertical-align: top;
+   text-align: center;
+}

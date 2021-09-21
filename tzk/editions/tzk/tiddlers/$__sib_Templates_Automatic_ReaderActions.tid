@@ -1,0 +1,56 @@
+created: 20210608021806427
+description: Provide links that allow users to get in touch with the author, share content, or otherwise interact with it.
+modified: 20210622002447440
+tags: $:/tags/ViewTemplate
+title: $:/sib/Templates/Automatic/ReaderActions
+transcludedin: All non-system tiddlers, if this is the public edition.
+type: text/vnd.tiddlywiki
+
+\define startConvoAction()
+	<$action-createtiddler $basetitle="$:/temp/Conversation" $savetitle="$:/temp/ConversationCollector" target=<<currentTiddler>> email={{$:/config/sobjornstad/UserEmail}} comment=""/>
+	<$action-navigate $to="StartAConversation"/>
+\end
+
+\define subscribeAction()
+<$action-setfield $tiddler=<<qualify "$:/temp/SubscribeSection">> text="open"/>
+  <!--<$action-managesubscription tiddler=<<currentTiddler>> user="greata@sorenbjornstad.com" operation="subscribe"/>-->
+\end
+
+\define complete-subscription-action()
+  <$action-managesubscription tiddler=<<currentTiddler>> user={{$:/config/sobjornstad/UserEmail}} operation="subscribe"/>
+	<$action-setfield $tiddler=<<qualify "$:/temp/SubscribeSection">> text=""/>
+\end
+
+<$list filter="[all[current]!is[system]]" variable=_>
+<$list filter=<<ff ContactButtons>> variable=_>
+<div style="text-align: center;">
+<$button class="tc-btn-invisible tc-tiddlylink" tooltip="Send Soren email about this idea or note." actions=<<startConvoAction>>>
+	<i class="fa fa-envelope"/>&nbsp;start a conversation
+</$button>&emsp;
+<$button class="tc-btn-invisible tc-tiddlylink" tooltip="Get emails whenever this idea or note is updated." actions=<<subscribeAction>>>
+  <i class="fa fa-bell"/>&nbsp;subscribe
+</$button>
+</div>
+
+<div class="sib-subscribe-info">
+<$reveal state=<<qualify "$:/temp/SubscribeSection">> type="match" text="open">
+  <$list filter="[all[current]is[missing]]">//This tiddler doesn't exist yet. You'll be notified if and when it is created.//<br></$list>
+	Subscribe with email:&nbsp;<$edit-text tiddler="$:/config/sobjornstad/UserEmail" tag="input" default=""/>
+	<$button actions=<<complete-subscription-action>>>Subscribe</$button>
+</$reveal>
+</div>
+
+</$list>
+</$list>
+
+
+<style>
+div.sib-subscribe-info {
+	text-align: center;
+	margin-top: 0.5rem;
+}
+div.sib-subscribe-info input {
+	width: 20em;
+	max-width: 50%;
+}
+</style>

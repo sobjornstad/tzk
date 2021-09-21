@@ -1,0 +1,41 @@
+caption: Satellite
+created: 20201129174511282
+creator: soren
+modified: 20210910152248350
+modifier: soren
+tags: $:/sib/gis/MappingTools
+title: $:/sib/gis/SatelliteMap
+type: text/vnd.tiddlywiki
+
+\define mapUrl() https://www.google.com/maps/embed/v1/view?key=$(gmapsApiKey)$&zoom=$(zoom)$&center=$(lat)$%2C$(long)$&maptype=satellite
+
+\define changebutton(operation, faClass)
+	<$button class="tc-btn-invisible tc-tiddlylink">
+		<$action-setfield $field="gis-zoom" $value={{{ [{!!gis-zoom}$operation$[1]] }}}/>
+		<i class="fa $faClass$"/>
+	</$button>
+\end
+
+<$list filter="[all[current]has[gis-lat]]" variable=_>
+<$vars
+	lat={{!!gis-lat}}
+	long={{!!gis-long}}
+	zoom={{!!gis-zoom}}>
+	
+    <iframe
+      width="600"
+      height="450"
+      frameborder="0"
+      style="border:0"
+      src=<<mapUrl>>
+      allowfullscreen>
+		</iframe>
+</$vars>
+Edit map zoom: <<changebutton add fa-search-plus>> <<changebutton subtract fa-search-minus>>
+</$list>
+
+<!--
+<$list filter="[all[current]!has[gis-lat]]" variable=_>
+  Please add `gis-lat`, `gis-long`, and `gis-zoom` fields to this tiddler to display a map.
+</$list>
+-->

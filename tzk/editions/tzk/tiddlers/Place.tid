@@ -1,0 +1,22 @@
+caption: A physical location in ConsensusPhysicalReality or in a fictional world.
+color: #ff0000
+created: 20200121032316713
+creator: soren
+icon: $:/core/images/tag-button
+modified: 20210910155618846
+modifier: soren
+tags: Meta Public
+title: Place
+type: text/vnd.tiddlywiki
+
+{{!!caption}}
+
+For places that have usable addresses or GPS coordinates, you can configure maps and directions to appear at the bottom of the tiddler via Google Maps. To do this in an empty edition of this Zettelkasten:
+
+# Set up a Maps Embed API key in Google Cloud Platform (this is rather technical, so if you don't know what an API key is, you may want to skip this feature). Set $:/config/zettelkasten/gis/GMapsApiKey to your new key.
+# (Optionally) set the `Address` index of the `PrivateMetadata` data tiddler to your home address; this will save you having to type it in every time you want directions from your home to somewhere else. Since this isn't a system tiddler, it won't be published unless you check the “publish this tiddler” option.
+# Turn on the //GIS tools// [[feature flag|$:/sib/Tools/FeatureFlags]].
+
+You should now see a form on any tiddler tagged <<tag Place>> where you can enter latitude and longitude and zoom level for the place. If you don't already have a favorite tool for finding latitude and longitude, in Google Maps, you can right-click on any point and select the first option to copy the coordinates to your clipboard. I usually start with a zoom level of 12 to 15 depending on the size of the place (you can see the current zoom level at the end of a Google Maps URL, followed by a //z//).
+
+After clicking //Add//, you'll be able to see maps, directions, or raw data for the location. The data is stored in the `gis-lat`, `gis-long`, and `gis-zoom` fields; you can also add a `gis-address` field if you'd like to display a street address on the //Info// tab.

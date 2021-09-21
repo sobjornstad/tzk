@@ -1,0 +1,15 @@
+created: 20200427015719697
+modified: 20200427020204931
+tags: 
+title: $:/config/FileSystemPaths
+type: text/vnd.tiddlywiki
+
+[is[system]removeprefix[$:/]addprefix[_system/]]
+[tag[Template]tag[Meta]tag[Tool]addprefix[_meta/]]
+[tag[Image]tag[Attachment]addprefix[media/]]
+[tag[Journal]addprefix[journal/]]
+[tag[Source]addprefix[source/]]
+[tag[Sink]addprefix[sink/]]
+[tag[PAO]addprefix[pao/]]
+[tag[Place]addprefix[place/]]
+[tag[Publication]tag[Class]addprefix[metasource/]]

@@ -1,0 +1,3 @@
+module-type: startup
+title: $:/plugins/flibbles/relink/js/bulkops.js
+type: application/javascript

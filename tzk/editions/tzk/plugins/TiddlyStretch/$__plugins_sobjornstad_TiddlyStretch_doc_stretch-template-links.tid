@@ -1,0 +1,12 @@
+created: 20210304023737915
+description: Create a bulleted list of expandos from the tiddlers that match a filter, rendering each tiddler through one of two templates.
+modified: 20210306023011647
+name: stretch-template-links
+parameters: filter smallTemplate largeTemplate smallMode largeMode emptyMessage
+tags: $:/plugins/sobjornstad/TiddlyStretch/doc/Macro
+title: $:/plugins/sobjornstad/TiddlyStretch/doc/stretch-template-links
+type: text/vnd.tiddlywiki
+
+The `stretch-template-links` macro works just like the [[stretch-links|$:/plugins/sobjornstad/TiddlyStretch/doc/stretch-links]] macro, but instead of directly rendering one of two fields of each tiddler to be stretched, it renders the tiddler through one of two templates.
+
+{{||$:/plugins/sobjornstad/TiddlyStretch/doc/MacroInfoTemplate}}

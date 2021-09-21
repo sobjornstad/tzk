@@ -1,0 +1,8 @@
+/* FOUR COLUMN MODE */
+.fourcolumns {
+   display:block;
+   -moz-column-count:5;
+   -moz-column-gap:0em;
+   -webkit-column-count: 5;
+   -webkit-column-gap:0em;
+}

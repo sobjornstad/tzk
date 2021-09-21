@@ -1,0 +1,19 @@
+created: 20170205212323032
+modified: 20200219093956554
+tags: 
+title: $:/plugins/telmiger/details/readme
+type: text/vnd.tiddlywiki
+
+! ~DetailsWidget
+
+A plugin for [[TiddlyWiki|http://tiddlywiki.com]] 5 containing a script and some styles to create an HTML 5 `<details>` section including a `<summary>`. Here’s an example:
+
+<$details summary="W3C definition">
+
+<<<
+The [[details|http://w3c.github.io/html/interactive-elements.html#elementdef-details]] element represents a disclosure widget from which the user can obtain additional information or controls.
+<<< W3C
+
+</$details>
+
+Documentation can be found at http://tid.li/tw5/plugins.html#DetailsWidget

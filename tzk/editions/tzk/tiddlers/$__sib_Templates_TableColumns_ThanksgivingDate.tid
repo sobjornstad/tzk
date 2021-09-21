@@ -1,0 +1,12 @@
+created: 20201203034806153
+date: 20201128
+modified: 20210522013921371
+tags: $:/tags/table/BodyTemplate
+tbl-column-list: at
+tbl-noedit: 
+title: $:/sib/Templates/TableColumns/ThanksgivingDate
+type: text/vnd.tiddlywiki
+
+<td>
+<$view tiddler=<<currentRecord>> field="at" format="date" template="[UTC]MMM 0DD"/>
+</td>

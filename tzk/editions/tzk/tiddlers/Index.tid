@@ -1,0 +1,16 @@
+caption: A tiddler that serves primarily as an overview of or collection of links to other information, containing little information of its own.
+color: #ff0000
+created: 20200314213905906
+creator: soren
+icon: $:/core/images/tag-button
+modified: 20210825160727571
+modifier: soren
+tags: Meta Public
+title: Index
+type: text/vnd.tiddlywiki
+
+//Not to be confused with [[Indexing]], the art and science of creating lists of keywords that describe where information is to be found in a resource.//
+
+An ''index'' tiddler serves primarily as an overview of or collection of links to other information, containing little information of its own. These tiddlers become more and more useful the larger your Zettelkasten gets; you can use them to create ad-hoc lists or hierarchies or keep track of ideas in a specific topic you're currently working on.
+
+Index tiddlers don't have any special naming conventions or fields.

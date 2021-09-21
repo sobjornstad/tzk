@@ -1,0 +1,8 @@
+created: 20210307212922834
+modified: 20210825122822234
+modifier: soren
+tags: $:/tags/PageControls
+title: $:/sib/Buttons/ReadingInbox
+type: text/vnd.tiddlywiki
+
+<$button to="$:/sib/Tools/ReadingInbox" class=<<tv-config-toolbar-class>> selectedClass="tc-selected"><i class="fa fa-inbox" style="font-size:140%; position:relative; bottom:-3px; left:-1px;"/></$button>

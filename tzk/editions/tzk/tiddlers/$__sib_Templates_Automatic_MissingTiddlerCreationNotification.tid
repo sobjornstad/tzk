@@ -1,0 +1,12 @@
+created: 20201204132021892
+modified: 20210522014049552
+tags: $:/tags/EditTemplate
+title: $:/sib/Templates/Automatic/MissingTiddlerCreationNotification
+type: text/vnd.tiddlywiki
+
+<$list filter="[all[current]get[draft.of]prefix[New Tiddler]]" variable="draftof">
+  <$list filter="[all[current]get[draft.title]backlinks[]first[]]" variable=_>
+    Creating missing tiddler <$link to={{!!draft.title}}/>. The following tiddlers will link here when you save:
+    <<list-links "[all[current]get[draft.title]backlinks[]]">>
+	</$list>
+</$list>

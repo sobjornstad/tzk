@@ -1,0 +1,9 @@
+created: 20180328184036630
+modified: 20180328191101221
+tags: $:/tags/Macro
+title: $:/plugins/TheDiveO/FontAwesome/macros/global-macros
+type: text/vnd.tiddlywiki
+
+\define fa5-cfgpath(cfg) $:/config/fa5/$cfg$
+
+\define fa5-cfgfilterexpr() [<cfg>get[text]] [[yes]] +[first[]prefix[yes]]

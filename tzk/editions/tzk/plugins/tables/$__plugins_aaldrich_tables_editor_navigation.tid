@@ -1,0 +1,39 @@
+created: 20190727082624393
+modified: 20191208103316562
+tags: 
+title: $:/plugins/aaldrich/tables/editor/navigation
+
+''<$select tiddler="$:/temp/tables/editor/settings-page-vars" field="tbl-edit-page">
+<optgroup label="Data">
+<option>Records</option>
+<option>Columns</option>
+<option>Sorting</option>
+<option value="Limit">Limit/Pagination</option>
+</optgroup>
+<optgroup label="Style">
+<option value="Theme">Theme (Stylesheet)</option>
+<option value="Override">Override (Inline Styles)</option>
+<option value="Colgroups">Column Groups</option>
+<option>Advanced Styles</option>
+</optgroup>
+<optgroup label="Features">
+<option>Header/Footer</option>
+<option>Caption</option>
+<option value="Edit">Editor/Mode</option>
+<option>Defaults</option>
+</optgroup>
+<optgroup label="Special Columns">
+<option>Expand</option>
+<option>Button</option>
+<option>Checkbox</option>
+<option>Anything</option>
+</optgroup>
+<optgroup label="Help">
+<option>Getting Started</option>
+<option>About</option>
+</optgroup>
+</$select>''
+<$button class="tc-btn-invisible tc-tiddlylink" style="padding:0 0 0 6px;">
+  <$action-sendmessage $message="tm-close-tiddler" />
+  <$action-deletetiddler $tiddler="$:/temp/tables/editor/settings-page-vars"/> ''Close''
+</$button>

@@ -1,0 +1,30 @@
+created: 20210731162946420
+creator: soren
+description: Choose which top-level tabs you want to show in the sidebar in your public and private editions.
+modified: 20210920155630850
+modifier: soren
+tags: Tool
+title: $:/sib/gui/SidebarTabSelector
+tooltype: configuration
+type: text/vnd.tiddlywiki
+
+{{!!description}}
+
+<table>
+	<tr>
+		<th style="min-width: 6em;">Tab</th>
+		<th>Private</th>
+		<th>Public</th>
+		<th>Description</th>
+	</tr>
+	<$list filter="[all[shadows+tiddlers]tag[$:/tags/SideBar]!has[draft.of]]">
+		<$list filter="[all[current]addprefix[$:/config/zettelkasten/SideBar/Visibility/]]" variable="vizTiddler">
+			<tr>
+				<td><$link to=<<currentTiddler>>>{{!!caption}}</$link></td>
+				<td><$checkbox tiddler=<<vizTiddler>> field="private" checked="yes" unchecked="no"/></td>
+				<td><$checkbox tiddler=<<vizTiddler>> field="public" checked="yes" unchecked="no"/></td>
+				<td><$transclude field="description">(//built-in tab//)</$transclude></td>
+			</tr>
+		</$list>
+	</$list>
+</table>

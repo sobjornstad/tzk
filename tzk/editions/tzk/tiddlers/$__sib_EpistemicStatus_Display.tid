@@ -1,0 +1,37 @@
+created: 20210508223048629
+creator: soren
+description: Show the [[epistemic status|EpistemicStatuses]] of the current tiddler, if any. The status is editable in the private edition.
+modified: 20210920193540286
+modifier: soren
+tags: $:/tags/ViewTemplate
+title: $:/sib/EpistemicStatus/Display
+transcludedin: All [[idea tiddlers|ZettelkastenCardType]]: those that are not tagged with a red type tag and are not system tiddlers, except that index tiddlers are included.
+type: text/vnd.tiddlywiki
+
+\define color-style() color: $(itemColor)$;
+
+<$list filter=<<ff EpistemicStatus>> variable=_>
+<$list filter="[all[current]!is[system]]">
+<$list filter="[all[current]tag[Idea]] [all[current]tag[Index]]" variable=_>
+
+<div style="float: right; vertical-align: center;">
+<$list filter="[[$:/config/sib/IsPublicEdition]text[true]]" variable=_>
+	<$link to="EpistemicStatuses"><span style={{{ [prefix[$:/sib/EpistemicStatus]caption{!!es}get[color]addprefix[color: ]addsuffix[;]] }}}>epistemic status</span></$link>:
+	<$select field="es" default="">
+		<$list filter="[prefix[$:/sib/EpistemicStatus]has[caption]nsort[stackorder]]">
+			<$set name="itemColor" value={{!!color}}>
+				<option style=<<color-style>> value={{!!caption}}>{{!!caption}}</option>
+			</$set>
+		</$list>
+	</$select>
+</$list>
+<$list filter="[[$:/config/sib/IsPublicEdition]!text[true]]" variable=_>
+<$list filter="[all[current]has[es]]">
+	[[epistemic status|EpistemicStatuses]]: <span style={{{ [prefix[$:/sib/EpistemicStatus]caption{!!es}get[color]addprefix[color: ]addsuffix[;]] }}}>{{!!es}}</span>
+</$list>
+</$list>
+</div>
+
+</$list>
+</$list>
+</$list>

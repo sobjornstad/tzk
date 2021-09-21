@@ -1,0 +1,60 @@
+created: 20210721020857476
+creator: soren
+modified: 20210825185624720
+modifier: soren
+tags: $:/tags/Stylesheet
+title: $:/sib/styles/ReferenceExplorer
+type: text/vnd.tiddlywiki
+
+table.ideas-table {
+	width: 100%;
+	background-color: #686868;
+	caption-side: top;
+}
+
+table.ideas-table th {
+	background-color: #595959;
+}
+
+table.ideas-table th, table.ideas-table td {
+	border: 0;
+	border-right: 1px solid #999999;
+	border-left: 1px solid #999999;
+}
+
+table.ideas-table th {
+	border-top: 1px solid #999999;
+}
+
+table.ideas-table tr:last-child {
+	border-bottom: 1px solid #999999;
+}
+
+.ideas-table-caption {
+    margin: 0 0 0 0;
+    padding: 2px 7px 2px 7px;
+    text-shadow: none;
+    color: #FFFFFF;
+    background-color: #3D3D3D;
+    vertical-align: middle;
+    border-top: 1px solid #999999;
+    border-right: 1px solid #999999;
+    border-bottom: 0px solid #999999;
+    border-left: 1px solid #999999;
+    text-align: center;
+}
+
+table.ideas-table tr:nth-child(odd) {
+	background-color: #737373;
+}
+
+table.ideas-table a {
+	color: <<color foreground>>;
+}
+
+@media print
+{
+	.sib-reference-explorer {
+		display: none;
+	}
+}

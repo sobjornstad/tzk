@@ -1,0 +1,84 @@
+created: 20200808023836194
+creator: soren
+description: Display a table of fields and other information about the source described by this tiddler.
+modified: 20210916133730677
+modifier: soren
+tags: $:/tags/ViewTemplate
+title: $:/sib/Templates/Automatic/Source
+transcludedin: All tiddlers tagged <<tag Source>> or <<tag Sink>>.
+type: text/vnd.tiddlywiki
+
+\define isbnsearch(isbn) https://isbnsearch.org/isbn/$(isbn)$
+
+<$list filter="[all[current]tag[Source]] [all[current]tag[Sink]]">
+
+<table class="sourceDeetsTable">
+	<tr>
+		<th>Title</th>
+		<td>{{!!caption}}</td>
+	</tr>
+	<tr>
+		<th>Author</th>
+		<td>{{!!author}}</td>
+	</tr>
+	<tr>
+		<th>Publication year</th>
+		<td>{{!!year}}</td>
+	</tr>
+	<tr>
+		<th>Medium</th>
+		<td>{{!!medium}}</td>
+	</tr>
+	<$list filter={{{ [all[current]has[universe]!universe[nonfiction]] }}}>
+	<tr>
+		<th>Universe</th>
+		<td>
+			<$link to={{!!universe}}/>
+		</td>
+	</tr>
+	</$list>
+	<tr>
+		<th>URL</th>
+		<td>{{!!url}}</td>
+	</tr>
+	<$list filter="[all[current]has[isbn]]">
+	<tr>
+		<th>ISBN</th>
+		<td>
+			<$set name=isbn value={{!!isbn}}>
+				<a href=<<isbnsearch>> class="tc-tiddlylink-external">{{!!isbn}}</a>
+			</$set>
+		</td>
+	</tr>
+	</$list>
+	<tr>
+		<th>Bibliographies</th>
+		<td>
+			<$list filter="[all[current]enlist{!!bibliography}]">
+				<$link to={{{ [tag[Bibliography]bibliography<currentTiddler>] }}}>
+					<$text text=<<currentTiddler>>/>
+				</$link>
+			</$list>
+		</td>
+	</tr>
+	<tr>
+		<th>Status</th>
+		<td>
+			<<read-status-selector>>
+			<$list filter="[all[current]readstatus[read]]">
+				on <$view field="completed" format="date" template="YYYY-0MM-0DD"/>
+			</$list>
+			<$list filter="[all[current]readstatus[reread]]">
+				(last read <$view field="completed" format="date" template="YYYY-0MM-0DD"/>)
+			</$list>
+		</td>
+	</tr>
+</table>
+
+<style>
+.sourceDeetsTable tr th {
+	text-align: right;
+}
+</style>
+
+</$list>

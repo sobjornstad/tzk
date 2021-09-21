@@ -1,0 +1,18 @@
+created: 20190725080524516
+modified: 20190727005459045
+tags: [[ $:/tags/Image]]
+title: $:/plugins/aaldrich/tables/button/image
+
+<svg class="tc-image-button" viewBox="0 0 128 128" width="22pt" height="22pt">
+    <rect x="0" y="0" width="128" height="8"></rect>
+    <rect x="0" y="20" width="128" height="8"></rect>
+    <rect x="0" y="40" width="128" height="8"></rect>
+    <rect x="0" y="60" width="128" height="8"></rect>
+    <rect x="0" y="80" width="128" height="8"></rect>
+    <rect x="0" y="100" width="128" height="8"></rect>
+    <rect x="0" y="120" width="128" height="8"></rect>
+    <rect x="0" y="0" width="8" height="128"></rect>
+    <rect x="40" y="0" width="8" height="128"></rect>
+    <rect x="80" y="0" width="8" height="128"></rect>
+    <rect x="120" y="0" width="8" height="128"></rect>
+</svg>

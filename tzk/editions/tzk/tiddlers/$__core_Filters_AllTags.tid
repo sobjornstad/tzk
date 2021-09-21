@@ -1,0 +1,7 @@
+created: 20200329173823386
+description: {{$:/language/Filters/AllTags}}
+filter: [tags[]!is[system]sort[title]sort[color]]
+modified: 20210414230511254
+tags: $:/tags/Filter
+title: $:/core/Filters/AllTags
+type: text/vnd.tiddlywiki

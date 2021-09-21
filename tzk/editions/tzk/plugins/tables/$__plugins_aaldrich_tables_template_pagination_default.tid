@@ -1,0 +1,32 @@
+created: 20190715072523828
+modified: 20191208103154143
+tags: 
+title: $:/plugins/aaldrich/tables/template/pagination/default
+
+<$reveal type="nomatch" style="text-align:center;" state="!!tbl-page-marker" text="" tag="div" class="tbl-page-footer">
+    <$reveal type="nomatch" style="float:left;" state="!!tbl-page-marker" text=<<previousPage>> tag="div" class="tbl-page-prev">
+        <$button class="tc-btn-invisible tc-tiddlylink">
+        <$action-setfield tbl-page-marker=<<previousPage>>/>{{$:/core/images/chevron-left}} ''Prev''</$button>
+    </$reveal>
+    <$reveal type="match" style="float:right;" state="!!tbl-limit" text=<<recordCount>> tag="div" class="tbl-page-next">
+        <$button class="tc-btn-invisible tc-tiddlylink">
+        <$action-setfield tbl-page-marker=<<nextPage>>/>''Next'' {{$:/core/images/chevron-right}}</$button>
+    </$reveal>
+Displaying <<firstCount>> through <<lastCount>> of <<totalCount>> Results&nbsp; |
+<$select tiddler=<<currentTable>> field="tbl-limit" actions="""<$action-setfield $tiddler=<<currentTable>> tbl-page-marker=<<firstRecord>>/>""">
+<$set name="limitFilter" value={{$:/plugins/aaldrich/tables/defaults!!tbl-limit-choices}} >
+<$list filter=<<limitFilter>>>
+<option value={{!!title}}>Limit {{!!title}}</option>
+</$list>
+</$set>
+<option value=9999999>Show All</option>
+</$select>
+</$reveal>
+<$reveal type="match" state="!!tbl-page-marker" text="" >
+  <$list filter=<<veryFirst>> >
+    <div class="tbl-page-refresh">
+    <$button class="tc-btn-invisible tc-tiddlylink">
+    <$action-setfield $tiddler=<<currentTable>> tbl-page-marker=<<firstRecord>>/>''Click to Enable Pagination''</$button>
+    </div>
+  </$list>
+</$reveal>

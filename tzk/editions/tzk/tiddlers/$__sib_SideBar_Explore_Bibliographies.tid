@@ -1,0 +1,24 @@
+caption: Bibliographies
+created: 20200913180810431
+modified: 20210610114217425
+tags: $:/tags/MoreSideBar
+title: $:/sib/SideBar/Explore/Bibliographies
+type: text/vnd.tiddlywiki
+
+<div class="sib-tab-description">
+
+</div>
+
+[[Recently Read|RecentlyRead]]<br>
+<$list filter="[tag[Bibliography]!has[draft.of]]">
+	<$link to={{!!title}}>{{!!bibliography}}</$link><br>
+</$list>
+
+<style>
+.sib-tab-description {
+	font-style: italic;
+	margin-left: 2em;
+	margin-right: 2em;
+	margin-bottom: 2ex;
+}
+</style>

@@ -1,0 +1,9 @@
+created: 20210920202013745
+creator: soren
+modified: 20210920202606337
+modifier: soren
+tags: $:/tags/Macro
+title: $:/sib/Overrides/details-background-color
+type: text/vnd.tiddlywiki
+
+\define details-background-color() <<colour dropdown-background>>

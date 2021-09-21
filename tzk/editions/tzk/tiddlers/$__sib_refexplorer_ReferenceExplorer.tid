@@ -1,0 +1,84 @@
+created: 20200321225156394
+creator: soren
+description: Display the Reference Explorer, a table that shows related topics, for the current tiddler.
+modified: 20210920193434935
+modifier: soren
+tags: $:/tags/ViewTemplate
+title: $:/sib/refexplorer/ReferenceExplorer
+transcludedin: All non-system tiddlers.
+type: text/vnd.tiddlywiki
+
+\define ref-explorer()
+	<$set name="tabList" value={{{ [tag[$:/tags/ReferenceExplorerTab]] :reduce[<storyTiddler>subfilter{!!condition}then<currentTiddler>addprefix[ ]addprefix<accumulator>] }}}>
+	<$set name="myDefaultTab" value={{{ [<storyTiddler>has[refexplorer-starttab]get[refexplorer-starttab]addprefix[$:/sib/refexplorer/]] ~[enlist<tabList>first[]] }}}>
+	<$list filter="[<tabList>!is[blank]]" variable=_>
+		<$macrocall $name="tabs" tabsList=<<tabList>> default=<<myDefaultTab>> class="sib-reference-explorer"/>
+	</$list>
+	</$set>
+	</$set>
+\end
+
+<!-- If this is a system tiddler, don't do anything. -->
+<$list filter="[all[current]!is[system]]" variable=_>
+
+<!-- If the refexplorer-hide field is not set, just render the explorer. -->
+<$reveal stateTitle=<<currentTiddler>>
+			   stateField="refexplorer-hide"
+			   type="match"
+			   text=""
+			   default="" >
+	<<ref-explorer>>
+</$reveal>
+
+<!-- Otherwise... -->
+<$reveal stateTitle=<<currentTiddler>>
+			   stateField="refexplorer-hide"
+			   type="nomatch"
+			   text=""
+			   default="" >
+				 
+	<!-- If collapsed: -->
+	<$reveal stateTitle="$:/temp/sibrefexplorer-shows"
+			     stateIndex=<<currentTiddler>>
+					 type="nomatch"
+					 text="show"
+					 default="hide">
+		<<clarify>>
+		<hr>
+		<div>
+			<span style="font-size: 50%;">
+				<<fa-lbox fa-info>>
+			</span>
+			This tiddler does not display its references automatically, likely because there are a large number of them which could slow the wiki down.
+		</div>
+		<$button setTitle="$:/temp/sibrefexplorer-shows"
+						 setIndex=<<currentTiddler>>
+						 setTo="show">
+			Show Reference Explorer
+		</$button>
+	</$reveal>
+	
+	<!-- If expanded: -->
+	<$reveal stateTitle="$:/temp/sibrefexplorer-shows"
+			     stateIndex=<<currentTiddler>>
+					 type="match"
+					 text="show"
+					 default="hide">
+		<<clarify>>
+		<hr>
+		<div>
+			<span style="font-size: 50%;">
+				<<fa-lbox fa-info>>
+			</span>
+			Experiencing poor performance? Try hiding the reference explorer on this tiddler.
+		</div>
+		<$button setTitle="$:/temp/sibrefexplorer-shows"
+						 setIndex=<<currentTiddler>>
+						 setTo="hide">
+			Hide Reference Explorer
+		</$button>
+		<<ref-explorer>>
+	</$reveal>
+</$reveal>
+
+</$list>

@@ -1,0 +1,25 @@
+created: 20170206022244360
+modified: 20191215041922693
+revision: 0
+tags: $:/tags/table/BodyTemplate
+tbl-column-list: tbl-expand-many
+tbl-noedit: tbl-expand-many
+title: $:/plugins/aaldrich/tables/template/body/expand-many
+
+<$reveal type="nomatch" state=<<tempPathExpand>> text="show" tag="td" style="width:1.4ch;text-align:center;">
+  <$button class="tc-btn-invisible tc-tiddlylink" tooltip="expand" style="min-width:1.4ch">
+    <$action-setfield $tiddler=<<tempTableExpand>> $index=<<currentRecord>> $value="show" />
+    <$set name="childTable" filter="[all[tiddlers+shadows]title<currentTable>get[tbl-expand]]" >
+      <$list filter=<<expandResetNested>>>
+        <$action-setfield $tiddler=<<tableExpand>> $field="tbl-page-marker" $value=""/>
+      </$list>
+    </$set>
+    {{$:/core/images/right-arrow}}
+  </$button>
+</$reveal>
+<$reveal type="match" state=<<tempPathExpand>> text="show" tag="td" style="width:1.4ch;text-align:center;">
+  <$button class="tc-btn-invisible tc-tiddlylink" tooltip="collapse" style="min-width:1.4ch">
+    <$action-setfield $tiddler=<<tempTableExpand>> $index=<<currentRecord>>/>
+    {{$:/core/images/down-arrow}}
+  </$button>
+</$reveal>

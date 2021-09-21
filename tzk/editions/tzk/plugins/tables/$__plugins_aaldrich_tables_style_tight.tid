@@ -1,0 +1,25 @@
+created: 20190726060145636
+modified: 20191215061001950
+tags: $:/tags/Stylesheet
+tbl-class-name: tbl-style-tight
+tbl-class-type: child
+tbl-color-border: #DDDDDD
+tbl-color-caption: #DDDDDD
+tbl-color-footer: #F0F0F0
+tbl-color-header: #F0F0F0
+tbl-color-row-all: #FFFFFF
+tbl-color-row-even: #FCFCFC
+tbl-color-row-hover: #FFFEE2
+tbl-color-row-odd: #FFFFFF
+tbl-color-text: #000000
+tbl-color-text-hover: #001177
+tbl-pad-lr: 7px
+tbl-pad-tb-body: 1px
+tbl-pad-tb-headfoot: 1px
+tbl-size-font: 10pt
+tbl-size-height: 20px
+tbl-size-icons: 10pt
+tbl-width-border: 1px
+title: $:/plugins/aaldrich/tables/style/tight
+
+{{||$:/plugins/aaldrich/tables/style/default}}

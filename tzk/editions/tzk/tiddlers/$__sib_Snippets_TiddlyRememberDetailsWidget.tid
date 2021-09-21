@@ -1,0 +1,12 @@
+caption: ~TiddlyRemember collapsible
+created: 20210307213447524
+modified: 20210522013632019
+tags: $:/tags/TextEditor/Snippet
+title: $:/sib/Snippets/TiddlyRememberDetailsWidget
+type: text/vnd.tiddlywiki
+
+<$details summary="Flashcards">
+
+
+
+</$details>

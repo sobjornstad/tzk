@@ -1,0 +1,17 @@
+created: 20200309202554627
+creator: soren
+description: Show all missing tiddlers that have the naming convention for people.
+modified: 20210920155034053
+modifier: soren
+tags: Tool
+title: $:/sib/Tools/MissingPeople
+tooltype: maintenance
+type: text/vnd.tiddlywiki
+
+"Missing" of course meaning that the ZK doesn't know about them, not that nobody in ConsensusPhysicalReality knows about them...
+
+<ul>
+<$list filter="[all[missing]regexp[^(Mr|Ms|The)]sort[]]" emptyMessage="No references to nonexistent people right now!">
+	<li><$link><<currentTiddler>></$link></li>
+</$list>
+</ul>

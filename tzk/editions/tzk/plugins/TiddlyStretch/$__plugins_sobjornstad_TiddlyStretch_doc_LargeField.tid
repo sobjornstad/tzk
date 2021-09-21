@@ -1,0 +1,7 @@
+created: 20210304024150673
+description: The field to display (in block mode) when the expando is expanded. Defaults to `text`.
+modified: 20210306022349461
+name: largeField
+tags: $:/plugins/sobjornstad/TiddlyStretch/doc/Parameter
+title: $:/plugins/sobjornstad/TiddlyStretch/doc/LargeField
+type: text/vnd.tiddlywiki

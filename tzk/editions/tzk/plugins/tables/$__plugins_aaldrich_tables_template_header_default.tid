@@ -1,0 +1,49 @@
+created: 20170205223914688
+modified: 20191208103157722
+revision: 0
+tags: $:/tags/table/HeaderTemplate
+title: $:/plugins/aaldrich/tables/template/header/default
+
+<$list filter="[<currentTable>!contains:tbl-sort-by<currentColumn>]" >
+<th>
+  <$button set="!!tbl-sort-by" setTo=<<currentColumn>> class="tc-btn-invisible tc-tiddlylink" >
+    <$action-setfield $tiddler={{!!title}} $field="tbl-sort-negate" $value="false"/>
+    <<currentColumn>>
+    <$list filter="[<currentTable>get[tbl-page-marker]]" variable="hasMarker">
+      <$set name="firstRecord" filter=<<veryFirst>> value=<<firstRecord>> >
+      <$wikify name="firstRecord" text=<<firstRecord>> mode="inline">
+        <$action-setfield $tiddler={{!!title}} $field="tbl-page-marker" $value=<<firstRecord>> />
+      </$wikify>
+      </$set>
+    </$list>
+  </$button>
+</th>
+</$list>
+<$list filter="[<currentTable>contains:tbl-sort-by<currentColumn>]" >
+<th>
+  <$list filter="[<currentTable>get[tbl-sort-negate]remove[true]]" variable="hasNegate">
+    <$button set="!!tbl-sort-negate" setTo="true" class="tbl-sort-svg tc-btn-invisible tc-tiddlylink" >
+      <<currentColumn>> {{$:/core/images/down-arrow}}
+      <$list filter="[<currentTable>get[tbl-page-marker]]" variable="hasMarker">
+      <$set name="lastRecord" filter=<<veryLast>> value=<<lastRecord>> >
+      <$wikify name="lastRecord" text=<<lastRecord>> mode="inline">
+        <$action-setfield $tiddler={{!!title}} $field="tbl-page-marker" $value=<<lastRecord>> /> 
+      </$wikify>
+      </$set>
+      </$list>
+    </$button>
+  </$list>
+  <$list filter="[<currentTable>get[tbl-sort-negate]remove[false]]" variable="hasNegate">
+    <$button set="!!tbl-sort-negate" setTo="false" class="tbl-sort-svg tc-btn-invisible tc-tiddlylink" >
+      <<currentColumn>> {{$:/core/images/up-arrow}}
+      <$list filter="[<currentTable>get[tbl-page-marker]]" variable="hasMarker">
+      <$set name="firstRecord" filter=<<veryFirst>> value=<<firstRecord>> >
+      <$wikify name="firstRecord" text=<<firstRecord>> mode="inline">
+        <$action-setfield $tiddler={{!!title}} $field="tbl-page-marker" $value=<<firstRecord>> />
+      </$wikify>
+      </$set>
+      </$list>
+    </$button>
+  </$list>
+</th>
+</$list>

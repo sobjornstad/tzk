@@ -1,0 +1,28 @@
+created: 20170206082424723
+modified: 20200103012208099
+revision: 0
+tags: $:/tags/table/BodyTemplate
+tbl-column-list: tbl-checkbox
+tbl-noedit: tbl-checkbox
+title: $:/plugins/aaldrich/tables/template/body/checkbox
+
+<td style="width:1.4ch;text-align:center;" class="tbl-inpt-check">
+  <$set name="recordSelected" filter=<<checkboxTest>> value="$:/plugins/aaldrich/tables/macro!!tbl-false" emptyValue="$:/plugins/aaldrich/tables/macro!!tbl-true">
+  <$reveal type="match" state=<<recordSelected>> text="false">
+    <$button class="tc-btn-invisible" tooltip={{!!tbl-checkbox-tip}}>
+      <$checkbox field="tbl-selall" unchecked="closed" default="closed"/>
+      <$action-listops $tiddler=<<currentRecord>> $tags="+[append<checkTag>]" />
+      <$action-setfield $tiddler=<<currentRecord>> $field=<<checkField>> $value=<<checkSel>>/>
+      <<checkActions>>
+    </$button>
+  </$reveal>
+  <$reveal type="match" state=<<recordSelected>> text="true">
+    <$button class="tc-btn-invisible" tooltip={{!!tbl-checkbox-tip}}>
+      <$checkbox field="tbl-selall" checked="open" default="open"/>
+      <$action-listops $tiddler=<<currentRecord>> $tags="+[remove<checkTag>]" />
+      <$action-setfield $tiddler=<<currentRecord>> $field=<<checkField>> $value=<<checkUnsel>>/>
+      <<checkUnactions>>
+    </$button>
+  </$reveal>
+  </$set>
+</td>

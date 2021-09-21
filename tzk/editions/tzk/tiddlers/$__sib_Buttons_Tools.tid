@@ -1,0 +1,21 @@
+caption: tools
+created: 20210825121643555
+creator: soren
+description: Open the Zettelkasten tools
+list-after: $:/core/ui/Buttons/control-panel
+modified: 20210825121844661
+modifier: soren
+tags: $:/tags/PageControls
+title: $:/sib/Buttons/Tools
+type: text/vnd.tiddlywiki
+
+<$button class=<<tv-config-toolbar-class>> selectedClass="tc-selected" tooltip={{!!caption}}>
+	<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+		{{$:/core/images/theme-button}}
+	</$list>
+	<$list filter="[<tv-config-toolbar-text>match[yes]]">
+	<span class="tc-btn-text"><$text text={{$:/sib/Buttons/Tools!!caption}}/></span>
+	</$list>
+	
+	<$action-navigate $to="$:/sib/Tools"/>
+</$button>

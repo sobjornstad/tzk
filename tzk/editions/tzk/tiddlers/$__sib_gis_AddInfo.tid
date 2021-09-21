@@ -1,0 +1,26 @@
+created: 20201129183646538
+modified: 20201129184104788
+tags: 
+title: $:/sib/gis/AddInfo
+type: text/vnd.tiddlywiki
+
+<table>
+<tr>
+	<th>Latitude, Longitude</th><td><$edit-text tag=input default="" tiddler="$:/temp/AddValues" field="latlong"/></td>
+</tr>
+<tr>
+  <th>Zoom</th><td><$edit-text tag=input default="" tiddler="$:/temp/AddValues" field="gis-zoom"/></td>
+</tr>
+</table>
+
+<$vars
+  lat={{{ [[$:/temp/AddValues]get[latlong]split[,]first[]trim[]] }}}
+	long={{{ [[$:/temp/AddValues]get[latlong]split[,]last[]trim[]] }}}>
+<$button>
+	<$action-setfield $field="gis-lat" $value=<<lat>>/>
+	<$action-setfield $field="gis-long" $value=<<long>>/>
+	<$action-setfield $field="gis-zoom" $value={{$:/temp/AddValues!!gis-zoom}}/>
+	<$action-deletetiddler $tiddler="$:/temp/AddValues"/>
+	Add
+</$button>
+</$vars>

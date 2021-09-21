@@ -1,0 +1,13 @@
+created: 20170128100357203
+modified: 20191205205435926
+revision: 0
+tags: $:/tags/table/BodyTemplate
+tbl-column-list: title
+tbl-noedit: title
+title: $:/plugins/aaldrich/tables/template/body/title
+
+<td>
+<$link to=<<currentRecord>>>
+<$view tiddler=<<currentRecord>> field="title"/><$list filter="[[$:/plugins/aaldrich/tables/defaults]get[tbl-title-type-show]]-false">{{$:/plugins/aaldrich/tables/defaults!!tbl-title-type-code}}</$list>
+</$link>
+</td>

@@ -1,0 +1,50 @@
+created: 20210329204050908
+creator: soren
+description: View all the colors in the current palette and conveniently copy their hex codes or `<<color>>` macros for use elsewhere in the wiki.
+modified: 20210920155041358
+modifier: soren
+tags: Meta Tool
+title: $:/sib/Tools/PaletteBrowser
+tooltype: maintenance
+type: text/vnd.tiddlywiki
+
+\define colorsplotch(col)
+	<div class="color-splotch" style="background: $col$;">
+\end
+
+\define copy-hex() <$action-sendmessage $message="tm-copy-to-clipboard" $param=<<hexvalue>>/>
+\define copy-mac() <$action-sendmessage $message="tm-copy-to-clipboard" $param="""<<color $(currentTiddler)$>>"""/>
+
+<div style="text-align: center;">Current palette: <$link to={{$:/palette}}/></div>
+
+<table>
+	<tr>
+		<th></th>
+		<th>HTML color code</th>
+		<th>TiddlyWiki name</th>
+		<th>Copy to clipboard</th>
+	</tr>
+<$list filter="[{$:/palette}indexes[]]">
+	<$list filter="[{$:/palette}getindex<currentTiddler>]" variable="hexvalue">
+		<tr>
+			<td><$macrocall $name=colorsplotch col=<<hexvalue>>/></td>
+			<td><<hexvalue>></td>
+		  <td><<currentTiddler>></td>
+			<td>
+				<$button class="tc-tiddlylink tc-btn-invisible" actions=<<copy-mac>>>`<<color>>` macro</$button> -- 
+				<$button class="tc-tiddlylink tc-btn-invisible" actions=<<copy-hex>>>hex code</$button>
+			</td>
+		</tr>
+	</$list>
+</$list>
+</table>
+
+<style>
+.color-splotch {
+	float: left;
+	width: 20px;
+	height: 20px;
+	border: 1px solid #000000;
+	margin: 0;
+}
+</style>

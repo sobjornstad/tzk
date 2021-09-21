@@ -1,0 +1,35 @@
+caption: Directions
+created: 20201129175445792
+creator: soren
+modified: 20210910154651732
+modifier: soren
+tags: $:/sib/gis/MappingTools
+title: $:/sib/gis/DrivingDirections
+type: text/vnd.tiddlywiki
+
+\define dirUrl(lat, long) https://www.google.com/maps/embed/v1/directions?key=$(gmapsApiKey)$&origin=$(sourceLoc)$&destination=$(lat)$%2C$(long)$
+
+<$list filter="[all[current]has[gis-lat]]" variable=_>
+<div style="margin-bottom:1ex;">
+	Directions from <$link to="PrivateMetadata">home</$link> or: <$edit-text tiddler="$:/temp/CurrentDirectionsSource" tag=input default="" size=56 />
+</div>
+
+<$set name="directionsSource" value={{{ [{$:/temp/CurrentDirectionsSource}!is[blank]encodeuri[]] ~[{PrivateMetadata##Address}encodeuri[]] }}}>
+<$list filter="[<directionsSource>!is[blank]]" variable=_ emptyMessage="Please enter an address to start from, or set the `Address` index of the `PrivateMetadata` data tiddler to a default address.">
+<$vars
+  gmapsApiKey={{$:/config/zettelkasten/gis/GMapsApiKey}}
+	lat={{!!gis-lat}}
+	long={{!!gis-long}}
+	sourceLoc=<<directionsSource>>>
+    <iframe
+      width="600"
+      height="450"
+      frameborder="0"
+      style="border:0"
+      src=<<dirUrl>>
+      allowfullscreen></iframe>
+</$vars>
+</$list>
+</$set>
+
+</$list>

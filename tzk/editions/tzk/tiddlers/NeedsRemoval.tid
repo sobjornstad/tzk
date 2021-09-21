@@ -1,0 +1,12 @@
+caption: Items that were placed in the ZK due to convenience but do not really belong and should be migrated to another notes system.
+color: #fff12e
+created: 20200325230351650
+creator: soren
+icon: $:/core/images/info-button
+modified: 20210825122842375
+modifier: soren
+tags: Meta
+title: NeedsRemoval
+type: text/vnd.tiddlywiki
+
+Tag for items that have drifted into the ZettelKasten but do not belong and should be removed to another notes source.

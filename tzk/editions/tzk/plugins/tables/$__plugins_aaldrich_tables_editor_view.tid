@@ -1,0 +1,547 @@
+created: 20190722221724072
+footer: <$button class="tc-btn-invisible tc-tiddlylink" style="padding:0 0 0 6px;">   <$action-sendmessage $message="tm-close-tiddler" />   <$action-deletetiddler $tiddler="$:/temp/tables/editor/settings-page-vars"/> ''Close'' </$button>
+modified: 20191212071106904
+revision: 0
+subtitle: <h2>''<$text text={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}}/>''</h2>{{||$:/plugins/aaldrich/tables/editor/navigation}}
+tags: 
+title: $:/plugins/aaldrich/tables/editor/view
+
+<$keyboard actions="""<$action-sendmessage $message="tm-close-tiddler" /><$action-deletetiddler $tiddler="$:/temp/tables/editor/settings-page-vars"/>""" key="ctrl-enter">
+<span class="tbl-edit-menu">
+<$set name="currentTable" value={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} >
+<$reveal type="match" state="$:/temp/tables/editor/settings-page-vars!!tbl-edit-page" text="Records">
+
+''Query Records'' (tbl-filter) - filter syntax<br>
+<$edit-text  class="tbl-edit-wide" tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-filter"/>
+<span class="tc-popup-keep">
+<$button popup="$:/state/tables/filter/preset-dropdown" class="tc-btn-invisible">
+&nbsp;{{$:/core/images/down-arrow}}
+</$button><br>
+</span>
+<$reveal class="tc-block-dropdown" state="$:/state/tables/filter/preset-dropdown" type="popup" position="belowleft" animate="yes">
+<$list filter="[[$:/plugins/aaldrich/tables/defaults]indexes[]]" variable="filterList">
+<$list filter="[[$:/plugins/aaldrich/tables/defaults]getindex<filterList>]" variable="filterValues" >
+<$set name="existingTableFilter" filter="[{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}get[tbl-filter]]">
+<$set name="existingTableFilterPrefix" filter="[{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}get[tbl-filter]]" value="+" emptyValue="">
+<a style="margin:0 0 0 0;padding:0 0 0 0;" ><$button style="display:block;width:100%;text-align:left;margin:0 0 0 0;padding:4px 4px 4px 4px;" actions="""<$action-setfield $tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} tbl-filter=<<tableFilterPick>> />""" class="tc-btn-invisible"><<filterList>></$button></a>
+</$set>
+</$set>
+</$list>
+</$list>
+</$reveal><br>
+<$reveal type="nomatch" state="$:/temp/tables/editor/settings-page-vars!!tbl-edit-presets" text="true">
+<$button class="tc-btn-invisible tc-tiddlylink" set="$:/temp/tables/editor/settings-page-vars!!tbl-edit-presets" setTo=true >edit presets
+</$button>
+</$reveal>
+<$reveal type="match" state="$:/temp/tables/editor/settings-page-vars!!tbl-edit-presets" text="true">
+<$button class="tc-btn-invisible tc-tiddlylink" set="$:/temp/tables/editor/settings-page-vars!!tbl-edit-presets" setTo=false>close
+</$button><br>
+<$edit-text tiddler="$:/plugins/aaldrich/tables/defaults" field="text"/>
+</$reveal><br><br>
+''Enter Records Manually'' (tbl-add-records) - filter syntax<br>
+<$edit-text tag=textarea tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-add-records"/>
+</$reveal>
+
+
+<$reveal type="match" state="$:/temp/tables/editor/settings-page-vars!!tbl-edit-page" text="Columns">
+
+''Columns to Display'' (tbl-columns) - filter syntax<br>
+<$edit-text class="tbl-edit-wide" tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-columns"/>
+<$reveal type="match" state="$:/temp/tables/editor/settings-page-vars!!tbl-show-columns" text="true">
+
+<$button class="tc-btn-invisible tc-tiddlylink" set="$:/temp/tables/editor/settings-page-vars!!tbl-show-columns" setTo="false" >close</$button>
+
+!!''Assign/Modify Column Templates''
+
+Use the table below to assign fields/indexes to column templates by adding the field/index name to ''tbl-column-list''. 
+
+Unassigned fields/indexes will inherit one of three default templates:
+
+*~$:/plugins/aaldrich/tables/template/header/default<br>
+*~$:/plugins/aaldrich/tables/template/body/default<br>
+*~$:/plugins/aaldrich/tables/template/footer/default<br>
+
+(Optional) Restrict a field/index from edit mode by adding the field/index name to ''tbl-noedit''.
+
+{{$:/plugins/aaldrich/tables/editor/templates}}
+
+''Note:'' Ensure each field/index name is only assigned to one of each template type - header, body and footer.<br><br>
+
+!!''Create New Column Template''<br>
+
+__''Create Blank Template''__<br>
+
+<$edit-text tiddler="$:/temp/tables/editor/settings-page-vars" field="tbl-new-template-name" placeholder="Template name (no spaces)..." size="30"/>
+<$set name="newTemplateTitle" filter="[{$:/temp/tables/editor/settings-page-vars!!tbl-new-template-name}]+[addprefix[/]]+[addprefix{$:/temp/tables/editor/settings-page-vars!!tbl-new-template-type}]+[addprefix[$:/plugins/aaldrich/tables/template/]]" value=<<newTemplateTitle>> noValue="" >
+<$select tiddler="$:/temp/tables/editor/settings-page-vars" field="tbl-new-template-type" >
+<option>header</option>
+<option>body</option>
+<option>footer</option>
+</$select>
+<$reveal type="nomatch" state="$:/temp/tables/editor/settings-page-vars!!tbl-new-template-name" text="">
+<$button class="tc-btn-invisible tc-tiddlylink" >
+<$action-setfield $tiddler=<<newTemplateTitle>> tags="$:/tags/table/BodyTemplate" tbl-column-list="" tbl-noedit=""/>
+<$action-setfield $tiddler="$:/temp/tables/editor/settings-page-vars" tbl-new-template-name=""/> create</$button>
+</$reveal>
+</$set>
+
+__''Create Template Manually''__<br>
+
+(Tip) One way to create a new template is to clone and modify an existing one.<br>
+
+''Required Tags:''<br>
+
+*''Header Templates'' - must be tagged with //''~$:/tags/table/HeaderTemplate''//<br>
+*''Body Templates'' - must be tagged with //''~$:/tags/table/BodyTemplate''//<br>
+*''Footer Templates'' - must be tagged with //''~$:/tags/table/FooterTemplate''//<br>
+
+''Required Fields:''<br>
+
+*//''tbl-column-list''// - used to assign fields/indexes to a column template
+*//''tbl-noedit''// - used to restrict fields/indexes from entering //edit mode// 
+*//''text''// - template code (wikitext) - see below for useful macro parameters
+
+''Useful Macro Parameters''
+
+//Can be used anywhere inside the table container://
+
+*''current table:'' `<<currentTable>>`
+*''input filter:'' `<<inputFilter>>`
+*''processed filter:'' `<<tableFilter>>`
+*''temporary table tiddler:'' `<<tempTable>>`
+
+//Can only be used in //Header//, //Footer// or //Body// Templates://
+
+*''current column:'' `<<currentColumn>>`
+
+//Can only be used in //Body// Templates://
+
+*''current record:'' `<<currentRecord>>`
+*''temporary record tiddler:'' `<<tempRecord>>`
+*''numerical record index (filter):'' `<<getIndex>>`
+</$reveal>
+
+<$reveal type="nomatch" state="$:/temp/tables/editor/settings-page-vars!!tbl-show-columns" text="true">
+<$button class="tc-btn-invisible tc-tiddlylink" set="$:/temp/tables/editor/settings-page-vars!!tbl-show-columns" setTo="true">manage column templates
+<$action-setfield $tiddler="$:/temp/tables/editor/settings-page-vars" tbl-new-template-type="body"/>
+</$button>
+</$reveal>
+</$reveal>
+
+
+<$reveal type="match" state="$:/temp/tables/editor/settings-page-vars!!tbl-edit-page" text="Sorting">
+
+''Sort Type'' (tbl-sort-type)<br>
+<$select tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-sort-type">
+<option>sort</option>
+<option>nsort</option>
+<option>sortcs</option>
+<option>nsortcs</option>
+<option>sortan</option>
+<option>sortby</option>
+</$select>
+
+''Sort By'' (tbl-sort-by)<br>
+<$edit-text tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-sort-by" size=22/>
+
+''Sort Negate (Invert Order)'' (tbl-sort-negate) <br>
+<$checkbox tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-sort-negate" checked="true" unchecked="false">
+<$transclude tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-sort-negate" mode="inline"/></$checkbox> 
+</$reveal>
+
+
+<$reveal type="match" state="$:/temp/tables/editor/settings-page-vars!!tbl-edit-page" text="Limit">
+
+''Limit'' (tbl-limit)<br>
+<$select tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-limit" >
+<$set name="limitFilter" value={{$:/plugins/aaldrich/tables/defaults!!tbl-limit-choices}} >
+<$list filter=<<limitFilter>>>
+<option value={{!!title}}>Limit {{!!title}}</option>
+</$list>
+</$set>
+<option value=9999999>Show All</option>
+</$select>
+
+''Show Pagination'' (tbl-show-pagination)<br>
+<$select tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-show-pagination" actions="""<$action-setfield $tiddler=<<currentTable>> tbl-page-marker=""/><$list filter="[<currentTable>tbl-show-pagination[false]]" ><$action-setfield $tiddler=<<currentTable>> tbl-limit="9999999"/></$list>""">
+<option>true</option>
+<option>false</option>
+<option>auto</option>
+</$select>
+
+''Pagination Marker'' (tbl-page-marker)<br>
+<$edit-text tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-page-marker" size=50/>
+<$button class="tc-btn-invisible tc-tiddlylink" >
+<$action-setfield $tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} $field="tbl-page-marker" $value="" />clear
+</$button>
+</$reveal>
+
+
+<$reveal type="match" state="$:/temp/tables/editor/settings-page-vars!!tbl-edit-page" text="Theme">
+
+''Stylesheet'' (tbl-class)<br>
+<$select tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-class">
+<optgroup label="Parent Themes">
+<$list filter="[all[tiddlers+shadows]has[tbl-class-name]contains:tbl-class-type[parent]sort[title]]">
+<option>{{!!tbl-class-name}}</option>
+</$list>
+</optgroup>
+<optgroup label="Child Themes">
+<$list filter="[all[tiddlers+shadows]has[tbl-class-name]contains:tbl-class-type[child]sort[title]]">
+<option>{{!!tbl-class-name}}</option>
+</$list>
+</optgroup>
+<optgroup label="Other">
+<$list filter="[all[tiddlers+shadows]has[tbl-class-name]!contains:tbl-class-type[child]!contains:tbl-class-type[parent]sort[title]]">
+<option>{{!!tbl-class-name}}</option>
+</$list>
+<option value="" >inherit</option>
+</optgroup>
+</$select>
+<$set name="currentThemeClass" filter="[{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}get[tbl-class]]" value=<<currentThemeClass>> emptyValue="" >
+<$set name="currentThemeTitle" filter="[all[tiddlers+shadows]contains:tbl-class-name<currentThemeClass>limit[1]]" value=<<currentThemeTitle>> emptyValue="Inheriting style from {{$:/theme}}." >
+<h2><<currentThemeTitle>> 
+<$reveal type="nomatch" state="$:/temp/tables/editor/settings-page-vars!!tbl-show-style-settings" text="true">
+<$button class="tc-btn-invisible tc-tiddlylink" set="$:/temp/tables/editor/settings-page-vars!!tbl-show-style-settings" setTo="true"> {{$:/core/images/edit-button}} </$button>
+</$reveal>
+<$reveal type="match" state="$:/temp/tables/editor/settings-page-vars!!tbl-show-style-settings" text="true">
+<$button class="tc-btn-invisible tc-tiddlylink" set="$:/temp/tables/editor/settings-page-vars!!tbl-show-style-settings" setTo="false" >{{$:/core/images/done-button}}</$button>
+</$reveal></h2>
+<$reveal type="match" state="$:/temp/tables/editor/settings-page-vars!!tbl-show-style-settings" text="true">
+<table style="width:100%;border-collapse: collapse; border: none;vertical-align:top;">
+  <tr style="border: none;vertical-align:top;">
+    <td style="border: none;">
+
+!!''Body''
+
+''All Rows Color:''<br><$edit-text tiddler=<<currentThemeTitle>> field="tbl-color-row-all" tag="input" type="color"/><$edit-text tiddler=<<currentThemeTitle>> field="tbl-color-row-all" tag="input" size="8"/><br><br>
+''Even Rows Color:''<br><$edit-text tiddler=<<currentThemeTitle>> field="tbl-color-row-even" tag="input" type="color"/><$edit-text tiddler=<<currentThemeTitle>> field="tbl-color-row-even" tag="input" size="8"/><br><br>
+''Odd Rows Color:''<br><$edit-text tiddler=<<currentThemeTitle>> field="tbl-color-row-odd" tag="input" type="color"/><$edit-text tiddler=<<currentThemeTitle>> field="tbl-color-row-odd" tag="input" size="8"/><br><br>
+''Row Hover Color:''<br><$edit-text tiddler=<<currentThemeTitle>> field="tbl-color-row-hover" tag="input" type="color"/><$edit-text tiddler=<<currentThemeTitle>> field="tbl-color-row-hover" tag="input" size="8"/>
+    </td>
+    <td style="border: none;">
+
+!!''Header/Footer''
+
+''Header Color:''<br><$edit-text tiddler=<<currentThemeTitle>> field="tbl-color-header" tag="input" type="color"/><$edit-text tiddler=<<currentThemeTitle>> field="tbl-color-header" tag="input" size="8"/><br><br>
+''Footer Color:''<br><$edit-text tiddler=<<currentThemeTitle>> field="tbl-color-footer" tag="input" type="color"/><$edit-text tiddler=<<currentThemeTitle>> field="tbl-color-footer" tag="input" size="8"/><br><br>
+
+!!''Caption''
+
+''Caption Color:''<br><$edit-text tiddler=<<currentThemeTitle>> field="tbl-color-caption" tag="input" type="color"/><$edit-text tiddler=<<currentThemeTitle>> field="tbl-color-caption" tag="input" size="8"/>
+    </td>
+    <td style="border: none;">
+
+!!''Padding''
+
+__''Header/Footer''__
+
+''Padding Top/Bottom:''<br><$edit-text tiddler=<<currentThemeTitle>> field="tbl-pad-tb-headfoot" tag="input" size="16"/>
+
+__''Body''__
+
+''Left/Right:''<br><$edit-text tiddler=<<currentThemeTitle>> field="tbl-pad-lr" tag="input" size="16"/><br><br>
+''Top/Bottom:''<br><$edit-text tiddler=<<currentThemeTitle>> field="tbl-pad-tb-body" tag="input" size="16"/>
+    </td>
+    <td style="border: none;">
+
+!!''Text/Icons''
+
+''Text Color:''<br><$edit-text tiddler=<<currentThemeTitle>> field="tbl-color-text" tag="input" type="color"/><$edit-text tiddler=<<currentThemeTitle>> field="tbl-color-text" tag="input" size="8"/><br><br>
+''Text Hover Color:''<br><$edit-text tiddler=<<currentThemeTitle>> field="tbl-color-text-hover" tag="input" type="color"/><$edit-text tiddler=<<currentThemeTitle>> field="tbl-color-text-hover" tag="input" size="8"/><br><br>
+''Font Size:''<br><$edit-text tiddler=<<currentThemeTitle>> field="tbl-size-font" tag="input" size="16"/><br><br>
+''Icon Size:''<br><$edit-text tiddler=<<currentThemeTitle>> field="tbl-size-icons" tag="input" size="16"/>
+    </td>
+    <td style="border: none;">
+
+!!''Border''
+
+''Border Width:''<br><$edit-text tiddler=<<currentThemeTitle>> field="tbl-width-border" tag="input" size="16"/><br><br>
+''Border Color:''<br><$edit-text tiddler=<<currentThemeTitle>> field="tbl-color-border" tag="input" type="color"/><$edit-text tiddler=<<currentThemeTitle>> field="tbl-color-border" tag="input" size="8" /><br><br>
+
+!!''Other''
+
+''Line Height:''<br><$edit-text tiddler=<<currentThemeTitle>> field="tbl-size-height" tag="input" size="16"/>
+    </td>
+  </tr>
+</table>
+<h2>''Stylesheet:'' 
+<$reveal type="nomatch" state="$:/temp/tables/editor/settings-page-vars!!tbl-show-stylesheet" text="true">
+<$button class="tc-btn-invisible tc-tiddlylink" set="$:/temp/tables/editor/settings-page-vars!!tbl-show-stylesheet" setTo="true">{{$:/core/images/edit-button}}</$button>
+</$reveal>
+<$reveal type="match" state="$:/temp/tables/editor/settings-page-vars!!tbl-show-stylesheet" text="true">
+<$button class="tc-btn-invisible tc-tiddlylink" set="$:/temp/tables/editor/settings-page-vars!!tbl-show-stylesheet" setTo="false" >{{$:/core/images/done-button}}</$button>
+</$reveal></h2>
+<$reveal type="match" state="$:/temp/tables/editor/settings-page-vars!!tbl-show-stylesheet" text="true">
+<$edit-text tiddler=<<currentThemeTitle>> field="text" tag="textarea"/>
+</$reveal>
+
+<$reveal type="nomatch" state="$:/temp/tables/editor/settings-page-vars!!tbl-theme-delete-confirm" text=<<currentThemeTitle>>>
+<$button style="color:red;fill:red;" class="tc-btn-invisible" set="$:/temp/tables/editor/settings-page-vars!!tbl-theme-delete-confirm" setTo=<<currentThemeTitle>> >{{$:/core/images/delete-button}}'' delete theme''</$button>
+</$reveal>
+<$reveal type="match" state="$:/temp/tables/editor/settings-page-vars!!tbl-theme-delete-confirm" text=<<currentThemeTitle>>>
+ delete this theme? <$button class="tc-btn-invisible"><$action-deletetiddler $tiddler=<<currentThemeTitle>>/><$action-setfield $tiddler="$:/temp/tables/editor/settings-page-vars" tbl-theme-delete-confirm="" />'' yes ''</$button> / <$button class="tc-btn-invisible"><$action-setfield $tiddler="$:/temp/tables/editor/settings-page-vars" tbl-theme-delete-confirm="" />'' no ''</$button>
+</$reveal>
+
+</$reveal>
+<$reveal type="match" state="$:/temp/tables/editor/settings-page-vars!!tbl-show-styles" text="true">
+
+<$button class="tc-btn-invisible tc-tiddlylink" set="$:/temp/tables/editor/settings-page-vars!!tbl-show-styles" setTo="false" >close</$button><br>
+
+!!''Create New Theme''
+
+__''Clone Current Theme''__
+
+<$edit-text tiddler="$:/temp/tables/editor/settings-page-vars" field="tbl-new-theme-class" placeholder="Enter a class name (no spaces)..." size="30"/>
+<$reveal type="nomatch" state="$:/temp/tables/editor/settings-page-vars!!tbl-new-theme-class" text="">
+<$button class="tc-btn-invisible tc-tiddlylink" >
+<$set name="newThemeTitle" filter="[{$:/temp/tables/editor/settings-page-vars!!tbl-new-theme-class}]+[addprefix[$:/plugins/aaldrich/tables/style/]]" value=<<newThemeTitle>> noValue="" >
+<$action-setfield $tiddler=<<newThemeTitle>> title=<<newThemeTitle>>  />
+<$list variable="themeFields" filter="[<currentThemeTitle>fields[]]-[[title]]-[[modified]]-[[created]]-[[tbl-class-type]]-[[text]]">
+<$set name="themeFieldValues" filter="[<currentThemeTitle>get<themeFields>]" value=<<themeFieldValues>> noValue="">
+<$action-setfield $tiddler=<<newThemeTitle>> $field=<<themeFields>> $value=<<themeFieldValues>> />
+</$set>
+</$list>
+<$action-setfield $tiddler=<<newThemeTitle>> tbl-class-name={{$:/temp/tables/editor/settings-page-vars!!tbl-new-theme-class}} tbl-class-type="child" text="{{||$:/plugins/aaldrich/tables/style/default}}"/>
+<$action-setfield $tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} tbl-class={{$:/temp/tables/editor/settings-page-vars!!tbl-new-theme-class}} />
+<$action-setfield $tiddler="$:/temp/tables/editor/settings-page-vars" tbl-new-theme-class="" />
+</$set>
+ clone</$button>
+</$reveal>
+
+__''Create Theme Manually''__
+
+''Required Tags:''
+
+*//''~$:/tags/Stylesheet''//
+
+''Required Fields:''
+
+*//''tbl-class-name''// - css class name (no spaces)
+*//''tbl-class-type''// - parent or child (child themes inherit their css from a parent)
+*//''text''// - stylesheet (wikitext)
+**//parent theme// - uses css code
+**//child theme// - uses a parent theme's code
+</$reveal>
+<$reveal type="nomatch" state="$:/temp/tables/editor/settings-page-vars!!tbl-show-styles" text="true">
+
+<$button class="tc-btn-invisible tc-tiddlylink" set="$:/temp/tables/editor/settings-page-vars!!tbl-show-styles" setTo="true">more themes
+</$button>
+</$reveal>
+</$set>
+</$set>
+</$reveal>
+
+
+<$reveal type="match" state="$:/temp/tables/editor/settings-page-vars!!tbl-edit-page" text="Override">
+
+''Container'' (tbl-style-container) - css properties for the ``<div>`` element containing the table<br>
+<$edit-text tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-style-container" tag="textarea"/>
+
+''Table'' (tbl-style-table) - css properties for the ``<table>`` element<br>
+<$edit-text tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-style-table" tag="textarea"/>
+</$reveal>
+
+
+<$reveal type="match" state="$:/temp/tables/editor/settings-page-vars!!tbl-edit-page" text="Colgroups">
+
+''Show Colgroup'' (tbl-show-colgroup)<br>
+<$checkbox tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-show-colgroup" checked="true" unchecked="false">
+<$transclude tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-show-colgroup" mode="inline"/></$checkbox>
+
+''Colgroup Elements'' (tbl-style-colgroup) - series of ``<col>`` elements to be included in the ``<colgroup>`` element<br> 
+<$edit-text tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-style-colgroup" tag="textarea"/>
+</$reveal>
+
+
+<$reveal type="match" state="$:/temp/tables/editor/settings-page-vars!!tbl-edit-page" text="Advanced Styles">
+
+!!''Row Styling''<br>
+
+Style can be applied to individual records using a button or checkbox. CSS properties should be stored in tiddler: ``<<tempTableStyle>>`` in the index: ``<<currentRecord>>``.
+
+For example, add the ''tbl-checkbox'' column to a table and set the ''check actions'' to:
+
+`<$action-setfield $tiddler=<<tempTableStyle>> $index=<<currentRecord>> $value="background-color:green;"/>`
+
+Then set the ''uncheck actions'' to:
+
+`<$action-setfield $tiddler=<<tempTableStyle>> $index=<<currentRecord>> $value=""/>`
+
+This will cause the row's background to change to green when the checkbox is checked.
+
+!!''Column Styling''<br>
+
+Use the ''Column Group'' options page to specify styles for individual columns using `<col>` elements.
+</$reveal>
+
+
+<$reveal type="match" state="$:/temp/tables/editor/settings-page-vars!!tbl-edit-page" text="Header/Footer">
+
+''Show Header'' (tbl-show-header)<br>
+<$checkbox tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-show-header" checked="true" unchecked="false">
+<$transclude tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-show-header" mode="inline"/></$checkbox>
+
+''Show Footer'' (tbl-show-footer)<br>
+<$checkbox tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-show-footer" checked="true" unchecked="false">
+<$transclude tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-show-footer" mode="inline"/></$checkbox>
+</$reveal>
+
+
+<$reveal type="match" state="$:/temp/tables/editor/settings-page-vars!!tbl-edit-page" text="Caption">
+
+''Show Caption'' (tbl-show-caption)<br>
+<$checkbox tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-show-caption" checked="true" unchecked="false">
+<$transclude tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-show-caption" mode="inline"/></$checkbox>
+
+''Caption'' (tbl-caption) - wikitext ({{$:/plugins/aaldrich/tables/defaults!!tbl-caption-mode}})<br>
+<$edit-text tag=textarea tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-caption"/>
+</$reveal>
+
+
+<$reveal type="match" state="$:/temp/tables/editor/settings-page-vars!!tbl-edit-page" text="Edit">
+
+''Show Editor Button'' (tbl-show-edit)<br>
+<$checkbox tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-show-edit" checked="true" unchecked="false">
+<$transclude tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-show-edit" mode="inline"/></$checkbox><br>
+''Attention:'' This will hide the {{$:/core/images/options-button}} button. To restore, manually set field ''tbl-show-edit'' to ''true''.<br><br>
+
+''Show Mode Button'' (tbl-show-mode)<br>
+<$checkbox tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-show-mode" checked="true" unchecked="false">
+<$transclude tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-show-mode" mode="inline"/></$checkbox><br><br>
+
+''Mode'' (tbl-mode)<br>
+<$select tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-mode" >
+<option>normal</option>
+<option>edit</option>
+</$select>
+</$reveal>
+
+
+<$reveal type="match" state="$:/temp/tables/editor/settings-page-vars!!tbl-edit-page" text="Defaults">
+
+!!''Modify Table/Global Defaults''
+Default settings are stored here: ''~$:/plugins/aaldrich/tables/defaults''<br>
+
+__''Table defaults:''__
+
+*All default table parameters can be modified.
+
+__''Global defaults:''__
+
+*''tbl-caption-mode'' - set caption to //inline// or //block// mode.<br>
+*''tbl-default-date-format'' - set default date format.<br>
+*''tbl-default-title'' - set default new table name.<br>
+*''tbl-temp-default-expand'' - set default expand column template.<br>
+*''tbl-limit-choices'' - set drop-down values for //limit// control.<br>
+*''tbl-temp-default-body'' - set the default body template for non-custom columns.<br>
+*''tbl-temp-default-body-edit'' - set the default body template for edit mode.<br>
+*''tbl-temp-default-foot'' - set the default footer template for non-custom columns.<br>
+*''tbl-temp-default-head'' - set the default header template for non-custom columns.<br>
+*''tbl-title-type-code'' - code to indicate the tiddler //type// in the title column.<br>
+*''tbl-title-type-show'' - show the tiddler //type// in the title column (true/false).<br>
+*''text'' - filter presets (data dictionary format)<br>
+</$reveal>
+
+
+<$reveal type="match" state="$:/temp/tables/editor/settings-page-vars!!tbl-edit-page" text="Expand">
+
+''To use:'' Add column: ''tbl-expand'' or ''tbl-expand-one'' to expand one row at a time.<br>
+Add column: ''tbl-expand-many'' to expand multiple rows at a time.
+
+''Expand Target'' (tbl-expand) - text reference (spaces allowed, no quotes)<br>
+<$edit-text tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-expand" size=50/>
+<$select tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-expand">
+<option value="">default</option>
+<option value="$:/plugins/aaldrich/tables/template/expand/transclude">transclude text</option>
+<option value="$:/plugins/aaldrich/tables/template/expand/edit">edit text</option>
+</$select>
+</$reveal>
+
+
+<$reveal type="match" state="$:/temp/tables/editor/settings-page-vars!!tbl-edit-page" text="Button">
+
+''To use:'' Add column: ''tbl-button'' 
+
+''Button Icon'' (tbl-button-icon) - wikitext<br>
+<$edit-text tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-button-icon" size=50/> <h3><$list filter="[title<currentTable>get[tbl-button-icon]]">{{!!title}}</$list></h3>
+
+<$list variable="iconPickTitle" filter="[all[shadows]prefix[$:/core/images/]]">
+<$button class="tc-btn-invisible" actions="""<$action-setfield $tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} tbl-button-icon=<<buttonIconPick>>/>""" ><<buttonIconPick>></$button>
+</$list>
+
+''Button Actions'' (tbl-button-actions) - series of action widgets<br>
+<$edit-text tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-button-actions" tag="textarea"/>
+
+''Button Tooltip'' (tbl-button-tip) - plain text<br>
+<$edit-text tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-button-tip" size=50/>
+</$reveal>
+
+
+<$reveal type="match" state="$:/temp/tables/editor/settings-page-vars!!tbl-edit-page" text="Checkbox">
+
+''To use:'' Add column: ''tbl-checkbox'' 
+
+''Add/Remove Tag'' (tbl-checkbox-tag)<br>
+<$edit-text tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-checkbox-tag" size=22/>
+
+''Target Field'' (tbl-checkbox-field)<br>
+<$edit-text tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-checkbox-field" size=22/>
+
+''Select Value'' (tbl-checkbox-value-selected)<br>
+<$edit-text tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-checkbox-value-selected" size=22/>
+
+''Unselect Value'' (tbl-checkbox-value-unselected)<br>
+<$edit-text tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-checkbox-value-unselected" size=22/>
+
+''Select Actions'' (tbl-checkbox-actions-selected) - series of action widgets<br>
+<$edit-text tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-checkbox-actions-selected" tag="textarea"/>
+
+''Unselect Actions'' (tbl-checkbox-actions-unselected) - series of action widgets<br>
+<$edit-text tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-checkbox-actions-unselected" tag="textarea"/>
+
+''Checkbox Tooltip'' (tbl-checkbox-tip) - plain text<br>
+<$edit-text tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-checkbox-tip" size=50/>
+</$reveal>
+
+
+<$reveal type="match" state="$:/temp/tables/editor/settings-page-vars!!tbl-edit-page" text="Anything">
+
+''To use:'' Add column: ''tbl-anything'' 
+
+''Code'' (tbl-anything) - wikitext<br>
+<$edit-text tiddler={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}} field="tbl-anything" tag="textarea"/>
+</$reveal>
+
+
+<$reveal type="match" state="$:/temp/tables/editor/settings-page-vars!!tbl-edit-page" text="Getting Started">
+
+{{$:/plugins/aaldrich/tables/readme}}
+</$reveal>
+
+
+<$reveal type="match" state="$:/temp/tables/editor/settings-page-vars!!tbl-edit-page" text="About">
+
+!''~TiddlyTables''
+!!Version {{$:/plugins/aaldrich/tables!!version}}
+!!!created by {{$:/plugins/aaldrich/tables!!author}}
+last modified {{$:/plugins/aaldrich/tables!!modified}}
+
+__TiddlyWiki version {{$:/plugins/aaldrich/tables!!core-version}} or greater required.__
+
+//This plugin is free to use, modify and share. 
+With special thanks to Jeremy Ruston and the entire ~TiddlyWiki community.//
+</$reveal>
+
+<br>
+''Show Preview''<br>
+<$checkbox tiddler="$:/temp/tables/editor/persist-vars" field="tbl-show-preview" checked="true" unchecked="false" default="false">
+<$transclude tiddler="$:/temp/tables/editor/persist-vars" field="tbl-show-preview" mode="inline"/></$checkbox><br><br>
+<$reveal type="match" state="$:/temp/tables/editor/persist-vars!!tbl-show-preview" text="true">
+<$set name=editorTarget value={{$:/temp/tables/editor/settings-page-vars!!tbl-edit-target}}>
+<<editorPreview>>
+</$set>
+</$reveal>
+</$set>
+</span>
+</$keyboard>

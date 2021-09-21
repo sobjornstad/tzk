@@ -1,0 +1,13 @@
+created: 20210920160651222
+creator: soren
+modified: 20210920204851937
+modifier: soren
+tags: Meta Public
+title: Subtiddler
+type: text/vnd.tiddlywiki
+
+A ''subtiddler'' is a tiddler which is tightly coupled to another, larger tiddler. It's not an idea of its own, it's a part of some larger idea which benefits from being compartmentalized.
+
+Subtiddlers are identified by containing one or more slashes `/` in their names. The main tiddler or //supertiddler//'s title comes prior to the slash, then the subtiddler's name. There can be multiple levels of hierarchy if needed, but this is generally rare.
+
+Subtiddlers of the current tiddler appear on a [[Subtiddlers tab|$:/sib/refexplorer/Subtiddlers]] of the ReferenceExplorer.

@@ -1,0 +1,11 @@
+created: 20170128104241598
+modified: 20191213071802838
+revision: 0
+tags: $:/tags/table/BodyTemplate
+tbl-column-list: tags
+tbl-noedit: 
+title: $:/plugins/aaldrich/tables/template/body/tags
+
+<td class="tbl-tag-template">
+<$tiddler tiddler=<<currentRecord>>>{{||$:/core/ui/ViewTemplate/tags}}</$tiddler>
+</td>

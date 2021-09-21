@@ -3,6 +3,5 @@ __pycache__/
 venv/
 *.egg-info/
 cli_docs/_build/
-tzk/editions/
 dist/
 build/

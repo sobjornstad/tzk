@@ -1,0 +1,18 @@
+created: 20200516031757915
+creator: soren
+description: General information about the number of tiddlers accumulated in the wiki.
+modified: 20210920155422635
+modifier: soren
+tags: Tool
+title: $:/sib/Tools/Statistics
+tooltype: maintenance
+type: text/vnd.tiddlywiki
+
+* <$list filter="[!is[system]count[]]"><<currentTiddler>></$list> (non-system) tiddlers
+** <$list filter="[tag[Idea]count[]]"><<currentTiddler>></$list> ideas
+** <$list filter="[tag[PAO]count[]]"><<currentTiddler>></$list> people
+** <$list filter="[tag[Source]count[]]"><<currentTiddler>></$list> sources
+** <$list filter="[tag[Sink]count[]]"><<currentTiddler>></$list> sinks
+** <$list filter="[all[tags]!is[system]count[]]"><<currentTiddler>></$list> tags
+** <$list filter="[!is[system]tag[Journal]count[]]"><<currentTiddler>></$list> journal entries
+* <$list filter="[tag[Public]count[]]"><<currentTiddler>></$list> public tiddlers <<publicAmount>>

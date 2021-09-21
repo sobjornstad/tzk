@@ -1,0 +1,44 @@
+created: 20210606181123394
+creator: soren
+description: Show a banner to public users warning them that spoilers may be present in tiddlers related to a work of fiction they may not have read.
+modified: 20210909023752258
+modifier: soren
+tags: $:/tags/ViewTemplate
+title: $:/sib/Templates/Automatic/SpoilerBanner
+transcludedin: All tiddlers that have a `universe` field which is not set to `nonfiction`, if this is the public edition.
+type: text/vnd.tiddlywiki
+
+\define hide-action() <$action-setfield $tiddler="$:/config/sib/HideSpoilerBanner" text="yes"/>
+
+<$list filter=<<ff SpoilerBanner>> variable=_>
+<$list filter="[[$:/config/sib/HideSpoilerBanner]!text[yes]]" variable=_>
+<$list filter="[all[current]has[universe]!universe[nonfiction]]">
+	<div class="sib-spoiler-banner">
+		<div style="display: inline-block; vertical-align: center; margin-top: 6px; margin-left: 1em;">
+			<span style="height: 44px; fill: yellow;">{{$:/core/images/warning}}</span>
+		</div>
+		<div style="display: inline-block; margin-left: 1em; margin-right: 1em;">
+		<$list filter="[all[current]tag[Source]]" variable=_>
+			This tiddler is about a work of fiction. Absolutely no attempt is made to avoid or <br>
+			mark spoilers; read at your own risk.&ensp;(<$button class="tc-tiddlylink tc-btn-invisible" actions=<<hide-action>>>don't show again this session</$button>)<br>
+		</$list>
+		<$list filter="[all[current]!tag[Source]]">
+			This tiddler may contain spoilers for //<$link to={{!!universe}}><$text text={{{ [{!!universe}get[caption]] }}}/></$link>//.<br>
+			Read at your own risk.&ensp;(<$button class="tc-tiddlylink tc-btn-invisible" actions=<<hide-action>>>don't show again this session</$button>)<br>
+		</$list>
+		</div>
+	</div>
+</$list>
+</$list>
+</$list>
+
+<style>
+.sib-spoiler-banner {
+	background-color: <<color message-background>>;
+	display: block;
+	border-radius: 10px;
+	padding: 5px;
+	margin: 0 auto;
+	width: 35rem;
+}
+</style>

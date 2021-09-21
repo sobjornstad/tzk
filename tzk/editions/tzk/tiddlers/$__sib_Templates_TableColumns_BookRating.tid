@@ -1,0 +1,11 @@
+created: 20210606231459712
+modified: 20210606231553647
+tags: $:/tags/table/BodyTemplate
+tbl-column-list: rating
+tbl-noedit: 
+title: $:/sib/Templates/TableColumns/BookRating
+type: text/vnd.tiddlywiki
+
+<td>
+	<span style={{{ [<currentRecord>get[rating]addprefix[$:/sib/MediaRating/]get[color]addprefix[color: ]addsuffix[;]] }}}><$text text={{{ [<currentRecord>get[rating]] }}}/></span>
+</td>

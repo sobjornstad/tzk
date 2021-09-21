@@ -1,0 +1,13 @@
+created: 20210731164211393
+modified: 20210731164054970
+tags: $:/tags/SideBarSegment
+title: $:/core/ui/SideBarSegments/tabs
+type: text/vnd.tiddlywiki
+
+\define isEnabled() [addprefix[$:/config/zettelkasten/SideBar/Visibility/]get{$:/config/sib/CurrentEditionPublicity}] -[[no]]
+
+<div class="tc-sidebar-lists tc-sidebar-tabs">
+
+<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/SideBar]!has[draft.of]filter<isEnabled>]" default={{$:/config/DefaultSidebarTab}} state="$:/state/tab/sidebar" class="tc-sidebar-tabs-main" explicitState="$:/state/tab/sidebar--595412856"/>
+
+</div>

@@ -1,0 +1,23 @@
+created: 20171230210524160
+modified: 20171230211107336
+tags: $:/tags/Macro
+title: $:/plugins/TheDiveO/FontAwesome/macros/css settings
+type: text/vnd.tiddlywiki
+
+\define fa-plugin-font-solid()
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 900;  
+\end
+
+\define fa-plugin-font-regular()
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 400;  
+\end
+
+\define fa-plugin-font-brands()
+  font-family: 'Font Awesome 5 Brands';
+  font-style: normal;
+  font-weight: normal;  
+\end

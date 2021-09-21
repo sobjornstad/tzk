@@ -1,0 +1,9 @@
+created: 20200410133117956
+creator: soren
+field-direction: to
+modified: 20200410133133054
+modifier: soren
+title: $:/config/bimlas/locator/fields/parent
+type: text/vnd.tiddlywiki
+
+$:/plugins/bimlas/locator/field-templates/text

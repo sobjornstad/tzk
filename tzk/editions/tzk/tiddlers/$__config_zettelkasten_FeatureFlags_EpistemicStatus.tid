@@ -1,0 +1,11 @@
+caption: Epistemic status
+created: 20210920193247824
+creator: soren
+description: Show the [[epistemic status|EpistemicStatus]] of the current tiddler on ideas.
+modified: 20210920193354215
+modifier: soren
+private: yes
+public: yes
+tags: 
+title: $:/config/zettelkasten/FeatureFlags/EpistemicStatus
+type: text/vnd.tiddlywiki

@@ -1,0 +1,6 @@
+{
+    "20200423024915852": "Fix the fact that rich relationships are missing from the \"All\" ReferenceExplorer view",
+    "20200428184308637": "Create maintenance tool for naming conventions (no 'Vs', only 'Versus'; PAO names)",
+    "20200519141610053": "Public ZK should use zoomin view; also can we not render backgrounded tiddlers to improve performance?",
+    "20200831174643357": "Possibility of a nopub macro for little snippets of things that can't be publicized; would need to regex-replace out of the source prior to publish"
+}

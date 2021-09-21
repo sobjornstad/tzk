@@ -1,0 +1,33 @@
+created: 20180925155320737
+creator: Thomas Elmiger
+modified: 20210920202652482
+modifier: soren
+tags: $:/tags/Stylesheet
+title: $:/plugins/telmiger/details/colours.css
+type: text/vnd.tiddlywiki
+
+/* details and summary colours */
+
+details {
+   background-color: <<details-background-color>>;
+   color: <<colour foreground>>;
+}
+
+details summary {
+   background-color: <<colour dropdown-tab-background>>;
+}
+
+details.notification summary {
+    background-color: <<colour notification-background>>;
+    /* TW leaves color undefined/uses foreground */
+}
+
+details.warning summary {
+    background-color: #ffbbaf;
+    color: #000;
+}
+
+details.success summary {
+    background-color: #88edc5;
+    color: #000;
+}

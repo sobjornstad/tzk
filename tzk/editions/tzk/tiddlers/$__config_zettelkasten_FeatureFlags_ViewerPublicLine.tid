@@ -1,0 +1,9 @@
+caption: Viewer public line
+created: 20210622003316816
+description: Show the "publish this tiddler" checkbox when viewing a tiddler.
+modified: 20210825145501899
+private: yes
+public: no
+tags: 
+title: $:/config/zettelkasten/FeatureFlags/ViewerPublicLine
+type: text/vnd.tiddlywiki

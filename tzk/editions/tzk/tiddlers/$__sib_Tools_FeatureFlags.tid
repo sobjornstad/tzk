@@ -1,0 +1,30 @@
+created: 20210622001737586
+creator: soren
+description: Selectively hide and show interface elements or other features.
+modified: 20210920155749092
+modifier: soren
+tags: Meta Tool Public
+title: $:/sib/Tools/FeatureFlags
+tooltype: configuration
+type: text/vnd.tiddlywiki
+
+Feature flags allow many elements of the wiki to be selectively enabled and disabled. Feature flags may be set to different values in the private and public editions of your wiki.
+
+To add your own feature flag, create a new tiddler under `$:/config/zettelkasten/FeatureFlags` and setting its `caption` and `description` fields to the values you'd like to see in the table below. You can then check the feature flag's value using the [[ff macro|$:/sib/Macros/ff]]; see the macro's tiddler for an example.
+
+<table>
+	<tr>
+		<th>Feature</th>
+		<th>Private</th>
+		<th>Public</th>
+		<th>Description</th>
+	</tr>
+	<$list filter="[prefix[$:/config/zettelkasten/FeatureFlags/]sort[caption]]">
+	<tr>
+		<td>{{!!caption}}</td>
+		<td><$checkbox field="private" checked="yes" unchecked="no"/></td>
+		<td><$checkbox field="public" checked="yes" unchecked="no"/></td>
+		<td>{{!!description}}</td>
+	</tr>
+	</$list>
+</table>

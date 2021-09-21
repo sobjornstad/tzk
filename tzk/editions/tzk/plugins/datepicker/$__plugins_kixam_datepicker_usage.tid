@@ -1,0 +1,24 @@
+title: $:/plugins/kixam/datepicker/usage
+
+`<$edit-date>`
+
+This plugin can pick days and times.
+
+!! attributes
+All attributes are optional.
+
+|!Attribute|!Purpose|!Default value|
+|`tiddler`|Edited tiddler|//current tiddler//|
+|`field`|Edited field|`created`|
+|`format`|Date format as it is shown in input control, in [[moment.js|http://momentjs.com]]'s [[parse+string format|http://momentjs.com/docs/#/parsing/string-format/]]|`YYYY-MM-DD`|
+|`firstDay`|First day of the week (0: Sunday, 1: Monday, etc.)|`0`|
+|`fieldFormat`|Date format used to save into the field, in [[moment.js|http://momentjs.com]]'s [[parse+string format|http://momentjs.com/docs/#/parsing/string-format/]]|`YYYYMMDDHHmmssSSS`|
+|`placeholder`|Placeholder|//empty//|
+|`tag`|HTML tag to render the editor|`input`|
+|`index`|The index to edit|//empty//|
+|`class`|A CSS class to be assigned to the generated HTML editing element|
+|`attributes`|[[JSON Tiddler|http://tiddlywiki.com/#JSONTiddlers]] containing HTML attributes attached to the HTML object used to render the editor, typically `style`|//empty//|
+|`icon`|Image tiddler or URL to an image that will be rendered next to the `tag`. When clicked, it will trigger the date picker|//empty//|
+|`showTime`|Show time as well as date|//not set//|
+|`showSeconds`|If `showTime` is set, shows seconds as well|//not set//|
+|`use24hour`|If `showTime` is set, use 24-hour format|//not set//|

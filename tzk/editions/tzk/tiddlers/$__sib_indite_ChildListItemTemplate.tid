@@ -1,0 +1,7 @@
+created: 20210415020141514
+modified: 20210421012848006
+tags: 
+title: $:/sib/indite/ChildListItemTemplate
+type: text/vnd.tiddlywiki
+
+<$link to=<<currentTiddler>>/> ({{!!indite-class}})

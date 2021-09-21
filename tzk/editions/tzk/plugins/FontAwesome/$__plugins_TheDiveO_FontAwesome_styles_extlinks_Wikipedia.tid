@@ -1,0 +1,19 @@
+created: 20170223100306336
+modified: 20180328191215033
+tags: $:/tags/Stylesheet
+title: $:/plugins/TheDiveO/FontAwesome/styles/extlinks/Wikipedia
+type: text/vnd.tiddlywiki
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html
+
+<$set name="cfg" value=<<fa5-cfgpath "decorate-wk-extlinks">> >
+<$list filter=<<fa5-cfgfilterexpr>> >
+
+a[href^="http://"][href*=".wikipedia.org"]:before {
+  <<fa-plugin-font-brands>>
+  font-size: 90%;
+  content: '[\f266]\202f';
+}
+
+</$list>
+</$set>

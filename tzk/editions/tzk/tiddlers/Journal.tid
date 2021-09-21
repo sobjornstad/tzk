@@ -1,0 +1,14 @@
+caption: Journal tiddlers describe events as they happen. They might be written daily or near-daily to describe what's going on, or be created for a particular event.
+color: #ff0000
+created: 20200425035307739
+creator: soren
+icon: $:/core/images/tag-button
+modified: 20210828132307946
+modifier: soren
+tags: Meta Public
+title: Journal
+type: text/vnd.tiddlywiki
+
+{{!!caption}}
+
+Journal tiddlers don't have any special naming conventions or fields.

@@ -1,0 +1,17 @@
+created: 20170212102107998
+modified: 20191215042010684
+revision: 0
+tags: $:/tags/table/HeaderTemplate
+tbl-column-list: tbl-delete
+title: $:/plugins/aaldrich/tables/template/header/delete
+
+<th style="width:1.4ch;text-align:center;">
+  <span>
+  <$button class="tc-btn-invisible" tooltip="delete all" style="min-width:1.4ch">
+<$list filter=<<showDeleteConfirm>>>
+    <$action-setfield $tiddler="$:/temp/tables/delete-all" text=<<currentTable>>/>
+</$list>
+    {{$:/core/images/delete-button}}
+  </$button>
+  </span>
+</th>

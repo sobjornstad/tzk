@@ -1,0 +1,13 @@
+created: 20210313002520118
+modified: 20210522013653257
+tags: 
+title: $:/sib/Templates/Topical/AnkiPattern/Common
+type: text/vnd.tiddlywiki
+
+	<<transclude-section "Formula" "open">>
+	<<transclude-section "Examples" "open">>
+	<<transclude-section "Advantages" "open">>
+	<<transclude-section "Disadvantages" "open">>
+	<<transclude-section "Cautions" "open">>
+	<<transclude-section-with-name "UsageNotes" "Usage notes" "open">>
+	<<transclude-section "Contributors">>

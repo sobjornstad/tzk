@@ -1,0 +1,12 @@
+created: 20210304022329779
+description: Create an expando from a tiddler, displaying one of two fields on the tiddler.
+modified: 20210306022740596
+name: stretch
+parameters: tiddler smallField largeField
+tags: $:/plugins/sobjornstad/TiddlyStretch/doc/Macro
+title: $:/plugins/sobjornstad/TiddlyStretch/doc/stretch
+type: text/vnd.tiddlywiki
+
+The `stretch` macro creates an expando out of a single tiddler. The `smallField` is shown when contracted, and the `largeField` is shown when expanded.
+
+{{||$:/plugins/sobjornstad/TiddlyStretch/doc/MacroInfoTemplate}}

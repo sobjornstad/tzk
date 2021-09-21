@@ -1,0 +1,33 @@
+caption: Subtiddlers
+condition: [all[tiddlers]prefix<storyTiddler>!field:title<storyTiddler>sort[]]
+created: 20201206210345097
+creator: soren
+modified: 20210920161045390
+modifier: soren
+tags: $:/tags/ReferenceExplorerTab
+title: $:/sib/refexplorer/Subtiddlers
+type: text/vnd.tiddlywiki
+
+<table class="ideas-table">
+	<caption class="ideas-table-caption">Subtiddler Explorer</caption>
+	<thead>
+	<tr>
+		<th>Title</th>
+		<th>Type</th>
+		<th>Tags</th>
+		<th style="width: 8rem;">Modified</th>
+	</tr>
+	</thead>
+	<tbody>
+		<$list filter={{$:/sib/refexplorer/Subtiddlers!!condition}}>
+		<$vars currentRecord=<<currentTiddler>> thisTooltip={{{ [all[current]get[description]!is[blank]] ~[all[current]get[text]split[ ]first[100]join[ ]addsuffix[...]] }}}>
+		<tr>
+			<td><$link to={{!!title}} tooltip=<<thisTooltip>> style="color: white;"/></td>
+			{{$:/sib/refexplorer/LinkTypeTemplate}}
+			<td><$list filter="[all[current]tags[]sort[]]"><$macrocall $name="tag-pill" tag=<<currentTiddler>>/></$list></td>
+			<td><$view field="modified" format="date" template="YYYY-0MM-0DD 0hh:0ss"/></td>
+		</tr>
+		</$vars>
+		</$list>
+	</tbody>
+</table>

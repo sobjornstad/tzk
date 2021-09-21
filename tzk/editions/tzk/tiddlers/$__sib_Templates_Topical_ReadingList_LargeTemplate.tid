@@ -1,0 +1,11 @@
+created: 20210123155242287
+modified: 20210522013432694
+tags: 
+title: $:/sib/Templates/Topical/ReadingList/LargeTemplate
+type: text/vnd.tiddlywiki
+
+{{!!text}}
+
+<$set name=storyTiddler value=<<currentTiddler>>>
+{{||$:/sib/refexplorer/ReferenceExplorer}}
+</$set>

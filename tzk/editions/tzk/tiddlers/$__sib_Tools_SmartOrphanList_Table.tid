@@ -1,0 +1,41 @@
+created: 20210522014752620
+creator: soren
+modified: 20210920140719298
+modifier: soren
+tbl-add-records: 
+tbl-anything: 
+tbl-button-actions: <$action-setfield $tiddler=<<currentRecord>> $field="hideorphan" $value="true" modified="no" />
+tbl-button-icon: {{$:/core/images/delete-button}}
+tbl-button-tip: Exclude this tiddler from the smart orphans list
+tbl-caption: ''{{!!title}}''
+tbl-checkbox-actions-selected: 
+tbl-checkbox-actions-unselected: 
+tbl-checkbox-field: 
+tbl-checkbox-tag: 
+tbl-checkbox-tip: 
+tbl-checkbox-value-selected: 
+tbl-checkbox-value-unselected: 
+tbl-class: tbl-style-default
+tbl-columns: tbl-expand title modified tags tbl-button
+tbl-expand: 
+tbl-filter: [is[orphan]!field:hideorphan[true]!tag[Image]!tag[Attachment]!tag[Template]!tag[Meta]!tag[Tool]!tag[Stub]!tag[PrivateChunk]!tag[Bibliography]!tag[Journal]!search:title[/]!tag[Indite]]
+tbl-limit: 25
+tbl-mode: normal
+tbl-page-marker: ThreePersonTeam
+tbl-show-caption: true
+tbl-show-colgroup: false
+tbl-show-edit: true
+tbl-show-footer: false
+tbl-show-header: true
+tbl-show-mode: true
+tbl-show-pagination: auto
+tbl-sort-by: title
+tbl-sort-negate: false
+tbl-sort-type: nsort
+tbl-style-colgroup: 
+tbl-style-container: 
+tbl-style-table: width:100%;
+title: $:/sib/Tools/SmartOrphanList/Table
+type: text/vnd.tiddlywiki
+
+<<table $:/sib/Tools/SmartOrphanList/Table>>

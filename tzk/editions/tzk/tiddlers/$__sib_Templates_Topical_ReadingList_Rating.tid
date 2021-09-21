@@ -1,0 +1,9 @@
+created: 20210703174501801
+modified: 20210703174533455
+tags: 
+title: $:/sib/Templates/Topical/ReadingList/Rating
+type: text/vnd.tiddlywiki
+
+<$list filter="[all[current]get[rating]!is[blank]]" variable=_>
+<span style={{{ [all[current]get[rating]addprefix[$:/sib/MediaRating/]get[color]addprefix[color: ]addsuffix[;]] }}}>[{{!!rating}}]</span>
+</$list>

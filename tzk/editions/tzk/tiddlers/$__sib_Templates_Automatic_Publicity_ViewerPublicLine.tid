@@ -1,0 +1,23 @@
+created: 20200508002211355
+creator: soren
+description: Show a checkbox to make the tiddler private or public while viewing it.
+modified: 20210825185507543
+modifier: soren
+tags: $:/tags/ViewTemplate
+title: $:/sib/Templates/Automatic/Publicity/ViewerPublicLine
+transcludedin: All non-system tiddlers, in the private edition. Never, in the public edition.
+type: text/vnd.tiddlywiki
+
+<!-- Clear any outstanding floats or things will look really weird. This also clears for the Reference Explorer since the public checkbox is floated, so it comes outside the list widget. -->
+<div class="sib-viewer-clarify"/>
+
+<!-- If this is a system tiddler, don't show the public line. -->
+<$list filter="[all[current]!is[system]]" variable=_>
+
+<$list filter=<<ff ViewerPublicLine>> variable=_>
+	<div class="sib-viewer-public-line">
+		<$checkbox tag=Public> Publish this tiddler</$checkbox>
+	</div>
+</$list>
+
+</$list>

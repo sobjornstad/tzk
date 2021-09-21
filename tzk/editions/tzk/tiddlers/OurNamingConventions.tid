@@ -1,0 +1,51 @@
+created: 20200115225047720
+creator: soren
+modified: 20210920205010621
+modifier: soren
+tags: Meta Public
+title: OurNamingConventions
+type: text/vnd.tiddlywiki
+
+In order to help keep track of all the entries here, certain [[NamingConvention]]s are observed on tiddler titles. Titles serve as [[IdeaApi]]s, so need to be clear and consistent.
+
+!!! Casing
+
+TiddlyWiki titles are case-sensitive, which can cause some irritation when you accidentally create tiddlers that differ only in case. These rules help to keep the capitalization consistent and avoid such confusion:
+
+* Titles should generally be WikiCamelCase (really, PascalCase, but everyone in the wiki world calls it CamelCase). However, a single-word concept or title should not have its capitalization mangled or gratuitous words added for the sole purpose of making it into a ~CamelCase title; it should simply be rendered as the single word.
+** It is, however, OK and encouraged to spell out a number or standard abbreviation where this enables a match with the ~CamelCase pattern, e.g., NineteenEightyFour. This tends to read better anyway.
+* When writing ~CamelCase titles, capitalization is normalized as if all components were normal words. Acronyms do not retain upper-casing or proprietary weirdness. So it is QwertyResidue, not *QWERTYResidue; TheAdoSupportTeam, not *~TheADOSupportTeam.
+** But acronyms and proprietary weirdness not incorporated into a ~CamelCase word do retain their capitalization: [[BDFL]], not *Bdfl; [[LaTeX]], not *Latex.
+* Barring proprietary weirdness (e.g., [[xkcd]]), titles always begin with a capital letter.
+
+
+!!! Wording
+
+* Titles, when they are nouns, are always singular.
+** But names of organizations (e.g., TheManitouSingers) and  titles of sources (e.g., ComputerStupidities) should not have their number mangled to match.
+** The last word of a phrasal title might be pluralized. This is fine as long as the title as a whole is not a plural noun. E.g., SpacedRepetitionEncouragesFloatingIdeas is fine.
+
+* `The` may not begin any title which does not refer to an organization or group of people (see //Type patterns//, below). `The` should simply be omitted in such cases; e.g., GreatGatsby, not *~TheGreatGatsby. It's often hard to remember if `The` is part of the title anyway!
+
+* Abbreviations should be avoided unless they are standard/genericized (e.g., SQL, HTML).
+
+* Numbers should be spelled out unless this looks silly, especially when they're small (e.g., EightSeasons, not *8Seasons).
+
+* Punctuation, including apostrophes, is removed, and accented characters are turned to standard Latin letters, in titles. This avoids confusion about whether this was done, as well as possible quoting and encoding issues in filenames, URLs, etc. The correct spelling should be used within the tiddler.
+
+* If the tiddler is about the relationship between two things, or discusses two things, it should place those two things in alphabetical order within the title, absent a strong reason to do otherwise.
+
+!!! Type patterns
+
+Titles of certain [[ZettelkastenCardType]]s follow specific patterns:
+
+* //PAO//, ''^(Mr|Ms|The)[A-Z][a-zA-Z]+'': Identifies a person, author, or organization. 'The' is used for nongendered, impersonal sources.
+* //Source//, ''^[A-Z][a-zA-Z]*[0-9]{4,8}'': Identifies a source (an individual instance of a book, article, or other medium). Typically the page will note it as written by a //PAO//. The final number should be the publication date to as many digits of precision as known.
+* //Image//, ''.*\.(png|jpg|gif)$'': Identifies an image embedded in the wiki.
+* //Meta//, ''^Our[A-Z][a-zA-Z]+'': Something (like this article) that discusses the wiki rather than an idea.
+
+!!! Looser conventions
+
+These aren't types, but are generally conventions I try to follow.
+
+* ''My'' before a name indicates that it's a work I created.

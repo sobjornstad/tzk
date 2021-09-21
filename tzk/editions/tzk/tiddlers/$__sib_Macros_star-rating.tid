@@ -1,0 +1,12 @@
+created: 20210817143607812
+description: Show a rating out of 5 stars, with filled stars up until the argument and empty stars to fill out the total of 5.
+example: <<star-rating 4>>
+modified: 20210817143846288
+tags: $:/tags/Macro
+title: $:/sib/Macros/star-rating
+type: text/vnd.tiddlywiki
+
+\define open-star()  <i class="far fa-star"/>
+\define filled-star()  <i class="fa fa-star"/>
+
+\define star-rating(stars) <$list filter="[range<__stars__>]" variable=_><<filled-star>></$list><$set name="remainder" value={{{ [[5]subtract<__stars__>] }}}><$list filter="[range<remainder>]" variable=_><<open-star>></$list></$set>

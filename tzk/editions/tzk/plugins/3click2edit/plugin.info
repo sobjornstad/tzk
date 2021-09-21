@@ -1,0 +1,11 @@
+{
+    "title": "$:/plugins/sobjornstad/3click2edit",
+    "description": "triple-click to edit tiddlers",
+    "author": "Soren Bjornstad, after Danielo Rodriguez",
+    "version": "0.1",
+    "core-version": ">=5.1.0",
+    "plugin-type": "plugin",
+    "source": "https://github.com/sobjornstad/TW5-3click2edit",
+    "list": "readme",
+    "dependents": ""
+}

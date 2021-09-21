@@ -1,0 +1,9 @@
+created: 20190714062216671
+modified: 20191214044612648
+revision: 0
+tags: $:/tags/table/HeaderTemplate
+tbl-column-list: tbl-anything tbl-index tbl-radio
+title: $:/plugins/aaldrich/tables/template/header/empty
+
+<th>
+</th>

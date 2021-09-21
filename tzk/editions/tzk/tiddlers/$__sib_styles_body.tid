@@ -1,0 +1,39 @@
+created: 20210615030339909
+creator: soren
+modified: 20210917203545404
+modifier: soren
+tags: $:/tags/Stylesheet
+title: $:/sib/styles/body
+type: text/vnd.tiddlywiki
+
+/* Allow the story river to get a good bit wider than the text since this gives useful space to the navbars and balances out any empty space more nicely, but not so long that it looks ridiculous. */
+div.tc-tiddler-frame { max-width: 60em; margin-left: auto; margin-right: auto; }
+
+div.tc-tiddler-edit-frame { max-width: 90em; margin-left: auto; margin-right: auto; }
+
+div.tc-tiddler-body { max-width: 50em; margin: auto; }
+
+.tc-tiddler-frame .tc-tiddler-preview .tc-edit-texteditor { width: 69%; }
+
+div[data-tiddler-title*="$:/sib/Tools/ReadingInbox"] div.tc-tiddler-body, div[data-tags*="Indite"] div.tc-tiddler-body {
+	max-width: 100%;
+}
+div[data-tiddler-title*="$:/sib/Tools/ReadingInbox"],
+div[data-tags*="Indite"] {
+	max-width: 90em;
+}
+
+div[data-tiddler-title*="LifetimeReading"] div.tc-tiddler-body {
+	max-width: 100%;
+}
+div[data-tiddler-title*="LifetimeReading"] {
+	max-width: 90em;
+}
+
+div.tc-tiddler-preview-preview {
+	width: 29%;
+}
+
+h2:not(.tc-title) { 
+	text-align: center;
+}

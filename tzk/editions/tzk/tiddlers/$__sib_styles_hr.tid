@@ -1,0 +1,30 @@
+created: 20210624125244567
+modified: 20210629025407566
+tags: $:/tags/Stylesheet
+title: $:/sib/styles/hr
+type: text/vnd.tiddlywiki
+
+/* Based on: Flaired edges, by Tomas Theunissen
+   https://css-tricks.com/examples/hrs/ */
+
+.tc-tiddler-body hr, .tc-tiddler-preview-preview hr {
+    overflow: visible; /* For IE */
+    height: 30px;
+    border-style: solid;
+    border-color: <<color primary>>;
+    border-width: 1px 0 0 0;
+    border-radius: 20px;
+		margin-bottom: -15px;
+		max-width: 80%;
+		margin-top: 30px;
+}
+.tc-tiddler-body hr:before, .tc-tiddler-preview-preview hr:before { /* Not really supposed to work, but does */
+    display: block;
+    content: "";
+    height: 30px;
+    border-style: solid;
+    border-color: <<color primary>>;
+    border-width: 0 0 1px 0;
+    border-radius: 20px;
+    margin-top: -31px;
+}

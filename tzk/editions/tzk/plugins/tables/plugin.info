@@ -1,0 +1,12 @@
+{
+    "author": "Alan Aldrich",
+    "core-version": "5.1.16",
+    "created": "20170212060612535",
+    "dependents": "",
+    "description": "TiddlyTables",
+    "list": "readme",
+    "modified": "20200322003951511",
+    "plugin-type": "plugin",
+    "title": "$:/plugins/aaldrich/tables",
+    "version": "0.6.21"
+}

@@ -1,0 +1,7 @@
+created: 20210304024141880
+description: The field to display (in inline mode) when the expando is contracted. Defaults to `description`.
+modified: 20210306022830648
+name: smallField
+tags: $:/plugins/sobjornstad/TiddlyStretch/doc/Parameter
+title: $:/plugins/sobjornstad/TiddlyStretch/doc/SmallField
+type: text/vnd.tiddlywiki

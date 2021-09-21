@@ -1,0 +1,10 @@
+created: 20210304025229965
+modified: 20210306022014774
+title: $:/plugins/sobjornstad/TiddlyStretch/doc/ParameterListingTemplate
+type: text/vnd.tiddlywiki
+
+Parameters:
+
+<$wikify name="w" mode="inline" output="html"  text={{{ [enlist{!!parameters}join[</code>, <code>]addprefix[<code>]addsuffix[</code>]] }}}>
+  <<w>>
+</$wikify>

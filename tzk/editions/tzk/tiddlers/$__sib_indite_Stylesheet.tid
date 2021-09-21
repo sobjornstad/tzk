@@ -1,0 +1,65 @@
+created: 20210410003437115
+modified: 20210415015805553
+tags: $:/tags/Stylesheet
+title: $:/sib/indite/Stylesheet
+type: text/vnd.tiddlywiki
+
+div[data-tags*="Indite"] div.tc-tiddler-body {
+	display: none;
+}
+
+div.indite-text {
+	font-family: "Bitstream Charter", Garamond, Georgia, serif;
+	font-size: 16px;
+	max-width: 80rem;
+	width: 80%;
+	/*margin-left: 30%;*/
+	margin-left: 20%;
+}
+
+div.indite-text > p > div.indite-halfwidth {
+	width: 49%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+div.indite-text > p > div.indite-fullwidth {
+	width: 100%;
+}
+
+div.indite-text > p > div.indite-fullwidth.indite-sbs-viewer {
+	max-width: 40em;
+	margin-left: 2em;
+	margin-right: auto;
+}
+
+div.indite-text div p:first-child {
+	margin-top: 0;
+	padding-top: 0;
+}
+
+div.indite-text div.indite-sbs-editor div {
+	font-size: 12px;
+}
+
+.hide-notes title-block, .hide-notes aside {
+	display: none;
+}
+
+title-block, aside {
+	font-size: 12px;
+	font-family: "Bitstream Vera Sans", "Bitstream Sans", Arial, sans-serif;
+	vertical-align: top;
+	display: block;
+	float: left;
+	/*position: absolute;*/
+	padding-left: 2rem;
+	padding-right: 1rem;
+	margin-left: -50%;
+	/*left: 0;*/
+	width: 50%;
+	text-align: right;
+	list-style-type: none;
+	clear: both;
+	margin-bottom: 1rem;
+}

@@ -1,0 +1,9 @@
+created: 20210328020051916
+modified: 20210328053732117
+tags: $:/tags/Macro
+title: $:/plugins/adithyab/cmplus/macros
+type: text/vnd.tiddlywiki
+
+\define cmcolour(name)
+{{$:/plugins/adithyab/cmplus/settings##$name$}}
+\end

@@ -1,0 +1,45 @@
+created: 20170122140815442
+creator: Thomas Elmiger
+modified: 20200219093956595
+modifier: Thomas Elmiger
+tags: $:/tags/Stylesheet
+title: $:/plugins/telmiger/details/details.css
+type: text/vnd.tiddlywiki
+
+/* details and summary */
+
+details {
+   transition: height 1s ease;
+   padding: 0 0.5em 0 0.66em;
+   margin-top: 0.66em;
+   margin-bottom: 0.66em;
+}
+
+details + details {
+   margin-top: -0.46em;
+}
+
+details[open] {
+   padding-bottom: 1em;
+}
+
+details:not([open]) { 
+   cursor: pointer;
+}
+
+details > summary {
+   display: list-item;
+   margin: 0 -0.5em 0 -0.66em;
+   padding: 0.2em 0.5em 0.2em 0.66em;
+   padding-left: 1.76em;  /* adjust for indentation */
+   text-indent: -1.1em;
+   cursor: pointer;
+}
+
+details[open] > summary {
+   margin-bottom: 1em;
+}
+
+details[open] > *:first-child:not(summary) {
+   margin-top: 1em;
+}

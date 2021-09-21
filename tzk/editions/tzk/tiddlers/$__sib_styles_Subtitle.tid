@@ -1,0 +1,9 @@
+created: 20210611020047183
+modified: 20210611024114066
+tags: $:/tags/Stylesheet
+title: $:/sib/styles/Subtitle
+type: text/vnd.tiddlywiki
+
+.tc-subtitle { font-size: 0.9em; color: <<color tiddler-title-foreground>>; }
+
+.tc-subtitle .tc-tiddlylink { margin-right: 0; }

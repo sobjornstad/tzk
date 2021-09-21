@@ -1,0 +1,19 @@
+created: 20210304003038202
+modified: 20210304003233865
+tags: $:/tags/Stylesheet
+title: $:/plugins/sobjornstad/TiddlyStretch/styles/stretch
+
+.st-open {
+    border-left: 3px solid <<colour muted-foreground>>;
+    padding-left: 0.5em;
+}
+
+.st-open p {
+    margin-block-start: 0em;
+}
+
+.st-closed { }
+
+i.st-expanded-colorize {
+    color: <<colour tag-background>>;
+}

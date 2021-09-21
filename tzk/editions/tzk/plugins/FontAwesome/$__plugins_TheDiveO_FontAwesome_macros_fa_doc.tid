@@ -1,0 +1,17 @@
+created: 20140831145557569
+modified: 20171230205047837
+title: $:/plugins/TheDiveO/FontAwesome/macros/fa/doc
+type: text/vnd.tiddlywiki
+
+Convenience macros to typeset symbols from Font Awesome.
+
+;`fa-lbox` //glyph//:"fa-flag" //fam//:"fas"
+: typesets the Font Awesome glyp (defaults to `fa-flag` glyph) in a gray box, and pulls it to the left.
+: As Font Awesome 5.0 has broken up the single 4.x font into multiple fonts, this macro now sports a second optional parameter for setting the font family. Allowed values are `fas` (for //Font Awesome Solid//), `far` (for //Font Awesome Regular//), and finally `fab` (for //Font Awesome Brands//).
+
+;`fa-lbadge` //glyph//:"fa-flag"
+: typesets the Font Awesome glyph (defaults to `fa-flag` glyph) in inverse, on a round badge. Also pulls the badge with the icon to the left.
+: As Font Awesome 5.0 has broken up the single 4.x font into multiple fonts, this macro now sports a second optional parameter for setting the font family. Allowed values are `fas` (for //Font Awesome Solid//), `far` (for //Font Awesome Regular//), and finally `fab` (for //Font Awesome Brands//).
+
+;`fa-clear`
+: convenience macro that inserts an empty HTML `div` element with styling `clear:both`. Use this before multiple `fa-lbox` and `fa-lbadge` macros to avoid them piling up from left to right.

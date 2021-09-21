@@ -1,0 +1,13 @@
+color: #fff12e
+created: 20200116024803799
+creator: soren
+icon: $:/core/images/new-here-button
+modified: 20200530141202429
+modifier: soren
+tags: Meta Public
+title: Stub
+type: text/vnd.tiddlywiki
+
+Stub tiddlers, like in [[Wikipedia]] or similar, are those that have been created with a few momentary thoughts, or even just a title, but need more expansion to be useful.
+
+Things don't have to be tagged with <<tag Stub>> just because they're short. We don't want to go OverEngineering things, because many tiddlers may be dead-ends. If they aren't dead-ends, then we'll end up seeing them again and can improve on them if appropriate. Things should be tagged Stub if we believe the material is inadequate for even the present moment and the only limitation to expanding it is time.

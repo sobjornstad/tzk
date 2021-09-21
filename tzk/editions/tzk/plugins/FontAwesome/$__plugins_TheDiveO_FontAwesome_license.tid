@@ -1,0 +1,10 @@
+created: 20140901105404058
+modified: 20170223103858754
+title: $:/plugins/TheDiveO/FontAwesome/license
+type: text/vnd.tiddlywiki
+
+This plugin is licensed as follows:
+
+* Font Awesome font license: [[SIL OFL 1.1|http://scripts.sil.org/OFL]].
+* Font Awesome CSS and LESS files licenses: [[MIT License|http://opensource.org/licenses/mit-license.html]].
+* everything else in this plugin is (c) by TheDiveO and licensed under the [[MIT License|http://opensource.org/licenses/mit-license.html]].

@@ -1,0 +1,39 @@
+title: $:/plugins/ihm/tidgraph/documentation
+
+!!Example
+The following example shows a tiddler which tags 7 children:
+
+``<$tidgraph start="Virtues" />``
+
+looks like this:
+
+{{$:/plugins/ihm/tidgraph/tidgraph.png}}
+
+!!Usage
+Simple usage:
+
+``<$tidgraph start="MyRootTiddler" />``
+
+The map will start with MyRootTiddler on the left, and show all its children recursively. The default maximum depth is 10 levels, it can be changed with the `maxdepth` attribute.
+
+All  options:
+
+|!Attribute |!Description|!Default |
+|`start`      |Initial tiddler that starts the map | none |
+|`startat`   |First level to display. 0 is the root tiddler named in the `start` attribute. 1 is the next level, etc. | 0 |
+|`maxdepth`   |Maximum depth to display.| 10 |
+|`mode` |//tagging// or //linking// or custom. This is how to identify the children of a node. With //tagging// Tiddlers that tag other tiddlers become their parent. With //linking// tiddlers that link to other tiddlers become their parent. A custom mode can be specified by a `$:/config/tidgraph/modes/MyMode` tiddler where `MyMode` is the name of the mode. The subfilter can be also specified directly; e.g. `mode="fields[]"`. See [[Custom Mode Demo|https://ihm4u.github.io/tw5plugs/#Custom%20Mode%20Demo]] for an example | //tagging//  |
+|`nodetitle` |Field to use as title for the node. | //title// (or //caption// if present) |
+|`tooltip` |List of fields to use for node tooltip. The first field with a non empty value is used. | //summary// |
+|`filter` |Only tiddlers matching filter will be used | none |
+|`nocollapse` |Disable ability to collapse nodes. The graph allows node collapsing by default. | false |
+|`nodetemplate` |One or mode node templates to make node look like you want. See the [[Node Templates Demo|https://ihm4u.github.io/tw5plugs/#Node%20Templates%20Demo]] for examples of how to use them. | none |
+|`layout` |`E` for East (Vertical) or `S` for south (Horizontal) layout. | E |
+
+!CSS classes
+You can also change colors, and other styles with the following CSS classes.
+
+|!Class |!Description |
+|tgr-node |Style for each node. If you want to change the color of the links inside the node use the `.tgr-node a` selector. |
+|tgr-edge |Style for the SVG path that connects the nodes. The old name was tgr-link. |
+|tgr-arrow |Style for the SVG polyline that draws the arrow at the end of the link |

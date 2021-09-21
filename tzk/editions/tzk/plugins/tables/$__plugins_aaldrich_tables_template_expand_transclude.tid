@@ -1,0 +1,9 @@
+created: 20190714035903654
+modified: 20191210184939804
+tags: $:/tags/table/ExpandTemplate
+tbl-template-name: view
+title: $:/plugins/aaldrich/tables/template/expand/transclude
+
+<$tiddler tiddler=<<currentRecord>>>
+<$transclude tiddler=<<currentRecord>> field="text" mode="block" />
+</$tiddler>

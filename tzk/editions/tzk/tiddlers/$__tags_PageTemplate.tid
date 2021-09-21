@@ -1,0 +1,7 @@
+created: 20210626221416384
+creator: soren
+list: $:/core/ui/PageTemplate/topleftbar $:/core/ui/PageTemplate/toprightbar $:/core/ui/PageTemplate/sidebar $:/core/ui/PageTemplate/story $:/core/ui/PageTemplate/alerts $:/core/ui/PageTemplate/drafts $:/core/ui/PageTemplate/pluginreloadwarning $:/sib/Templates/Automatic/OpenTopBar
+modified: 20210825131835004
+modifier: soren
+title: $:/tags/PageTemplate
+type: text/vnd.tiddlywiki

@@ -1,0 +1,14 @@
+created: 20170206022244360
+modified: 20191215041903621
+revision: 0
+tags: $:/tags/table/BodyTemplate
+tbl-column-list: tbl-button
+tbl-noedit: tbl-button
+title: $:/plugins/aaldrich/tables/template/body/button
+
+<td style="width:1.4ch;text-align:center;">
+  <$button class="tc-btn-invisible" tooltip={{!!tbl-button-tip}} style="min-width:1.4ch">
+    <<buttonIcon>>
+    <<buttonAction>>
+  </$button>
+</td>

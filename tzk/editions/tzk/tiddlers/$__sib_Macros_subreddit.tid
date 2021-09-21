@@ -1,0 +1,9 @@
+created: 20210522021038565
+description: Create a web link to a named subreddit, with the link text "/r/yoursubreddit".
+example: <<subreddit TiddlyWiki5>>
+modified: 20210523135249615
+tags: $:/tags/Macro
+title: $:/sib/Macros/subreddit
+type: text/vnd.tiddlywiki
+
+\define subreddit(name) [[/r/$name$|https://www.reddit.com/r/$name$/]]

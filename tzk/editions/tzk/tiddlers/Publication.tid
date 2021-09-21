@@ -1,0 +1,16 @@
+caption: A [[metasource|Metasource]] consisting of an organization or location that publishes or groups together multiple Sources.
+color: #ff0000
+created: 20200201045921067
+creator: soren
+icon: $:/core/images/tag-button
+modified: 20210825162348971
+modifier: soren
+tags: Meta Public
+title: Publication
+type: text/vnd.tiddlywiki
+
+{{!!caption}}
+
+For instance, magazines, newspapers, journals, book series, and websites are publications. Articles, papers, individual books, and pages on websites are [[Source]]s.
+
+Publications have no special naming conventions or fields.

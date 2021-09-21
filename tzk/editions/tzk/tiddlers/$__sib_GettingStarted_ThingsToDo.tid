@@ -1,0 +1,33 @@
+caption: Keeping track of things to do
+created: 20210828132735971
+creator: soren
+modified: 20210828133749250
+modifier: soren
+tags: 
+title: $:/sib/GettingStarted/ThingsToDo
+type: text/vnd.tiddlywiki
+
+A Zettelkasten is never complete and always full of new things you could work on and existing things you can improve. As such, tzk has a variety of tools for keeping track of what you might want to work on next, so you'll always be ready to do something useful whenever you have time to work.
+
+These tools are gathered together on the ''Write'' tab of the sidebar.
+
+; Stubs
+: Tag a tiddler <<tag Stub>> to indicate that you've decided this topic deserves a tiddler, but haven't had time to write much of significance about it yet. If I have an idea but no time to write about it, I commonly add a tiddler with just a title, or a title and a sentence or two explaining what would go in it, then tag it as a stub and save it.
+
+; Missing
+: All tiddlers that you've linked to but not created appear here. Just because you linked to a tiddler doesn't mean you //have// to create it -- often it's sufficient just to gather a list of things that link to that person, place, or idea, which works just fine without ever creating the tiddler -- but this list often contains things that could be promoted to stubs or full-blown tiddlers, so it's good to skim through it from time to time.
+
+; Needing attention
+: If you have a tiddler that obviously needs some work -- for instance, it no longer represents your opinion, it's full of errors, half of it consists of text you copied and pasted from somewhere else, and so on -- tag it <<tag NeedsAttention>> to add it to this list.
+
+; Needing excision
+: The <<tag NeedsExcision>> tag is a more specific version of //Needing attention// which indicates the tiddler is too long and should be [[broken out into atomic units|https://groktiddlywiki.com/read/#Slicing%20Up%20Content]]. For instance, if you took a bunch of notes on a book but left them sitting in the tiddler about the book rather than splitting them up into separate tiddlers for each idea, you might add this tag to the book tiddler as a reminder to come back and think more clearly about the boundaries between ideas.
+
+; To-do items
+: If you need to be more specific about what needs to be done in a tiddler than the on-or-off NeedsAttention tag allows, in the text field of that tiddler, link to `[[TODO]]` and follow the link with a sentence ending in a period. For instance, ``[[TODO]]: Find a reference for this claim.`` A link to the tiddler containing the todo and the text of the todo item will then appear in this tab.
+
+; Open questions
+: Similar to to-do items, tiddlers containing a link to `[[OpenQuestion]]` appear here. Open questions are ones that you don't know how to answer, but think are important and hope that with more study or life experience you might be able to understand better.
+
+; Tray
+: If you have some tiddlers you want to keep “front of mind,” but you don't want to keep them open in the story river, you can drag and drop them into this tab, where they'll stay until you manually remove them.

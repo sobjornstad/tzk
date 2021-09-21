@@ -1,0 +1,25 @@
+created: 20190723034929272
+modified: 20191205031607095
+tags: $:/tags/Stylesheet
+tbl-class-name: tbl-style-dark
+tbl-class-type: child
+tbl-color-border: #999999
+tbl-color-caption: #3D3D3D
+tbl-color-footer: #595959
+tbl-color-header: #595959
+tbl-color-row-all: #686868
+tbl-color-row-even: #737373
+tbl-color-row-hover: #46486B
+tbl-color-row-odd: #7A7A7A
+tbl-color-text: #FFFFFF
+tbl-color-text-hover: #FFFEE2
+tbl-pad-lr: 7px
+tbl-pad-tb-body: 1px
+tbl-pad-tb-headfoot: 2px
+tbl-size-font: {{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}}
+tbl-size-height: {{$:/themes/tiddlywiki/vanilla/metrics/bodylineheight}}
+tbl-size-icons: {{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}}
+tbl-width-border: 1px
+title: $:/plugins/aaldrich/tables/style/dark
+
+{{||$:/plugins/aaldrich/tables/style/default}}

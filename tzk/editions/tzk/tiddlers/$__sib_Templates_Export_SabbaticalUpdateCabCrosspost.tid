@@ -1,0 +1,15 @@
+created: 20210807200136273
+modified: 20210807205025301
+tags: 
+title: $:/sib/Templates/Export/SabbaticalUpdateCabCrosspost
+type: text/vnd.tiddlywiki
+
+\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+
+<div id="__title">{{!!title}}</div>
+<div id="__caption">{{!!caption}}</div>
+<div id="__slug">{{!!cab-slug}}</div>
+
+<div id="__content">
+	<$transclude mode="block" />
+</div>

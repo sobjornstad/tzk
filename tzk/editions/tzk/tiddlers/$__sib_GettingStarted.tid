@@ -1,0 +1,90 @@
+created: 20210523150144006
+creator: soren
+description: Guided wizard that walks you through basic settings and the most important things to know about this edition.
+list: $:/sib/GettingStarted/Warning $:/sib/GettingStarted/Title $:/sib/GettingStarted/Copyright $:/sib/GettingStarted/ZettelkastenCardTypes $:/sib/GettingStarted/ReferenceExplorer $:/sib/GettingStarted/ThingsToDo $:/sib/GettingStarted/NextSteps
+modified: 20210920203903771
+modifier: soren
+tags: Meta Tool
+title: $:/sib/GettingStarted
+tooltype: configuration
+type: text/vnd.tiddlywiki
+
+\define go-back() <$action-setfield $tiddler="$:/config/zettelkasten/GettingStartedWizardCurr" text={{{ [enlist{$:/sib/GettingStarted!!list}before{$:/config/zettelkasten/GettingStartedWizardCurr}] }}}/>
+\define go-forward() <$action-setfield $tiddler="$:/config/zettelkasten/GettingStartedWizardCurr" text={{{ [enlist{$:/sib/GettingStarted!!list}after{$:/config/zettelkasten/GettingStartedWizardCurr}] }}}/>
+\define wizard-navbar()
+<div style="margin: auto; text-align: center;">
+	<h2 style="margin-bottom: 5px;">{{!!caption}}</h2>
+
+	<$list filter="[enlist{$:/sib/GettingStarted!!list}before{$:/config/zettelkasten/GettingStartedWizardCurr}!is[blank]]" variable=_>
+		<$button actions=<<go-back>>>
+			← Back
+		</$button>
+	</$list>
+	
+	<$list filter="[enlist{$:/sib/GettingStarted!!list}after{$:/config/zettelkasten/GettingStartedWizardCurr}!is[blank]]" variable=_>
+		<$button actions=<<go-forward>>>
+			Next →
+		</$button>
+	</$list>
+</div>
+\end
+
+Welcome to ~TiddlyZettelKasten, usually known as ''tzk'' (pronounced /tə'ziːk/, tuh-ZEEK). tzk is an occasionally updated version of [[Soren's Zettelkasten|https://zettelkasten.sorenbjornstad.com]] in a format that you can use as a launching point for your own Zettelkasten or similar wiki.
+
+You are expected and encouraged to make tzk your own by changing its conventions, tools, tags, and so on as you learn more about the Zettelkasten approach to note-taking. Rather than a full-service application, tzk is a framework you can use to build your own system (although it works out of the box if you happen to like Soren's highly opinionated approach).
+
+It's recommended that you have a basic understanding of TiddlyWiki before getting started with tzk. [[Grok TiddlyWiki|https://groktiddlywiki.com]] is a free online textbook you can use to learn TiddlyWiki; completing at least chapters 1 and 2 is recommended before getting too serious with tzk. (Jumping in first is totally fine, but if you find yourself with lots of questions about how things work, check //Grok ~TiddlyWiki// before getting frustrated).
+
+If you're viewing this page on the web, you have two options for installation:
+
+<$details summary="As a single file">
+
+You can start out by downloading the wiki as a single HTML file and working with it directly in your browser:
+
+{{$:/snippets/download-wiki-button}}
+
+You will need a way of saving changes to this file as you work. You can [[view the full list of options at tiddlywiki.com|https://tiddlywiki.com/#Saving]]; if you've never used TiddlyWiki before and aren't sure what to pick, [[I recommend TiddlyDesktop|https://groktiddlywiki.com/read/#Installing%20TiddlyWiki]].
+
+You can always convert your single-file wiki to Node.js later using the `tzk convert` command.
+
+</$details>
+<$details summary="Through Node.js (full-service)">
+
+tzk is primarily designed for use with Node.js and has an associated helper command-line interface. Using tzk this way is more involved and technical but offers the following features you can't get in the single-file version:
+
+* Instant setup of your wiki on Node.js.
+* Highly configurable builds, allowing you to publish different versions of your wiki -- a common use case is publishing some of your content on the web and keeping some of it private.
+* Space-efficient backups and version history with Git.
+
+Full instructions for installing and initializing the tzk command-line tool can be found on Read the Docs.
+
+If you're familiar with command-line tools like tzk, you can get a quick start by making sure you have Git, NPM, and Python 3.6 or greater installed, then running:
+
+```
+$ pip install tzk
+$ mkdir my_wiki_folder
+$ cd my_wiki_folder
+$ tzk init
+$ tzk listen
+```
+
+If everything goes well, this will launch a web server and tell you what URL to enter into your web browser, and when you go there you'll have your wiki waiting for you.
+
+</$details>
+
+
+-------
+
+Once you have a copy of tzk, open it up on your computer and get started with the following quick-start wizard!
+
+<div style="border: 1px solid gray; padding: 0.5rem;">
+
+<$tiddler tiddler={{$:/config/zettelkasten/GettingStartedWizardCurr}}>
+<<wizard-navbar>>
+</$tiddler>
+
+<$transclude tiddler={{$:/config/zettelkasten/GettingStartedWizardCurr}}/>
+
+<<wizard-navbar>>
+
+</div>

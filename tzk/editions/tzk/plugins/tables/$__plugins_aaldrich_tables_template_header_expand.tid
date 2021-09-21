@@ -1,0 +1,21 @@
+created: 20170206022431198
+modified: 20191215042036015
+revision: 0
+tags: $:/tags/table/HeaderTemplate
+tbl-column-list: tbl-expand tbl-expand-one tbl-expand-many
+title: $:/plugins/aaldrich/tables/template/header/expand
+
+<th style="width:1.4ch;text-align:center;">
+  <$set name="isExpanded" filter="[<tempTableExpand>indexes[]limit[1]]" value="true" emptyValue="false">
+  <$list variable="showColAll" filter="[<isExpanded>]-[[false]]" >
+      <$button class="tc-btn-invisible" tooltip="collapse all" style="min-width:1.4ch">{{$:/core/images/fold-button}}
+        <$action-setfield $tiddler=<<tempTableExpand>> text=""/>
+      </$button>
+  </$list>
+<!--this is done so the column stays visible if the table is squished out of tiddler margin -->
+  <$list variable="hideColAll" filter="[<isExpanded>]-[[true]]" >
+      <$button class="tc-btn-invisible" style="cursor:default;min-width:1.4ch">{{$:/core/images/blank}}
+      </$button>
+  </$list>
+  </$set>
+</th>

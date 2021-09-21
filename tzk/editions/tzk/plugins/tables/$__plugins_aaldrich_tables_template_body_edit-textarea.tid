@@ -1,0 +1,16 @@
+created: 20170209052300022
+modified: 20191206021427822
+revision: 0
+tags: $:/tags/table/BodyTemplate
+tbl-column-list: tbl-edit-textarea
+tbl-noedit: tbl-edit-textarea
+title: $:/plugins/aaldrich/tables/template/body/edit-textarea
+
+<td class="tbl-inpt-edit">
+  <$list filter="[<fieldOrIndex>]-index">
+    <$edit-text tiddler=<<currentRecord>> field=<<currentColumn>> tag="textarea" minHeight=10px rows=1/>
+  </$list>
+  <$list filter="[<fieldOrIndex>]-field">
+    <$edit-text tiddler=<<currentRecord>> index=<<currentColumn>> tag="textarea" minHeight=10px rows=1/>
+  </$list>
+</td>

@@ -1,0 +1,64 @@
+caption: {{$:/plugins/aaldrich/tables/button/image}} new table
+created: 20170205062652787
+description: Create a new table
+modified: 20191212071246997
+tags: $:/tags/PageControls
+title: $:/plugins/aaldrich/tables/button
+
+\define newTableText()
+<<table "$(newTableTitle)$">>
+\end
+
+\define makeNewTable()
+
+<$set name="newTableTitle" value={{$:/temp/tables/button/generate-new-table-name}} >
+<$action-setfield $tiddler={{$:/temp/tables/button/generate-new-table-name}} text=<<newTableText>>/>
+</$set>
+<$action-navigate $to={{$:/temp/tables/button/generate-new-table-name}}/>
+<$action-deletetiddler $tiddler="$:/temp/tables/button/generate-new-table-name"/>
+\end
+
+<$button class=<<tv-config-toolbar-class>> tooltip="Create new table" aria-label={{$:/plugins/aaldrich/tables/button!!caption}} actions=<<makeNewTable>>>
+<$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
+{{$:/plugins/aaldrich/tables/button/image}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>prefix[yes]]">
+<span class="tc-btn-text"><$text text="new table"/></span>
+</$list>
+<$action-createtiddler $basetitle={{$:/plugins/aaldrich/tables/defaults!!tbl-default-title}}
+$savetitle="$:/temp/tables/button/generate-new-table-name"
+tbl-add-records={{$:/plugins/aaldrich/tables/defaults!!tbl-add-records}}
+tbl-anything={{$:/plugins/aaldrich/tables/defaults!!tbl-anything}}
+tbl-button-actions={{$:/plugins/aaldrich/tables/defaults!!tbl-button-actions}}
+tbl-button-icon={{$:/plugins/aaldrich/tables/defaults!!tbl-button-icon}}
+tbl-button-tip={{$:/plugins/aaldrich/tables/defaults!!tbl-button-tip}}
+tbl-caption={{$:/plugins/aaldrich/tables/defaults!!tbl-caption}}
+tbl-checkbox-actions-selected={{$:/plugins/aaldrich/tables/defaults!!tbl-checkbox-actions-selected}}
+tbl-checkbox-actions-unselected={{$:/plugins/aaldrich/tables/defaults!!tbl-checkbox-actions-unselected}}
+tbl-checkbox-field={{$:/plugins/aaldrich/tables/defaults!!tbl-checkbox-field}}
+tbl-checkbox-tag={{$:/plugins/aaldrich/tables/defaults!!tbl-checkbox-tag}}
+tbl-checkbox-tip={{$:/plugins/aaldrich/tables/defaults!!tbl-checkbox-tip}}
+tbl-checkbox-value-selected={{$:/plugins/aaldrich/tables/defaults!!tbl-checkbox-value-selected}}
+tbl-checkbox-value-unselected={{$:/plugins/aaldrich/tables/defaults!!tbl-checkbox-value-unselected}}
+tbl-class={{$:/plugins/aaldrich/tables/defaults!!tbl-class}}
+tbl-columns={{$:/plugins/aaldrich/tables/defaults!!tbl-columns}}
+tbl-expand={{$:/plugins/aaldrich/tables/defaults!!tbl-expand}}
+tbl-filter={{$:/plugins/aaldrich/tables/defaults!!tbl-filter}}
+tbl-show-caption={{$:/plugins/aaldrich/tables/defaults!!tbl-show-caption}}
+tbl-show-colgroup={{$:/plugins/aaldrich/tables/defaults!!tbl-show-colgroup}}
+tbl-show-edit={{$:/plugins/aaldrich/tables/defaults!!tbl-show-edit}}
+tbl-show-footer={{$:/plugins/aaldrich/tables/defaults!!tbl-show-footer}}
+tbl-show-header={{$:/plugins/aaldrich/tables/defaults!!tbl-show-header}}
+tbl-show-mode={{$:/plugins/aaldrich/tables/defaults!!tbl-show-mode}}
+tbl-show-pagination={{$:/plugins/aaldrich/tables/defaults!!tbl-show-pagination}}
+tbl-limit={{$:/plugins/aaldrich/tables/defaults!!tbl-limit}}
+tbl-mode={{$:/plugins/aaldrich/tables/defaults!!tbl-mode}}
+tbl-page-marker={{$:/plugins/aaldrich/tables/defaults!!tbl-page-marker}}
+tbl-sort-by={{$:/plugins/aaldrich/tables/defaults!!tbl-sort-by}}
+tbl-sort-negate={{$:/plugins/aaldrich/tables/defaults!!tbl-sort-negate}}
+tbl-sort-type={{$:/plugins/aaldrich/tables/defaults!!tbl-sort-type}}
+tbl-style-colgroup={{$:/plugins/aaldrich/tables/defaults!!tbl-style-colgroup}}
+tbl-style-container={{$:/plugins/aaldrich/tables/defaults!!tbl-style-container}}
+tbl-style-table={{$:/plugins/aaldrich/tables/defaults!!tbl-style-table}}
+/>
+</$button>

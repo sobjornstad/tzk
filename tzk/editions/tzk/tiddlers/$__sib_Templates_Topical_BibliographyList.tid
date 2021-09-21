@@ -1,0 +1,28 @@
+created: 20200808152932642
+modified: 20210522013411650
+tags: 
+title: $:/sib/Templates/Topical/BibliographyList
+type: text/vnd.tiddlywiki
+
+\define biblioFilter(sortSnippet)
+	[contains:bibliography{!!bibliography}$sortSnippet$] -[<currentTiddler>] -[<currentTiddler>get[draft.of]]
+\end
+
+<!-- TODO: Add sort radio button options -->
+
+<ul>
+<$list filter=<<biblioFilter "sort[title]sort[caption]">> >
+	<li>
+		<$set name=itemTitle filter={{!!caption}} value={{!!caption}} emptyValue={{!!title}}>
+			<$link to={{!!title}}><$text text=<<itemTitle>>/></$link>
+		</$set>
+		<$list filter="[<currentTiddler>get[medium]]" variable=_>
+			({{!!medium}}<$list filter="[<currentTiddler>get[year]]" variable="year">, <<year>></$list>)
+		</$list>
+		<$list filter="[<currentTiddler>has[url]]" variable=_><a class="tc-tiddlylink-external" href={{!!url}}>full text</a></$list>
+		<$list filter="[{!!description}]">
+		<ul><li><<currentTiddler>></li></ul>
+		</$list>
+	</li>
+</$list>
+</ul>

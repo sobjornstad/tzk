@@ -1,0 +1,7 @@
+created: 20210304024354323
+description: A filter expression describing the tiddlers to list.
+modified: 20210306022349455
+name: filter
+tags: $:/plugins/sobjornstad/TiddlyStretch/doc/Parameter
+title: $:/plugins/sobjornstad/TiddlyStretch/doc/Filter
+type: text/vnd.tiddlywiki

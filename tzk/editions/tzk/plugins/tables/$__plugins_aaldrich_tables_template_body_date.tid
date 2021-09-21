@@ -1,0 +1,16 @@
+created: 20170128100657312
+modified: 20191207211809915
+revision: 0
+tags: $:/tags/table/BodyTemplate
+tbl-column-list: created modified
+tbl-noedit: created modified
+title: $:/plugins/aaldrich/tables/template/body/date
+
+<td>
+  <$list filter="[<fieldOrIndex>]-index">
+    <$view tiddler=<<currentRecord>> field=<<currentColumn>> format="date" template={{$:/plugins/aaldrich/tables/defaults!!tbl-default-date-format}}/>
+  </$list>
+  <$list filter="[<fieldOrIndex>]-field">
+    <$view tiddler=<<currentRecord>> index=<<currentColumn>> format="date" template={{$:/plugins/aaldrich/tables/defaults!!tbl-default-date-format}}/>
+  </$list>
+</td>

@@ -1,0 +1,11 @@
+created: 20210626221212233
+modified: 20210627171414206
+tags: $:/tags/TopLeftBar
+title: $:/sib/Templates/Automatic/OpenTopBar
+type: text/vnd.tiddlywiki
+
+<$list filter=<<ff OpenTopBar>> variable=_>
+<div class="sib-quick-tiddler-jump">
+	<<list-links-draggable "$:/StoryList">>
+</div>
+</$list>

@@ -1,0 +1,10 @@
+created: 20170205233518589
+modified: 20191205210234858
+revision: 0
+tags: $:/tags/table/HeaderTemplate
+tbl-column-list: ID id
+title: $:/plugins/aaldrich/tables/template/header/disabled
+
+<th>
+<<currentColumn>>
+</th>

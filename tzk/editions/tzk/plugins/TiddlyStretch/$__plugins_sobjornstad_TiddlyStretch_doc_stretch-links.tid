@@ -1,0 +1,12 @@
+created: 20210304023056728
+description: Create a bulleted list of expandos from the tiddlers that match a filter, displaying one of two fields on each tiddler.
+modified: 20210306022047185
+name: stretch-links
+parameters: filter smallField largeField emptyMessage
+tags: $:/plugins/sobjornstad/TiddlyStretch/doc/Macro
+title: $:/plugins/sobjornstad/TiddlyStretch/doc/stretch-links
+type: text/vnd.tiddlywiki
+
+The `stretch-links` macro creates a bulleted list where each item is an expando. It is a cross between TiddlyStretch's `stretch` macro and the built-in `list-links` macro.
+
+{{||$:/plugins/sobjornstad/TiddlyStretch/doc/MacroInfoTemplate}}

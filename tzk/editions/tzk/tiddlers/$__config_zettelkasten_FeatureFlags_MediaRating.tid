@@ -1,0 +1,11 @@
+caption: Media rating
+created: 20210920193222752
+creator: soren
+description: Show the [[rating|MediaRating]] of the current tiddler on sources.
+modified: 20210920193357318
+modifier: soren
+private: yes
+public: yes
+tags: 
+title: $:/config/zettelkasten/FeatureFlags/MediaRating
+type: text/vnd.tiddlywiki

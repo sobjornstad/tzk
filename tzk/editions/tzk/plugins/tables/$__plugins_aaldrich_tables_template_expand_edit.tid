@@ -1,0 +1,7 @@
+created: 20190714035903654
+modified: 20190816062006055
+tags: $:/tags/table/ExpandTemplate
+tbl-template-name: edit
+title: $:/plugins/aaldrich/tables/template/expand/edit
+
+<$edit class="tbl-inpt-edit" tiddler=<<currentRecord>> field=text tag=textarea/>

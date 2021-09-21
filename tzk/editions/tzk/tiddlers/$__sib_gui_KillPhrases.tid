@@ -1,0 +1,34 @@
+created: 20210731165017938
+creator: soren
+description: Configure phrases that should cause public builds to fail.
+modified: 20210920155725847
+modifier: soren
+tags: Tool
+title: $:/sib/gui/KillPhrases
+tooltype: configuration
+type: text/vnd.tiddlywiki
+
+//Kill phrases// are an extra measure of security to ensure you don't accidentally publish something that was supposed to be private. After building the public wiki, if the source of any tiddler therein contains any of the words or phrases below in any field, the build will fail and point out the location where a kill phrase ended up in the output.
+
+Enter kill phrases below, one per line.
+
+<div class="kill-phrase-entry">
+<$edit-text
+  tiddler="$:/config/zettelkasten/Build/KillPhrases"
+	default=""
+	/>
+</div>
+
+Each line is treated as a Python-dialect regular expression ([[documentation|https://docs.python.org/3/library/re.html#regular-expression-syntax]] of this dialect).
+
+Kill phrases are ''case-sensitive''. If you want to kill the build on multiple cases of a word, use a //character class// (`[sS]ecret` to allow both `secret` and `Secret`), or begin the phrase with `(?i)` to make the entire regular expression case-insensitive.}
+
+Kill phrases ''match substrings'': that is, “kill” will also match “skillet” and “killdeer”. If you want to match only a whole word, use `\b` (a //word boundary// marker) before and after the word, like `\bkill\b`. (This still ignores punctuation, so it will find `kill,` -- but that's probably what you want.)
+
+Your list of kill phrases will not be published so long as you do not alter the build filter (if you do, watch out -- system tiddlers, including the one which stores your kill phrases, are published by default).
+
+<style>
+div.kill-phrase-entry textarea {
+	width: 100%;
+}
+</style>

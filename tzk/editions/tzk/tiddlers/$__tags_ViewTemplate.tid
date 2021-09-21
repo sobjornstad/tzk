@@ -1,0 +1,5 @@
+created: 20201129183705439
+list: $:/core/ui/ViewTemplate/title $:/core/ui/ViewTemplate/unfold $:/core/ui/ViewTemplate/subtitle $:/sib/EpistemicStatus/Display $:/sib/MediaRating/Display $:/core/ui/ViewTemplate/tags $:/core/ui/ViewTemplate/classic $:/sib/Templates/Automatic/SpoilerBanner $:/sib/Templates/Automatic/Untitled $:/sib/Templates/Automatic/PrivateChunkParentNotice $:/sib/Templates/Automatic/Source $:/sib/Templates/Topical/MinnesotaStateParkInfo $:/sib/Templates/Automatic/MacroDescription $:/core/ui/ViewTemplate/body $:/sib/indite/ViewTemplate $:/sib/Reviewer/SchedulableTemplate $:/sib/gis/MappingTools $:/sib/Templates/Topical/SabbaticalUpdates/DateNavigation $:/sib/Templates/Automatic/Publicity/ViewerPublicLine $:/core/ui/ViewTemplate/import $:/core/ui/ViewTemplate/plugin $:/plugins/danielo515/2click2edit/ui/ViewTemplate $:/sib/refexplorer/ReferenceExplorer $:/sib/Templates/Automatic/ViewTemplateDescription $:/sib/Templates/Automatic/ReaderActions $:/plugins/kookma/refnotes/viewtemplates/main
+modified: 20210807194815491
+title: $:/tags/ViewTemplate
+type: text/vnd.tiddlywiki

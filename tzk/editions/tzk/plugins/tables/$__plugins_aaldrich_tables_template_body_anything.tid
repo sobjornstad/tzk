@@ -1,0 +1,11 @@
+created: 20170206022244360
+modified: 20191215042443693
+revision: 0
+tags: $:/tags/table/BodyTemplate
+tbl-column-list: tbl-anything
+tbl-noedit: tbl-anything
+title: $:/plugins/aaldrich/tables/template/body/anything
+
+<td style="width:1.4ch;">
+    <<anythingCode>>
+</td>

@@ -1,0 +1,8 @@
+created: 20140901105307611
+modified: 20180112190527729
+title: $:/plugins/TheDiveO/FontAwesome/readme
+type: text/vnd.tiddlywiki
+
+This plugin adds support for Font Awesome to your ~TiddlyWiki&nbsp;5. It embeds the [[Font Awesome|http://fontawesome.io/]] within this plugin, so you don't need to install this font in your operating system. You may, but the //embedded// Font Awesome will take precedence to ensure a consistent user experience.
+
+To install this plugin in your own ~TiddlyWiki(s), simply drop this [[FontAwesome plugin|$:/plugins/TheDiveO/FontAwesome]] onto your own ~TiddlyWiki(s): this will then import it.

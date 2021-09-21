@@ -1,0 +1,59 @@
+created: 20210119015940853
+description: Show buttons that exponentially postpone a tiddler from the reading inbox to a later date.
+modified: 20210523142535687
+tags: $:/tags/ViewTemplate
+title: $:/sib/Reviewer/SchedulableTemplate
+transcludedin: All tiddlers tagged <<tag Source>> that are marked unread or partially read.
+type: text/vnd.tiddlywiki
+
+\define rescheduleme()
+	<$macrocall $name=inbox-postpone ivlExpr={{$:/temp/NextReviewTime}}/>
+\end
+
+<$list filter="[all[current]tag[Source]readstatus[unread]] [all[current]tag[Source]readstatus[partial]]">
+<div class="schedule-next">
+
+!!! ExpoPostpone
+
+<$list filter="[{!!due}!is[blank]first[]]" emptyMessage="Not scheduled for review." variable=_>
+	This item has been postponed until <$view field="due" format="date" template="YYYY-0MM-0DD"/>.
+</$list><br>
+Bump to:
+<div>
+<$button>
+	<$action-setfield due="" ivl=""/>
+	now
+</$button>
+<$button>
+	<$macrocall $name=inbox-postpone ivlExpr="1"/>
+	tomorrow
+</$button>
+<$button>
+	<$macrocall $name=inbox-postpone ivlExpr="5"/>
+	in 5 days
+</$button>
+<$button>
+	<$macrocall $name=inbox-postpone ivlExpr={{{ [all[current]get[ivl]else[5]multiply[2]] }}}/>
+	later
+</$button>
+<$button>
+	<$macrocall $name=inbox-postpone ivlExpr={{{ [all[current]get[ivl]else[5]multiply[3]] }}}/>
+	even later
+</$button>
+</div>
+</div>
+
+</$list>
+
+<style>
+.schedule-next {
+	padding: 5px;
+	border: 2px solid <<color "tag-background">>;
+	max-width: 500px;
+	text-align: center;
+}
+
+.schedule-next h3 {
+	margin-top: 0.5em;
+}
+</style>

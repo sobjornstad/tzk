@@ -1,0 +1,7 @@
+created: 20210304025753399
+modified: 20210306022549030
+tags: 
+title: $:/plugins/sobjornstad/TiddlyStretch/doc/MacroInfoTemplate
+type: text/vnd.tiddlywiki
+
+<$macrocall $name="stretch-template" tiddler=<<currentTiddler>> smallTemplate="$:/plugins/sobjornstad/TiddlyStretch/doc/ParameterListingTemplate" largeTemplate="$:/plugins/sobjornstad/TiddlyStretch/doc/ParametersTemplate"/>

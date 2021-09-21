@@ -1,0 +1,16 @@
+caption: Excise private chunk
+condition: [<targetTiddler>type[]] [<targetTiddler>type[text/vnd.tiddlywiki]] +[first[]]
+created: 20210522034413324
+description: Create a new private chunk from the selection
+icon: $:/core/images/locked-padlock
+list-after: $:/core/ui/EditorToolbar/excise
+modified: 20210522034828757
+shortcuts: ((excise-private-chunk))
+tags: $:/tags/EditorToolbar
+title: $:/sib/Buttons/excise-private-chunk
+type: text/vnd.tiddlywiki
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="excisePrivateChunk"
+/>

@@ -1,0 +1,37 @@
+created: 20200225231807460
+creator: soren
+description: Do a find and replace to merge tags. (Pure renames can be accomplished by editing the tag tiddler.)
+modified: 20210920155146151
+modifier: soren
+tags: Tool
+title: $:/sib/Tools/TagReplace
+tooltype: maintenance
+type: text/vnd.tiddlywiki
+
+<!--
+https://groups.google.com/forum/#!msg/tiddlywiki/OCntQ79DuwM/_vYCTYRXfaUJ
+
+Version taken from the linked "TiddlyWiki Magic" post
+-->
+
+|!Search tag: | <$edit-text tiddler="$:/temp/RenameTags/search" tag="input" type="text"/> |
+|!Replace by: | <$edit-text tiddler="$:/temp/RenameTags/replace" tag="input" type="text"/> |
+
+---
+<$reveal type="nomatch" text="" state="$:/temp/RenameTags/replace">
+
+Apply the tag <$tiddler tiddler={{$:/temp/RenameTags/replace}}><$transclude tiddler="$:/core/ui/TagTemplate"/></$tiddler> to the following tiddlers:
+
+<$list filter="[!has[draft.of]tag{$:/temp/RenameTags/search}!tag{$:/temp/RenameTags/replace}sort[created]]">
+<$checkbox tag={{$:/temp/RenameTags/replace}}> <$link to={{!!title}}><$view field="title"/></$link></$checkbox><br/>
+</$list>
+</$reveal>
+
+<$reveal type="nomatch" text="" state="$:/temp/RenameTags/search">
+
+Remove the tag <$tiddler tiddler={{$:/temp/RenameTags/search}}><$transclude tiddler="$:/core/ui/TagTemplate"/></$tiddler> from the following tiddlers:
+
+<$list filter="[!has[draft.of]tag{$:/temp/RenameTags/search}tag{$:/temp/RenameTags/replace}sort[created]]">
+<$checkbox tag={{$:/temp/RenameTags/search}}> ~~<$link to={{!!title}}><$view field="title"/></$link>~~</$checkbox><br/>
+</$list>
+</$reveal>

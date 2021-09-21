@@ -1,0 +1,7 @@
+created: 20210304024312605
+description: Whether to render the contracted template in `block` or `inline` mode (default: inline).
+modified: 20210306022349474
+name: smallMode
+tags: $:/plugins/sobjornstad/TiddlyStretch/doc/Parameter
+title: $:/plugins/sobjornstad/TiddlyStretch/doc/SmallMode
+type: text/vnd.tiddlywiki

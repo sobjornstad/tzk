@@ -1,0 +1,22 @@
+caption: View templates
+created: 20210523143729032
+modified: 20210523144417979
+tags: 
+title: $:/sib/Documentation/ViewTemplates
+type: text/vnd.tiddlywiki
+
+\define lastbit() [{!!caption}!is[blank]] ~[split[/]last[]]
+<table>
+	<tr>
+		<th style="width: 15em;">Name</th>
+		<th>Purpose</th>
+		<th>Transcluded in</th>
+	</tr>
+	<$list filter="[prefix[$:/sib/]tag[$:/tags/ViewTemplate]sortsub<lastbit>]">
+	<tr>
+		<td><$link to=<<currentTiddler>>><$text text={{{ [{!!caption}!is[blank]] ~[all[current]subfilter<lastbit>] }}}/></$link></td>
+		<td>{{!!description}}</td>
+		<td>{{!!transcludedin}}</td>
+	</tr>
+	</$list>
+</table>

@@ -1,0 +1,15 @@
+caption: Copy tiddler title
+created: 20200419143537510
+creator: soren
+description: Copy the name of this tiddler to the clipboard
+list-after: $:/core/ui/Buttons/info
+modified: 20210825162721583
+modifier: soren
+tags: $:/tags/ViewToolbar
+title: $:/sib/Buttons/CopyTitleReference
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+<$button message="tm-copy-to-clipboard" param={{!!title}} tooltip={{!!caption}} class=<<tv-config-toolbar-class>>>
+	<i class="far fa-copy" style="font-size:160%; position:relative; bottom:-4px; left:-1px;"/>
+</$button>

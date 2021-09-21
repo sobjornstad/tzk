@@ -1,0 +1,11 @@
+created: 20210719234454927
+description: Create a footnote at the current location. Based on Refnotes (https://kookma.github.io/TW-Refnotes/), but doesn't use the plugin.
+example: This is my body text.<<fnote "This is my footnote.">>
+modified: 20210731165949531
+tags: $:/tags/Macro
+title: $:/sib/Macros/fnote
+type: text/vnd.tiddlywiki
+
+\define fnote(note)
+<div class="refnotes-tooltip refnotes-footnote"><div class="refnotes-tooltiptext">$note$</div></div>
+\end

@@ -1,0 +1,12 @@
+color: #000001
+created: 20200507032259254
+icon: $:/core/images/globe
+modified: 20200512034215900
+refexplorer-hide: true
+tags: Public Meta
+title: Public
+type: text/vnd.tiddlywiki
+
+All tiddlers tagged with this tag, as well as all system tiddlers, will be included in the nightly upload to https://zettelkasten.sorenbjornstad.com.
+
+Tiddlers not tagged Public may still be redlinked from elsewhere in the wiki, which may be useful for establishing connections between other ideas.

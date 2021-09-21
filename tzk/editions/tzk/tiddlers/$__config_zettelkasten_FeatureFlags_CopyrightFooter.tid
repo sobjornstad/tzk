@@ -1,0 +1,11 @@
+caption: Copyright footer
+created: 20210902152332169
+creator: soren
+description: Display a copyright and attribution notice underneath the story river.
+modified: 20210902152446023
+modifier: soren
+private: no
+public: yes
+tags: 
+title: $:/config/zettelkasten/FeatureFlags/CopyrightFooter
+type: text/vnd.tiddlywiki

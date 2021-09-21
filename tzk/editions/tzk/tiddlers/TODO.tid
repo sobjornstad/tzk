@@ -1,0 +1,24 @@
+caption: To-do items
+created: 20201203005550171
+creator: soren
+description: List of all tiddlers which contain a link to TODO.
+modified: 20210920155226812
+modifier: soren
+tags: Meta Tool
+title: TODO
+tooltype: aggregator
+type: text/vnd.tiddlywiki
+
+\define todore() \[\[TODO\]\]:
+\define splitre() [\.\?!](\s|$)
+
+To add a TODO item to this list, simply link to [[TODO]].
+
+<dl>
+<$list filter="[[TODO]backlinks[]] -[[TODO]]" variable=outer>
+  <$list filter="[<outer>get[text]splitregexp<todore>last[]splitregexp<splitre>first[]]" variable=inner>
+	  <dt><$link to=<<outer>>/></dt>
+		<dd>''TODO:'' <<inner>>.</dd>
+	</$list>
+</$list>
+</dl>

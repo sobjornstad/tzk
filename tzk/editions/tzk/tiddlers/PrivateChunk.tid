@@ -1,0 +1,38 @@
+color: #000001
+created: 20200509180315396
+creator: soren
+icon: $:/core/images/excise
+modified: 20210901215354072
+modifier: soren
+refexplorer-hide: true
+tags: Meta Public
+title: PrivateChunk
+type: text/vnd.tiddlywiki
+
+<!-- not being used as a template -->
+<$list filter="[all[current]field:title[PrivateChunk]]">
+
+Tiddlers whose subject matter is sensitive or personal are not made publicly available. However, sometimes a topic is almost entirely fit for publication, but you'd like to add a little bit of private commentary to it. In this case, you can use a //private chunk//. This is a separate tiddler, generally named the same as the public tiddler followed by a `/p`, and tagged <<tag PrivateChunk>> (this tiddler). To include the private chunk in the public tiddler, it is transcluded, using `PrivateChunk` (this tiddler again) as a template. Some list magic hides this bit and shows the template bit when this is done.
+
+Since you won't mark the private chunk as public, when the wiki is published, the private chunks don't come along. The title must not contain any sensitive information, since the transclusion directive will still be present in the source, but this shouldn't be a concern if the naming convention above is followed.
+
+The lock button {{$:/core/images/locked-padlock}} on the editor toolbar can be used to create a new private chunk from the selected text.
+
+</$list>
+
+<!-- being used as a template -->
+<$list filter="[all[current]is[tiddler]!field:title[PrivateChunk]]" variable=_>
+	<$list filter="[all[current]!tag[PrivateChunk]]" variable=_>
+		<span style="color: yellow;">Warning: This private chunk is not tagged PrivateChunk.</span>
+		<$fieldmangler tiddler=<<currentTiddler>>>
+		<$button>
+		  <$action-sendmessage $message="tm-add-tag" $param="PrivateChunk"/>
+		  Add tag
+		</$button>
+		</$fieldmangler>
+	</$list>
+
+  <div class="sib-private-chunk"><$link to=<<currentTiddler>>>private</$link>:
+		<$transclude name=<<currentTiddler>> mode="block"/>
+	</div>
+</$list>

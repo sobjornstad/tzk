@@ -1,0 +1,9 @@
+created: 20210523151255793
+creator: soren
+modified: 20210825142934141
+modifier: soren
+tags: 
+title: $:/config/zettelkasten/copyright/InitialNotice
+type: text/vnd.tiddlywiki
+
+Copyright © 2020--<<now YYYY>> Soren Bjornstad.

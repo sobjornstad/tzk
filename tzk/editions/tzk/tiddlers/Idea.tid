@@ -1,0 +1,25 @@
+caption: The core of the Zettelkasten. Ideas are tiddlers that describe some concept, thought, lesson, or similar topic.
+color: #ff0000
+created: 20210721004110425
+creator: soren
+description: 
+icon: $:/core/images/tag-button
+modified: 20210825160340787
+modifier: soren
+refexplorer-hide: true
+tags: Public Meta
+title: Idea
+type: text/vnd.tiddlywiki
+
+{{!!caption}}
+
+!! Fields
+
+; description
+: When possible, the main idea of a tiddler should be summed up into a sentence or two and placed in the `description` field. This be displayed next to a gem icon underneath the tiddler's title, and it will appear in a tooltip when you hover over the tiddler in the ReferenceExplorer. (If no `description` field is available, a short excerpt of the beginning of the tiddler is shown in this tooltip.)
+; es
+: The [[epistemic status|EpistemicStatuses]] of this idea, if one is appropriate. This may be chosen from the drop-down in the upper-right of the tiddler in view mode.
+; universe
+: If this idea is associated with a fictional [[Source]], that source's universe key.
+; url
+: If this idea has a single URL strongly associated with it (for instance, a blog post describing the idea that everyone knows about), it may be placed here.

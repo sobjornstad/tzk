@@ -1,0 +1,10 @@
+caption: View
+created: 20210313002551320
+modified: 20210522013709625
+tags: 
+title: $:/sib/Templates/Topical/AnkiPattern/View
+type: text/vnd.tiddlywiki
+
+<$set name="isedit" value="no">
+{{||$:/sib/Templates/Topical/AnkiPattern/Common}}
+</$set>

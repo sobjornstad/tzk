@@ -1,0 +1,101 @@
+created: 20170205062652787
+modified: 20191215053651054
+tags: 
+title: $:/plugins/aaldrich/tables/view
+
+<!-- reveals Edit Buttons-->
+{{||$:/plugins/aaldrich/tables/editor/open}}
+<!-- reveals deletion confirmation -->
+  <$reveal class="tbl-delete-confirm" type="match" state="$:/temp/tables/delete-all!!text" text=<<currentTable>> tag="div">
+    Delete all displayed records? 
+    <$button class="tc-btn-invisible">
+      <$action-deletetiddler $tiddler="$:/temp/tables/delete-all"/>
+      <$list filter=<<tableFilter>> variable="currentRecord">
+        <$action-setfield $tiddler=<<tempTableStyle>> $index=<<currentRecord>> $value=""/>
+        <$action-deletetiddler $tiddler=<<currentRecord>>/>
+      </$list>
+      {{$:/core/images/delete-button}} ''yes'' 
+    </$button> or 
+    <$button class="tc-btn-invisible">
+      <$action-deletetiddler $tiddler="$:/temp/tables/delete-all"/>
+      {{$:/core/images/close-button}} ''no'' 
+    </$button>
+  </$reveal>
+<table style={{!!tbl-style-table}}>
+<!-- reveals table caption -->
+  <$reveal type="match" state="!!tbl-show-caption" text="true" tag="caption">
+    <$transclude tiddler=<<currentTable>> field="tbl-caption" mode={{$:/plugins/aaldrich/tables/defaults!!tbl-caption-mode}}/>
+  </$reveal>
+<!-- reveals column groups -->
+  <$reveal type="match" state="!!tbl-show-colgroup" text="true" tag="colgroup">
+    {{!!tbl-style-colgroup}}
+  </$reveal>
+<!-- reveal header -->
+  <$reveal type="match" state="!!tbl-show-header" text="true" tag="thead">
+    <tr>
+        <$list filter={{!!tbl-columns}} variable="currentColumn">
+            <$set name="headerLookup" filter="[all[tiddlers+shadows]tag[$:/tags/table/HeaderTemplate]tag<currentColumn>][all[tiddlers+shadows]tag[$:/tags/table/HeaderTemplate]contains:tbl-column-list<currentColumn>]+[limit[1]get[title]]" value=<<headerLookup>> emptyValue={{$:/plugins/aaldrich/tables/defaults!!tbl-temp-default-head}}>
+              <$transclude tiddler=<<headerLookup>> field="text" mode="inline"/>
+            </$set>
+        </$list>
+    </tr>
+  </$reveal>
+<!-- reveal footer -->
+  <$reveal type="match" state="!!tbl-show-footer" text="true" tag="tfoot">
+    <tr>
+        <$list filter={{!!tbl-columns}} variable="currentColumn">
+            <$set name="footerLookup" filter="[all[tiddlers+shadows]tag[$:/tags/table/FooterTemplate]tag<currentColumn>][all[tiddlers+shadows]tag[$:/tags/table/FooterTemplate]contains:tbl-column-list<currentColumn>]+[limit[1]get[title]]" value=<<footerLookup>> emptyValue={{$:/plugins/aaldrich/tables/defaults!!tbl-temp-default-foot}}>
+              <$transclude tiddler=<<footerLookup>> field="text" mode="inline"/>
+            </$set>
+        </$list>
+    </tr>
+  </$reveal>
+<!-- generate records -->
+  <tbody>
+    <$list filter=<<tableFilter>> variable="currentRecord">
+    <$wikify name="rowStyle" text="""<$transclude tiddler=<<tempTableStyle>> index=<<currentRecord>> />""" mode="inline">
+      <$list filter="[<currentTable>contains:tbl-mode[edit]]" variable="tableModeEdit">
+      <tr class="tbl-record-row" style=<<rowStyle>>>
+        <$list filter={{!!tbl-columns}} variable="currentColumn">
+          <$set name="hasIndex" filter="[<currentRecord>indexes[]]-[<currentColumn>]+[count[]]-[<currentRecord>indexes[]count[]]" value=index emptyValue="field">
+          <$set name="fieldOrIndex" filter="[<currentRecord>fields[]]-[<currentColumn>]+[count[]]-[<currentRecord>fields[]count[]]" value="field" emptyValue=<<hasIndex>>>
+          <$set name="bodyLookup" filter="[all[tiddlers+shadows]tag[$:/tags/table/BodyTemplate]contains:tbl-noedit<currentColumn>limit[1]get[title]]" value=<<bodyLookup>> emptyValue={{$:/plugins/aaldrich/tables/defaults!!tbl-temp-default-body-edit}}>
+            <$transclude tiddler=<<bodyLookup>> field="text" mode="inline"/>
+          </$set>
+          </$set>
+          </$set>
+        </$list>
+      </tr>
+      </$list>
+      <$list filter="[<currentTable>!contains:tbl-mode[edit]]" variable="tableModeNormal">
+      <tr class="tbl-record-row" style=<<rowStyle>>>
+        <$list filter={{!!tbl-columns}} variable="currentColumn">
+          <$set name="hasIndex" filter="[<currentRecord>indexes[]]-[<currentColumn>]+[count[]]-[<currentRecord>indexes[]count[]]" value=index emptyValue="field">
+          <$set name="fieldOrIndex" filter="[<currentRecord>fields[]]-[<currentColumn>]+[count[]]-[<currentRecord>fields[]count[]]" value="field" emptyValue=<<hasIndex>>>
+          <$set name="bodyLookup" filter="[all[tiddlers+shadows]tag[$:/tags/table/BodyTemplate]tag<currentColumn>][all[tiddlers+shadows]tag[$:/tags/table/BodyTemplate]contains:tbl-column-list<currentColumn>]+[limit[1]get[title]]" value=<<bodyLookup>> emptyValue={{$:/plugins/aaldrich/tables/defaults!!tbl-temp-default-body}}>
+            <$transclude tiddler=<<bodyLookup>> field="text" mode="inline"/>
+          </$set>
+          </$set>
+          </$set>
+        </$list>
+      </tr>
+      </$list>
+<!-- reveal expanded record-->
+      <$list variable="isExpanded" filter="[<tempTableExpand>getindex<currentRecord>limit[1]]">
+      <tr class="tbl-record-expand" >
+        <$set name="childTable" filter="[all[tiddlers+shadows]title<currentTable>get[tbl-expand]]" >
+        <$set name="expandClass" filter=<<expandClassFilter>> value="tbl-expand-nopad"  emptyValue="tbl-expand-pad">
+        <td colspan="999" class=<<expandClass>> >
+
+          <<tableExpandRender>>
+
+        </td>
+        </$set>
+        </$set>
+      </tr>
+    </$list>
+    </$wikify>
+    </$list>
+  </tbody>
+</table>
+{{||$:/plugins/aaldrich/tables/pagination}}

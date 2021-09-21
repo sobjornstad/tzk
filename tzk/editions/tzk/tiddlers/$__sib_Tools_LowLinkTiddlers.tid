@@ -1,0 +1,20 @@
+created: 20210118021217305
+creator: soren
+description: Find non-subtiddler idea tiddlers that have fewer than a specified number of outbound links.
+modified: 20210920155025769
+modifier: soren
+tags: Tool
+title: $:/sib/Tools/LowLinkTiddlers
+tooltype: maintenance
+type: text/vnd.tiddlywiki
+
+\define sorty() [links[]count[]]
+Find non-subtiddler idea tiddlers that have fewer than <$edit-text tiddler="$:/temp/LowLinkTiddlers" tag="input" default=""/> outbound links:
+
+<ul>
+<$list filter="[!is[system]has[text]tag[Idea]!search:title[/]sortsub<sorty>]">
+	<$list filter="[all[current]links[]count[]compare:number:lt{$:/temp/LowLinkTiddlers}]" variable="count">
+		<li><$link to=<<currentTiddler>>/>: <<count>> outbound links</li>
+	</$list>
+</$list>
+</ul>

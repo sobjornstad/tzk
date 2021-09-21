@@ -1,0 +1,12 @@
+created: 20210304022640887
+description: Create an expando from a tiddler, rendering the tiddler through one of two templates.
+modified: 20210306022706090
+name: stretch-template
+parameters: tiddler smallTemplate largeTemplate smallMode largeMode
+tags: $:/plugins/sobjornstad/TiddlyStretch/doc/Macro
+title: $:/plugins/sobjornstad/TiddlyStretch/doc/stretch-template
+type: text/vnd.tiddlywiki
+
+The `stretch-template` macro works just like the [[stretch|$:/plugins/sobjornstad/TiddlyStretch/doc/stretch]] macro, but instead of directly rendering one of two fields of the tiddler to be stretched, it renders the tiddler through one of two templates.
+
+{{||$:/plugins/sobjornstad/TiddlyStretch/doc/MacroInfoTemplate}}

@@ -1,0 +1,8 @@
+caption: Whether interface elements for personal use only should appear.
+created: 20200508003748651
+modified: 20210508232303597
+tags: Meta
+title: $:/config/sib/IsPublicEdition
+type: text/vnd.tiddlywiki
+
+true

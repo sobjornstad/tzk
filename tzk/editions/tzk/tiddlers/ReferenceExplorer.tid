@@ -1,0 +1,43 @@
+created: 20200410133657263
+creator: soren
+modified: 20210920192218164
+modifier: soren
+tags: Meta Public
+title: ReferenceExplorer
+type: text/vnd.tiddlywiki
+
+At the bottom of every tiddler in the Zettelkasten is the ''Reference Explorer'', which shows all links between tiddlers, separated into tabs based on the ZettelkastenCardType, and allows quickly navigating through them. Several auxiliary tabs (//Link graph// and //Footnotes//) are available as well.
+
+Only the tabs that have at least one item on them for the current tiddler will be shown, and if the current tiddler has no links or relationships at all or is a system tiddler, the reference explorer will not appear.
+
+The possible tabs are as follows:
+
+* [[Ideas|Idea]]
+* People ([[PAO]] tag)
+* [[Places|Place]]
+* [[Sources|Source]] (and [[Metasources|Metasource]])
+* [[Sinks|Sink]]
+* [[Indexes|Index]]
+* [[Subtiddlers|Subtiddler]] -- tiddlers named for the current tiddler plus some additional characters, usually separated by `/`
+* Link graph -- a graphical view of the outbound links from this tiddler, going several layers deep
+* [[Footnotes|Footnote]] -- display of all footnotes in the current tiddler (you can also hover over a footnote indicator to read it)
+* All -- all the types of links combined into one view
+
+It's possible to add new tabs or customize the existing ones by editing the tiddlers tagged with [[$:/tags/ReferenceExplorerTab]].
+
+The behavior of the explorer can be customized per-tiddler by setting the following fields:
+
+* `refexplorer-starttab` -- Instead of starting the Reference Explorer on the first tab that is shown, start it on the tab with this name (`$:/sib/refexplorer/` is prepended to this value to select a tiddler name).
+* `refexplorer-hide` -- if set to `yes`, don't show the Reference Explorer until the user clicks a button. Useful to avoid performance issues on tiddlers that have dozens, hundreds, or thousands of links or tagged tiddlers.
+
+The Reference Explorer is homegrown for the ZK wiki. It used to use TiddlyTables, but once I settled on how it should work, I rewrote it with pure HTML tables to improve performance (they use much of the CSS from TiddlyTables, so they're hard to tell apart!). Its system tiddlers can be found in `$:/sib/refexplorer`; you can borrow these for another wiki [[under the MIT license|CopyrightNotice]] if you so desire.
+
+<$details summary="Flashcards">
+<<rememberq "20210123160338153"
+	"What variable must be set manually when trying to transclude the ReferenceExplorer within a nested tiddler (e.g., within a tab)?"
+	"`storyTiddler`">>
+	
+<<rememberq "20210123160402884"
+	"If the ReferenceExplorer shows the references for the wrong tiddler, what variable is most likely set incorrectly?"
+	"`storyTiddler`">>
+</$details>

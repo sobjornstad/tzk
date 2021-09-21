@@ -1,0 +1,24 @@
+created: 20210825185232587
+creator: soren
+modified: 20210825185606721
+modifier: soren
+tags: $:/tags/Stylesheet
+title: $:/sib/styles/Publicity
+type: text/vnd.tiddlywiki
+
+.sib-viewer-clarify {
+	clear: both;
+}
+
+.sib-viewer-public-line {
+	float: right;
+	color: #5E81AC;
+	margin-top: 1ex;
+}
+
+@media print
+{
+	.sib-viewer-public-line {
+		display: none;
+	}
+}

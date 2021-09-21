@@ -1,0 +1,106 @@
+created: 20210304002537855
+modified: 20210714025439865
+tags: $:/tags/Macro
+title: $:/plugins/sobjornstad/TiddlyStretch/macros/stretch
+type: text/vnd.tiddlywiki
+
+\define stretchtext-tools(tiddler)
+    <$button class="tc-btn-invisible tc-tiddlylink" to=<<__tiddler__>> tooltip="Open this node's tiddler as a new item in the story river.">
+        <i class="fa fa-expand"/>
+    </$button>
+    <$button class="tc-btn-invisible tc-tiddlylink" message="tm-edit-tiddler" param=<<__tiddler__>> tooltip="Edit this node's tiddler.">
+        <i class="fa fa-pen"/>
+    </$button>
+\end
+
+\define stretchtext-missing-tiddler(tiddler, descr: "tiddler")
+    <$list filter="[<__tiddler__>!is[tiddler]!is[shadow]]" variable=_>
+      //Missing $descr$ <$link to=<<__tiddler__>>/>//
+    </$list>
+\end
+
+\define stretchtext-missing(tiddler, field)
+    <$macrocall $name="stretchtext-missing-tiddler" tiddler=<<__tiddler__>>/>
+    <$list filter="[<__tiddler__>is[tiddler]!is[shadow]!has<__field__>]" variable=_>
+      //Missing field '$field$' on existing tiddler <$link to=<<__tiddler__>>/>//
+    </$list>
+\end
+
+\define stretch(tiddler, smallField: "description", largeField: "text")
+  <$set name="stateTiddler" value=<<qualify """$:/state/stretchtext/$tiddler$""">>>
+    <$reveal stateTitle=<<stateTiddler>> stateIndex=<<__tiddler__>> type="match" text="hide" default="hide">
+        <div class="st-closed">
+        <$button setTitle=<<stateTiddler>> setIndex=<<__tiddler__>> setTo="show" class="tc-btn-invisible tc-tiddlylink" tooltip="Expand this node to show more detail.">
+            <i class="fa fa-search-plus"/>
+        </$button>
+    <$macrocall $name="stretchtext-tools" tiddler=<<__tiddler__>>/>
+        <$macrocall $name="stretchtext-missing" tiddler=<<__tiddler__>> field=<<__smallField__>>/>
+        <$tiddler tiddler=<<__tiddler__>>>
+            <$transclude tiddler=<<__tiddler__>> field=<<__smallField__>> />
+        </$tiddler>
+        </div>
+    </$reveal>
+    <$reveal stateTitle=<<stateTiddler>> stateIndex=<<__tiddler__>> type="match" text="show" default="hide">
+        <div class="st-open">
+      <$button setTitle=<<stateTiddler>> setIndex=<<__tiddler__>> setTo="hide" class="tc-btn-invisible tc-tiddlylink" tooltip="Shrink this node to show less detail.">
+          <i class="fa fa-search-minus st-expanded-colorize"/>
+      </$button>
+    <$macrocall $name="stretchtext-tools" tiddler=<<__tiddler__>>/>
+      [<$link to=<<__tiddler__>>/>]
+
+        <$macrocall $name="stretchtext-missing" tiddler=<<__tiddler__>> field=<<__largeField__>>/>
+        <$tiddler tiddler=<<__tiddler__>>>
+          <$transclude mode="block" field=<<__largeField__>> tiddler=<<__tiddler__>>/>
+        </$tiddler>
+        </div>
+    </$reveal>
+    </$set>
+\end
+
+\define stretch-template(tiddler, smallTemplate, largeTemplate, smallMode: "inline", largeMode: "block")
+  <$set name="stateTiddler" value=<<qualify """$:/state/stretchtext/$tiddler$""">>>
+    <$reveal stateTitle=<<stateTiddler>> stateIndex=<<__tiddler__>> type="match" text="hide" default="hide">
+        <div class="st-closed">
+        <$button setTitle=<<stateTiddler>> setIndex=<<__tiddler__>> setTo="show" class="tc-btn-invisible tc-tiddlylink" tooltip="Expand this node to show more detail.">
+            <i class="fa fa-search-plus"/>
+        </$button>
+    <$macrocall $name="stretchtext-tools" tiddler=<<__tiddler__>>/>
+        <$macrocall $name="stretchtext-missing-tiddler" tiddler=<<__smallTemplate__>> descr="template"/>
+        <$tiddler tiddler=<<__tiddler__>>>
+            <$transclude mode=<<__smallMode__>> tiddler=<<__smallTemplate__>>/>
+        </$tiddler>
+        </div>
+    </$reveal>
+    <$reveal stateTitle=<<stateTiddler>> stateIndex=<<__tiddler__>> type="match" text="show" default="hide">
+        <div class="st-open">
+      <$button setTitle=<<stateTiddler>> setIndex=<<__tiddler__>> setTo="hide" class="tc-btn-invisible tc-tiddlylink" tooltip="Shrink this node to show less detail.">
+          <i class="fa fa-search-minus st-expanded-colorize"/>
+      </$button>
+    <$macrocall $name="stretchtext-tools" tiddler=<<__tiddler__>>/>
+      [<$link to=<<__tiddler__>>/>]
+
+        <$macrocall $name="stretchtext-missing-tiddler" tiddler=<<__tiddler__>>/>
+        <$macrocall $name="stretchtext-missing-tiddler" tiddler=<<__largeTemplate__>> descr="template"/>
+        <$tiddler tiddler=<<__tiddler__>>>
+          <$transclude mode=<<__largeMode__>> tiddler=<<__largeTemplate__>>/>
+        </$tiddler>
+        </div>
+    </$reveal>
+    </$set>
+\end
+
+\define stretch-links(filter, smallField: "description", largeField: "text", emptyMessage: "")
+    <ul>
+        <$list filter=<<__filter__>> emptyMessage=<<__emptyMessage__>>>
+            <li><$macrocall $name="stretch" tiddler=<<currentTiddler>> smallField=<<__smallField__>> largeField=<<__largeField__>>/></li>
+        </$list>
+    </ul>
+\end
+
+\define stretch-template-links(filter, smallTemplate, largeTemplate, smallMode: "inline", largeMode: "block", emptyMessage: "")
+    <ul>
+        <$list filter=<<__filter__>> emptyMessage=<<__emptyMessage__>>>
+            <li><$macrocall $name="stretch-template" tiddler=<<currentTiddler>> smallTemplate=<<__smallTemplate__>> largeTemplate=<<__largeTemplate__>> smallMode=<<__smallMode__>> largeMode=<<__largeMode__>>/></li>
+        </$list>
+    </ul>
+\end

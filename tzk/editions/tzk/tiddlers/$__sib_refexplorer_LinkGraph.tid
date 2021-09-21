@@ -1,0 +1,16 @@
+caption: Link graph
+condition: [links[]]
+created: 20210301193644181
+modified: 20210825191857621
+modifier: soren
+tags: $:/tags/ReferenceExplorerTab
+title: $:/sib/refexplorer/LinkGraph
+type: text/vnd.tiddlywiki
+
+<!--
+Depth:&ensp;<$range tiddler="$:/temp/OutboundLinkDepth" index=<<currentTiddler>> min=1 max=4/>&ensp;<$text text={{{ [[$:/temp/OutboundLinkDepth]getindex<currentTiddler>!is[blank]else[2]] }}}/>
+
+<$tidgraph start=<<currentTiddler>> mode="linking" maxdepth={{{ [[$:/temp/OutboundLinkDepth]getindex<currentTiddler>] }}}/>
+-->
+
+<$tidgraph start=<<currentTiddler>> mode="linking" maxdepth=3 />

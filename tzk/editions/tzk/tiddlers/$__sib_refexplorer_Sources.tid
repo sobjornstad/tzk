@@ -1,0 +1,33 @@
+caption: Sources
+condition: [<storyTiddler>backlinks[]] [<storyTiddler>links[]] [<storyTiddler>tagging[]] +[regexp:tags[Class|Publication|Source]sort[]]
+created: 20200321225758173
+creator: soren
+modified: 20210825191857675
+modifier: soren
+tags: $:/tags/ReferenceExplorerTab
+title: $:/sib/refexplorer/Sources
+type: text/vnd.tiddlywiki
+
+<table class="ideas-table">
+	<caption class="ideas-table-caption">Source Explorer</caption>
+	<thead>
+	<tr>
+		<th>Title</th>
+		<th>Type</th>
+		<th>Tags</th>
+		<th style="width: 8rem;">Modified</th>
+	</tr>
+	</thead>
+	<tbody>
+		<$list filter={{$:/sib/refexplorer/Sources!!condition}}>
+		<$vars currentRecord=<<currentTiddler>> thisTooltip={{{ [all[current]get[description]!is[blank]] ~[all[current]get[text]split[ ]first[100]join[ ]addsuffix[...]] }}}>
+		<tr>
+			<td><$link to={{!!title}} tooltip=<<thisTooltip>> style="color: white;"/></td>
+			{{$:/sib/refexplorer/LinkTypeTemplate}}
+			<td><$list filter="[all[current]tags[]sort[]]"><$macrocall $name="tag-pill" tag=<<currentTiddler>>/></$list></td>
+			<td><$view field="modified" format="date" template="YYYY-0MM-0DD 0hh:0ss"/></td>
+		</tr>
+		</$vars>
+		</$list>
+	</tbody>
+</table>

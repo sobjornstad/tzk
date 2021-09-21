@@ -1,0 +1,13 @@
+created: 20200325215908710
+creator: soren
+description: List of orphans that excludes types of tiddlers that wouldn't be expected to have hardlinks; you can also permanently hide items.
+modified: 20210920155127747
+modifier: soren
+tags: Tool
+title: $:/sib/Tools/SmartOrphanList
+tooltype: maintenance
+type: text/vnd.tiddlywiki
+
+The following list of outstanding orphans excludes images and attachments (as they don't hard-link when used), templates, meta items, stubs (as they haven't been filled out yet), and any items that have been manually excluded.
+
+{{||$:/sib/Tools/SmartOrphanList/Table}}

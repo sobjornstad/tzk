@@ -1,0 +1,11 @@
+created: 20170206022244360
+modified: 20191215045742495
+revision: 0
+tags: $:/tags/table/BodyTemplate
+tbl-column-list: tbl-radio
+tbl-noedit: tbl-radio
+title: $:/plugins/aaldrich/tables/template/body/radio
+
+<td style="width:1.4ch;text-align:center;">
+<$radio tiddler=<<currentTable>> field="tbl-selected-record" value=<<currentRecord>>></$radio>
+</td>

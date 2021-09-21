@@ -1,0 +1,7 @@
+created: 20210304024358659
+description: Optional wikitext to display if the filter yields no result.
+modified: 20210306022349423
+name: emptyMessage
+tags: $:/plugins/sobjornstad/TiddlyStretch/doc/Parameter
+title: $:/plugins/sobjornstad/TiddlyStretch/doc/EmptyMessage
+type: text/vnd.tiddlywiki

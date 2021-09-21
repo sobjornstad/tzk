@@ -1,0 +1,3 @@
+title: $:/plugins/flibbles/relink/language/Error/InvalidElementName
+
+Illegal characters in element/widget name "<$text text=<<elementName>>/>". Element tags can only contain letters and the characters hyphen (`-`) and dollar sign (`$`)

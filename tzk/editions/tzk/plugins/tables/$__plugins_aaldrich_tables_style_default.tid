@@ -1,0 +1,459 @@
+created: 20190723034442800
+modified: 20191215064245416
+tags: $:/tags/Stylesheet
+tbl-class-name: tbl-style-default
+tbl-class-type: parent
+tbl-color-border: #DDDDDD
+tbl-color-caption: #DDDDDD
+tbl-color-footer: #F0F0F0
+tbl-color-header: #F0F0F0
+tbl-color-row-all: #FFFFFF
+tbl-color-row-even: #FCFCFC
+tbl-color-row-hover: #FFFEE2
+tbl-color-row-odd: #FFFFFF
+tbl-color-text: #000000
+tbl-color-text-hover: #001177
+tbl-pad-lr: 7px
+tbl-pad-tb-body: 2px
+tbl-pad-tb-headfoot: 4px
+tbl-size-font: {{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}}
+tbl-size-height: {{$:/themes/tiddlywiki/vanilla/metrics/bodylineheight}}
+tbl-size-icons: {{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}}
+tbl-width-border: 1px
+title: $:/plugins/aaldrich/tables/style/default
+
+<!-- CONTAINER/TABLE-->
+.{{!!tbl-class-name}} {  
+  text-shadow: none;
+  width:100%;
+  overflow:visible;
+}
+
+.{{!!tbl-class-name}} > table{  
+  text-shadow: none;
+  border-collapse: collapse;
+  caption-side: top;
+  table-layout:auto;
+  width:100%;
+  margin: 0 0 0 0;
+  border-top: {{!!tbl-width-border}} solid {{!!tbl-color-border}};
+  border-right: {{!!tbl-width-border}} solid {{!!tbl-color-border}};
+  border-bottom: {{!!tbl-width-border}} solid {{!!tbl-color-border}};
+  border-left: {{!!tbl-width-border}} solid {{!!tbl-color-border}};
+}
+
+<!--CAPTION-->
+.{{!!tbl-class-name}} > table > caption {
+  margin: 0 0 0 0;
+  padding: {{!!tbl-pad-tb-headfoot}} {{!!tbl-pad-lr}} {{!!tbl-pad-tb-headfoot}} {{!!tbl-pad-lr}};
+  text-shadow: none;
+  color:{{!!tbl-color-text}};
+  background-color:{{!!tbl-color-caption}};
+  vertical-align: middle;
+  font-size: {{!!tbl-size-font}};
+  line-height: {{!!tbl-size-height}};
+  border-top: {{!!tbl-width-border}} solid {{!!tbl-color-border}};
+  border-right: {{!!tbl-width-border}} solid {{!!tbl-color-border}};
+  border-bottom: 0px solid {{!!tbl-color-border}};
+  border-left: {{!!tbl-width-border}} solid {{!!tbl-color-border}};
+  text-align:center;
+}
+
+.{{!!tbl-class-name}} > table > caption *,
+.{{!!tbl-class-name}} > table > caption > div *{
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  text-shadow: none;
+  color:{{!!tbl-color-text}};
+  fill:{{!!tbl-color-text}};
+}
+
+.{{!!tbl-class-name}} > table > caption > div > .tbl-hidden-edit{
+  background: transparent !important;
+  border: none;
+  color:{{!!tbl-color-text}}!important;
+}
+
+.{{!!tbl-class-name}} > table > caption > div > .tbl-hidden-edit-wide{
+  width: 100%;
+  background: transparent !important;
+  border: none;
+  color:{{!!tbl-color-text}}!important;
+}
+
+<!--HEADER-->
+  .{{!!tbl-class-name}} > table > thead {
+  text-shadow: none;
+}
+
+.{{!!tbl-class-name}} > table > thead > tr {
+  text-shadow: none;
+  background: {{!!tbl-color-header}};
+  vertical-align: middle;
+  font-size: {{!!tbl-size-font}};
+  line-height: {{!!tbl-size-height}};
+}
+
+.{{!!tbl-class-name}} > table > thead > tr > th {
+  text-shadow: none;
+  color:{{!!tbl-color-text}};
+  background: transparent;
+  margin: 0 0 0 0;
+  padding: {{!!tbl-pad-tb-headfoot}} {{!!tbl-pad-lr}} {{!!tbl-pad-tb-headfoot}} {{!!tbl-pad-lr}};
+  border-top: {{!!tbl-width-border}} solid {{!!tbl-color-border}};
+  border-right: {{!!tbl-width-border}} solid {{!!tbl-color-border}};
+  border-bottom: {{!!tbl-width-border}} solid {{!!tbl-color-border}};
+  border-left: {{!!tbl-width-border}} solid {{!!tbl-color-border}};
+  text-align: left;
+  vertical-align: middle;
+  font-size: {{!!tbl-size-font}};
+  line-height: {{!!tbl-size-height}};
+  white-space: nowrap;
+}
+
+.{{!!tbl-class-name}} > table > thead> tr > th p, 
+.{{!!tbl-class-name}} > table > thead> tr > th a,
+.{{!!tbl-class-name}} > table > thead> tr > th button,
+.{{!!tbl-class-name}} > table > thead> tr > th .tc-tiddlylink {
+  text-shadow: none;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  color:{{!!tbl-color-text}};
+  font-weight: bold;
+}
+
+.{{!!tbl-class-name}} > table > thead> tr > th > button > svg,
+.{{!!tbl-class-name}} > table > thead> tr > th > span > button > svg {
+  text-shadow: none;
+  fill:{{!!tbl-color-text}};
+  height:{{!!tbl-size-icons}};
+  padding:0 0 2px 0;
+}
+
+.{{!!tbl-class-name}} > table > thead> tr > th > button.tbl-sort-svg > svg {
+  text-shadow: none;
+  fill:{{!!tbl-color-text}};
+  height:10px;
+  padding:0 0 2px 0;
+}
+
+<!--FOOTER-->
+.{{!!tbl-class-name}} > table > tfoot {
+  text-shadow: none;
+}
+
+.{{!!tbl-class-name}} > table > tfoot > tr {
+  text-shadow: none;
+  background: {{!!tbl-color-footer}};
+  vertical-align: middle;
+  font-size: {{!!tbl-size-font}};
+  line-height: {{!!tbl-size-height}};
+}
+
+.{{!!tbl-class-name}} > table > tfoot > tr > th {
+  text-shadow: none;
+  color:{{!!tbl-color-text}};
+  background: transparent;
+  margin: 0 0 0 0;
+  padding: {{!!tbl-pad-tb-headfoot}} {{!!tbl-pad-lr}} {{!!tbl-pad-tb-headfoot}} {{!!tbl-pad-lr}};
+  border-top: {{!!tbl-width-border}} solid {{!!tbl-color-border}};
+  border-right: {{!!tbl-width-border}} solid {{!!tbl-color-border}};
+  border-bottom: {{!!tbl-width-border}} solid {{!!tbl-color-border}};
+  border-left: {{!!tbl-width-border}} solid {{!!tbl-color-border}};
+  text-align: left;
+  vertical-align: middle;
+  font-size: {{!!tbl-size-font}};
+  line-height: {{!!tbl-size-height}};
+  white-space: nowrap;
+}
+
+.{{!!tbl-class-name}} > table > tfoot> tr > th p, 
+.{{!!tbl-class-name}} > table > tfoot> tr > th a,
+.{{!!tbl-class-name}} > table > tfoot> tr > th button,
+.{{!!tbl-class-name}} > table > tfoot> tr > th .tc-tiddlylink {
+  text-shadow: none;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  color:{{!!tbl-color-text}};
+  font-weight: bold;
+}
+
+.{{!!tbl-class-name}} > table > tfoot> tr > th > button > svg,
+.{{!!tbl-class-name}} > table > tfoot> tr > th > span > button > svg {
+  text-shadow: none;
+  fill:{{!!tbl-color-text}};
+  height:{{!!tbl-size-icons}};
+  padding:0 0 2px 0;
+}
+
+.{{!!tbl-class-name}} > table > tfoot> tr > th > button.tbl-sort-svg > svg {
+  text-shadow: none;
+  fill:{{!!tbl-color-text}};
+  height:10px;
+  padding:0 0 2px 0;
+}
+
+<!--BODY-->
+.{{!!tbl-class-name}} > table > tbody {
+  text-shadow: none;
+}
+
+.{{!!tbl-class-name}} > table > tbody > tr {
+  text-shadow: none;
+  background: {{!!tbl-color-row-all}};
+  vertical-align: middle;
+  font-size: {{!!tbl-size-font}};
+  line-height: {{!!tbl-size-height}};
+}
+
+.{{!!tbl-class-name}} > table > tbody > tr > td {
+  text-shadow: none;
+  color:{{!!tbl-color-text}};
+  background: transparent;
+  margin: 0 0 0 0;
+  padding: {{!!tbl-pad-tb-body}} {{!!tbl-pad-lr}} {{!!tbl-pad-tb-body}} {{!!tbl-pad-lr}};
+  border-top: {{!!tbl-width-border}} solid {{!!tbl-color-border}};
+  border-right: {{!!tbl-width-border}} solid {{!!tbl-color-border}};
+  border-bottom: {{!!tbl-width-border}} solid {{!!tbl-color-border}};
+  border-left: {{!!tbl-width-border}} solid {{!!tbl-color-border}};
+  text-align: left;
+}
+
+.{{!!tbl-class-name}} > table > tbody > tr > td.tbl-tag-template > div > div.tc-tags-wrapper {
+margin:0 0 0 0;
+}
+
+.{{!!tbl-class-name}} > table > tbody> tr > td > p > svg{
+  vertical-align: middle;
+  fill:{{!!tbl-color-text}};
+}
+
+.{{!!tbl-class-name}} > table > tbody> tr > td > a > sup{
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.{{!!tbl-class-name}} > table > tbody> tr > td > p,
+.{{!!tbl-class-name}} > table > tbody> tr > td > p > a, 
+.{{!!tbl-class-name}} > table > tbody> tr > td > a,
+.{{!!tbl-class-name}} > table > tbody> tr > td > a > a,
+.{{!!tbl-class-name}} > table > tbody> tr > td > button, 
+.{{!!tbl-class-name}} > table > tbody> tr > td > .tc-tiddlylink,
+.{{!!tbl-class-name}} > table > tbody> tr > td > a > a.tc-tiddlylink{
+  text-shadow: none;
+  margin:0 0 0 0;
+  color:{{!!tbl-color-text}};
+  background-color:transparent;
+  font-weight: normal;
+}
+
+.{{!!tbl-class-name}} > table > tbody> tr > td > button > svg {
+  text-shadow: none;
+  fill:{{!!tbl-color-text}};
+  height:{{!!tbl-size-icons}};
+  padding:0 0 2px 0;
+  align:center;
+}
+
+
+<!-- EVEN/ODD & ROW HIGHLIGHT -->
+.{{!!tbl-class-name}} > table > tbody > tr.tbl-record-row:nth-child(odd) {
+  background-color: {{!!tbl-color-row-odd}};
+}
+
+.{{!!tbl-class-name}} > table > tbody > tr.tbl-record-row:nth-child(even) {
+  background-color: {{!!tbl-color-row-even}};
+}
+
+<!--ROW HOVER-->
+.{{!!tbl-class-name}} > table > tbody > tr.tbl-record-row:hover {
+  background-color: {{!!tbl-color-row-hover}};
+}
+
+<!--LINK HOVER-->
+.{{!!tbl-class-name}} > table > caption a:hover,
+.{{!!tbl-class-name}} > table > caption > .tc-tiddlylink:hover {
+  color:{{!!tbl-color-text-hover}};
+  text-decoration: none;
+  font-weight: normal;
+}
+
+.{{!!tbl-class-name}} > table > thead > tr > th a:hover, 
+.{{!!tbl-class-name}} > table > thead > tr > th button:hover,
+.{{!!tbl-class-name}} > table > thead> tr > th > .tc-tiddlylink:hover {
+  color: {{!!tbl-color-text}};
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.{{!!tbl-class-name}} > table > tfoot > tr > th a:hover,
+.{{!!tbl-class-name}} > table > tfoot > tr > th button:hover,
+.{{!!tbl-class-name}} > table > tfoot> tr > th > .tc-tiddlylink:hover {
+  color: {{!!tbl-color-text}};
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.{{!!tbl-class-name}} > table > tbody > tr > td a:hover,
+.{{!!tbl-class-name}} > table > tbody > tr > td > a > a:hover,
+.{{!!tbl-class-name}} > table > tbody > tr > td > .tc-tiddlylink:hover, 
+.{{!!tbl-class-name}} > table > tbody > tr > td > a > .tc-tiddlylink:hover{
+  color:{{!!tbl-color-text-hover}};
+  text-decoration: none;
+  font-weight: normal;
+}
+
+.{{!!tbl-class-name}} > div a:hover,
+.{{!!tbl-class-name}} > div .tc-tiddlylink:hover {
+  color: {{!!tbl-color-text-hover}};
+  text-decoration: none;
+  font-weight: normal;
+}
+
+<!--INPUTS-->
+.{{!!tbl-class-name}} > table > tbody> tr > .tbl-inpt-edit > input[type="text"],
+.{{!!tbl-class-name}} > table > tbody> tr > .tbl-inpt-edit > textarea {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  color: {{!!tbl-color-text}};
+}
+
+.{{!!tbl-class-name}} > table > tbody > tr > .tbl-inpt-check > span > button > label > input[type="checkbox"],
+.{{!!tbl-class-name}} > table > thead > tr > .tbl-inpt-check > span > button > label > input[type="checkbox"]{
+  vertical-align: middle;
+  margin: 0px 0px 2px 0px;
+}
+
+.{{!!tbl-class-name}} > table > tbody> tr > td > select {
+  background: transparent;
+  border: none;
+  color: {{!!tbl-color-text}};
+}
+
+.{{!!tbl-class-name}} > table > tbody> tr > td > select > option {
+  background: {{!!tbl-color-row-all}};
+  border: none;
+  color: {{!!tbl-color-text}};
+}
+
+<!--EXPAND-->
+.{{!!tbl-class-name}} > table > tbody> tr > td.tbl-expand-pad,
+.{{!!tbl-class-name}} > table > tbody> tr > td.tbl-expand-pad > p > pre {
+  background-color: transparent;
+  border: none;
+  color: {{!!tbl-color-text}};
+  padding: 5px 8px 5px 8px;
+}
+
+.{{!!tbl-class-name}} > table > tbody> tr > td.tbl-expand-nopad,
+.{{!!tbl-class-name}} > table > tbody> tr > td.tbl-expand-nopad > p,
+.{{!!tbl-class-name}} > table > tbody> tr > td.tbl-expand-nopad > p > pre {
+  background-color: transparent;
+  border: none;
+  color: {{!!tbl-color-text}};
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+
+.{{!!tbl-class-name}} > table > tbody> tr > td > p > .tbl-inpt-edit {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  color: {{!!tbl-color-text}};
+}
+
+.{{!!tbl-class-name}} > table > tbody> tr > td > canvas {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  color: ;
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+}
+
+<!--PAGINATION-->
+.{{!!tbl-class-name}} > div > div.tbl-page-footer,
+.{{!!tbl-class-name}} > div > span > div.tbl-page-refresh {
+  text-align: center;
+  margin: 0 0 0 0;
+  padding: {{!!tbl-pad-tb-headfoot}} {{!!tbl-pad-lr}} {{!!tbl-pad-tb-headfoot}} {{!!tbl-pad-lr}};
+  color:{{!!tbl-color-text}};
+  background-color:{{!!tbl-color-caption}};
+  font-size: {{!!tbl-size-font}};
+  line-height: {{!!tbl-size-height}};
+  border-top: 0px solid {{!!tbl-color-border}};
+  border-right: {{!!tbl-width-border}} solid {{!!tbl-color-border}};
+  border-bottom: {{!!tbl-width-border}} solid {{!!tbl-color-border}};
+  border-left: {{!!tbl-width-border}} solid {{!!tbl-color-border}};
+}
+
+.{{!!tbl-class-name}} > div > span > div.tbl-page-refresh > button,
+.{{!!tbl-class-name}} > div > span > div.tbl-page-refresh > .tc-tiddlylink{
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+  color:{{!!tbl-color-text}};
+  font-weight: normal;
+  font-size: {{!!tbl-size-font}};
+}
+
+.{{!!tbl-class-name}} > div > div.tbl-page-footer > div.tbl-page-prev > button,
+.{{!!tbl-class-name}} > div > div.tbl-page-footer > div.tbl-page-prev > .tc-tiddlylink{
+  padding: 0 0 0 0;
+  margin: 2px 0 0 0;
+  color:{{!!tbl-color-text}};
+  font-weight: normal;
+  font-size: {{!!tbl-size-font}};
+  float:left;
+}
+
+.{{!!tbl-class-name}} > div > div.tbl-page-footer > div.tbl-page-next > button,
+.{{!!tbl-class-name}} > div > div.tbl-page-footer > div.tbl-page-next > .tc-tiddlylink{
+  padding: 0 0 0 0;
+  margin: 2px 0 0 0;
+  color:{{!!tbl-color-text}};
+  font-weight: normal;
+  font-size: {{!!tbl-size-font}};
+  float:right;
+}
+
+.{{!!tbl-class-name}} > div > div.tbl-page-footer > select {
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+  background: transparent;
+  border: none;
+  color: {{!!tbl-color-text}};
+}
+
+.{{!!tbl-class-name}} > div > div.tbl-page-footer > div.tbl-page-prev > button > svg,
+.{{!!tbl-class-name}} > div > div.tbl-page-footer > div.tbl-page-next > button > svg {
+  text-shadow: none;
+  fill:{{!!tbl-color-text}};
+  padding:0 0 3px 0;
+}
+
+<!--DELETE CONFIRMATION-->
+.tbl-delete-confirm {
+  color: white;
+  background-color:red;
+  padding: 8px;
+  margin: 0px;
+  text-align:center;
+}
+
+.tbl-delete-confirm > button {
+  color: white;
+  fill: white;
+}
+
+<!--EDIT MENU-->
+.tbl-edit-menu textarea{
+  width:100%;
+}
+.tbl-edit-wide{
+  width:94%;
+}

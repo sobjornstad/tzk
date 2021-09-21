@@ -1,0 +1,11 @@
+created: 20151120174133063
+modified: 20151120180705805
+tags: 
+title: $:/plugins/ihm/templates/collapse
+type: text/vnd.tiddlywiki
+
+<svg version="1.1"  xmlns="http://www.w3.org/2000/svg"  x="0px"
+	 y="0px" width="14px" height="14px" >
+<circle cx="7" cy="7" r="6"  stroke="#aeb0b5" stroke-width="1" fill="#aeb0b5"/>
+<polyline points="4,7 10,7" fill="none" stroke="white"/>
+</svg>

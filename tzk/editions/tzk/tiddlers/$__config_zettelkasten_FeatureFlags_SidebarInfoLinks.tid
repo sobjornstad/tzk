@@ -1,0 +1,11 @@
+caption: Sidebar info links
+created: 20210623014408947
+creator: soren
+description: Show navigation links to the most important parts of the wiki underneath the subtitle.
+modified: 20210825145449987
+modifier: soren
+private: no
+public: no
+tags: 
+title: $:/config/zettelkasten/FeatureFlags/SidebarInfoLinks
+type: text/vnd.tiddlywiki

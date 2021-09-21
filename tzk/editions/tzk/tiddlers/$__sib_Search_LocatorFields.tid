@@ -1,0 +1,10 @@
+caption: Fields
+created: 20200404141432994
+creator: soren
+modified: 20210522015101940
+modifier: soren
+tags: $:/tags/SearchResults
+title: $:/sib/Search/LocatorFields
+type: text/vnd.tiddlywiki
+
+<<locator-fields>>

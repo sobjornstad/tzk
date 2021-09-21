@@ -1,0 +1,11 @@
+caption: Info
+created: 20201129181525887
+modified: 20201129182049518
+tags: $:/sib/gis/MappingTools
+title: $:/sib/gis/Info
+type: text/vnd.tiddlywiki
+
+|!Address|{{!!gis-address}}|
+|!Latitude|{{!!gis-lat}}|
+|!Longitude|{{!!gis-long}}|
+|!GMaps zoom level|{{!!gis-zoom}}|

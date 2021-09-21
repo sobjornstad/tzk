@@ -1,0 +1,30 @@
+created: 20210807194134012
+description: Show links to the chronologically previous and next sabbatical update tiddlers.
+modified: 20210807194948834
+tags: $:/tags/ViewTemplate
+title: $:/sib/Templates/Topical/SabbaticalUpdates/DateNavigation
+transcludedin: Subtiddlers of SabbaticalUpdate.
+type: text/vnd.tiddlywiki
+
+<$list filter="[all[current]prefix[SabbaticalUpdate/]]" variable=_>
+
+<div class="sab-upd-navigator">
+<div style="text-align: left;">
+← Previous: <$list filter="[prefix[SabbaticalUpdate]sort[]!field:title[SabbaticalUpdate]before<currentTiddler>]" variable="prevTiddler" emptyMessage="//(at first update)//"><$link to=<<prevTiddler>>><$text text={{{ [<prevTiddler>get[caption]] }}}/></$link></$list>
+</div>
+<div style="text-align: right;">
+Next: <$list filter="[prefix[SabbaticalUpdate]sort[]!field:title[SabbaticalUpdate]after<currentTiddler>]" variable="nextTiddler" emptyMessage="//(at last update)//"><$link to=<<nextTiddler>>><$text text={{{ [<nextTiddler>get[caption]] }}}/></$link></$list> →
+</div>
+</div>
+
+</$list>
+
+<style>
+div.sab-upd-navigator div {
+	border-top: 1px solid <<color table-border>>;
+	padding-top: 10px;
+	margin-top: 6ex;
+	width: 50%;
+	float: left;
+}
+</style>

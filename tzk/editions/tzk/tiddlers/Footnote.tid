@@ -1,0 +1,11 @@
+created: 20210917204123567
+creator: soren
+modified: 20210917204403789
+modifier: soren
+tags: Meta Public
+title: Footnote
+type: text/vnd.tiddlywiki
+
+To add a footnote in a Zettelkasten tiddler, use the [[fnote|$:/sib/Macros/fnote]] macro in the spot where you want to create the footnote. Footnotes are primarily accessed by hovering over the number; the ReferenceExplorer also displays footnotes on a [[footnotes tab|$:/sib/refexplorer/Footnotes]].
+
+Internal links in footnotes don't appear in the reference explorer, so they shouldn't be used to discuss concepts critical to the central idea of the tiddler. In general, I use footnotes more in quasi-essays aimed primarily at discussing something in detail or sharing information with the public than in tightly focused and internally-bound notes.

@@ -1,0 +1,16 @@
+caption: Font Awesome
+created: 20180328182555066
+modified: 20180328190604063
+tags: $:/tags/ControlPanel
+title: $:/plugins/TheDiveO/FontAwesome/ui/ControlPanel/FontAwesome
+type: text/vnd.tiddlywiki
+
+Customize the Font Awesome 5 plugin.
+
+<$checkbox tiddler=<<fa5-cfgpath "decorate-syslinks">> field="text" checked="yes" unchecked="no" default="yes" >&nbsp;decorate system links: [[$:/ControlPanel]]</$checkbox>
+
+<$checkbox tiddler=<<fa5-cfgpath "decorate-extlinks">> field="text" checked="yes" unchecked="no" default="yes" >&nbsp;decorate external links: [[TiddlyWiki|http://tiddlywiki.com]]  [[Wikipedia|https://en.wikipedia.org/wiki/TiddlyWiki]]</$checkbox>
+
+<$checkbox tiddler=<<fa5-cfgpath "decorate-extdoclinks">> field="text" checked="yes" unchecked="no" default="yes" >&nbsp;decorate external document links:  https://example.org/document.pdf</$checkbox>
+
+<$checkbox tiddler=<<fa5-cfgpath "decorate-wk-extlinks">> field="text" checked="yes" unchecked="no" default="yes" >&nbsp;decorate external well-known links:  http://github.com http://en.wikipedia.org</$checkbox>

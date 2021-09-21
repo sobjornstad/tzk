@@ -1,0 +1,9 @@
+created: 20210303031840037
+creator: soren
+modified: 20210825162913436
+modifier: soren
+tags: Public
+title: $:/sib/Templates/Topical/TitleDescriptionStretch
+type: text/vnd.tiddlywiki
+
+{{!!title}}: {{!!description}}

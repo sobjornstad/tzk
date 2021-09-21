@@ -1,0 +1,53 @@
+created: 20201126014757319
+modified: 20201129155303116
+title: $:/sib/StorySaver/Saver
+type: text/vnd.tiddlywiki
+
+<!-- Eric Shulman, https://groups.google.com/g/tiddlywiki/c/2WWN0Lf0G-E, alt. -->
+
+<$set name=savedStoryTag value="$:/sib/StorySaver/SavedStory">
+<$set name=savedStoryPrefix value="$:/sib/StorySaver/saved/">
+<$button popup="$:/state/popup/savestory"> {{$:/core/images/save-button}} save story </$button>
+<$reveal type="popup" state="$:/state/popup/savestory" class="tc-drop-down tc-popup-keep" style="min-width:auto;padding:0.5em;">
+   Enter a new story name:<br>
+   <$edit-text tiddler="$:/state/popup/savestory" field="storyname" /><br>
+   <$list filter="[tag<savedStoryTag>limit[1]]">
+      or, select an existing story:<br>
+      <style> .savedStoryList { width:100%; } </style>
+      <$select tiddler="$:/state/popup/savestory" field="storyname" size="5" class="savedStoryList">
+      <$list filter="[tag<savedStoryTag>removeprefix<savedStoryPrefix>]"><option><<currentTiddler>></option></$list>
+      </$select>
+   </$list>
+   <$button style="text-align:center;"> save
+      <$action-setfield $tiddler={{{ [{$:/state/popup/savestory!!storyname}addprefix<savedStoryPrefix>] }}} list={{$:/StoryList!!list}} tags=<<savedStoryTag>> />
+      <$action-deletetiddler $tiddler="$:/state/popup/savestory" />
+   </$button>
+</$reveal>
+<$button popup="$:/state/popup/loadstory"> {{$:/core/images/storyview-classic}} load story </$button>
+<$reveal type="popup" state="$:/state/popup/loadstory" class="tc-drop-down tc-popup-keep" style="min-width:auto;padding:0.5em;">
+   <$list filter="[tag<savedStoryTag>limit[1]]" emptyMessage="no saved stories">
+      select an existing story:<br>
+      <style> .savedStoryList { width:100%; } </style>
+      <$select tiddler="$:/state/popup/loadstory" field="storyname" size="5" class="savedStoryList">
+      <$list filter="[tag<savedStoryTag>removeprefix<savedStoryPrefix>]"><option><<currentTiddler>></option></$list>
+      </$select>
+   </$list>
+   <$button style="text-align:center;"> load
+      <$action-setfield $tiddler="$:/StoryList" list={{{ [{$:/state/popup/loadstory!!storyname}addprefix<savedStoryPrefix>get[list]] }}} />
+      <$action-deletetiddler $tiddler="$:/state/popup/loadstory" />
+   </$button>
+</$reveal>
+
+<$button popup="$:/state/popup/exportstory"> {{$:/core/images/export-button}} export story </$button>
+<$reveal type="popup" state="$:/state/popup/exportstory" class="tc-drop-down tc-popup-keep" style="min-width:auto;padding:0.5em;">
+   <$list filter="[tag<savedStoryTag>limit[1]]" emptyMessage="no saved stories">
+      select an existing story:<br>
+      <style> .savedStoryList { width:100%; } </style>
+      <$select tiddler="$:/state/popup/exportstory" field="storyname" size="5" class="savedStoryList">
+      <$list filter="[tag<savedStoryTag>removeprefix<savedStoryPrefix>]"><option><<currentTiddler>></option></$list>
+      </$select>
+   </$list>
+	 <$macrocall $name="exportButton" exportFilter={{{ [{$:/state/popup/exportstory!!storyname}addprefix<savedStoryPrefix>get[list]] }}} lingoBase="$:/language/Buttons/ExportTiddlers/"/>
+</$reveal>
+</$set>
+</$set>

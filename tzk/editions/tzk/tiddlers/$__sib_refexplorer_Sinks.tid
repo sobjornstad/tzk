@@ -1,0 +1,33 @@
+caption: Sinks
+condition: [<storyTiddler>backlinks[]] [<storyTiddler>links[]] [<storyTiddler>tagging[]] +[tag[Sink]sort[]]
+created: 20200329154311717
+creator: soren
+modified: 20210825191857667
+modifier: soren
+tags: $:/tags/ReferenceExplorerTab
+title: $:/sib/refexplorer/Sinks
+type: text/vnd.tiddlywiki
+
+<table class="ideas-table">
+	<caption class="ideas-table-caption">Sink Explorer</caption>
+	<thead>
+	<tr>
+		<th>Title</th>
+		<th>Type</th>
+		<th>Tags</th>
+		<th style="width: 8rem;">Modified</th>
+	</tr>
+	</thead>
+	<tbody>
+		<$list filter={{$:/sib/refexplorer/Sinks!!condition}}>
+		<$vars currentRecord=<<currentTiddler>> thisTooltip={{{ [all[current]get[description]!is[blank]] ~[all[current]get[text]split[ ]first[100]join[ ]addsuffix[...]] }}}>
+		<tr>
+			<td><$link to={{!!title}} tooltip=<<thisTooltip>> style="color: white;"/></td>
+			{{$:/sib/refexplorer/LinkTypeTemplate}}
+			<td><$list filter="[all[current]tags[]sort[]]"><$macrocall $name="tag-pill" tag=<<currentTiddler>>/></$list></td>
+			<td><$view field="modified" format="date" template="YYYY-0MM-0DD 0hh:0ss"/></td>
+		</tr>
+		</$vars>
+		</$list>
+	</tbody>
+</table>

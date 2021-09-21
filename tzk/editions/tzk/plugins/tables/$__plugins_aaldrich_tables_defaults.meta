@@ -1,0 +1,49 @@
+created: 20170207075434434
+modified: 20191214043748895
+tags: 
+tbl-add-records: 
+tbl-anything: 
+tbl-button-actions: 
+tbl-button-icon: {{$:/core/images/menu-button}}
+tbl-button-tip: 
+tbl-caption: ''{{!!title}}''
+tbl-caption-mode: inline
+tbl-checkbox-actions-selected: 
+tbl-checkbox-actions-unselected: 
+tbl-checkbox-field: 
+tbl-checkbox-tag: 
+tbl-checkbox-tip: 
+tbl-checkbox-value-selected: 
+tbl-checkbox-value-unselected: 
+tbl-class: tbl-style-default
+tbl-columns: title modified tags
+tbl-default-date-format: 0MM/0DD/YY hh12:0mmAM
+tbl-default-title: New Table
+tbl-expand: 
+tbl-filter: [!is[system]search[]]
+tbl-limit: 10
+tbl-limit-choices: [[5]] [[10]] [[15]] [[20]] [[25]] [[30]] [[40]] [[50]]
+tbl-mode: normal
+tbl-page-marker: 
+tbl-show-caption: true
+tbl-show-colgroup: false
+tbl-show-edit: true
+tbl-show-footer: false
+tbl-show-header: true
+tbl-show-mode: true
+tbl-show-pagination: auto
+tbl-sort-by: title
+tbl-sort-negate: false
+tbl-sort-type: nsort
+tbl-style-colgroup: 
+tbl-style-container: 
+tbl-style-table: width:100%;
+tbl-temp-default-body: $:/plugins/aaldrich/tables/template/body/default
+tbl-temp-default-body-edit: $:/plugins/aaldrich/tables/template/body/edit-input
+tbl-temp-default-expand: $:/plugins/aaldrich/tables/template/expand/transclude
+tbl-temp-default-foot: $:/plugins/aaldrich/tables/template/footer/default
+tbl-temp-default-head: $:/plugins/aaldrich/tables/template/header/default
+tbl-title-type-code: <$list filter="[<currentRecord>is[shadow]]">^^s^^</$list><$list filter="[<currentRecord>is[tiddler]is[shadow]]">^^*^^</$list>
+tbl-title-type-show: true
+title: $:/plugins/aaldrich/tables/defaults
+type: application/x-tiddler-dictionary

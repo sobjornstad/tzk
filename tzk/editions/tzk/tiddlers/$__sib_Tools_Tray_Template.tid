@@ -1,0 +1,13 @@
+created: 20210711192716590
+creator: soren
+modified: 20210920140956221
+modifier: soren
+tags: 
+title: $:/sib/Tools/Tray/Template
+type: text/vnd.tiddlywiki
+
+\define remove-tiddler()
+	<$action-listops $tiddler="$:/sib/Tools/Tray" $field="list" $filter="[enlist{$:/sib/Tools/Tray!!list}] -[all[current]]"/>
+\end
+
+<$link/>&nbsp;<$button actions=<<remove-tiddler>> class="tc-btn-invisible"><span style="fill: white;">{{$:/core/images/delete-button}}</span></$button>

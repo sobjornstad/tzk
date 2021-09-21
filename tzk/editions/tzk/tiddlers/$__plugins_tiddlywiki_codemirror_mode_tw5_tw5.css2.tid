@@ -1,0 +1,238 @@
+created: 20200815103937889
+creator: soren
+modified: 20210827213558174
+modifier: soren
+module-type: codemirror-theme
+name: tw5plus
+tags: $:/tags/DisabledPlugin
+title: $:/plugins/tiddlywiki/codemirror/mode/tw5/tw5.css2
+type: text/vnd.tiddlywiki
+
+```
+/*
+Tiddlywiki Metadata
+----
+Name: $:/plugins/tiddlywiki/codemirror/mode/tw5/tw5.css
+
+Additional Fields - 
+module-type: codemirror-theme
+name: tw5plus
+*/
+```
+
+.cm-s-tw5plus {
+    line-height: 1.5em;
+    background: <<colour tiddler-editor-background>>;
+    color: <<colour foreground>>;
+}
+
+.cm-s-tw5plus .CodeMirror-lines {
+    padding: 8px 0;
+}
+
+.cm-s-tw5plus .CodeMirror-linenumber {
+    color: #586E75;
+}
+
+.cm-s-tw5plus .CodeMirror-gutters {
+    background-color: <<colour page-background>>;
+    padding-right: 10px;
+    z-index: 3;
+    border: none;
+}
+
+.cm-s-tw5plus div.CodeMirror-cursor {
+    border-left: 3px solid <<colour foreground>>;
+}
+
+.cm-s-tw5plus .CodeMirror-activeline-background {
+    background: <<colour tiddler-editor-fields-odd>>;
+}
+
+.cm-s-tw5plus .CodeMirror-selected {
+    background: <<colour very-muted-foreground>>;
+}
+
+.cm-s-tw5plus .cm-comment {
+    font-style: italic;
+    color: <<colour muted-foreground>>;
+}
+
+.cm-s-tw5plus .CodeMirror-matchingbracket {
+    text-decoration: underline;
+    color: #d33682 !important;
+}
+
+.cm-s-tw5plus .cm-strikethrough {
+    text-decoration-color: <<colour very-muted-foreground>>;  
+}
+
+.cm-s-tw5plus .cm-underlined {
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-color: <<colour very-muted-foreground>>;
+}
+
+.cm-s-tw5plus .cm-superscript {
+    vertical-align: super;
+    font-size: 0.7em;
+    line-height: 0.1em;
+}
+
+.cm-s-tw5plus .cm-subscript {
+    font-size: 0.7em;
+    line-height: 0.5;
+}
+
+.cm-s-tw5plus .cm-string {
+    color: #586E75;
+}
+
+.cm-s-tw5plus .cm-number {
+    color: #268BD2;
+}
+
+.cm-s-tw5plus .cm-macro {
+    color: #cb4b16;
+    font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
+}
+
+.cm-s-tw5plus .cm-keyword {
+    color: #859900;
+    font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
+    font-weight: 600;
+}
+
+.cm-s-tw5plus .cm-variable {
+    color: #268BD2;
+}
+
+.cm-s-tw5plus .cm-variable-2 {
+    color: #268BD2;
+}
+
+.cm-s-tw5plus .cm-property {
+    color: #268BD2;
+}
+
+.cm-s-tw5plus .cm-atom {
+    color: #268BD2;
+}
+
+.cm-s-tw5plus .cm-operator {
+    color: #859900;
+}
+
+.cm-s-tw5plus .cm-quote {
+    font-style: italic;
+    padding-left: 0.6em;
+    border-left: #d33682 solid 0.2em;
+}
+
+.cm-s-tw5plus .cm-hr {
+    color: #268bd2;
+}
+
+.cm-s-tw5plus .cm-h1 {
+    color: #d33682;
+    font-weight: 700;
+    font-size: 1.383em;
+    line-height: 1.802em;
+}
+
+.cm-s-tw5plus .cm-h2 {
+    color: #d33682;
+    font-weight: 600;
+    font-size: 1.296em;
+    line-height: 1.602em;
+}
+
+.cm-s-tw5plus .cm-h3 {
+    color: #d33682;
+    font-weight: 500;
+    font-size: 1.215em;
+    line-height: 1.424em;
+}
+
+.cm-s-tw5plus .cm-h4 {
+    color: #d33682;
+    font-weight: 400;
+    font-size: 1.138em;
+    line-height: 1.266em;
+}
+
+.cm-s-tw5plus .cm-h5 {
+    color: #d33682;
+    font-weight: 400;
+    font-size: 1.067em;
+    line-height: 1.125em;
+}
+
+.cm-s-tw5plus .cm-h6 {
+    color: #d33682;
+    font-weight: 400;
+}
+
+.cm-s-tw5plus .cm-link {
+    color: #2aa198;
+    text-decoration: none;
+}
+
+.cm-s-tw5plus .cm-internallink {
+    color: #268bd2;
+    font-weight:600;
+}
+
+.cm-s-tw5plus .cm-externallink {
+    color: #d33682;
+    text-decoration: underline;
+}
+
+.cm-s-tw5plus .cm-transclude {
+    color: #dc322f;
+}
+
+.cm-s-tw5plus .cm-pre {
+    color: #268BD2;
+    font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
+}
+
+.cm-s-tw5plus .cm-monospace {
+    color: #cb4b16;
+    font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
+}
+
+.cm-s-tw5plus .cm-list1 {
+    color: #268BD2;
+    padding-left: 1em;
+    padding-right: 0.5em;
+    font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
+}
+
+.cm-s-tw5plus .cm-list2 {
+    color: #268BD2;
+    padding-left: 2em;
+    padding-right: 0.5em;
+    font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
+}
+
+.cm-s-tw5plus .cm-list3 {
+    color: #268BD2;
+    padding-left: 3em;
+    padding-right: 0.5em;
+    font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
+}
+
+.cm-s-tw5plus .cm-list4 {
+    color: #268BD2;
+    padding-left: 4em;
+    padding-right: 0.5em;
+    font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
+}
+
+.cm-s-tw5plus .cm-list5 {
+    color: #268BD2;
+    padding-left: 5em;
+    padding-right: 0.5em;
+    font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
+}

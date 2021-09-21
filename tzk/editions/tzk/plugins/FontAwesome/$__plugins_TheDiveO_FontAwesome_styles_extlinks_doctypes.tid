@@ -1,0 +1,39 @@
+created: 20170301201914393
+list-after: $:/plugins/TheDiveO/FontAwesome/styles/extlinks
+modified: 20180328191142557
+tags: $:/tags/Stylesheet
+title: $:/plugins/TheDiveO/FontAwesome/styles/extlinks/doctypes
+type: text/vnd.tiddlywiki
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html
+
+<$set name="cfg" value=<<fa5-cfgpath "decorate-extdoclinks">> >
+<$list filter=<<fa5-cfgfilterexpr>> >
+
+a[href$=".pdf"].tc-tiddlylink-external:before {
+  <<fa-plugin-font-regular>>
+  content: '\f1c1\202f';
+  display: inline-block;
+}
+
+a[href$=".gz"].tc-tiddlylink-external:before, 
+a[href$=".zip"].tc-tiddlylink-external:before,
+a[href$=".7z"].tc-tiddlylink-external:before {
+  <<fa-plugin-font-regular>>
+  content: '\f1c6\202f';
+  display: inline-block;
+}
+
+a[href$=".jpg"].tc-tiddlylink-external:before,
+a[href$=".jpeg"].tc-tiddlylink-external:before,
+a[href$=".png"].tc-tiddlylink-external:before,
+a[href$=".gif"].tc-tiddlylink-external:before,
+a[href$=".tif"].tc-tiddlylink-external:before,
+a[href$=".tiff"].tc-tiddlylink-external:before {
+  <<fa-plugin-font-regular>>
+  content: '\f1c5\202f';
+  display: inline-block;
+}
+
+</$list>
+</$set>

@@ -1,0 +1,3 @@
+title: $:/plugins/flibbles/relink/language/Error/InvalidAttributeName
+
+Illegal characters in attribute name "<$text text=<<attributeName>>/>". Attributes cannot contain slashes ('/'), closing angle or square brackets ('>' or ']'), quotes or apostrophes ('"' or "'"), equals ('='), or whitespace

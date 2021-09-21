@@ -1,0 +1,45 @@
+created: 20200508004653657
+modified: 20210606175143055
+tags: $:/tags/EditTemplate
+title: $:/sib/Templates/Automatic/Publicity/LevelDisplay
+type: text/vnd.tiddlywiki
+
+\define editingSystemTiddler(not)[all[current]has[draft.of]get[draft.title]$not$is[system]]
+\define editingPublicZk(not) [[$:/config/sib/IsPublicEdition]] +[get[text]$not$match[true]]
+
+
+<$list filter=<<editingPublicZk "!">> variable=_>
+	<div style="color: orangered; font-weight: bold">
+		WARNING: You are editing the public Zettelkasten. Your changes will not be saved unless you export them manually.
+	</div>
+</$list>
+
+<$list filter=<<editingPublicZk>> variable=_>
+	<$list filter=<<editingSystemTiddler>> >
+	<div style="color: #d08770; float:left;">
+		<div style="width: 16px; float:left;">{{$:/core/images/theme-button}}</div>
+		<div style="padding-top: 5px; padding-left: 20px;">
+			You are editing a //system tiddler//. System tiddlers are intrinsically public.
+		</div>
+	</div>
+	</$list>
+
+	<$list filter=<<editingSystemTiddler "!">> variable=_>
+		<$list filter="[all[current]!tag[Public]]">
+		<div style="color: #81a1c1; float:left;">
+			<div style="width: 16px; float:left;">{{$:/core/images/locked-padlock}}</div>
+			<div style="padding-top: 5px; padding-left: 20px;">
+				You are editing a //private tiddler//.
+			</div>
+		</div>
+		</$list>
+
+		<$list filter="[all[current]tag[Public]!is[system]]">
+		<div style="color: #d08770; float:left;">
+			<div style="width: 16px; float:left;">{{$:/core/images/globe}}</div>
+			<div style="padding-top: 4px; padding-left: 20px;">You are editing a //public tiddler//.
+			</div>
+		</div>
+		</$list>
+	</$list>
+</$list>

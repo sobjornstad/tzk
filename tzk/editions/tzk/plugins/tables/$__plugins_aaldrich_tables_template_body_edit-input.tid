@@ -1,0 +1,16 @@
+created: 20191205063124704
+modified: 20191206021441510
+revision: 0
+tags: $:/tags/table/BodyTemplate
+tbl-column-list: tbl-edit-input
+tbl-noedit: tbl-edit-input
+title: $:/plugins/aaldrich/tables/template/body/edit-input
+
+<td class="tbl-inpt-edit">
+  <$list filter="[<fieldOrIndex>]-index">
+    <$edit-text tiddler=<<currentRecord>> field=<<currentColumn>> tag="input" type="text"/>
+  </$list>
+  <$list filter="[<fieldOrIndex>]-field">
+    <$edit-text tiddler=<<currentRecord>> index=<<currentColumn>> tag="input" type="text"/>
+  </$list>
+</td>
