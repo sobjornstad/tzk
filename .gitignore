@@ -2,6 +2,6 @@ __pycache__/
 .vscode/
 venv/
 *.egg-info/
-docs/_build/
+cli_docs/_build/
 tzk/editions/
 dist/
