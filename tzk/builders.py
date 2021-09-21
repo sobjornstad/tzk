@@ -110,7 +110,7 @@ def require_clean_working_tree() -> None:
     For the standard build process, it is not necessary for the working tree
     to be clean. However, if you use any custom build steps that compare history,
     or you simply want to ensure that you always have a recent checkpoint in your
-    local version whenever you publishing another version, this may be a useful
+    local version whenever you publish another version, this may be a useful
     requirement.
     """
     pleasecommit = "Please commit or stash them before publishing (try 'tzk commit')."
@@ -538,9 +538,7 @@ def delete_tiddlers(tiddlers: Sequence[str]) -> None:
 
     This is hopefully self-explanatory.
 
-    .. code-block:: python
-
-    :param mappings: A list of filenames of tiddlers to delete.
+    :param tiddlers: A list of filenames of tiddlers to delete.
     """
     assert 'public_wiki_folder' in build_state
     for tiddler in tiddlers:
