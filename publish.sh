@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+. venv/bin/activate
 rm -rf build/
 rm -f dist/*
 mkdir -p dist
