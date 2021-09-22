@@ -188,13 +188,13 @@ def check_for_kill_phrases(kill_phrase_file: str = None) -> None:
     :param kill_phrase_file: The path from the source wiki's root directory to the
                              config tiddler containing kill phrases. In the default
                              Zettelkasten edition, this is
-                             tiddlers/_system/config/zettelkasten/Build/KillPhrases.tid;
+                             "tiddlers/$__config_zettelkasten_Build_KillPhrases.tid";
                              if you change the way paths are determined, you can give
                              a different path here.
     """
     assert 'public_wiki_folder' in build_state, "new_output_folder builder must run first"
     if kill_phrase_file is None:
-        kill_phrase_file = "tiddlers/_system/config/zettelkasten/Build/KillPhrases.tid"
+        kill_phrase_file = "tiddlers/$__config_zettelkasten_Build_KillPhrases.tid"
 
     kill_phrases = set()
     with open(kill_phrase_file) as f:
