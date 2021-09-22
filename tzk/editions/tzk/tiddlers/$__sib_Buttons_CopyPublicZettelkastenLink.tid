@@ -1,9 +1,9 @@
-caption: Copy public Zettelkasten link
+caption: copy public link
 created: 20201120172611922
 creator: soren
 description: Copy a link to this tiddler in the public Zettelkasten
 list-after: $:/core/ui/Buttons/info
-modified: 20210825162715432
+modified: 20210922125543768
 modifier: soren
 tags: $:/tags/ViewToolbar
 title: $:/sib/Buttons/CopyPublicZettelkastenLink
@@ -15,7 +15,15 @@ type: text/vnd.tiddlywiki
 \end
 
 <$set name="tidTitle" value={{!!title}}>
-<$button message="tm-copy-to-clipboard" param=<<copier>> tooltip={{!!caption}} class=<<tv-config-toolbar-class>>>
+<$button message="tm-copy-to-clipboard" param=<<copier>> tooltip={{$:/sib/Buttons/CopyPublicZettelkastenLink!!caption}} class=<<tv-config-toolbar-class>>>
+	<$list filter="[<tv-config-toolbar-icons>match[yes]]">
   {{$:/core/images/permalink-button}}
+	</$list>
+	<$list filter="[<tv-config-toolbar-text>match[yes]]">
+	<span class="tc-btn-text">
+	<$text text=" "/>
+	<$text text={{$:/sib/Buttons/CopyPublicZettelkastenLink!!caption}}/>
+	</span>
+	</$list>
 </$button>
 </$set>
