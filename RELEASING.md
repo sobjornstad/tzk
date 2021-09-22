@@ -5,7 +5,7 @@
 2. Update version numbers:
    `setup.py`,
    `cli_docs/conf.py`,
-   `util.py`.
+   `tzk/util.py`.
 3. Push changes to GitHub.
    Check that RTD and GitHub Pages update as desired
    (https://tzk.readthedocs.io/en/latest/,
