@@ -1,0 +1,15 @@
+caption: Tray
+created: 20210701023215046
+creator: soren
+description: Items we're currently working on but don't need to leave open. Drag and drop a link to a tiddler to add it.
+list: 
+modified: 20210920155431768
+modifier: soren
+tags: Meta Tool
+title: $:/sib/Tools/Tray
+tooltype: aggregator
+type: text/vnd.tiddlywiki
+
+Stuff I'm working on but don't need to keep open:
+
+<<list-links-draggable "$:/sib/Tools/Tray" itemTemplate:"$:/sib/Tools/Tray/Template">>
