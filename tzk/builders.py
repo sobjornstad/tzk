@@ -278,7 +278,8 @@ def compile_html_file(
                           will be placed, relative to the private wiki's root directory.
                           Default ``output/public_site``.
     :param overwrite:     If the ``output_folder`` already exists,
-                          should we overwrite it? Default True.
+                          should we overwrite any files in it with the same name?
+                          Default True.
     :param externalize_attachments: If True, update tiddlers that match
                                     the ``attachment_filter`` parameter to point to
                                     external versions of their content.
@@ -311,13 +312,10 @@ def compile_html_file(
              f"(To overwrite any files existing in the output folder, "
              f"set overwrite = True for this builder.)")
 
-    try:
-        shutil.rmtree(output_folder)
-    except FileNotFoundError:
-        pass
     shutil.copytree(
         Path(build_state['public_wiki_folder']) / "output",
         Path(output_folder),
+        dirs_exist_ok=True
     )
     info(f"Successfully copied built output to {os.path.abspath(output_folder)}.")
 
