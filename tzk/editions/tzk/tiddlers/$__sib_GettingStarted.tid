@@ -2,7 +2,7 @@ created: 20210523150144006
 creator: soren
 description: Guided wizard that walks you through basic settings and the most important things to know about this edition.
 list: $:/sib/GettingStarted/Warning $:/sib/GettingStarted/Title $:/sib/GettingStarted/Copyright $:/sib/GettingStarted/ZettelkastenCardTypes $:/sib/GettingStarted/ReferenceExplorer $:/sib/GettingStarted/ThingsToDo $:/sib/GettingStarted/NextSteps
-modified: 20210920203903771
+modified: 20210922011910182
 modifier: soren
 tags: Meta Tool
 title: $:/sib/GettingStarted
@@ -56,7 +56,7 @@ tzk is primarily designed for use with Node.js and has an associated helper comm
 * Highly configurable builds, allowing you to publish different versions of your wiki -- a common use case is publishing some of your content on the web and keeping some of it private.
 * Space-efficient backups and version history with Git.
 
-Full instructions for installing and initializing the tzk command-line tool can be found on Read the Docs.
+Full instructions for installing and initializing the tzk command-line tool can be [[found on Read the Docs|https://tzk.readthedocs.io/en/latest/]].
 
 If you're familiar with command-line tools like tzk, you can get a quick start by making sure you have Git, NPM, and Python 3.6 or greater installed, then running:
 
