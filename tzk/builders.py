@@ -388,31 +388,32 @@ def replace_private_people(initialer: Callable[[str], str] = None) -> None:
     assert 'public_wiki_folder' in build_state
 
     replacement_table = _private_people_replacement_table(initialer)
+    from pprint import pprint; pprint(replacement_table)
     tid_files = (Path(build_state['public_wiki_folder']) / "tiddlers").glob("**/*.tid")
 
     for tiddler in tid_files:
         dirty = False
         with tiddler.open() as f:
             lines = f.readlines()
-        for idx, line in enumerate(lines):
+        for i in range(len(lines)):
             for replace_person, replace_initials in replacement_table.items():
-                if replace_person in line:
-                    if '|' + replace_person + ']]' in line:
+                if replace_person in lines[i]:
+                    if '|' + replace_person + ']]' in lines[i]:
                         # link with the person as the target only;
                         # beware that you might have put something private in the text
-                        lines[idx] = line.replace(replace_person,
-                                                  'PrivatePerson')
-                    elif '[[' + replace_person + ']]' in line:
+                        lines[i] = lines[i].replace(replace_person, 'PrivatePerson')
+                    elif '[[' + replace_person + ']]' in lines[i]:
                         # link with the person as the target and text
-                        lines[idx] = line.replace(replace_person,
-                                                  replace_initials + '|PrivatePerson')
+                        lines[i] = lines[i].replace(
+                                replace_person,
+                                replace_initials + '|PrivatePerson')
                     else:
                         # camel-case link or unlinked reference in text;
                         # or spurious substring, so rule that out with the '\b' search
-                        lines[idx] = re.sub(
+                        lines[i] = re.sub(
                             r"\b" + re.escape(replace_person) + r"\b",
                             f'<<privateperson "{replace_initials}">>',
-                            line
+                            lines[i]
                         )
                     dirty = True
         if dirty:
