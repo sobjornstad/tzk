@@ -1,5 +1,7 @@
 created: 20210624125244567
-modified: 20210629025407566
+creator: soren
+modified: 20211025010048942
+modifier: soren
 tags: $:/tags/Stylesheet
 title: $:/sib/styles/hr
 type: text/vnd.tiddlywiki
@@ -7,7 +9,7 @@ type: text/vnd.tiddlywiki
 /* Based on: Flaired edges, by Tomas Theunissen
    https://css-tricks.com/examples/hrs/ */
 
-.tc-tiddler-body hr, .tc-tiddler-preview-preview hr {
+.tc-tiddler-body > hr, .tc-tiddler-preview-preview > hr {
     overflow: visible; /* For IE */
     height: 30px;
     border-style: solid;

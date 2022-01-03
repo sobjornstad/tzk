@@ -1,0 +1,6 @@
+caption: A filter Operator to randomize the order of the list passed to it.
+created: 20150811171933696
+modified: 20180220125039203
+module-type: filteroperator
+title: $:/plugins/mklauber/shuffle/shuffle.js
+type: application/javascript

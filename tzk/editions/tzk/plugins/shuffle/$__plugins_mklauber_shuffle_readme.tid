@@ -1,0 +1,68 @@
+caption: Shuffle Operator
+title: $:/plugins/mklauber/shuffle/readme
+
+|!purpose|Randomize the order of the input list|
+|!input|a selection of titles|
+|!parameter|a random string to be used to create consistent random ordering|
+|!output|The input titles, rearranged in a random order|
+
+This plugin implements a new filter operator called Shuffle.  This operator takes the input list and randomizes the order of the list.  If no parameter is provided, the list order is random every time.
+
+!!!Example:
+```
+<$list filter="1 2 3 4 5 +[shuffle[]]">
+
+</$list>
+```
+
+<$button popup="$:/state/shuffle/reveal1">Run Demo</$button>
+
+<$reveal type="popup" state="$:/state/shuffle/reveal1">
+<div class="tc-drop-down">
+<$list filter="1 2 3 4 5 +[shuffle[]]">
+
+</$list>
+</div>
+</$reveal>
+
+Combining this operator with the first operator allows you to choose 1 or more titles randomly from a list.
+
+!!!Example:
+```
+<$list filter="1 2 3 4 5 +[shuffle[]first[2]]">
+
+</$list>
+```
+
+<$button popup="$:/state/shuffle/reveal2">Run Demo</$button>
+
+<$reveal type="popup" state="$:/state/shuffle/reveal2">
+<div class="tc-drop-down">
+<$list filter="1 2 3 4 5 +[shuffle[]first[2]]">
+
+</$list>
+</div>
+</$reveal>
+
+If a parameter is provided the list will be ordered identically every time it is rendered.  This can be useful in conjunction a button that updates a state tiddler.  Set the parameter of this operator to reference that state tiddler, and create a button that updates that tiddler, and now the ordering of the random operators only changes when the button is pressed.
+
+!!!Example:
+```
+<$button>
+<$action-setfield $tiddler="$:/temp/shuffle/example" $field="state" $value=<<now "0hh:0mm:0ss">>/>
+Change Order
+</$button>
+
+<$list filter="1 2 3 4 5 +[shuffle{$:/temp/shuffle/example!!state}]">
+
+</$list>
+```
+
+<$button>
+<$action-setfield $tiddler="$:/temp/shuffle/example" $field="state" $value=<<now "0hh:0mm:0ss">>/>
+Update
+</$button>
+
+<$list filter="1 2 3 4 5 +[shuffle{$:/temp/shuffle/example!!state}]">
+
+</$list>

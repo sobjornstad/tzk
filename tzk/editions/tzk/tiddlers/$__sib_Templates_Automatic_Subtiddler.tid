@@ -1,0 +1,33 @@
+created: 20211120164840100
+creator: soren
+description: Navigate to the parent or a sibling of the current subtiddler. Subtiddler names are separated from that of their supertiddlers by a / (and are not system tiddlers).
+modified: 20211120170254112
+modifier: soren
+tags: $:/tags/ViewTemplate
+title: $:/sib/Templates/Automatic/Subtiddler
+transcludedin: All tiddlers whose titles contain a slash and are not system tiddlers.
+type: text/vnd.tiddlywiki
+
+\define expand-siblings() <$action-setfield $tiddler="$:/temp/ShowSiblings" $index=<<currentTiddler>> $value="yes" />
+\define contract-siblings() <$action-setfield $tiddler="$:/temp/ShowSiblings" $index=<<currentTiddler>> $value="no" />
+
+<$list filter="[all[current]!is[system]regexp:title[/]]" variable=_>
+<$set name="parentTiddler" value={{{ [all[current]split[/]butlast[]join[/]] }}}>
+<$set name="parentTiddlerPlusSlash" value={{{ [<parentTiddler>addsuffix[/]] }}}>
+<div style="text-align: center;">
+
+This is a subtiddler of <$link to=<<parentTiddler>>/>.<br>
+	<$reveal stateTitle="$:/temp/ShowSiblings" stateIndex=<<currentTiddler>> type="nomatch" text="yes">
+		<$button class="tc-btn-invisible tc-tiddlylink" actions=<<expand-siblings>>>{{$:/core/images/right-arrow}} Siblings of this subtiddler</$button>
+	</$reveal>
+	<$reveal stateTitle="$:/temp/ShowSiblings" stateIndex=<<currentTiddler>> type="match" text="yes">
+		<$button class="tc-btn-invisible tc-tiddlylink" actions=<<contract-siblings>>>{{$:/core/images/down-arrow}} Siblings of this subtiddler:</$button><br>
+		<$list filter="[prefix<parentTiddlerPlusSlash>]">
+			<$link to=<<currentTiddler>>><$text text={{{ [<currentTiddler>removeprefix<parentTiddlerPlusSlash>] }}}/></$link><br>
+		</$list>
+	</$reveal>
+
+</div>
+</$set>
+</$set>
+</$list>

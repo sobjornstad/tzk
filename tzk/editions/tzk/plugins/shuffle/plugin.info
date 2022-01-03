@@ -1,0 +1,13 @@
+{
+    "author": "Matthew Lauber",
+    "core-version": ">=5.0.0",
+    "created": "20210105134918257",
+    "dependents": "",
+    "description": "A Shuffle filter operator",
+    "list": "readme",
+    "modified": "20211107172616237",
+    "plugin-type": "plugin",
+    "source": "https://github.com/mklauber/tiddly-shuffle",
+    "title": "$:/plugins/mklauber/shuffle",
+    "version": "1.0.2"
+}

@@ -2,9 +2,9 @@ caption: Sidebar info links
 created: 20210623014408947
 creator: soren
 description: Show navigation links to the most important parts of the wiki underneath the subtitle.
-modified: 20210825145449987
+modified: 20211107173557802
 modifier: soren
-private: no
+private: yes
 public: no
 tags: 
 title: $:/config/zettelkasten/FeatureFlags/SidebarInfoLinks

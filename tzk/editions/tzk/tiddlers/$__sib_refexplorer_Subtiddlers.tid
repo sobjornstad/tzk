@@ -2,7 +2,7 @@ caption: Subtiddlers
 condition: [all[tiddlers]prefix<storyTiddler>!field:title<storyTiddler>sort[]]
 created: 20201206210345097
 creator: soren
-modified: 20210920161045390
+modified: 20211227155615108
 modifier: soren
 tags: $:/tags/ReferenceExplorerTab
 title: $:/sib/refexplorer/Subtiddlers

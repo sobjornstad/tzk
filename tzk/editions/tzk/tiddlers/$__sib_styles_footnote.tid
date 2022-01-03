@@ -1,5 +1,7 @@
 created: 20210719234124096
-modified: 20210719235343017
+creator: soren
+modified: 20211025140658570
+modifier: soren
 tags: $:/tags/Stylesheet
 title: $:/sib/styles/footnote
 type: text/vnd.tiddlywiki
@@ -26,8 +28,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 .refnotes-footnote:after {
   content: counter(fnote-count);
   font-size:small;
-  vertical-align: super;
-  line-height: 1.5;
+	vertical-align: top;
+	font-size: 0.8em;
+  /*vertical-align: super;
+  line-height: 1.5;*/
   margin-left: 0em;
   color: yellow;
 }

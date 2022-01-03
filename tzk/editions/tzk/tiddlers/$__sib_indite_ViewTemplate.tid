@@ -1,7 +1,9 @@
 caption: Indite view template
 created: 20210410004824597
+creator: soren
 description: Tiddlers that are part of the Indite writing system (under development) hide the normal view template via CSS and use this one instead.
-modified: 20210523143848140
+modified: 20210924153731019
+modifier: soren
 tags: $:/tags/ViewTemplate
 title: $:/sib/indite/ViewTemplate
 transcludedin: All tiddlers tagged <<tag Indite>>.

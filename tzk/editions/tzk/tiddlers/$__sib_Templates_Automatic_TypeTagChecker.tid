@@ -1,0 +1,22 @@
+created: 20211120170347843
+creator: soren
+description: Show a warning on tiddlers that don't have a type selected.
+modified: 20211221014011578
+modifier: soren
+tags: $:/tags/ViewTemplate
+title: $:/sib/Templates/Automatic/TypeTagChecker
+transcludedin: All tiddlers that exist, aren't system tiddlers or subtiddlers, and don't have at least one tag of the color #ff0000.
+type: text/vnd.tiddlywiki
+
+<!-- System tiddlers, missing tiddlers, and subtiddlers are exempt from the warning. -->
+<$list filter="[all[current]!is[system]!is[missing]!regexp[/]]">
+<$list filter="[all[current]tags[]color[#ff0000]] ~[[Oops]] +[match[Oops]]" variable=_>
+	<div style="display: inline-block; vertical-align: center; margin-top: 6px; margin-left: 1em; fill: yellow;">
+		<span style="height: 44px">{{$:/core/images/warning}}</span>
+	</div>
+	<div style="display: inline-block; margin-left: 1em; color: yellow; font-weight: bold;">
+		This tiddler does not have a type tag (type tags appear in red). You should probably attach one.<br>
+		See [[ZettelkastenCardType]] for details on the available options.
+	</div>
+</$list>
+</$list>

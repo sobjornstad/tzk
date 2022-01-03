@@ -1,6 +1,6 @@
 created: 20210410004529968
 creator: soren
-modified: 20210825162735756
+modified: 20210924153927403
 modifier: soren
 tags: 
 title: $:/sib/indite/InditeChildren
@@ -50,10 +50,13 @@ copy <<copy-me>> · <<copy-rendered>>
 				$viewBlock$
 			</div>
 		</$list>
+		
+		<$list filter="[<tr-rendering>!match[yes]]" variable=_>
 		<$list filter="[all[current]editmode[edit]] [all[current]editmode[both]]">
 			<div class={{{ [[indite-sbs-editor]addsuffix[ ]addsuffix<thewidth>] }}}>
 				<$transclude tiddler="$:/core/ui/EditTemplate/body/editor"/>
 			</div>
+		</$list>
 		</$list>
 	</$set>
 \end
