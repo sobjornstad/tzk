@@ -385,6 +385,7 @@ def launch():
     # go there before doing anything else.
     if (not os.path.exists("tzk_config.py")
             and os.environ.get('TZK_DIRECTORY')
+            and len(sys.argv) > 1
             and sys.argv[1] != "init"):  # we can't init an existing TZK_DIRECTORY
         try:
             os.chdir(os.environ['TZK_DIRECTORY'])
