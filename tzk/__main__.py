@@ -13,6 +13,8 @@ from tzk import tw
 from tzk.util import (BuildError, fail, numerize, require_dependencies, pushd,
                       TZK_VERSION)
 
+VERSION_INFO = f"tzk version {TZK_VERSION}"
+
 
 class CliCommand(ABC):
     """
@@ -180,7 +182,7 @@ class VersionCommand(CliCommand):
         pass
 
     def execute(self, args: argparse.Namespace) -> None:
-        print(f"tzk version {TZK_VERSION}")
+        print(VERSION_INFO)
 
 
 class BuildCommand(CliCommand):
@@ -406,6 +408,12 @@ def launch():
                     f"MIT license; see https://github.com/sobjornstad/tzk/blob/master/LICENSE for details.",
         epilog="For full documentation, see https://tzk.readthedocs.io/en/latest/.",
         formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=VERSION_INFO,
+        help=VersionCommand.help
     )
 
     subparsers = parser.add_subparsers()

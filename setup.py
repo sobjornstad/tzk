@@ -9,7 +9,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="tzk",
-    version="0.1.4",
+    version="0.1.5",
     author="Soren I. Bjornstad",
     author_email="zettelkasten@sorenbjornstad.com",
     description="Build tool for TiddlyWiki Zettelkasten",
