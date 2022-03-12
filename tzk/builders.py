@@ -388,7 +388,6 @@ def replace_private_people(initialer: Callable[[str], str] = None) -> None:
     assert 'public_wiki_folder' in build_state
 
     replacement_table = _private_people_replacement_table(initialer)
-    from pprint import pprint; pprint(replacement_table)
     tid_files = (Path(build_state['public_wiki_folder']) / "tiddlers").glob("**/*.tid")
 
     for tiddler in tid_files:
