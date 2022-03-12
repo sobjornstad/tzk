@@ -360,7 +360,7 @@ def _private_people_replacement_table(
 
 
 @tzk_builder
-def replace_private_people(initialer: Callable[[str], str] = None) -> None:
+def replace_private_people(initialer: Callable[[str], str] = None, replace_link_text = False) -> None:
     """
     Replace the names of people who are not marked Public with their initials.
 
@@ -384,6 +384,20 @@ def replace_private_people(initialer: Callable[[str], str] = None) -> None:
                       that takes one string argument
                       (a tiddler filename without the full path, e.g., ``MsJaneDoe.tid``)
                       and returns a string to be considered the "initials" of that person.
+
+    :param replace_link_text: If you have links in the form
+                              ``So then [[John said|MrJohnDoe]] something about this``,
+                              then enabling this option ensures that the link is fully
+                              replaced with
+                              ``So then [[J.D.|PrivatePerson]] something about this``.
+                              This means that when using this feature, having the
+                              link text also be meaningful after redaction is important.
+
+    .. warning ::
+        Using this link replacement feature does not redact everything, just the link
+        (and the link text with `replace_link_text` enabled). So *do not* rely on it
+        for redacting everything. Making a tiddler public still needs consideration and
+        tooling is there to help, not to replace your own judgment.
     """
     assert 'public_wiki_folder' in build_state
 
@@ -401,7 +415,17 @@ def replace_private_people(initialer: Callable[[str], str] = None) -> None:
                     if '|' + replace_person + ']]' in lines[i]:
                         # link with the person as the target only;
                         # beware that you might have put something private in the text
-                        lines[i] = lines[i].replace(replace_person, 'PrivatePerson')
+                        if replace_link_text:
+                            # with this option, the initials are also
+                            # put in the text, solving the warning before
+                            end = lines[i].find('|' + replace_person + ']]')
+                            start = lines[i].rfind('[[', 0, end) + 2
+                            search = f"[[{lines[i][start:end]}|{replace_person}]]"
+                            replace = f"[[{replace_initials}|PrivatePerson]]"
+
+                            lines[i] = lines[i].replace(search, replace)
+                        else:
+                            lines[i] = lines[i].replace(replace_person, 'PrivatePerson')
                     elif '[[' + replace_person + ']]' in lines[i]:
                         # link with the person as the target and text
                         lines[i] = lines[i].replace(
