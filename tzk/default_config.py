@@ -35,6 +35,10 @@ commit_remote = ""
 # http://localhost:8080 in your browser.
 listen_port = 8080
 
+# Host to listen on. If you specify "0.0.0.0" it will listen to all network interfaces.
+# This is useful for allowing the wiki to be exposed to the network through a container.
+listen_host = "127.0.0.1"
+
 # Uncomment if you want to require HTTP basic authentication when serving your wiki.
 # **WARNING**: this is NOT secure for use over the open Internet or all but the
 # simplest local networks, as the password is sent in the clear. For good
