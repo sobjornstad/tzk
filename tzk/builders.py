@@ -453,6 +453,7 @@ def _privatize_line(line: str, replacement_table: Dict[str, str],
                 # as is needed for slice notation.
                 if increment_iterator_by:
                     start_idx = iterator.send(increment_iterator_by)
+                    increment_iterator_by = 0
                 else:
                     start_idx = next(iterator)
                 end_idx = start_idx + len(replace_person)
