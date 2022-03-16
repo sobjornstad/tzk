@@ -19,7 +19,7 @@ import re
 import shutil
 import subprocess
 import tempfile
-from typing import Callable, Dict, List, Optional, Set, Sequence, Tuple
+from typing import Callable, Dict, Generator, List, Optional, Set, Sequence, Tuple
 
 from tzk import git
 from tzk import tw
@@ -359,6 +359,146 @@ def _private_people_replacement_table(
     }
 
 
+def _privatize_line(line: str, replacement_table: Dict[str, str],
+                    replace_link_text: bool = False) -> Optional[str]:
+    """
+    Given a line and a table of replacements to make, replace all instances
+    of all private people defined in the replacement table.
+
+    Basics:
+        >>> _privatize_line("MsAlice is a test person.", {'MsAlice': 'A.'})
+        '<<privateperson "A.">> is a test person.'
+
+        >>> _privatize_line("This woman, known as MsAlice, is a test person.", \
+                            {'MsAlice': 'A.'})
+        'This woman, known as <<privateperson "A.">>, is a test person.'
+
+        >>> _privatize_line("[[MsAlice]] is a test person.", {'MsAlice': 'A.'})
+        '[[A.|PrivatePerson]] is a test person.'
+
+        >>> _privatize_line("When we talk about [[MsAlice]] in the middle of a " \
+                            "sentence, that's fine too.", {'MsAlice': 'A.'})
+        "When we talk about [[A.|PrivatePerson]] in the middle of a sentence, that's fine too."
+
+    Links with different text and target:
+        >>> _privatize_line("We can talk about [[Alice|MsAlice]] " \
+                            "with different text.", {'MsAlice': 'A.'})
+        'We can talk about [[Alice|PrivatePerson]] with different text.'
+
+    Multiple replacements with different people:
+        >>> _privatize_line("We can have [[MsAlice]] and MrBob talk to each other " \
+                            "in the same line.", {'MsAlice': 'A.', 'MrBob': 'B.'})
+        'We can have [[A.|PrivatePerson]] and <<privateperson "B.">> talk to each other in the same line.'
+
+    Multiple replacements with the same person:
+        >>> _privatize_line("We can have MsAlice talk to herself (MsAlice) " \
+                            "in the same line.", {'MsAlice': 'A.'})
+        'We can have <<privateperson "A.">> talk to herself (<<privateperson "A.">>) in the same line.'
+
+        >>> _privatize_line("Likewise [[MsAlice]] can do it with brackets " \
+                            "([[MsAlice]]).", {'MsAlice': 'A.'})
+        'Likewise [[A.|PrivatePerson]] can do it with brackets ([[A.|PrivatePerson]]).'
+
+        >>> _privatize_line('We can talk about [[Alice|MsAlice]] lots of ways, ' \
+                            'like MsAlice and [[MsAlice]].', {'MsAlice': 'A.'})
+        'We can talk about [[Alice|PrivatePerson]] lots of ways, like <<privateperson "A.">> and [[A.|PrivatePerson]].'
+
+    We don't want to replace places where a CamelCase match is a substring of another
+    word. This is expected to yield no output because there's nothing to replace:
+        >>> _privatize_line("But an EmbeddedCamelWithMsAliceInIt isn't her.", \
+                            {'MsAlice': 'A.'})
+    """
+    def iteroccurrences(needle: str) -> Generator[int, int, None]:
+        """
+        Iterate over the start indices of occurrences of substring
+        ``needle`` in the line /line/ in outer scope.
+
+        (We have to use outer scope because it can be changed while we're iterating
+         and the generator is only bound to arguments once.)
+        """
+        idx = -1
+        while True:
+            idx = line.find(needle, idx + 1)
+            if idx == -1:
+                return
+            else:
+                additional_increments = yield idx
+                if additional_increments is not None:
+                    idx += additional_increments
+
+    def anchored_at_one_end(start_index: int, end_index: int) -> bool:
+        return start_index == 0 or end_index == len(line)
+
+    def is_camelcase_link(start_index: int, end_index: int) -> bool:
+        return (anchored_at_one_end(start_index, end_index)
+                or (line[start_index-1] != '[' and line[end_index] != ']'))
+
+    def is_bare_bracketed_link(start_index: int, end_index: int) -> bool:
+        return (not anchored_at_one_end(start_index, end_index)
+                and line[start_index-2:start_index] == '[['
+                and line[end_index:end_index+2] == ']]')
+
+    def is_textual_bracketed_link(start_index: int, end_index: int) -> bool:
+        return (not anchored_at_one_end(start_index, end_index)
+                and line[start_index-1] == '|'
+                and line[end_index:end_index+2] == ']]')
+
+    dirty = False
+    increment_iterator_by = 0
+    for replace_person, replace_initials in replacement_table.items():
+        iterator = iteroccurrences(replace_person)
+        try:
+            while True:
+                # NOTE: the "end" index is one after the last index in the string,
+                # as is needed for slice notation.
+                if increment_iterator_by:
+                    start_idx = iterator.send(increment_iterator_by)
+                else:
+                    start_idx = next(iterator)
+                end_idx = start_idx + len(replace_person)
+                new_line = None
+
+                if is_camelcase_link(start_idx, end_idx):
+                    # camel-case link or unlinked reference in text
+                    def is_spurious_substring():
+                        # If there's not a non-alphanumeric character on both sides of
+                        # the "link", we may be making a clbuttic replacement.
+                        # <https://en.wikipedia.org/wiki/Scunthorpe_problem>
+                        start_ok = start_idx == 0 or not line[start_idx-1].isalnum()
+                        end_ok = end_idx == len(line) or not line[end_idx].isalnum()
+                        return not (start_ok and end_ok)
+
+                    if not is_spurious_substring():
+                        new_line = (line[0:start_idx]
+                                    + f'<<privateperson "{replace_initials}">>'
+                                    + line[end_idx:])
+                elif is_bare_bracketed_link(start_idx, end_idx):
+                    # link with the person as the target and text
+                    replacement = replace_initials + '|PrivatePerson'
+                    new_line = line[0:start_idx] + replacement + line[end_idx:]
+                elif is_textual_bracketed_link(start_idx, end_idx):
+                    # link with the person as the target only;
+                    # beware that you might have put something private in the text
+                    new_line = line[0:start_idx] + 'PrivatePerson' + line[end_idx:]
+                else:
+                    link = line[start_idx:end_idx]
+                    raise ValueError("Unknown type of link '{link}'.")
+                
+                if new_line:
+                    line = new_line
+                    dirty = True
+                    # If we changed the length of the string by modifying it,
+                    # we need to update our stored position within the string.
+                    increment_iterator_by = len(new_line) - len(line)
+        except StopIteration:
+            pass
+    
+    if dirty:
+        return line
+    else:
+        return None
+
+
 @tzk_builder
 def replace_private_people(initialer: Callable[[str], str] = None) -> None:
     """
@@ -395,26 +535,10 @@ def replace_private_people(initialer: Callable[[str], str] = None) -> None:
         with tiddler.open() as f:
             lines = f.readlines()
         for i in range(len(lines)):
-            for replace_person, replace_initials in replacement_table.items():
-                if replace_person in lines[i]:
-                    if '|' + replace_person + ']]' in lines[i]:
-                        # link with the person as the target only;
-                        # beware that you might have put something private in the text
-                        lines[i] = lines[i].replace(replace_person, 'PrivatePerson')
-                    elif '[[' + replace_person + ']]' in lines[i]:
-                        # link with the person as the target and text
-                        lines[i] = lines[i].replace(
-                                replace_person,
-                                replace_initials + '|PrivatePerson')
-                    else:
-                        # camel-case link or unlinked reference in text;
-                        # or spurious substring, so rule that out with the '\b' search
-                        lines[i] = re.sub(
-                            r"\b" + re.escape(replace_person) + r"\b",
-                            f'<<privateperson "{replace_initials}">>',
-                            lines[i]
-                        )
-                    dirty = True
+            private_line = _privatize_line(lines[i], replacement_table)
+            if private_line is not None:
+                lines[i] = private_line
+                dirty = True
         if dirty:
             with tiddler.open("w") as f:
                 f.writelines(lines)
