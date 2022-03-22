@@ -403,6 +403,12 @@ def _privatize_line(line: str, replacement_table: Dict[str, str],
                             'like MsAlice and [[MsAlice]].', {'MsAlice': 'A.'})
         'We can talk about [[Alice|PrivatePerson]] lots of ways, like <<privateperson "A.">> and [[A.|PrivatePerson]].'
 
+    Replacements with alternate link text:
+        >>> _privatize_line('We can talk about [[Alice|MsAlice]] and [[Bob|MrBob]] as well', \
+                            {'MsAlice': 'A.', 'MrBob': 'B.'}, replace_link_text=True)
+        'We can talk about [[A.|PrivatePerson]] and [[B.|PrivatePerson]] as well'
+
+
     We don't want to replace places where a CamelCase match is a substring of another
     word. This is expected to yield no output because there's nothing to replace:
         >>> _privatize_line("But an EmbeddedCamelWithMsAliceInIt isn't her.", \
@@ -480,7 +486,11 @@ def _privatize_line(line: str, replacement_table: Dict[str, str],
                 elif is_textual_bracketed_link(start_idx, end_idx):
                     # link with the person as the target only;
                     # beware that you might have put something private in the text
-                    new_line = line[0:start_idx] + 'PrivatePerson' + line[end_idx:]
+                    if replace_link_text:
+                        start_of_link = line[0:start_idx].rfind('[[', 0, start_idx) + 2
+                        new_line = line[0:start_of_link] + f"{replace_initials}|PrivatePerson" + line[end_idx:]
+                    else:
+                        new_line = line[0:start_idx] + 'PrivatePerson' + line[end_idx:]
                 else:
                     link = line[start_idx:end_idx]
                     raise ValueError("Unknown type of link '{link}'.")
@@ -501,7 +511,7 @@ def _privatize_line(line: str, replacement_table: Dict[str, str],
 
 
 @tzk_builder
-def replace_private_people(initialer: Callable[[str], str] = None) -> None:
+def replace_private_people(initialer: Callable[[str], str] = None, replace_link_text: bool = False) -> None:
     """
     Replace the names of people who are not marked Public with their initials.
 
@@ -525,6 +535,20 @@ def replace_private_people(initialer: Callable[[str], str] = None) -> None:
                       that takes one string argument
                       (a tiddler filename without the full path, e.g., ``MsJaneDoe.tid``)
                       and returns a string to be considered the "initials" of that person.
+
+    :param replace_link_text: If you have links in the form
+                              ``So then [[John said|MrJohnDoe]] something about this``,
+                              then enabling this option ensures that the link is fully
+                              replaced with
+                              ``So then [[J.D.|PrivatePerson]] something about this``.
+                              This means that when using this feature, having the
+                              link text also be meaningful after redaction is important.
+
+    .. warning ::
+        Using this link replacement feature does not redact everything, just the link
+        (and the link text with `replace_link_text` enabled). So *do not* rely on it
+        for redacting everything. Making a tiddler public still needs consideration and
+        tooling is there to help, not to replace your own judgment.
     """
     assert 'public_wiki_folder' in build_state
 
@@ -536,7 +560,7 @@ def replace_private_people(initialer: Callable[[str], str] = None) -> None:
         with tiddler.open() as f:
             lines = f.readlines()
         for i in range(len(lines)):
-            private_line = _privatize_line(lines[i], replacement_table)
+            private_line = _privatize_line(lines[i], replacement_table, replace_link_text)
             if private_line is not None:
                 lines[i] = private_line
                 dirty = True
