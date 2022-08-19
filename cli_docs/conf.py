@@ -6,15 +6,12 @@
 # full list see the documentation:
 # http://www.sphinx-doc.org/en/master/config
 
-# -- Path setup --------------------------------------------------------------
-# Instead of adding things manually to the path, we just ensure we install esc
-# in editable mode in our environment.
-
+import datetime
 
 # -- Project information -----------------------------------------------------
 
 project = 'tzk'
-copyright = '2021 Soren Bjornstad'
+copyright = datetime.date.today().year + ' Soren Bjornstad'
 author = 'Soren Bjornstad'
 
 # The short X.Y version
