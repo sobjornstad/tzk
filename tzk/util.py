@@ -10,7 +10,7 @@ import sys
 from typing import Any, Callable, Dict, NoReturn
 
 
-TZK_VERSION = "0.2.0"
+TZK_VERSION = "0.3.0"
 
 
 class BuildError(Exception):

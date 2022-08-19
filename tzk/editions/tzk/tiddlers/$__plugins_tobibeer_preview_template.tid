@@ -1,0 +1,11 @@
+created: 20220505135633168
+creator: soren
+modified: 20220505135638189
+modifier: soren
+title: $:/plugins/tobibeer/preview/template
+type: text/vnd.tiddlywiki
+
+{{||$:/core/ui/ViewTemplate/subtitle}}
+{{||$:/core/ui/ViewTemplate/tags}}
+
+<$transclude mode="block"/>

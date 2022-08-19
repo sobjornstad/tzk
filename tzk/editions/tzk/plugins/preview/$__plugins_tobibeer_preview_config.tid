@@ -1,0 +1,20 @@
+title: $:/plugins/tobibeer/preview/config
+
+\define default()
+<dt>$(defaults)$$(option)$</dt>
+<dd>
+//{{$:/plugins/tobibeer/preview/lingo/$(option)$}}<$list
+filter="[[$(option)$]prefix[template]]">
+{{$(defaults)$$(option)$}}</$list>://<br>
+<$edit-text tag=input tiddler="$(defaults)$$(option)$"/>
+</dd>
+\end
+
+<dl class="preview-defaults">
+<$vars defaults="$:/plugins/tobibeer/preview/defaults/">
+<$list filter="[all[tiddlers+shadows]removeprefix<defaults>sort[title]]" variable="option">
+<<default>>
+</$list>
+</$vars>
+</dl>
+<style>.preview-defaults input {width:90%;}</style>

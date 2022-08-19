@@ -1,0 +1,8 @@
+title: $:/plugins/tobibeer/preview/readme
+
+The plugin $:/plugins/tobibeer/preview enhances the core <<x LinkWidget>> to display a preview of tiddlers when hovering an internal link.
+
+<br>
+
+; documentation / examples / demos...
+: http://tobibeer.github.io/tw5-plugins#preview

@@ -1,0 +1,8 @@
+created: 20220505135432323
+creator: soren
+modified: 20220505135433494
+modifier: soren
+title: $:/plugins/tobibeer/preview/defaults/exclude
+type: text/vnd.tiddlywiki
+
+[is[system]] [all[shadows]]

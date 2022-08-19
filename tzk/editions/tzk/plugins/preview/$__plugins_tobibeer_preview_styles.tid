@@ -1,0 +1,8 @@
+tags: $:/tags/Stylesheet
+title: $:/plugins/tobibeer/preview/styles
+
+.tc-popup.tc-preview-tiddler{
+	max-width:600px;
+	width:100%;
+	padding:1em;
+}

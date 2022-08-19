@@ -1,8 +1,10 @@
 caption: new source
 created: 20200822190145295
+creator: soren
 description: Create a new source tiddler
 list-after: $:/core/ui/Buttons/new-tiddler
-modified: 20210522014032330
+modified: 20220504192240445
+modifier: soren
 tags: $:/tags/PageControls
 title: $:/sib/Buttons/NewSource
 type: text/vnd.tiddlywiki
@@ -25,6 +27,6 @@ type: text/vnd.tiddlywiki
 		readstatus="unread"
 		author=""
 		completed=""
-		year="2021"
+		year=<<now YYYY>>
   />
 </$button>
