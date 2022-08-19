@@ -13,6 +13,7 @@ information about the defined products without actually running any build steps.
 from collections.abc import Mapping
 from contextlib import contextmanager
 import functools
+import itertools
 import os
 from pathlib import Path
 import re
@@ -559,7 +560,8 @@ def replace_private_people(initialer: Callable[[str], str] = None, replace_link_
     assert 'public_wiki_folder' in build_state
 
     replacement_table = _private_people_replacement_table(initialer)
-    tid_files = (Path(build_state['public_wiki_folder']) / "tiddlers").glob("**/*.tid")
+    root = (Path(build_state['public_wiki_folder']) / "tiddlers")
+    tid_files = itertools.chain(root.glob("**/*.tid"), root.glob("**/*.json"))
 
     for tiddler in tid_files:
         dirty = False
