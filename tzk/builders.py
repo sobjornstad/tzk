@@ -367,11 +367,11 @@ def _privatize_line(line: str, replacement_table: Dict[str, str],
 
     Basics:
         >>> _privatize_line("MsAlice is a test person.", {'MsAlice': 'A.'})
-        '<<privateperson "A.">> is a test person.'
+        '[[A.|PrivatePerson]] is a test person.'
 
         >>> _privatize_line("This woman, known as MsAlice, is a test person.", \
                             {'MsAlice': 'A.'})
-        'This woman, known as <<privateperson "A.">>, is a test person.'
+        'This woman, known as [[A.|PrivatePerson]], is a test person.'
 
         >>> _privatize_line("[[MsAlice]] is a test person.", {'MsAlice': 'A.'})
         '[[A.|PrivatePerson]] is a test person.'
@@ -379,6 +379,12 @@ def _privatize_line(line: str, replacement_table: Dict[str, str],
         >>> _privatize_line("When we talk about [[MsAlice]] in the middle of a " \
                             "sentence, that's fine too.", {'MsAlice': 'A.'})
         "When we talk about [[A.|PrivatePerson]] in the middle of a sentence, that's fine too."
+
+    Content inside a macro:
+        >>> _privatize_line('''Text with a footnote.''' \
+                            '''<<fnote "Here's my footnote about MsAlice.">>''', \
+                            {'MsAlice': 'A.'})
+        'Text with a footnote.<<fnote "Here\\'s my footnote about [[A.|PrivatePerson]].">>'
 
     Links with different text and target:
         >>> _privatize_line("We can talk about [[Alice|MsAlice]] " \
@@ -388,12 +394,12 @@ def _privatize_line(line: str, replacement_table: Dict[str, str],
     Multiple replacements with different people:
         >>> _privatize_line("We can have [[MsAlice]] and MrBob talk to each other " \
                             "in the same line.", {'MsAlice': 'A.', 'MrBob': 'B.'})
-        'We can have [[A.|PrivatePerson]] and <<privateperson "B.">> talk to each other in the same line.'
+        'We can have [[A.|PrivatePerson]] and [[B.|PrivatePerson]] talk to each other in the same line.'
 
     Multiple replacements with the same person:
         >>> _privatize_line("We can have MsAlice talk to herself (MsAlice) " \
                             "in the same line.", {'MsAlice': 'A.'})
-        'We can have <<privateperson "A.">> talk to herself (<<privateperson "A.">>) in the same line.'
+        'We can have [[A.|PrivatePerson]] talk to herself ([[A.|PrivatePerson]]) in the same line.'
 
         >>> _privatize_line("Likewise [[MsAlice]] can do it with brackets " \
                             "([[MsAlice]]).", {'MsAlice': 'A.'})
@@ -401,7 +407,7 @@ def _privatize_line(line: str, replacement_table: Dict[str, str],
 
         >>> _privatize_line('We can talk about [[Alice|MsAlice]] lots of ways, ' \
                             'like MsAlice and [[MsAlice]].', {'MsAlice': 'A.'})
-        'We can talk about [[Alice|PrivatePerson]] lots of ways, like <<privateperson "A.">> and [[A.|PrivatePerson]].'
+        'We can talk about [[Alice|PrivatePerson]] lots of ways, like [[A.|PrivatePerson]] and [[A.|PrivatePerson]].'
 
     Replacements with alternate link text:
         >>> _privatize_line('We can talk about [[Alice|MsAlice]] and [[Bob|MrBob]] as well', \
@@ -477,7 +483,7 @@ def _privatize_line(line: str, replacement_table: Dict[str, str],
 
                     if not is_spurious_substring():
                         new_line = (line[0:start_idx]
-                                    + f'<<privateperson "{replace_initials}">>'
+                                    + f'[[{replace_initials}|PrivatePerson]]'
                                     + line[end_idx:])
                 elif is_bare_bracketed_link(start_idx, end_idx):
                     # link with the person as the target and text
