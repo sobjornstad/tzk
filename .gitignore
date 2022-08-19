@@ -5,3 +5,4 @@ venv/
 cli_docs/_build/
 dist/
 build/
+.pypi_token
