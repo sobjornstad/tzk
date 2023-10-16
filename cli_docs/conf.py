@@ -11,7 +11,7 @@ import datetime
 # -- Project information -----------------------------------------------------
 
 project = 'tzk'
-copyright = datetime.date.today().year + ' Soren Bjornstad'
+copyright = str(datetime.date.today().year) + ' Soren Bjornstad'
 author = 'Soren Bjornstad'
 
 # The short X.Y version
