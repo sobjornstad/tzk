@@ -1,0 +1,30 @@
+created: 20230405164752085
+creator: soren
+description: Show the previous and next journal entries.
+modified: 20230822195423771
+modifier: soren
+tags: $:/tags/ViewTemplate
+title: $:/sib/Templates/Automatic/JournalNavigation
+transcludedin: All tiddlers tagged <<tag Journal>>.
+type: text/vnd.tiddlywiki
+
+<$list filter="[all[current]tag[Journal]]">
+
+<$vars
+  previousEntry={{{ [!is[system]tag[Journal]sort[]before<currentTiddler>] }}}
+  nextEntry={{{ [!is[system]tag[Journal]sort[]after<currentTiddler>] }}}>
+	
+<div style="display: flex; justify-content: space-between;">
+	<div style="display: inline-block;">
+		«&nbsp;Previous: <$link to=<<previousEntry>>/>
+	</div>
+	<div style="display: inline-block;">
+		Next: <$link to=<<nextEntry>>/>&nbsp;»
+	</div>
+</div>
+
+</$vars>
+
+{{||$:/sib/Templates/Topical/JournalPersonPlaceExplorer}}
+
+</$list>

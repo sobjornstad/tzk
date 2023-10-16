@@ -1,0 +1,31 @@
+caption: geoSyntax
+created: 20151119173416239
+modified: 20151211173250584
+title: $:/plugins/sycom/leaflet/geoSyntax
+type: text/vnd.tiddlywiki
+
+Geographical objects can be stored
+
+* in a GeoTiddler by creating a ''//type// : // pattern//'' metadata field pair in any tiddler or by storing geoJson data in it and setting your tiddler to `application/JSON` type. Call it in the widget with ''places'' attribute : `places='{"tiddler":"title of your tiddler"}'`
+* in several [[GeoTiddlers|GeoTiddler]]. Call them in the widget with ''places'' attribute
+** via a space separated list of [[GeoTiddlers|GeoTiddler]] : `places='{"tiddlers":"tiddler1 tiddler2 tiddler3"}'`
+** via a [[filter|http://tiddlywiki.com/#Filters]] selection of [[GeoTiddlers|GeoTiddler]] : `places='{"filter":"[[your filter]]"}'`
+* straight in the widget with ''places'' attribute : `places='{"object type":"coordinates pattern"}'`
+
+!! Everything might be a GeoTiddler
+
+In a very much tiddlywiki way, a tiddler may also refer to a list or a selection of tiddlers using `tiddlers` or `filter` metadata fields. You may add styling informations to all refered tiddler with `style`, `color` or `marker` metadata fields. Calling this tiddler with `<$leafmap />` will render all refered tiddlers.
+
+!! Tool for creating shapes
+As not everyone has a GIS in his head, And the plugin does not implement yet any tool for creating geo shapes, there is (very basic) tool for that : [ext[Draw for TiddlyWiki leaflet plugin|http://sycom.github.io/TiddlyWiki-Plugins/leafletDraw.html]]
+
+!! Geographical objects you can display on your map
+
+| !type | !description | !pattern |
+|''point'' |a unique point defined by a comma separated latitude,longitude pair |`y,x` |
+|''points''|a points collection defined by a space separated ''point'' definition list |`y1,x1 y2,x2 y3,x3 ...` |
+|''polygon''|a closed surfacic place defined like an //ordered// ''points'' collection just above |`y1,x1 y2,x2 y3,x3 ...` |
+|''polygons''|a polygons collection defined by a pipe (`|`) separated list of ''polygon'' definitions |`y1,x1 y2,x2 y3,x3|y4,x4 y5...` |
+|''polyline''|an open path place defined like the ''polygon'' just above |`y1,x1 y2,x2 y3,x3 ...` |
+|''polylines''|a polylines collection defined by a pipe (`|`) separated list of ''polyline'' definitions |`y1,x1 y2,x2 y3,x3|y4,x4 y5...` |
+|''geojson''|a [[geojson|http://geojson.org/]] object. If set through a tiddler field, please crunch it to one single line|see [[rfc7946|https://tools.ietf.org/html/rfc7946]]|

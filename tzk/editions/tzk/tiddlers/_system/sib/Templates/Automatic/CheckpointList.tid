@@ -1,0 +1,59 @@
+created: 20230727200534052
+modified: 20230727203131443
+tags: $:/tags/ViewTemplate
+title: $:/sib/Templates/Automatic/CheckpointList
+type: text/vnd.tiddlywiki
+
+\define expand-checkpoints() <$action-setfield $tiddler="$:/temp/ShowCheckpoints" $index=<<currentTiddler>> $value="yes" />
+\define contract-checkpoints() <$action-setfield $tiddler="$:/temp/ShowCheckpoints" $index=<<currentTiddler>> $value="no" />
+
+<$let checkpoint-prefix={{{ [[$:/checkpoints/]addsuffix<currentTiddler>addsuffix[/]] }}}>
+	<$list filter="[prefix<checkpoint-prefix>first[]]" variable=_>
+		<div class="checkpoint-list">
+			<$reveal stateTitle="$:/temp/ShowCheckpoints" stateIndex=<<currentTiddler>> type="nomatch" text="yes">
+				<div class="checkpoint-message">
+					<$let num-checkpoints={{{ [prefix<checkpoint-prefix>count[]] }}}>
+						<$button class="tc-btn-invisible tc-tiddlylink" actions=<<expand-checkpoints>>>
+							{{$:/core/images/right-arrow}} Previous checkpoints
+						</$button>
+						(<<num-checkpoints>>)
+					</$let>
+				</div>
+			</$reveal>
+			<$reveal stateTitle="$:/temp/ShowCheckpoints" stateIndex=<<currentTiddler>> type="match" text="yes">
+				<div class="checkpoint-message">
+					<$button class="tc-btn-invisible tc-tiddlylink" actions=<<contract-checkpoints>>>
+						{{$:/core/images/down-arrow}} Previous checkpoints of this tiddler:
+					</$button><br> 
+				</div>
+				<ol>
+					<$list filter="[prefix<checkpoint-prefix>!nsort[]]">
+						<$let timestamp={{{ [all[current]split[/]last[]] }}}>
+							<li>
+								<$link to=<<currentTiddler>>><<timestamp>></$link>:&nbsp;{{!!checkpoint-message}}
+							</li>
+						</$let>
+					</$list>
+				</ol>
+			</$reveal>
+		</div>
+	</$list>
+</$let>
+
+<style>
+.checkpoint-list {
+	/* background-color: <<color wikilist-background>>; */
+	padding: 1em;
+	/* width: 80%; */
+	margin: auto;
+}
+
+.checkpoint-list .checkpoint-message {
+	text-align: center;
+}
+
+.checkpoint-list ol li {
+	list-style-type: none;
+	/* display: inline-block; */
+}
+</style>

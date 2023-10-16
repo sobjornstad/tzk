@@ -1,0 +1,13 @@
+created: 20151211173500000
+modified: 20170317163500000
+title: $:/plugins/sycom/leaflet/example/leaflet_with_filter
+
+!! a map of a filter
+this one displays all tiddlers tagged with <<tag example>> (there's a //all shadow// tweak, since they are shadowed). There is also one cluster per tiddler. Some colors are set from within each tiddler with `color` field.
+
+```
+<$leafmap tile='toner'
+	places='{"filter":"[all[shadows]tag[example]]"}' clusterType='tiddler'/>
+```
+<$leafmap tile='toner'
+	places='{"filter":"[all[shadows]tag[example]]"}' clusterType='tiddler'/>

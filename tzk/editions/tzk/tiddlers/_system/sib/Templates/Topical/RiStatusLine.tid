@@ -1,0 +1,9 @@
+created: 20230405223858862
+creator: soren
+modified: 20230405224032570
+modifier: soren
+tags: 
+title: $:/sib/Templates/Topical/RiStatusLine
+type: text/vnd.tiddlywiki
+
+<span style={{{ [{!!ri-outcome}match[pending]then[cornflowerblue]] ~[{!!ri-outcome}regexp[.*mutual.*]then[orange]] ~[[tomato]] +[addprefix[color:]] }}}>{{!!ri-outcome}}</span>

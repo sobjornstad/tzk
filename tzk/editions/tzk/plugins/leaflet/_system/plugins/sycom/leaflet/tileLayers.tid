@@ -1,0 +1,23 @@
+caption: tileLayers
+created: 20151119173416239
+modified: 20161020222250584
+title: $:/plugins/sycom/leaflet/tileLayers
+type: text/vnd.tiddlywiki
+
+tileLayers are the //background// of the leaflet map. They will not be available offline and will not display at every zoom level.
+
+!! Available tile layers
+
+edit [[tileLayers.json|$:/plugins/sycom/leaflet/lib/tileLayers.json]] if you want to add / remove tile layers.
+
+| !id | !description | !zoom min/max |
+|''osm'' |[[OpenStreetMap|http://openstreetmap.org]] classic tile layer | 1/20 |
+|''osmfr'' |[[OpenStreetMap|http://openstreetmap.org]] with //baguette// smell | 1/20 |
+|''osmbw'' |Black and White version of [[OpenStreetMap|http://openstreetmap.org]] tiles by Wikimedia labs | 1/20 |
+|''sat'' |Satellite photographic layer provided by Esri | 1/18 |
+|''natgeo'' |National Geographic style layer provided by Esri| 1/12 |
+|''toner'' |Black and white styled OpenStreetMap data provided by [[Stamen|http://stamen.com]] | 1/20 |
+|''water'' |Watercolor styled OpenStreetMap data provided by [[Stamen|http://stamen.com]] | 1/20 |
+|''thunder'' |Pale styled OpenStreetMap data provided by [[Thunderforest|http://thunderforest.com]] | 1/20 |
+|''dark'' |"Dark Matter" styled  OpenStreetMap data provided by [[CartoDB|https://cartodb.com/basemaps]] | 1/20 |
+|''positron'' |"Positron" styled  OpenStreetMap data provided by [[CartoDB|https://cartodb.com/basemaps]] | 1/20 |

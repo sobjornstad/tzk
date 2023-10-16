@@ -1,0 +1,5 @@
+caption: {{$:/plugins/flibbles/relink/language/SideBar/Orphans/Caption}}
+tags: $:/tags/MoreSideBar
+title: $:/plugins/flibbles/relink/ui/MoreSideBar/Orphans
+
+<$list filter={{$:/plugins/flibbles/relink/Filters/Orphans!!filter}} template="$:/core/ui/ListItemTemplate" />

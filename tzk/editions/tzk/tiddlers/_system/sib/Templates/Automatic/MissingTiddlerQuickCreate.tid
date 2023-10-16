@@ -1,0 +1,19 @@
+created: 20230131043004421
+creator: soren
+description: Show options to quickly create an empty tiddler with a given tag from a missing title.
+modified: 20230405164922599
+modifier: soren
+tags: $:/tags/ViewTemplate
+title: $:/sib/Templates/Automatic/MissingTiddlerQuickCreate
+transcludedin: All missing tiddlers.
+type: text/vnd.tiddlywiki
+
+\define new-item(tag) <$action-createtiddler $basetitle=<<currentTiddler>> tags="""$tag$"""/>
+
+\define stub-type(type) <$button class="tc-btn-invisible" actions=<<new-item """$type$""">>><<tag-pill """$type$""">></$button>
+
+<$list filter="[all[current]is[missing]]">
+	Create stub:
+	<<stub-type PAO>>
+	<<stub-type Place>>
+</$list>

@@ -1,0 +1,11 @@
+caption: Footnotes
+condition: [search[fnote]]
+created: 20230405172618948
+creator: soren
+modified: 20230405212029685
+modifier: soren
+tags: 
+title: $:/sib/refexplorer/GlobalJournalSubtiddlerFilter
+type: text/vnd.tiddlywiki
+
+\define global-journal-subtiddler-filter() [tag[Journal]] [tag[Date]] [split[/]first[]tag[Journal]] [split[/]first[]tag[Date]]

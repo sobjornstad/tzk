@@ -1,0 +1,9 @@
+caption: point
+created: 20170129162401905
+marker_dim: 15 15 7.5 7.5
+modified: 20180531165500000
+tags: $:/tags/Image
+title: $:/plugins/sycom/leaflet/images/point.svg
+type: text/vnd.tiddlywiki
+
+<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill-rule="evenodd"><ellipse cx="7.5" cy="7.5" fill="none" stroke="#fff" stroke-opacity=".8" rx="7.5" ry="7.5"/><ellipse cx="7.5" cy="7.5" fill="$primary$" fill-opacity=".8" stroke="#000" stroke-opacity=".8" stroke-width=".5" class="leaflet-marker-colored" rx="7" ry="7"/></svg>

@@ -9,5 +9,6 @@
     "plugin-type": "plugin",
     "source": "https://github.com/TheDiveO/TW5FontAwesome",
     "title": "$:/plugins/TheDiveO/FontAwesome",
-    "version": "1.2.18"
+    "version": "1.2.18",
+    "dependents": ""
 }

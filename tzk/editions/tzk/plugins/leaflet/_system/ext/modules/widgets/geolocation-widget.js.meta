@@ -1,0 +1,3 @@
+module-type: widget
+title: $:/ext/modules/widgets/geolocation-widget.js
+type: application/javascript

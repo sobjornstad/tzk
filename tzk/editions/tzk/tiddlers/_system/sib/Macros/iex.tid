@@ -1,0 +1,15 @@
+created: 20221230152349542
+creator: soren
+description: (i)f (ex)ists: Display some content only if a tiddler exists.
+example: <$macrocall $name=iex tiddler=MyTiddler content="""<<stretch MyTiddler>>"""/>
+modified: 20221230152630225
+modifier: soren
+tags: $:/tags/Macro
+title: $:/sib/Macros/iex
+type: text/vnd.tiddlywiki
+
+\define iex(tiddler, content)
+<$list filter="[<__tiddler__>is[tiddler]]" variable=_>
+	$content$
+</$list>
+\end

@@ -1,0 +1,11 @@
+caption: Checkpoint
+condition: [<targetTiddler>type[]] [<targetTiddler>type[text/vnd.tiddlywiki]] +[first[]]
+created: 20230727194531822
+description: Save the current version of this tiddler so you can view it later
+dropdown: $:/sib/CheckpointDropdown
+icon: $:/core/images/timestamp-on
+modified: 20230727194728438
+shortcuts: ((checkpoint))
+tags: $:/tags/EditorToolbar
+title: $:/sib/Buttons/Checkpoint
+type: text/vnd.tiddlywiki

@@ -1,0 +1,40 @@
+created: 20230407023231664
+creator: soren
+modified: 20230407025933910
+modifier: soren
+tags: 
+title: $:/sib/Templates/Automatic/UpdateStatus
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+
+\define mark-ok() <$action-setfield $timestamp="no" reviewed=<<now "YYYY0MM0DD">>/>
+
+<!-- transcluded in $:/core/ui/ViewTemplate/subtitle -->
+<$list filter="[all[current]tag[Idea]]">
+&nbsp;
+<$wikify name="stale-date" text="""
+<$macrocall $name="dateadd" basedate=<<now "YYYY0MM0DD">> months="-6"/>
+""">
+<$vars compareAgainst={{{ [{!!modified}split[]first[8]join[]max{!!reviewed}] }}}>
+	(
+	<$list filter="[all[current]tag[Frozen]]">
+		<$link to="UpdateStatuses">
+			<span style='color: lightblue;'>frozen</span>
+		</$link>
+	</$list>
+	<$list filter="[all[current]!tag[Frozen]]">
+		<$list filter="[<compareAgainst>compare:date:lt<stale-date>][all[current]tag[NeedsAttention]] [all[current]links[]match[TODO]]" emptyMessage="""<$link to="UpdateStatuses"><span style='color: lightgreen;'>maintained</span></$link>""" variable=_>
+			<$link to="UpdateStatuses">
+				<span style='color: tomato;'>stale</span>
+			</$link>
+			<$list filter=<<ff MarkStaleUpdated>> variable=_>
+				;&nbsp;
+				<$button class="tc-tiddlylink tc-btn-invisible" actions=<<mark-ok>>>reup?</$button>
+			</$list>
+		</$list>
+	</$list>
+	)
+</$vars>
+</$wikify>
+</$list>

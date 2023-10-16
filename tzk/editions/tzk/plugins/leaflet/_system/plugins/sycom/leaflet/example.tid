@@ -1,0 +1,13 @@
+caption: Example
+title: $:/plugins/sycom/leaflet/example
+type: text/vnd.tiddlywiki
+
+Different ways to use the [[leaflet plugin|$:/plugins/sycom/leaflet]]
+
+{{$:/plugins/sycom/leaflet/example/leaflet_with_geotiddler}}
+
+{{$:/plugins/sycom/leaflet/example/leaflet_with_geojsontiddler}}
+
+{{$:/plugins/sycom/leaflet/example/leaflet_with_non-tiddler_geo_data}}
+
+{{$:/plugins/sycom/leaflet/example/leaflet_with_filter}}

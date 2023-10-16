@@ -1,0 +1,64 @@
+created: 20201121015759457
+creator: soren
+modified: 20230416220340477
+modifier: soren
+tags: $:/tags/Stylesheet
+title: $:/sib/styles/GeneralStyles
+type: text/vnd.tiddlywiki
+
+.left-float {
+	float: left;
+	margin-right: 30px;
+}
+
+.right-float {
+	float: right;
+	margin-left: 30px;
+}
+
+.clarify {
+  clear: both;
+}
+
+.sib-private-chunk {
+	border-left: 3px solid <<colour muted-foreground>>;
+	padding-left: 0.5em;
+}
+
+.color-splotch {
+	float: left;
+	width: 10px;
+	height: 10px;
+	margin: 5px;
+	margin-left: 0px;
+	border: 1px solid rgba(0, 0, 0, 0.2)
+}
+
+.dialogue {
+	border: 1px solid <<colour foreground>>;
+	padding: 1rem;
+}
+
+.dialogue p {
+	margin: 0;
+	padding: 0;
+}
+
+.checklist p, .checklist p span {
+	margin: 0;
+	padding: 0;
+}
+
+.epistemic-color-box {
+	width: 10px;
+	height: 10px;
+	margin: 5px;
+	margin-left: 0px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	display: inline-block;
+}
+
+.rt-fake-codeblock pre {
+	background-color: unset;
+	border: unset;
+}

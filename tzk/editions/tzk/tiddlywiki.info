@@ -9,8 +9,8 @@
     "tiddlywiki/katex"
   ],
   "themes": [
-    "tiddlywiki/vanilla",
-    "tiddlywiki/snowwhite"
+    "tiddlywiki/snowwhite",
+    "tiddlywiki/vanilla"
   ],
   "description": "TiddlyZettelKasten (tzk) edition"
 }

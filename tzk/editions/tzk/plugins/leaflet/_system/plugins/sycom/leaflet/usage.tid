@@ -1,0 +1,26 @@
+caption: Usage
+created: 20151119173416239
+modified: 20170129153650584
+title: $:/plugins/sycom/leaflet/usage
+type: text/vnd.tiddlywiki
+
+The widget is called by using `<$leafmap />`. You may specify some options :
+
+!!! widget attributes
+|!Attribute |!Description |!Default |
+|''width'' |the width of the map (px or tiddler %)| `100%`|
+|''height''|the height of the map (px only)| `420px`|
+
+!!! leaflet map attributes
+|!Attribute |!Description |!Default |
+|''places'' |a json object with the geographical data you want to display. Can be stored in tiddlers as metadata fields. See [[geoSyntax|$:/plugins/sycom/leaflet/geoSyntax]] for more informations ||
+|''style'' |a json object containing styling information for your polygons and polylines objects in the map. Will overwrite GeoTiddler style if exists. Refer to [[leaflet documentation|http://leafletjs.com/reference-1.0.3.html#path]] for all options| `{ }`|
+|''color'' |a color for drawing that will apply to all objects in the map. Will also overwrite GeoTiddler color attributes and //style// (if defined) colors| `<<colour primary>>`|
+|''marker''|the name of the marker you want for points. See [[markers|$:/plugins/sycom/leaflet/markers]] for more informations| `marker`|
+|''tile'' |the //id// or the //number// of the tile layer you want to use. See [[tileLayers|$:/plugins/sycom/leaflet/tileLayers]] for more informations | `osm`|
+|''cluster''|set the clustering distance between points. also can disable clustering with no value or `0` or `""`| `80`|
+|''clusterType''|set if points are clustered for whole map (`map`) or for each tiddler (`tiddler`) displayed.| `map`|
+|''tileControl'' |''if present'' add a control to select the tile layer you want ||
+|''lat'' |map center latitude. Will overwrite places auto-centering | `52.8`|
+|''long'' |map center longitude. Will overwrite places auto-centering | `-2.6`|
+|''zoom'' |zoom level as defined by leaflet : int value between `0` (world map) and `20` (ant view) | |

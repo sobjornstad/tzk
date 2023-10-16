@@ -1,0 +1,27 @@
+caption: Journal
+created: 20230830210720848
+modified: 20230912095822070
+tags: $:/tags/MoreSideBar
+title: $:/sib/SideBar/Journal
+type: text/vnd.tiddlywiki
+
+<!-- TODO: Split into years/months? -->
+
+\define day-journal-regexp() [0-9]{4}-[0-9]{2}-[0-9]{2} [A-Z][a-z]{2}
+
+Today: <$link to=<<now "YYYY-0MM-0DD ddd">>/>
+
+<$let theYear=<<now YYYY>> theMonth=<<now MM>>>
+	<$macrocall $name=calendar year=<<theYear>> month={{{ [<theMonth>trim:prefix[0]]}}} opts="journals" />
+</$let>
+
+[[More|JournalCalendar]]
+
+----
+
+<dl>
+<$list filter="[tag[Journal]!sort[]regexp:title<day-journal-regexp>]">
+	<dt><$link/></dt>
+	<dd>{{!!description}}</dd>
+</$list>
+</dl>

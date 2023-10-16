@@ -1,0 +1,55 @@
+caption: RT
+condition: [{$:/RtLinks}jsonextract<storyTiddler>]
+created: 20230416184506246
+creator: soren
+modified: 20230416230221470
+modifier: soren
+tags: $:/tags/ReferenceExplorerTab
+title: $:/sib/refexplorer/RT
+type: text/vnd.tiddlywiki
+
+<table class="ideas-table">
+	<caption class="ideas-table-caption">Random Thoughts Explorer</caption>
+	<thead>
+		<tr>
+			<th style="width: 6em;">Index</th>
+			<th>Content</th>
+			<th style="width: 6em;">Created</th>
+		</tr>
+	</thead>
+	<tbody>
+		<$list filter={{$:/sib/refexplorer/RT!!condition}} variable=linksfor>
+			<$list filter="[<linksfor>jsonindexes[]]" variable="index">
+				<$vars rt-id={{{ [<linksfor>jsonextract<index>jsonget[id]]}}}>
+					<tr> 
+						<td>
+							<a href={{{ [[https://randomthoughts.sorenbjornstad.com/#]addsuffix<rt-id>] }}}><$text text=<<rt-id>>/>
+							</a>
+						</td>
+						<td class="rt-fake-codeblock">
+							<$vars linksfor={{{ [{$:/RtLinks}jsonextract<storyTiddler>] }}}>
+								<$codeblock code={{{ [<linksfor>jsonextract<index>jsonget[text]trim[]] }}}/>
+							</$vars>	
+						</td>
+						<td>
+							<$text text={{{ [<linksfor>jsonextract<index>jsonget[created_date]] }}}/>
+						</td>
+					</tr>
+				</$vars>
+			</$list>
+		</$list>
+	</tbody>
+</table>
+
+		
+		
+<!--
+		<tr>
+			<td><$link to={{!!title}} tooltip=<<thisTooltip>> style="color: white;"/></td>
+			{{$:/sib/refexplorer/LinkTypeTemplate}}
+			<td><$list filter="[all[current]tags[]sort[]]"><$macrocall $name="tag-pill" tag=<<currentTiddler>>/></$list></td>
+			<td><$view field="modified" format="date" template="YYYY-0MM-0DD 0hh:0ss"/></td>
+		</tr>
+		</$vars>
+		</$list>
+-->

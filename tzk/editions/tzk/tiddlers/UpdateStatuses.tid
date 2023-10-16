@@ -1,0 +1,19 @@
+created: 20230407015234920
+creator: soren
+description: Update statuses give a vague idea of how reliably a tiddler represents my current thinking.
+modified: 20230407030031171
+modifier: soren
+tags: Meta Public
+title: UpdateStatuses
+type: text/vnd.tiddlywiki
+
+Each tiddler has an ''update status'' which aims to give a rough idea of whether you can rely on the information in that tiddler to be aligned with my current thinking. See DocumentationStates for inspiration.
+
+For now update statuses are something of an experiment and apply only to idea tiddlers; I may expand the system if it works well.
+
+; <span style="color: lightgreen;">maintained</span>
+: The tiddler describes an idea, opinion, etc., that can change over time, and has been touched within the preceding 6 months. It's probably not wildly out of date.
+; <span style="color: tomato;">stale</span>
+: The tiddler is of a type that can be maintained, but: (a) it hasn't been edited or explicitly marked as still relevant for 6 months; or (b) it contains a TODO or is tagged NeedsAttention. A stale tiddler is not necessarily out of date with my current thinking -- in fact, it usually isn't -- but it's worth recognizing that some time has gone past and things may have changed.
+; <span style="color: lightblue;">frozen</span>
+: The tiddler is intended as a record of my thinking at a point in time, and thus cannot go out of date. Tag a tiddler [[Frozen]] to give it this status.

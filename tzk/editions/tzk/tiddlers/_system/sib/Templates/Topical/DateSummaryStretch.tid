@@ -1,0 +1,9 @@
+created: 20230405210328425
+creator: soren
+modified: 20230405212531511
+modifier: soren
+tags: Public
+title: $:/sib/Templates/Topical/DateSummaryStretch
+type: text/vnd.tiddlywiki
+
+<$link to=<<currentTiddler>>><$text text={{{ [all[current]split[:]butfirst[]] }}}/></$link>: {{!!ri-date-summary}}

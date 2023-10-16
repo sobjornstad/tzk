@@ -1,0 +1,16 @@
+created: 20151207090936935
+modified: 20161025222038568
+tags: example leaflet
+title: $:/plugins/sycom/leaflet/example/leaflet_with_geotiddler
+
+!! a map of a GeoTiddler
+this one displays the tiddler [[placeTiddler|$:/plugins/sycom/leaflet/example/placeTiddler]]. Note the tileControl attribute that enables map background selection. As the tiddler has its `color` field set to pink, objects are rendered pink. The cat is know a panther ;-). The tiddler also have a `style` field to define dash and thickness of the stroke...
+
+```
+<$leafmap
+    tileControl
+    places='{"tiddler":"$:/plugins/sycom/leaflet/example/placeTiddler"}'/>
+```
+<$leafmap
+    tileControl
+    places='{"tiddler":"$:/plugins/sycom/leaflet/example/placeTiddler"}'/>

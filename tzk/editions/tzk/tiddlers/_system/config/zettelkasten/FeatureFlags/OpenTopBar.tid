@@ -1,0 +1,11 @@
+caption: Open top bar
+created: 20210626233606201
+creator: soren
+description: Show the list of open tiddlers in a horizontal bar at the top of the screen
+modified: 20230416214929742
+modifier: soren
+private: yes
+public: no
+tags: 
+title: $:/config/zettelkasten/FeatureFlags/OpenTopBar
+type: text/vnd.tiddlywiki

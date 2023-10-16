@@ -1,0 +1,44 @@
+condition: [all[current]has[icon]]~[[$:/config/DefaultTiddlerIcon]has[text]] ~[all[current]tag[PAO]] ~[all[current]tag[Place]] ~[all[current]tag[Idea]] ~[all[current]tag[Source]]  ~[all[current]tag[Sink]] ~[all[current]tag[Journal]]
+created: 20230407013552037
+creator: soren
+modified: 20230416155852646
+modifier: soren
+tags: 
+title: $:/sib/Templates/Automatic/TiddlerTypeIcon
+type: text/vnd.tiddlywiki
+
+<!-- This gets slipped into $:/core/ui/ViewTemplate/title via a shadow override. The `condition` is based on the one originally hard-coded there with no conditions added. -->
+
+<!-- PAO -->
+<$list filter="[all[current]regexp[^Mr]]" variable=_>
+	<i class="fas fa-male" style="font-size: 80%; position: relative; top: 0.2em; transform: translateY(-50%); margin-right: 0.1em;"/>
+</$list>
+<$list filter="[all[current]regexp[^Ms]]" variable=_>
+	<i class="fas fa-female" style="font-size: 80%; position: relative; top: 0.2em; transform: translateY(-50%); margin-right: 0.1em;"/>
+</$list>
+<$list filter="[all[current]regexp[^The]]" variable=_>
+	<i class="fas fa-users" style="font-size: 80%; position: relative; top: 0.2em; transform: translateY(-50%); margin-right: 0.1em;"/>
+</$list>
+
+<!-- Place -->
+<$list filter="[all[current]tag[Place]]" variable=_>
+	<i class="fas fa-map-marker-alt" style="font-size: 80%; position: relative; top: 0.2em; transform: translateY(-50%); margin-right: 0.1em;"/>
+</$list>
+
+<!-- Source -->
+<$list filter="[all[current]tag[Source]]" variable=_>
+	<i class="fas fa-book-open" style="font-size: 80%; position: relative; top: 0.2em; transform: translateY(-50%); margin-right: 0.1em;"/>
+</$list>
+<$list filter="[all[current]tag[Sink]]" variable=_>
+	<i class="fas fa-pen-fancy" style="font-size: 80%; position: relative; top: 0.2em; transform: translateY(-50%); margin-right: 0.0em;"/>
+</$list>
+
+<!-- Idea -->
+<$list filter="[all[current]tag[Idea]]" variable=_>
+	<i class="far fa-lightbulb" style="font-size: 80%; position: relative; top: 0.2em; transform: translateY(-50%); margin-right: 0.1em;"/>
+</$list>
+
+<!-- Journal -->
+<$list filter="[all[current]tag[Journal]]" variable=_>
+	<i class="far fa-calendar-alt" style="font-size: 80%; position: relative; top: 0.2em; transform: translateY(-50%); margin-right: 0.1em;"/>
+</$list>

@@ -1,0 +1,21 @@
+created: 20151207090936935
+modified: 20151211172038568
+point: 6.5,19.72
+tags: example leaflet
+title: $:/plugins/sycom/leaflet/example/leaflet_with_non-tiddler_geo_data
+
+!! a map with data on the go
+very useful for fast mapping. All objects that might be embedded in GeoTiddler can be used here. Let's display a map with satellite imagery and
+
+* a ''point'' at `6.5,19.72`
+* a ''polyline'' at `6.4,19.7 6.6,19.74`
+
+note this tiddler is also a geoTiddler with one point at `6.5,19.72`
+
+```
+<$leafmap tile='sat'
+	places='{"point":"6.5,19.72","polyline":"6.4,19.7 6.6,19.74"}'/>
+```
+
+<$leafmap tile='sat'
+	places='{"point":"6.5,19.72","polyline":"6.4,19.7 6.6,19.74"}'/>

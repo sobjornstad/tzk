@@ -1,0 +1,11 @@
+created: 20230407030211378
+creator: soren
+modified: 20230407031011568
+modifier: soren
+tags: $:/tags/EditTemplate
+title: $:/sib/Templates/Automatic/FrozenTiddlerEditWarning
+type: text/vnd.tiddlywiki
+
+<$list filter="[all[current]tag[Frozen]]">
+<span style="color: gray; margin-left: 0.25em;"><i class="fas fa-icicles"/>&ensp;This tiddler is frozen. Edits should be limited to links, metadata, and copyedits.</span>
+</$list>

@@ -1,0 +1,3 @@
+title: $:/plugins/flibbles/relink/language/Warning/OldRelinkTextOperator
+
+Relink cannot parse your <code>$$$<<keyword>></code> wikitext until you migrate your "<<type>>" relink module from the deprecated ''relinktextoperator'' module-type to ''relinktext''.<br><br>See <a href={{{ [[Versions/2.1.0]addprefix[#]addprefix{$:/plugins/flibbles/relink!!demo}encodeuri[]] }}} class="tc-tiddlylink-external">the online documentation</a> for details.

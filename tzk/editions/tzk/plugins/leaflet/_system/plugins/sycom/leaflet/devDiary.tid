@@ -1,0 +1,61 @@
+created: 20151110173416000
+modified: 20180531171500000
+title: $:/plugins/sycom/leaflet/devDiary
+type: text/vnd.tiddlywiki
+
+Some notes about coding this plugin. Might be useful to others...
+
+* 20180602
+** added a template that will display a map of embeded object for tiddlers containing one of the geoTiddlers fiels.
+** updtated leaflet and marker-cluster to 1.3.1 - the easy way. Just replaced with new version and no deprecation at all \o/ !
+* 20180531
+** converting all `.svg.tid` files to `.svg` + `.svg.meta` pairs. Will allow git client to make svg viewable in web interface. Also compressed SVG as much as possible with great https://jakearchibald.github.io/svgomg/ tool.
+** tweak : for svg embedding local TiddlyWiki colors (eg `$primary$`), forced type to `text/vnd.tiddlywiki` to preserve them.
+* 20170317
+** lot of work around cluster size, cluster color when using filter. Cluster size depends on point % for the cluster, clusterRadius and zoom.
+* 20170311
+** added styling options and also the grouping tiddler capabilities. Discovered that direct styling in SVG ''does not always'' [[overwrite css styling|http://stackoverflow.com/questions/24293880/svg-why-does-external-css-override-inline-style-for-text]].
+* 20170129
+** adding some markers. And it's possible to create yours.
+* 20170115
+** darling birthday edit. Clustering by tiddler is on track. Will have to look for clustering direct passing object through widget.
+* 20161111
+** armistice edit! can now disable clustering or set clustering distance. Bug #9 fixed. may be cluster size will be too big for big databases
+* 20161106
+** color parameter is partially implemented. Note that direct styling like `fill` in svg element wont take on class styling through css...
+* 20161104
+** after many attemps, managed to include tiddler excerpt in popups for mapping geoTiddler. Had to include an escape rule for tiddler containing a leafmap widget. No larsen, but a big bug (map number probably).
+** also managed to give the marker the color of the primary color. Note for later there is probably a bug if primary color is defined with `<<colour>>` macro.
+* 20161102
+** ok, when importing some library, don't forget to use `require()` in order to conclude. Silly guy. Still some polishing needed, but clustering know works...
+* 20161101
+** fighting with markercluster capabilities. At this point seems I can add the script but the MarkerClusterGroup class is not recognized when called...
+* 20161031
+** gave up inserting external layers.svg in stylesheet. Issues with `<$text />` and `{{ }}`... Created svg in a separate tiddler for the record but inserting directly an "escaped" version in [[mapCss.css|$:/plugins/sycom/leaflet/mapCssTweaks.css.tid]]
+* 20161030
+** working on different markers. Not so good at designing them though ;-) Putted default leaflet svg marker. Using Inkscape to edit svg easily and SVGO extension in atom to compress them. First attempt to put layers icon as svg. Issues...
+* 20161029
+** trying to put svg marker instead of png ones. Will be better for changing colors, content... using data:image/svg+xml. Svg has to bring xmlns ~~and xmlns:xlink~~ with it in order to work...
+* 20161025
+** after big fight, managed to call images as embeded through css without writing full base64 code. Had to add `html` to the "rules only" list at the beginning of the css code
+* 20161024
+** geojson implemented. Will need to add cluster soon. Some question about geojson attributes to create the popup...
+* 20161021
+** updated leaflet.js to 1.0.1 moved base64 image to mapCss.css in order to avoid problems when updating leaflet.
+** Updated tileLayer list. min/max checked for this time. Detect if tile id is wrong to alert user and display osm instead.
+* 20160314
+** corrected caption errors for example and roadmap. Have to write an install process in demo site (gh-page) since writing this in plugin is nonsense.
+* 20151124
+** wondering the best way to release plugin code in gitlab (or github). Can't be a fork of TiddlyWiki. Don't want to lose .git history.
+** ok I'm dumb. All is written in the dev TiddlyWiki : http://tiddlywiki.com/dev/#Developing%20p lugins%20using%20Node.js%20and%20GitHub . Lost .git history since cuting tree is bad. But history was still short...
+* 20151123
+** not able to use directly tiddler stored images as css background.
+** decided to use base64 form in css. Not so elegant as I wished, but works.
+* 20151121
+** fighting with parameters : not imported from widget with `this.getAttribute()`
+** solved by adding the parameter computation before : `this.computeAttributes();`
+* 20151115
+** some problems to declare leaflet.js library : fail during build since there is no window, no document.
+** solved by creating the tiddlywiki.files importer.
+* 20151110
+** starting some tests. Inspiration from d3plugin (also creating widget and importing library)

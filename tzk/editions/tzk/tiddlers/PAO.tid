@@ -3,7 +3,7 @@ color: #ff0000
 created: 20200115231447676
 creator: soren
 icon: $:/core/images/tag-button
-modified: 20210827234120899
+modified: 20230406024908885
 modifier: soren
 refexplorer-hide: true
 tags: Meta Public
@@ -16,7 +16,7 @@ type: text/vnd.tiddlywiki
 
 Tiddler type, the name of which stands for “''P''erson, ''A''nimal, or ''O''rganization.”
 
-See $:/sib/Tools/PaoList for a list of all PAOs, and $:/sib/Tools/MissingPeople to find PAOs that have been referenced but not had a tiddler created.
+See $:/sib/Tools/MissingPeople to find PAOs that have been referenced but not had a tiddler created.
 
 !! Linking
 
@@ -27,7 +27,7 @@ Sources should be connected to their authors by linking to the author or authors
 
 !! Naming conventions
 
-In addition to being tagged `PAO`, PAOs should have names which begin with `Mr`, `Ms`, or `The`. The first two indicate a person/animal and indicate gender (my intention is to use `Mx` for non-binary people, but I haven't needed it yet). `The` is used for organizations. Note that the titles of tiddlers which do not represent organizations should consequently not begin with //The// to avoid confusion; see OurNamingConventions.
+In addition to being tagged `PAO`, PAOs should have names which begin with `Mr`, `Ms`, `Mx`, or `The`. The first three indicate a person/animal and indicate gender (`Mx` is for non-binary people or people of unidentified gender). `The` is used for organizations. Note that the titles of tiddlers which do not represent organizations should consequently not begin with //The// to avoid confusion; see OurNamingConventions.
 
 
 !! Tags and fields

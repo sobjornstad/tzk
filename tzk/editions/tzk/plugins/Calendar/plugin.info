@@ -1,0 +1,11 @@
+{
+    "author": "JeffreyWilkinson",
+    "core-version": ">=5.1.11",
+    "dependents": "",
+    "description": "calendar with date formatter addons",
+    "list": "readme license",
+    "plugin-type": "plugin",
+    "source": "https://github.com/buggyj/TW5-tools",
+    "title": "$:/plugins/bj/Calendar",
+    "version": "1.11.0"
+}

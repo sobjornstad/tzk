@@ -1,0 +1,22 @@
+created: 20230416155348451
+creator: soren
+modified: 20230416155559272
+modifier: soren
+tags: $:/tags/Macro
+title: $:/sib/Macros/_delta-interest
+type: text/vnd.tiddlywiki
+
+\define delta-interest()
+	<$list filter="[{!!ri-date-interest-delta}match[growing]]">
+		<span style="color: lightblue;">🡕</span>
+	</$list>
+	<$list filter="[{!!ri-date-interest-delta}match[waning]]">
+		<span style="color: tomato;">🡖</span>
+	</$list>
+	<$list filter="[{!!ri-date-interest-delta}match[trudging]]">
+		<span style="color: yellow;">🡒</span>
+	</$list>
+	<$list filter="[{!!ri-date-interest-delta}is[blank]]">
+		—
+	</$list>
+\end

@@ -1,0 +1,34 @@
+created: 20220909162241485
+creator: soren
+modified: 20221201234637583
+modifier: soren
+tags: Tool Public
+title: RecentIdeas
+type: text/vnd.tiddlywiki
+
+See 100 published Ideas most recently:&ensp;
+<$radio tiddler="$:/temp/RecentListSortField" value="created">&nbsp;Created</$radio>&ensp;
+<$radio tiddler="$:/temp/RecentListSortField" value="modified">&nbsp;Updated</$radio>
+
+<$list filter="[{$:/temp/RecentListSortField}!is[blank]]" variable=_ emptyMessage="//Please select a sort field above.//">
+	<table class="recent-tab">
+		<tr>
+			<th>Created</th>
+			<th>Idea</th>
+			<th>Tags</th>
+		</tr>
+		<$list filter="[tag[Idea]tag[Public]!search:title[/]!tag[Software]!sort{$:/temp/RecentListSortField}limit[100]]">
+		<tr>
+			<td><$view format="date" template="YYYY/0MM/0DD" field={{$:/temp/RecentListSortField}}/></td>
+			<td><$link /><$list filter="[{!!description}!is[blank]]" variable=_>:</$list> {{!!description}}</td>
+			<td><$list filter="[all[current]tags[]sort[]]"><$macrocall $name="tag-pill" tag=<<currentTiddler>>/></$list></td>
+		</tr>
+		</$list>
+	</table>
+</$list>
+
+<style>
+table.recent-tab {
+	font-size: small;
+}
+</style>

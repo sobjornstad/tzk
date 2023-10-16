@@ -1,0 +1,26 @@
+created: 20210611015734693
+creator: soren
+modified: 20230407023355475
+modifier: soren
+tags: $:/tags/ViewTemplate
+title: $:/core/ui/ViewTemplate/subtitle
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+
+<$reveal type="nomatch" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
+<div class="tc-subtitle">
+<div>
+<i class="fa fa-history"/>&ensp;Created&nbsp;<$view field="created" format="date" template={{$:/language/Tiddler/DateFormat}} />
+</div>
+<div>
+<i class="fa fa-clock"/>&ensp;Updated&nbsp;<$view field="modified" format="date" template={{$:/language/Tiddler/DateFormat}} />
+<$transclude tiddler="$:/sib/Templates/Automatic/UpdateStatus"/>
+</div>
+<$list filter="[all[current]has[description]]">
+	<div>
+	<i class="fa fa-gem"/>&ensp;{{!!description}}
+	</div>
+</$list>
+</div>
+</$reveal>

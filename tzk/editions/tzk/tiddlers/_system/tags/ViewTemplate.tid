@@ -1,0 +1,7 @@
+created: 20201129183705439
+creator: soren
+list: $:/core/ui/ViewTemplate/title $:/core/ui/ViewTemplate/unfold $:/core/ui/ViewTemplate/subtitle $:/sib/EpistemicStatus/Display $:/sib/MediaRating/Display $:/core/ui/ViewTemplate/tags $:/core/ui/ViewTemplate/classic $:/sib/Templates/Automatic/CheckpointList $:/sib/Templates/Automatic/JournalNavigation $:/sib/Templates/Automatic/Subtiddler $:/sib/Templates/Automatic/TypeTagChecker $:/sib/Templates/Automatic/SpoilerBanner $:/sib/Templates/Automatic/Untitled $:/sib/Templates/Automatic/PrivateChunkParentNotice $:/sib/Templates/Automatic/Source $:/sib/Templates/Topical/MinnesotaStateParkInfo $:/sib/Templates/Automatic/MacroDescription $:/sib/Templates/Automatic/Date $:/core/ui/ViewTemplate/body $:/sib/Templates/Automatic/RomanticInterest $:/sib/Templates/Automatic/MissingTiddlerQuickCreate $:/sib/indite/ViewTemplate $:/sib/Reviewer/SchedulableTemplate $:/sib/Templates/Automatic/Event $:/sib/gis/MappingTools $:/sib/Templates/Topical/SabbaticalUpdates/DateNavigation $:/sib/Templates/Automatic/Publicity/ViewerPublicLine $:/plugins/danielo515/2click2edit/ui/ViewTemplate $:/sib/refexplorer/ReferenceExplorer $:/sib/Templates/Automatic/ViewTemplateDescription $:/sib/Templates/Automatic/ReaderActions $:/plugins/mklauber/aliases/footer
+modified: 20230912034410071
+modifier: soren
+title: $:/tags/ViewTemplate
+type: text/vnd.tiddlywiki

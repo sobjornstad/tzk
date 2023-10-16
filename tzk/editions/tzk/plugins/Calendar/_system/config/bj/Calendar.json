@@ -1,0 +1,31 @@
+
+{
+	"journals":{
+		"lastDayOfWeek":"0",
+		"formatter":"$:/macros/bj/Calendar/journalfmt.js",
+		"titlebold":"no",
+		"highlightThisDay":"no",
+		"highlightThisDate":"yes"
+	},
+	"default":{
+		"lastDayOfWeek":"0",
+		"formatter":"$:/macros/bj/Calendar/journalslinked.js",
+		"titlebold":"yes",
+		"highlightThisDay":"no",
+		"highlightLinks":"yes"
+	},
+	"diary":{
+		"lastDayOfWeek":"0",
+		"formatter":"$:/macros/bj/Calendar/diary.js",
+		"titlebold":"yes",
+		"highlightThisDay":"no",
+		"highlightLinks":"yes"
+	},
+	"plain":{
+		"lastDayOfWeek":"0",
+		"formatter":"",
+		"titlebold":"yes",
+		"highlightThisDay":"yes",
+		"highlightThisDate":"no"
+	}
+}

@@ -1,0 +1,40 @@
+created: 20230822195251601
+creator: soren
+modified: 20230824171626606
+modifier: soren
+tags: 
+title: $:/sib/Templates/Topical/JournalPersonPlaceExplorer
+type: text/vnd.tiddlywiki
+
+<table>
+	<tr>
+		<th>People</th>
+		<td>
+			<$list filter="[all[current]links[]] [prefix<currentTiddler>links[]] +[tag[PAO]sort[]]">
+				<span class="journal-item-intersep">
+					<$link/>
+				</span>
+			</$list>
+		</td>
+	</tr>
+	<tr>
+		<th>Places</th>
+		<td>
+			<$list filter="[all[current]links[]] [prefix<currentTiddler>links[]] +[tag[Place]sort[]]">
+				<span class="journal-item-intersep">
+					<$link/>
+				</span>
+			</$list>
+		</td>
+	</tr>
+</table>
+
+<style>
+span.journal-item-intersep:after {
+  content: "·";
+}
+
+span.journal-item-intersep:last-child:after {
+  content: "";
+}
+</style>

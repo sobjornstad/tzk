@@ -1,0 +1,25 @@
+caption: Markers
+created: 20170129172401910
+modified: 20170129172401910
+title: $:/plugins/sycom/leaflet/markers
+type: text/vnd.tiddlywiki
+
+markers are used to display point(s) related informations. Default marker is [[marker|$:/plugins/sycom/leaflet/images/marker.svg]].
+
+!! Available markers
+
+for now, available markers are those
+
+<$list filter='[all[shadows]has[marker_dim]has[caption]]'><span style="display:inline-block;text-align:center;margin:0 .5em;padding:.5em;border:.5px dotted"><$tiddler tiddler={{!!title}}><$transclude/></$tiddler><br/><$link to={{!!title}}>{{!!caption}}</$link></span></$list>
+
+!! Create your own markers
+
+Have a look at existing ones above for inspiration and hack. Markers are svg pieces with some mandatory tweaks :
+
+* a marker is based upon ''two'' tiddlers, one for the marker and one for the shadow
+* add a `caption` field to the marker tiddler (not for the shadow svg).
+* the `title` of your marker tiddler will be `$:/plugins/sycom/leaflet/images/`''caption''`.svg`
+* and the `title` of the marker shadow tiddler will be `$:/plugins/sycom/leaflet/images/`''caption''`shadow.svg`
+* a `marker_dim` field wich defines //width// //height// //x-anchor// //y-anchors//. Please check that your //width// and //height// value are the same as in `<svg (...) width="15" height="15">`
+* don't forget to add `xmlns` attribute : `<svg xmlns="http://www.w3.org/2000/svg" (...)`
+* if you want your marker to change color upon tiddlywiki or widget parameters, use `$primary$` for the color attribute of your svg

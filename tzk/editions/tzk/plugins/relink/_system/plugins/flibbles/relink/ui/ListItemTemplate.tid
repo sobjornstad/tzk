@@ -1,0 +1,12 @@
+title: $:/plugins/flibbles/relink/ui/ListItemTemplate
+
+\whitespace trim
+<$set
+	name="classes"
+	filter="[<listItem>relink:impossible<toTitle>]"
+	value="tc-menu-list-item tc-relink-impossible"
+	emptyValue="tc-menu-list-item">
+<div class=<<classes>>>
+<$link to=<<listItem>>><$text text=<<listItem>> /></$link>
+</div>
+</$set>

@@ -1,0 +1,23 @@
+caption: Macros
+created: 20210523143205876
+creator: soren
+modified: 20230416155452545
+modifier: soren
+tags: 
+title: $:/sib/Documentation/Macros
+type: text/vnd.tiddlywiki
+
+Click into a macro to see an example of its usage and its definition.
+
+<table>
+	<tr>
+		<th style="width: 10em;">Name</th>
+		<th>Description</th>
+	</tr>
+	<$list filter="[prefix[$:/sib/Macros/]tag[$:/tags/Macro]!prefix[$:/sib/Macros/_]]">
+	<tr>
+		<td><$link to=<<currentTiddler>>><$text text={{{ [all[current]removeprefix[$:/sib/Macros/]] }}}/></$link></td>
+		<td>{{!!description}}</td>
+	</tr>
+	</$list>
+</table>

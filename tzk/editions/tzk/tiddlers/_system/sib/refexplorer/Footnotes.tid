@@ -1,0 +1,84 @@
+caption: Footnotes
+condition: [search[fnote]]
+created: 20210719234943395
+creator: soren
+modified: 20230822144835533
+modifier: soren
+tags: $:/tags/ReferenceExplorerTab
+title: $:/sib/refexplorer/Footnotes
+type: text/vnd.tiddlywiki
+
+\define find(text, begin, end, output:"simple", mode:"all")
+<$vars 
+  fulltext=<<__text__>>
+  start=<<__begin__>>
+  stop=<<__end__>>
+  output-macro=<<__output__>>
+>
+<$list variable="p1" filter="[<fulltext>splitbefore<start>]">
+<$list variable="p2" filter="[<fulltext>removeprefix<p1>]">
+<$list variable="p3" filter="[<p2>splitbefore<stop>removesuffix<stop>]">
+<$macrocall $name=<<output-macro>> p=<<p3>> />
+<$reveal type="match" text="all" default=<<__mode__>> >
+<$macrocall $name="find"
+  text={{{[<p2>removeprefix<p3>removeprefix<stop>]}}}
+  begin=<<start>>
+  end=<<stop>>
+  output=<<output-macro>>
+/>
+</$reveal>
+</$list>
+</$list>
+</$list>
+</$vars>
+\end
+
+\define simple(p)
+<$text text=<<__p__>> />
+\end
+
+\define simple-list(p)
+<li><$text text=<<__p__>>/></li>
+\end
+
+\define showfnotes(filter:"[<currentTiddler>]", title:"Empty" class:"fnote-list", emptyMessage:"")
+<$vars leftDelimiter="<<fnote ">
+<$list filter="[subfilter<__filter__>search:text:regexp<leftDelimiter>limit[1]]" variable=null emptyMessage=<<__emptyMessage__>> ><!-- check to see if there is any footnote -->
+<$reveal tag="div" type="nomatch" default="Empty" text=<<__title__>> >
+<h2>$title$</h2>
+</$reveal>
+<ol class="$class$">
+<$list filter=<<__filter__>> >
+<$macrocall $name="find" 
+   text={{!!text}}
+   begin="<<fnote "
+   end=">>"
+   output="output-fnote"
+/>
+</$list>
+</ol>
+</$list>
+</$vars>
+\end
+
+\define output-fnote(p)
+<$vars output=$p$>
+<li><<output>></li>
+</$vars>
+\end
+
+<$tiddler tiddler=<<storyTiddler>>>
+<<showfnotes emptyMessage:"There are no footnotes in this tiddler. (Use the `fnote` macro to create a footnote.)">>
+</$tiddler>
+
+<!--
+Based on https://kookma.github.io/TW-Refnotes/.
+Copyright (c) 2019--2021 Mohammad Rahmani.
+Copyright (c) 2021 Soren Bjornstad.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->

@@ -1,0 +1,35 @@
+author: Sylvain Comte
+caption: action-createtiddler
+created: 20180906130958091
+modified: 20180906132645752
+tags: Widgets
+title: geoLocationWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+The ''geolocation'' widget is used to collect geographic position of the browser running the wiki. For now position will be added the //point// (or //points// if there is more than one point) field of the target tiddler. Those fields may then be used with the [[Leaflet Map Plugin|https://sycom.github.io/TiddlyWiki-Plugins/#Leaflet%20plugin]], or whatever tool using geographic coordinates.
+
+* The widget is not dependant from Leaflet Map Plugin (but is bundled in it). You may install it alone
+* The widget will only work on //https// website, due to security limitation of the geolocation implemented in browsers
+
+! Content and Attributes
+The [[geolocation widget|$:/ext/modules/widgets/geolocation-widget.js]] will create a button to collect your browser's position. Any content within it is ignored.
+
+| !Attribute | !Description | !Default |
+|target |The tiddler (title) in which data will be stored |//current tiddler// |
+|icon |The title of the icon used to dress up the button|$:/core/images/globe |
+|text |The text displayed in the button (will overwrite the icon)|`undefined` |
+
+More options will come later (//accuracy//, //object type//...).
+
+! Examples
+
+```
+<$geoloc target="Geolocation Store" />
+```
+
+<$geoloc target="Geolocation Store" />
+
+! Source
+The ''geolocation widget'' is developped aside Leaflet Map Plugin. Source code can be found on the same repository : https://framagit.org/sycom/TiddlyWiki-Plugins/tree/master/ext/modules/widget/geolocation
+

@@ -1,0 +1,1 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"><filter id="a" width="200" height="200" x="-50" y="-50"><feGaussianBlur in="SourceAlpha" stdDeviation="1.5"/></filter><ellipse cx="7.5" cy="7.5" fill-opacity=".3" filter="url(#a)" rx="7.2" ry="7.2"/></svg>

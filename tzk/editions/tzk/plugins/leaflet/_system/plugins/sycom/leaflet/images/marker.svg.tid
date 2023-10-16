@@ -1,0 +1,9 @@
+caption: marker
+created: 20161028202401905
+marker_dim: 25 40 12.5 40
+modified: 20180531124011600
+tags: $:/tags/Image
+title: $:/plugins/sycom/leaflet/images/marker.svg
+type: text/vnd.tiddlywiki
+
+<svg xmlns="http://www.w3.org/2000/svg" width="25" height="40" fill-rule="evenodd"><path fill="none" d="M6.279 4.463h12.625v14.5H6.279z"/><path fill="$primary$" fill-opacity=".8" stroke="#fff" stroke-linecap="round" d="M12.544.5C5.971.5.5 6.191.5 12.366c0 2.778 1.564 6.308 2.694 8.746L12.5 38.984l9.262-17.872c1.13-2.438 2.738-5.791 2.738-8.746C24.5 6.191 19.117.5 12.544.5zm0 7.155a4.714 4.714 0 0 1 4.679 4.71c0 2.588-2.095 4.663-4.679 4.679-2.584-.017-4.679-2.09-4.679-4.679a4.714 4.714 0 0 1 4.679-4.71z" class="leaflet-marker-colored"/><path fill="none" stroke="#fff" stroke-linecap="round" stroke-opacity=".9" d="M12.531 1.607c-5.944 0-10.938 5.219-10.938 10.75 0 2.359 1.443 5.832 2.563 8.25l.031.031L12.5 36.607l8.25-15.969.031-.031c1.135-2.448 2.625-5.706 2.625-8.25 0-5.538-4.931-10.75-10.875-10.75zm0 4.969c3.168.021 5.781 2.601 5.781 5.781 0 3.18-2.613 5.761-5.781 5.781-3.168-.02-5.75-2.61-5.75-5.781 0-3.172 2.582-5.761 5.75-5.781z"/></svg>

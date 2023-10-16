@@ -1,0 +1,98 @@
+created: 20230912033953383
+modified: 20230912044637875
+tags: $:/tags/ViewTemplate
+title: $:/sib/Templates/Automatic/Event
+type: text/vnd.tiddlywiki
+
+<$list filter="[all[current]tag[Event]]" variable=_>
+
+<div class="sib-event-info">
+
+<div class="sib-event-title">{{!!caption}}</div>
+<div class="sib-event-dates">
+	{{{ [{!!startdate}format:date{$:/config/NewJournal/Title}]}}} -- {{{ [{!!enddate}format:date{$:/config/NewJournal/Title}] }}}
+</div>
+
+<div class="sib-event-when">
+
+Journal entries:
+
+<ul>
+	<$list filter="[tag[Journal]] :map[split[ ]first[]split[-]join[]addsuffix[1200]] +[compare:date:gteq{!!startdate}compare:date:lteq{!!enddate}] +[format:date{$:/config/NewJournal/Title}]">
+		<li><$link /></li>
+	</$list>
+</ul>
+
+Months included:
+
+<$let
+	startyear={{{ [{!!startdate}split[]first[4]join[]] }}}
+	startmonth={{{ [{!!startdate}split[]first[6]last[2]join[]trim:prefix[0]]}}}
+	endyear={{{ [{!!enddate}split[]first[4]join[]] }}}
+	endmonth={{{ [{!!enddate}split[]first[6]last[2]join[]trim:prefix[0]]}}}>
+	
+	<$list filter="[range<startyear>,<endyear>]" variable="year">
+		<$list filter="[range<startmonth>,<endmonth>]" variable="month">
+			<$macrocall $name=calendar year=<<year>> month=<<month>> opts="event" />
+		</$list>
+	</$list>
+</$let>
+
+</div>
+
+<div class="sib-event-who-where">
+
+<$list filter="[all[current]has[people]]" variable=_>
+
+	People (<$count filter={{!!people}}/>):
+
+	<ul>
+		<$list filter={{!!people}}>
+			<li><$link /></li>
+		</$list>
+	</ul>
+
+</$list>
+
+<$list filter="[all[current]has[places]]" variable=_>
+
+	Places (<$count filter={{!!places}}/>):
+
+	<ul>
+		<$list filter={{!!places}}>
+			<li><$link /></li>
+		</$list>
+	</ul>
+	
+</$list>
+
+</div><!-- sib-event-who-where -->
+
+<<clarify>>
+
+</div><!-- sib-event-info -->
+
+<style>
+div.sib-event-info {
+	border-bottom: 1px solid gray;
+}
+div.sib-event-title {
+  font-weight: bold;
+	text-align: center;
+	border-top: 1px solid gray;
+}
+div.sib-event-dates {
+	text-align: center;
+	border-bottom: 1px solid gray;
+}
+div.sib-event-when {
+	float: left;
+	width: 50%;
+}
+div.sib-event-who-where {
+	float: right;
+	width: 50%;
+}
+</style>
+
+</$list>

@@ -1,0 +1,52 @@
+created: 20230406222633350
+creator: soren
+modified: 20230407013940964
+modifier: soren
+tags: $:/tags/ViewTemplate
+title: $:/core/ui/ViewTemplate/title
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+\define title-styles()
+fill:$(foregroundColor)$;
+\end
+\define config-title()
+$:/config/ViewToolbarButtons/Visibility/$(listItem)$
+\end
+<div class="tc-tiddler-title">
+<div class="tc-titlebar">
+<span class="tc-tiddler-controls">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]]" variable="listItem"><$reveal type="nomatch" state=<<config-title>> text="hide"><$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]"><$transclude tiddler=<<listItem>>/></$set></$reveal></$list>
+</span>
+<$set name="tv-wikilinks" value={{$:/config/Tiddlers/TitleLinks}}>
+<$link>
+<$set name="foregroundColor" value={{!!color}}>
+<$list filter={{$:/sib/Templates/Automatic/TiddlerTypeIcon!!condition}}>
+<span class="tc-tiddler-title-icon" style=<<title-styles>>>
+<$transclude tiddler={{!!icon}}>
+	<$transclude tiddler="$:/sib/Templates/Automatic/TiddlerTypeIcon"/>
+	<!-- <$transclude tiddler={{$:/config/DefaultTiddlerIcon}}/> -->
+</$transclude>
+</span>
+</$list>
+</$set>
+<$list filter="[all[current]removeprefix[$:/]]">
+<h2 class="tc-title" title={{$:/language/SystemTiddler/Tooltip}}>
+<span class="tc-system-title-prefix">$:/</span><$text text=<<currentTiddler>>/>
+</h2>
+</$list>
+<$list filter="[all[current]!prefix[$:/]]">
+<h2 class="tc-title">
+<$view field="title"/>
+</h2>
+</$list>
+</$link>
+</$set>
+</div>
+
+<$reveal type="nomatch" text="" default="" state=<<tiddlerInfoState>> class="tc-tiddler-info tc-popup-handle" animate="yes" retain="yes">
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/TiddlerInfoSegment]!has[draft.of]] [[$:/core/ui/TiddlerInfo]]" variable="listItem"><$transclude tiddler=<<listItem>> mode="block"/></$list>
+
+</$reveal>
+</div>

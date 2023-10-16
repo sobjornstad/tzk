@@ -1,0 +1,1 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="50" height="40"><filter id="a" width="200" height="200" x="-50" y="-50"><feGaussianBlur in="SourceAlpha" stdDeviation="1.5"/></filter><path fill="none" d="M47 0a52 52 0 0 0-34 21L0 40l30-19 13-9c7-6 9-12 4-12zm-9 7a3 8 58 0 1-2 5c-3 3-7 5-9 5-3 0-2-2 1-5a3 8 58 0 1 10-5z" filter="url(#a)"/></svg>

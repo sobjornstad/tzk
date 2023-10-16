@@ -1,0 +1,9 @@
+caption: pin
+created: 20161028202401905
+marker_dim: 20 35 10 35
+modified: 20180531154500000
+tags: $:/tags/Image
+title: $:/plugins/sycom/leaflet/images/pin.svg
+type: text/vnd.tiddlywiki
+
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="35"><defs><linearGradient id="a"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient><radialGradient id="b" cx="7" cy="7" r="8" fx="5" fy="5" gradientTransform="scale(1.12)" gradientUnits="userSpaceOnUse" href="#a"/></defs><g fill-rule="evenodd"><path d="M9 20h2v15H9z"/><circle cx="10" cy="10" r="10" class="leaflet-marker-colored" fill-opacity=".8" fill="$primary$"/><circle cx="10" cy="10" r="10" fill="url(#b)"/></g></svg>

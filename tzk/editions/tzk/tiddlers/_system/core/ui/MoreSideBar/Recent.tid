@@ -1,0 +1,14 @@
+caption: {{$:/language/SideBar/Recent/Caption}}
+created: 20221201233103301
+creator: soren
+modified: 20221201233146286
+modifier: soren
+tags: $:/tags/MoreSideBar
+title: $:/core/ui/MoreSideBar/Recent
+type: text/vnd.tiddlywiki
+
+For a table of recently created and updated ideas and their summaries, visit RecentIdeas.
+
+---
+
+<$macrocall $name="timeline" format={{$:/language/RecentChanges/DateFormat}}/>

@@ -1,0 +1,9 @@
+created: 20180602095702318
+modified: 20180602105242971
+tags: $:/tags/ViewTemplate
+title: $:/plugins/sycom/leaflet/templates/geoTiddler
+type: text/vnd.tiddlywiki
+
+<$list filter="[all[current]has[point]] [all[current]has[points]] [all[current]has[polyline]] [all[current]has[polylines]] [all[current]has[polygon]] [all[current]has[polygons]] [all[current]has[places]] [all[current]has[geojson]]">
+  <$leafmap  places='{"tiddler":" "}' height='240px'/>
+</$list>

@@ -1,0 +1,13 @@
+caption: Calendar
+tags: $:/tags/SideBar
+title: $:/plugins/bj/calendar/sidbar
+type: text/vnd.tiddlywiki
+
+<$reveal state="$:/temp/plugins/bj/Calendar" text="Year" type="nomatch">
+  <$button set="$:/temp/plugins/bj/Calendar" setTo="Year">Year</$button>
+  <<calendar "" "">>
+</$reveal>
+<$reveal state="$:/temp/plugins/bj/Calendar" text="Year" type="match">
+  <$button set="$:/temp/plugins/bj/Calendar" setTo="Month">Month</$button>
+<<calendar 2014 "">>
+</$reveal>

@@ -1,0 +1,10 @@
+caption: Stale update link
+created: 20230407023028152
+creator: soren
+description: Show a link on stale tiddlers allowing you to mark them as still up to date as of the current time.
+modified: 20230407025143508
+modifier: soren
+private: yes
+tags: 
+title: $:/config/zettelkasten/FeatureFlags/MarkStaleUpdated
+type: text/vnd.tiddlywiki

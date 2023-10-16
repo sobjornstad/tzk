@@ -1,0 +1,17 @@
+title: $:/plugins/flibbles/relink/ui/MissingTemplate
+
+\whitespace trim
+<$set name="missingTiddler" value=<<currentTiddler>> >
+<div class="tc-tiddler-missing">
+<$button popup=<<qualify "$:/state/relink/popup/missing">> class="tc-btn-invisible tc-missing-tiddler-label">
+<$view field="title" format="text" />
+</$button>
+<$reveal state=<<qualify "$:/state/relink/popup/missing">> type="popup" position="below" animate="yes">
+<div class="tc-drop-down">
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+<hr>
+<$list filter="[all[current]relink:backreferences[]sort[title]]" template="$:/plugins/flibbles/relink/ui/ListItemWithBlurbTemplate"/>
+</div>
+</$reveal>
+</div>
+</$set>

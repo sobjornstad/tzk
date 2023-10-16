@@ -1,0 +1,11 @@
+{
+    "author": "Sylvain Comte",
+    "core-version": ">=5.0.0",
+    "dependents": "",
+    "description": "Leaflet maps",
+    "list": "readme usage geoSyntax tileLayers markers example",
+    "plugin-type": "plugin",
+    "source": "https://framagit.org/sycom/TiddlyWiki-Plugins",
+    "title": "$:/plugins/sycom/leaflet",
+    "version": "0.8.6"
+}

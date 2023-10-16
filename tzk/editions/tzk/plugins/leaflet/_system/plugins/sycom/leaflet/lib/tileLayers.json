@@ -1,0 +1,82 @@
+[
+    {
+        "id": "osmfr",
+        "nom": "OSM France",
+        "url": "http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",
+        "attrib": "fond par <a href='http://osm.org/copyright'>OSM</a>, licence <a href='http://creativecommons.org/licenses/by-sa/3.0'>CC BY SA</a>. Données &copy;Contributeurs <a href='http://openstreetmap.org'>OSM</a>, licence <a href='http://opendatacommons.org/licenses/odbl/'>ODbL</a>.",
+        "zMin": 1,
+        "zMax": 20
+    },
+    {
+      "id": "osm",
+      "nom": "OpenStreetMap",
+      "url": "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
+      "attrib": "Map tiles by &copy;<a href='http://osm.org/copyright'>OSM</a>, licence <a href='http://creativecommons.org/licenses/by-sa/3.0'>CC BY SA</a>. Data by &copy;<a href='http://openstreetmap.org'>OSM</a> contributors, licence <a href='http://opendatacommons.org/licenses/odbl/'>ODbL</a>.",
+      "zMin": 1,
+      "zMax": 20
+   },
+    {
+        "id": "osmbw",
+        "nom": "OSM N&B",
+        "url": "http://www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png",
+        "attrib": "Tiles hosted by wikimedia labs. Data by &copy;<a href='http://openstreetmap.org'>OSM</a> contributors, licence <a href='http://opendatacommons.org/licenses/odbl/'>ODbL</a>.",
+        "zMin": 1,
+        "zMax": 20
+    },
+    {
+        "id": "sat",
+        "nom": "Satellite Esri",
+        "url": "http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+        "attrib": "&copy;Map tiles by Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community",
+        "zMin": 1,
+        "zMax": 20
+    },
+    {
+        "id": "natgeo",
+        "nom": "National Geog.",
+        "url": "http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}",
+        "attrib": "&copy;Map tiles by Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC",
+        "zMin": 1,
+        "zMax": 12
+    },
+    {
+        "id": "toner",
+        "nom": "Black Ink",
+        "url": "http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png",
+        "attrib": "Map tiles by <a href='http://stamen.com'>Stamen Design</a>, licence <a href='http://creativecommons.org/licenses/by/3.0'>CC BY 3.0</a>. Data by &copy;<a href='http://openstreetmap.org'>OSM</a> contributors, licence <a href='http://opendatacommons.org/licenses/odbl/'>ODbL</a>.",
+        "zMin": 1,
+        "zMax": 20
+    },
+    {
+        "id": "water",
+        "nom": "Water painting",
+        "url": "http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.png",
+        "attrib": "Map tiles by <a href='http://stamen.com'>Stamen Design</a>, licence <a href='http://creativecommons.org/licenses/by/3.0'>CC BY 3.0</a>. Data by &copy;<a href='http://openstreetmap.org'>OSM</a> contributors, licence <a href='http://opendatacommons.org/licenses/odbl/'>ODbL</a>.",
+        "zMin": 1,
+        "zMax": 20
+    },
+    {
+        "id": "thunder",
+        "nom": "Thunderforest",
+        "url": "http://{s}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png",
+        "attrib": "Map tiles by <a href='http://thunderforest.com/'>Thunderforest</a>. Data by &copy;<a href='http://openstreetmap.org'>OSM</a> contributors, licence <a href='http://opendatacommons.org/licenses/odbl/'>ODbL</a>.",
+        "zMin": 1,
+        "zMax": 20
+    },
+    {
+        "id": "dark",
+        "nom": "Dark Matter",
+        "url": "http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
+        "attrib": "&copy;Map tiles by <a href='https://cartodb.com/basemaps/' target='_blank'>CartoDB</a>, under <a href='https://creativecommons.org/licenses/by/3.0/' target='_blank'>CC BY 3.0</a>. Data by &copy;<a href='http://openstreetmap.org'>OSM</a> contributors, licence <a href='http://opendatacommons.org/licenses/odbl/'>ODbL</a>.",
+        "zMin": 1,
+        "zMax": 20
+    },
+    {
+        "id": "positron",
+        "nom": "Positron",
+        "url": "http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+        "attrib": "&copy;Map tiles by <a href='https://cartodb.com/basemaps/' target='_blank'>CartoDB</a>, under <a href='https://creativecommons.org/licenses/by/3.0/' target='_blank'>CC BY 3.0</a>. Data by &copy;<a href='http://openstreetmap.org'>OSM</a> contributors, licence <a href='http://opendatacommons.org/licenses/odbl/'>ODbL</a>.",
+        "zMin": 1,
+        "zMax": 20
+    }
+]

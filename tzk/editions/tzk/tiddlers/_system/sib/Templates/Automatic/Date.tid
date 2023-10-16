@@ -1,0 +1,71 @@
+created: 20230405220851883
+creator: soren
+description: Display information about a date.
+modified: 20230416155513868
+modifier: soren
+tags: $:/tags/ViewTemplate
+title: $:/sib/Templates/Automatic/Date
+transcludedin: All tiddlers tagged <<tag Date>>.
+type: text/vnd.tiddlywiki
+
+<$list filter="[all[current]tag[Date]]" variable=_>
+
+<table class="date-summary-table">
+	<tr>
+		<th>Person</th>
+		<td><$link to={{!!ri-date-with}}/></td>
+	</tr>
+	<tr>
+		<th>When</th>
+		<td><$link to={{{ [all[current]split[:]last[]] }}}/></td>
+	</tr>
+	<tr>
+		<th>Date #</th>
+		<td>
+			<$vars
+			  previousDate={{{ [tag[Date]ri-date-with{!!ri-date-with}sort[]before<currentTiddler>] }}}
+				nextDate={{{ [tag[Date]ri-date-with{!!ri-date-with}sort[]after<currentTiddler>] }}}
+			>
+				<$count filter="[tag[Date]ri-date-with{!!ri-date-with}sort[]compare:string:lteq<currentTiddler>]"/>/<$count filter="[tag[Date]ri-date-with{!!ri-date-with}]"/>
+				<$list filter="[<previousDate>!is[blank]]">
+					<$list filter="[<nextDate>!is[blank]]">
+						(<$link to=<<previousDate>>>previous</$link>, <$link to=<<nextDate>>>next</$link>);
+					</$list>
+					<$list filter="[<nextDate>is[blank]]">
+						(<$link to=<<previousDate>>>previous</$link>);
+					</$list>
+				</$list>
+				<$list filter="[<previousDate>is[blank]]">
+					<$list filter="[<nextDate>!is[blank]]">
+						(<$link to=<<nextDate>>>next</$link>);
+					</$list>
+				</$list>
+				<$tiddler tiddler={{!!ri-date-with}}>{{||$:/sib/Templates/Topical/RiStatusLine}}</$tiddler>
+			</$vars>
+		</td>
+	</tr>
+	<tr>
+		<th>Interest</th>
+		<td><<delta-interest>></td>
+	</tr>
+	<tr>
+		<th>Goal</th>
+		<td>
+			{{!!ri-date-goal}}
+			(<span style={{{ [{!!ri-date-goal-result}regexp[achieved]then[cornflowerblue]] ~[[tomato]] +[addprefix[color:]] }}}>{{!!ri-date-goal-result}}</span>)
+		</td>
+	</tr>
+	<tr>
+		<th>Summary</th>
+		<td>{{!!ri-date-summary}}</td>
+	</tr>
+</table>
+
+</$list>
+
+<style>
+table.date-summary-table th {
+	text-align: left;
+	vertical-align: top;
+}
+</style>
