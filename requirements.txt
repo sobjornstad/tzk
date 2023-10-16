@@ -2,7 +2,7 @@
 -e .
 
 # docs
-sphinx==3.5.4  # newer versions display function names in the wrong color?
+sphinx==4.2.0  # newer versions display function names in the wrong color?
 sphinx_rtd_theme==0.5.2
 Jinja2<3.1  # https://github.com/readthedocs/readthedocs.org/issues/9038
 
