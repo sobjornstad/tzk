@@ -58,6 +58,7 @@ def pushd(directory: str):
     finally:
         os.chdir(old_directory)
 
+
 def require_dependencies() -> None:
     """
     Raise an exception if dependencies of tzk aren't available.
@@ -71,3 +72,60 @@ def require_dependencies() -> None:
         fail("Git is not available. "
                 "Please install Git and make it available on your PATH.\n"
                 "https://git-scm.com/book/en/v2/Getting-Started-Installing-Git")
+
+
+def split_tiddler_list(s: str):
+    """
+    Split a tiddler list string into a Python list of undecorated tiddler names.
+    A tiddler list is a series of tiddler names separated by spaces.  If a
+    tiddler name contains spaces itself, it is placed in [[double square
+    brackets]].
+
+    >>> split_tiddler_list("")
+    []
+
+    >>> split_tiddler_list("foo")
+    ['foo']
+
+    >>> split_tiddler_list("foo bar")
+    ['foo', 'bar']
+
+    >>> split_tiddler_list("foo [[bar]] [[baz]]")
+    ['foo', 'bar', 'baz']
+
+    >>> split_tiddler_list("foo bar [[baz qux]]")
+    ['foo', 'bar', 'baz qux']
+    """
+    result = []
+    current_tiddler = []
+    in_brackets = False
+    i = 0
+
+    while i < len(s):
+        if s[i:i+2] == '[[':
+            in_brackets = True
+            i += 2  # Skip the opening brackets
+            continue
+        elif s[i:i+2] == ']]' and in_brackets:
+            in_brackets = False
+            i += 2  # Skip the closing brackets
+            result.append(''.join(current_tiddler).strip())
+            current_tiddler = []
+            continue
+
+        if in_brackets:
+            current_tiddler.append(s[i])
+        else:
+            if s[i] == ' ':
+                if current_tiddler:
+                    result.append(''.join(current_tiddler).strip())
+                    current_tiddler = []
+            else:
+                current_tiddler.append(s[i])
+
+        i += 1
+
+    if current_tiddler:
+        result.append(''.join(current_tiddler).strip())
+
+    return result
