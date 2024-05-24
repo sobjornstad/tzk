@@ -11,7 +11,6 @@ information about the defined products without actually running any build steps.
 """
 
 from collections.abc import Mapping
-from contextlib import contextmanager
 import functools
 import itertools
 import os
@@ -20,7 +19,7 @@ import re
 import shutil
 import subprocess
 import tempfile
-from typing import Callable, Dict, Generator, List, Optional, Set, Sequence, Tuple
+from typing import Callable, Dict, Generator, List, Optional, Set, Sequence, Tuple, Union
 
 from tzk import git
 from tzk import tw
@@ -171,7 +170,7 @@ def _find_kill_phrases(phrases: Set[str]):
                 for regex in regexes:
                     if re.search(regex, line):
                         failures.append((regex, str(tid_file), line))
-    
+
     return failures
 
 
@@ -322,14 +321,16 @@ def compile_html_file(
 
 
 def _private_people_replacement_table(
-        initialer: Callable[[str], str] = None) -> Dict[str, str]:
+    initialer: Callable[[str], str] = None,
+    is_public: Callable[[str], Union[bool, None]] = None,
+) -> Dict[str, str]:
     "Build table of private people and their transformed initials."
 
     def _initials_from_tiddler_name(name: str) -> str:
         m = re.match(r"^(?:Mr|Ms|Mx|The)(?P<camel_case_name>.*?)\.tid", name)
         assert m
         return '.'.join(i for i in m.group('camel_case_name') if i.isupper()) + '.'
-    
+
     if initialer is None:
         initialer = _initials_from_tiddler_name
 
@@ -337,6 +338,19 @@ def _private_people_replacement_table(
     person_tiddlers = (i for i in tiddlers if re.match("^(Mr|Ms|Mx|The)", i.name))
     private_person_tiddlers = []
     for pt in person_tiddlers:
+        # If the is_public handler is defined, call it. If not defined
+        # or it returns None for this line, proceed to the default
+        # handler.
+        if is_public:
+            delegated_publicity_status = is_public(pt)
+            if delegated_publicity_status is True:
+                continue
+            elif delegated_publicity_status is False:
+                private_person_tiddlers.append(pt)
+                continue
+            assert delegated_publicity_status is None
+
+        # Default handler.
         with pt.open() as f:
             for line in f:
                 if line.startswith("tags:"):
@@ -500,8 +514,8 @@ def _privatize_line(line: str, replacement_table: Dict[str, str],
                         new_line = line[0:start_idx] + 'PrivatePerson' + line[end_idx:]
                 else:
                     link = line[start_idx:end_idx]
-                    raise ValueError("Unknown type of link '{link}'.")
-                
+                    raise ValueError(f"Unknown type of link '{link}'.")
+
                 if new_line:
                     line = new_line
                     dirty = True
@@ -510,7 +524,7 @@ def _privatize_line(line: str, replacement_table: Dict[str, str],
                     increment_iterator_by = len(new_line) - len(line)
         except StopIteration:
             pass
-    
+
     if dirty:
         return line
     else:
@@ -518,7 +532,10 @@ def _privatize_line(line: str, replacement_table: Dict[str, str],
 
 
 @tzk_builder
-def replace_private_people(initialer: Callable[[str], str] = None, replace_link_text: bool = False) -> None:
+def replace_private_people(
+    initialer: Callable[[str], str] = None,
+    replace_link_text: bool = False,
+    is_public: Callable[[str], Union[bool, None]] = None) -> None:
     """
     Replace the names of people who are not marked Public with their initials.
 
@@ -551,16 +568,25 @@ def replace_private_people(initialer: Callable[[str], str] = None, replace_link_
                               This means that when using this feature, having the
                               link text also be meaningful after redaction is important.
 
+    :param is_public: If you want to define a person tiddler being public/private by
+                      some criteria other than having a 'Public' tag, pass a
+                      callable here. A Path object for the tiddler is the sole argument.
+                      Return True if the tiddler is public / should be included in the
+                      edition, False if it's private, or None to delegate to the default
+                      handler.
+
     .. warning ::
-        Using this link replacement feature does not redact everything, just the link
-        (and the link text with `replace_link_text` enabled). So *do not* rely on it
-        for redacting everything. Making a tiddler public still needs consideration and
-        tooling is there to help, not to replace your own judgment.
+        This function redacts only square-bracketed and CamelCase links themselves.
+        The text of links with different link target and text is NOT redacted unless
+        ``replace_link_text`` is enabled, and names used outside of links
+        are NEVER redacted. Making a tiddler public still needs consideration and
+        this function is here to help, not to replace your judgment! Consider adding
+        kill phrases for anyone you want to be doubly sure is not publicly mentioned.
     """
     assert 'public_wiki_folder' in build_state
 
-    replacement_table = _private_people_replacement_table(initialer)
-    root = (Path(build_state['public_wiki_folder']) / "tiddlers")
+    replacement_table = _private_people_replacement_table(initialer, is_public)
+    root = Path(build_state['public_wiki_folder']) / "tiddlers"
     tid_files = itertools.chain(root.glob("**/*.tid"), root.glob("**/*.json"))
 
     for tiddler in tid_files:
