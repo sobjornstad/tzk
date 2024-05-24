@@ -92,6 +92,12 @@ class ListenCommand(CliCommand):
             default=str(cm().listen_host or "127.0.0.1"),
         )
         parser.add_argument(
+            "--root-tiddler",
+            metavar="TIDDLER",
+            help="Saver tiddler to use (for LazyLoading).",
+            default=str(cm().listen_root_tiddler or "$:/core/save/all"),
+        )
+        parser.add_argument(
             "-p", "--port",
             metavar="PORT",
             help="Port to listen on.",
@@ -120,7 +126,8 @@ class ListenCommand(CliCommand):
                     f"host={args.host}",
                     f"port={args.port}",
                     f"username={args.username}",
-                    f"password={args.password}")
+                    f"password={args.password}",
+                    f"root-tiddler={args.root_tiddler}")
                 ]
             )
         except KeyboardInterrupt:
