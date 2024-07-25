@@ -1,0 +1,32 @@
+created: 20240601160913985
+creator: soren
+description: Show "previous" and "next" links for tiddlers in a sequence, conditioned on whether we're at the beginning or end. Pass filters that retrieve the previous and next items in the sequence from the current tiddler.
+modified: 20240601162620403
+modifier: soren
+tags: $:/tags/Global
+title: $:/sib/Widgets/prevnext-navigation
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+
+\procedure prevLink() <$link to=<<previous>>><<previousText>></$link>
+\procedure nextLink() <$link to=<<next>>><<nextText>></$link>
+
+\widget $m2.prevnext-navigation(previousFilter, nextFilter, previousText:"previous", nextText:"next")
+	<$let
+		previous={{{ [subfilter<previousFilter>] }}}
+		next={{{ [subfilter<nextFilter>] }}}
+	>
+		<% if [<previous>!is[blank]] %>
+			<% if [<next>!is[blank]] %>
+				<<prevLink>>,&nbsp;<<nextLink>>
+			<% else %>
+				<<prevLink>>
+			<% endif %>
+		<% else %>
+			<% if [<next>!is[blank]] %>
+				<<nextLink>>
+			<% endif %>
+		<% endif %>
+	</$let>
+\end

@@ -1,0 +1,44 @@
+created: 20240601195324030
+creator: soren
+modified: 20240601211510471
+modifier: soren
+tags: $:/tags/Global
+title: $:/sib/refexplorer/Widget
+type: text/vnd.tiddlywiki
+
+\widget $m2.reference-explorer(caption, filter)
+	<table class="ideas-table">
+		<caption class="ideas-table-caption"><<caption>></caption>
+		<thead>
+		<tr>
+			<th>Title</th>
+			<th>Type</th>
+			<th>Tags</th>
+			<th style="width: 8rem;">Modified</th>
+		</tr>
+		</thead>
+		<tbody>
+			<$list filter=<<filter>> variable="currentRecord">
+				<tr>
+					<td>
+						<$link to=<<currentRecord>> tooltip=<<thisTooltip>> style="color: white;"/>
+					</td>
+					{{||$:/sib/refexplorer/LinkTypeTemplate}}
+					<td>
+						<$list filter="[<currentRecord>tags[]sort[]]" variable="currentTag">
+							<$macrocall $name="tag-pill" tag=<<currentTag>>/>&#32;
+						</$list>
+					</td>
+					<td>
+						<$view tiddler=<<currentRecord>> field="modified" format="date" template="YYYY-0MM-0DD 0hh:0ss"/>
+					</td>
+				</tr>
+			</$list>
+		</tbody>
+	</table>
+\end $m2.reference-explorer
+
+<!-- 
+SIB 2024/06/01: Removing tooltip feature as we now have full popup previews.
+					thisTooltip={{{ [all[current]get[description]!is[blank]] ~[all[current]get[text]split[ ]first[100]join[ ]addsuffix[...]] }}}>
+-->

@@ -1,0 +1,11 @@
+created: 20240601151609755
+creator: soren
+description: `m2.public` or `m2.private` yields `true` if in the appropriate edition, and nothing otherwise. Consider using a [[feature flag|$:/sib/Tools/FeatureFlags]] if you might want to configure the behavior for either edition, or condition on the existence of a tiddler if whether something might be public might change.
+modified: 20240601151927722
+modifier: soren
+tags: $:/tags/Global
+title: $:/sib/Functions/public
+type: text/vnd.tiddlywiki
+
+\function m2.private() [[$:/config/sib/IsPublicEdition]text[true]]
+\function m2.public() [[$:/config/sib/IsPublicEdition]!text[true]]

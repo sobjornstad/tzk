@@ -1,7 +1,7 @@
 created: 20200401230406669
 creator: soren
 description: Show all values used for a particular field in the wiki.
-modified: 20210920155116145
+modified: 20240601203118734
 modifier: soren
 tags: Tool
 title: $:/sib/Tools/RelationshipValueTool
@@ -15,9 +15,9 @@ If you're not sure what field you're looking for, expand the list of all fields:
 <$details summary="List of all fields">
 
 <ul>
-<$list filter="[fields[]sort[]]">
-	<li><<currentTiddler>></li>
-</$list>
+	<$list filter="[fields[]sort[]]">
+		<li><<currentTiddler>></li>
+	</$list>
 </ul>
 
 </$details>

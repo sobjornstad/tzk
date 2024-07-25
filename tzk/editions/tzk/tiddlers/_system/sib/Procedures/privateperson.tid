@@ -1,0 +1,11 @@
+created: 20210522022034880
+creator: soren
+description: Show the provided string of initials, linking to the `PrivatePerson` tiddler. Ordinarily not used in the private Zettelkasten; names of people whose tiddlers are not public may be automatically replaced with calls to this macro by the build process for the public wiki.
+example: <<privateperson "R.A.B.">>
+modified: 20240601144737159
+modifier: soren
+tags: $:/tags/Macro
+title: $:/sib/Procedures/privateperson
+type: text/vnd.tiddlywiki
+
+\procedure privateperson(initials) <$link to="PrivatePerson"><<initials>></$link>

@@ -18,7 +18,23 @@ WidgetContext.prototype = new Context();
 
 WidgetContext.prototype.getMacroDefinition = function(variableName) {
 	// widget.variables is prototyped, so it looks up into all its parents too
-	return this.widget.variables[variableName] || $tw.macros[variableName];
+	var def = this.widget.variables[variableName];
+	if (!def) {
+		// It might be a javascript macro
+		def = $tw.macros[variableName];
+		if (def && !def.tiddler) {
+			// We haven't assigned associated tiddlers to these macros yet.
+			// That may be important for some installed supplemental plugins.
+			$tw.modules.forEachModuleOfType('macro', function(title, module) {
+				if (module.name) {
+					// For now, we just attach it directly to the definition
+					// It's easier, albeit a little sloppy.
+					$tw.macros[module.name].tiddler = title;
+				}
+			});
+		}
+	}
+	return def;
 };
 
 WidgetContext.prototype.addSetting = function(wiki, macroName, parameter, type, sourceTitle) {
@@ -31,10 +47,6 @@ WidgetContext.prototype.addSetting = function(wiki, macroName, parameter, type, 
 	var handler = utils.getType(type);
 	if (handler) {
 		handler.source = sourceTitle;
-		// We attach the fields of the defining tiddler for the benefit
-		// of any 3rd party field types that want access to them.
-		var tiddler = wiki.getTiddler(sourceTitle);
-		handler.fields = tiddler.fields;
 		macro[parameter] = handler;
 	}
 };
@@ -69,6 +81,44 @@ WidgetContext.prototype.getMacro = function(macroName) {
 		return rtnSettings;
 	}
 	return theseSettings || parentSettings;
+};
+
+WidgetContext.prototype.getAttribute = function(elementName) {
+	if (elementName.charAt(0) == '$' && elementName.indexOf('.') >= 0) {
+		// This is potentially a \widget, look in macros for it.
+		var macroSettings = this.getMacro(elementName);
+		if (macroSettings) {
+			// Make sure that it's actually a widget definition
+			var def = this.getMacroDefinition(elementName);
+			if (def) {
+				// We found a definition, but if it's not a widget, abort all.
+				return (def.isWidgetDefinition)? macroSettings: undefined;
+			}
+		}
+	}
+	return this.parent.getAttribute(elementName);
+};
+
+WidgetContext.prototype.getOperator = function(name, index) {
+	if (name.indexOf('.') >= 0) {
+		// This is potentially a \function, look in macros for it.
+		var macroSettings = this.getMacro(name);
+		if (macroSettings) {
+			//Make sure that it's actually a macro definition
+			var def = this.getMacroDefinition(name);
+			if (def) {
+				if (def.isFunctionDefinition) {
+					// Minus one because operator indices are 1 indexed,
+					// but parameters as we store them are not.
+					var param = def.params[index - 1];
+					return param && macroSettings[param.name];
+				}
+				// If it's not a filter, abort all.
+				return undefined;
+			}
+		}
+	}
+	return this.parent.getOperator(name, index);
 };
 
 /**Returns the deepest descendant of the given widget.

@@ -1,23 +1,26 @@
 caption: Satellite
 created: 20201129174511282
 creator: soren
-modified: 20210910152248350
+modified: 20240601194922823
 modifier: soren
 tags: $:/sib/gis/MappingTools
 title: $:/sib/gis/SatelliteMap
 type: text/vnd.tiddlywiki
 
-\define mapUrl() https://www.google.com/maps/embed/v1/view?key=$(gmapsApiKey)$&zoom=$(zoom)$&center=$(lat)$%2C$(long)$&maptype=satellite
+\function mapUrl() [[https://www.google.com/maps/embed/v1/view?key=]addsuffix{$:/config/zettelkasten/gis/GMapsApiKey}addsuffix[&zoom=]addsuffix<zoom>addsuffix[&center=]addsuffix<lat>addsuffix[%2C]addsuffix<long>addsuffix[&maptype=satellite]]
 
 \define changebutton(operation, faClass)
-	<$button class="tc-btn-invisible tc-tiddlylink">
+	\procedure set-zoom-action()
 		<$action-setfield $field="gis-zoom" $value={{{ [{!!gis-zoom}$operation$[1]] }}}/>
+	\end set-zoom-action
+	
+	<$button actions=<<set-zoom-action>> class="tc-btn-invisible tc-tiddlylink">
 		<i class="fa $faClass$"/>
 	</$button>
-\end
+\end changebutton
 
-<$list filter="[all[current]has[gis-lat]]" variable=_>
-<$vars
+<% if [all[current]has[gis-lat]] %>
+<$let
 	lat={{!!gis-lat}}
 	long={{!!gis-long}}
 	zoom={{!!gis-zoom}}>
@@ -30,12 +33,6 @@ type: text/vnd.tiddlywiki
       src=<<mapUrl>>
       allowfullscreen>
 		</iframe>
-</$vars>
+</$let>
 Edit map zoom: <<changebutton add fa-search-plus>> <<changebutton subtract fa-search-minus>>
-</$list>
-
-<!--
-<$list filter="[all[current]!has[gis-lat]]" variable=_>
-  Please add `gis-lat`, `gis-long`, and `gis-zoom` fields to this tiddler to display a map.
-</$list>
--->
+<% endif %>

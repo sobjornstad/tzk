@@ -1,7 +1,9 @@
 created: 20210627200040615
-modified: 20210627201201583
+creator: soren
+modified: 20240601150923690
+modifier: soren
 tags: 
 title: $:/config/sib/TopBarHeight
 type: text/vnd.tiddlywiki
 
-<$list filter=<<ff OpenTopBar>> emptyMessage="0px">30px</$list>
+<% if [m2.ff[OpenTopBar]] %>30px<% else %>0px<% endif %>

@@ -1,0 +1,27 @@
+caption: Procedures
+created: 20240601191438937
+creator: soren
+modified: 20240601191522932
+modifier: soren
+tags: 
+title: $:/sib/Documentation/Procedures
+type: text/vnd.tiddlywiki
+
+Click into a macro to see an example of its usage and its definition.
+
+<table>
+	<tr>
+		<th style="width: 10em;">Name</th>
+		<th>Description</th>
+	</tr>
+	<$list filter="[prefix[$:/sib/Procedures/]!prefix[$:/sib/Procedures/_]]">
+	<tr>
+		<td>
+			<$link to=<<currentTiddler>>>
+				<$text text={{{ [all[current]removeprefix[$:/sib/Procedures/]] }}}/>
+			</$link>
+		</td>
+		<td>{{!!description}}</td>
+	</tr>
+	</$list>
+</table>

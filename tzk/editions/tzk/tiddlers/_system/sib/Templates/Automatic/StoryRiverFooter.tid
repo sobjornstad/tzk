@@ -1,31 +1,36 @@
 created: 20210825140429794
 creator: soren
-modified: 20210902152411592
+modified: 20240601153408136
 modifier: soren
 tags: $:/tags/BelowStory
 title: $:/sib/Templates/Automatic/StoryRiverFooter
 type: text/vnd.tiddlywiki
 
-<$list filter=<<ff CopyrightFooter>> variable=_>
+<% if [m2.ff[CopyrightFooter]] %>
 
-<div class="zk-footer-row">
-<$list filter="[[$:/config/zettelkasten/copyright/UserNotice]has[text]]" emptyMessage={{$:/config/zettelkasten/copyright/InitialNotice}}>{{$:/config/zettelkasten/copyright/UserNotice}}</$list>
-See the [[content copyright notice|CopyrightNotice]] for details.
-</div>
-<div class="zk-footer-row">
-Zettelkasten [[edition of TiddlyWiki|https://zettelkasten.sorenbjornstad.com]] by [[Soren Bjornstad|https://sorenbjornstad.com]].
-</div>
+	<div class="zk-footer-row">
+		<% if [[$:/config/zettelkasten/copyright/UserNotice]has[text]] %>
+			{{$:/config/zettelkasten/copyright/UserNotice}}
+		<% else %>
+			{{$:/config/zettelkasten/copyright/InitialNotice}}
+		<% endif %>
+		See the [[content copyright notice|CopyrightNotice]] for details.
+	</div>
+	<div class="zk-footer-row">
+		Zettelkasten [[edition of TiddlyWiki|https://zettelkasten.sorenbjornstad.com]]
+		by [[Soren Bjornstad|https://sorenbjornstad.com]].
+	</div>
 
-<style>
-div.zk-footer-row {
-	color: <<color muted-foreground>>;
-	text-align: center;
-}
+	<style>
+	div.zk-footer-row {
+		color: <<color muted-foreground>>;
+		text-align: center;
+	}
 
-div.zk-footer-row a.tc-tiddlylink, div.zk-footer-row a.tc-tiddlylink-external {
-	color: <<color muted-foreground>>;
-	text-decoration: underline;
-}
-</style>
+	div.zk-footer-row a.tc-tiddlylink, div.zk-footer-row a.tc-tiddlylink-external {
+		color: <<color muted-foreground>>;
+		text-decoration: underline;
+	}
+	</style>
 
-</$list>
+<% endif %>

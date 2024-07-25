@@ -1,7 +1,7 @@
 created: 20200808023836194
 creator: soren
 description: Display a table of fields and other information about the source described by this tiddler.
-modified: 20210916133730677
+modified: 20240718012401911
 modifier: soren
 tags: $:/tags/ViewTemplate
 title: $:/sib/Templates/Automatic/Source
@@ -10,7 +10,11 @@ type: text/vnd.tiddlywiki
 
 \define isbnsearch(isbn) https://isbnsearch.org/isbn/$(isbn)$
 
-<$list filter="[all[current]tag[Source]] [all[current]tag[Sink]]">
+<% if [all[current]tag[Source]medium[conference]] %>
+
+{{||$:/sib/Templates/Topical/ConferenceSessionDetails}}
+
+<% elseif [all[current]tag[Source]] [all[current]tag[Sink]] %>
 
 <table class="sourceDeetsTable">
 	<tr>
@@ -81,4 +85,4 @@ type: text/vnd.tiddlywiki
 }
 </style>
 
-</$list>
+<% endif %>

@@ -1,0 +1,18 @@
+created: 20240601145401225
+creator: soren
+description: Create a link to a reference point on an external site, where part of the URL can be filled in by a reference number or key. Use a positional parameter `$1$` in the location that must be filled. Intended for internal use by procedures, such as `<<rt>>` or `<<subreddit>>`.
+example: 
+modified: 20240601150252049
+modifier: soren
+tags: $:/tags/Global
+title: $:/sib/Widgets/extlink
+type: text/vnd.tiddlywiki
+
+\widget $m2.extlink(urltemplate, slotvalue, text)
+	<$let href={{{ [<urltemplate>substitute<slotvalue>] }}}>
+		<a class="tc-tiddlylink-external" href=<<href>>>
+			<!-- Text could be in CamelCase and break the link. -->
+			<$text text=<<text>>/>
+		</a>
+	</$let>
+\end

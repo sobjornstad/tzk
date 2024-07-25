@@ -1,14 +1,14 @@
 created: 20230405210835121
 creator: soren
 description: Display information about a romantic interest (dates we went on, etc.).
-modified: 20230601213628950
+modified: 20240602163043832
 modifier: soren
 tags: $:/tags/ViewTemplate
 title: $:/sib/Templates/Automatic/RomanticInterest
 transcludedin: All tiddlers tagged <<tag RomanticInterest>>.
 type: text/vnd.tiddlywiki
 
-<$list filter="[all[current]tag[RomanticInterest]]">
+<% if [all[current]tag[RomanticInterest]] %>
 
 !! Dates
 
@@ -20,17 +20,17 @@ type: text/vnd.tiddlywiki
 		<th>ΔI</th>
 	</tr>
 	<$list filter="[contains:ri-date-with<currentTiddler>!is[draft]sort[]]" counter="counter">
-	<tr>
-		<!-- https://talk.tiddlywiki.org/t/counter-attribute-of-the-list-widget-not-working/6754/6 -->
-		<td><<counter>></td>
-		<td>
-			<$link to=<<currentTiddler>>>
-				<$text text={{{ [all[current]split[:]butfirst[]] }}}/>
-			</$link>
-		</td>
-		<td>{{!!ri-date-summary}}</td>
-		<td><<delta-interest>></td>
-	</tr>
+		<tr>
+			<!-- https://talk.tiddlywiki.org/t/counter-attribute-of-the-list-widget-not-working/6754/6 -->
+			<td><<counter>></td>
+			<td>
+				<$link to=<<currentTiddler>>>
+					<$text text={{{ [all[current]split[:]butfirst[]] }}}/>
+				</$link>
+			</td>
+			<td>{{!!ri-date-summary}}</td>
+			<td><<delta-interest>></td>
+		</tr>
 	</$list>
 </table>
 
@@ -39,8 +39,6 @@ Outcome: {{||$:/sib/Templates/Topical/RiStatusLine}}
 <!--
 <<stretch-template-links "[contains:ri-date-with<currentTiddler>sort[]]" smallTemplate:$:/sib/Templates/Topical/DateSummaryStretch largeTemplate:$:/sib/Templates/General/IdentityTemplate>>
 -->
-
-</$list>
 
 <style>
 table.date-list td {
@@ -51,3 +49,5 @@ table.date-list td:nth-child(2) {
 	width: 8em;
 }
 </style>
+
+<% endif %>

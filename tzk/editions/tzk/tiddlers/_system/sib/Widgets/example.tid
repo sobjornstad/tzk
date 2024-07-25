@@ -1,0 +1,15 @@
+created: 20240610235017528
+creator: soren
+modified: 20240611044159369
+modifier: soren
+tags: $:/tags/Global
+title: $:/sib/Widgets/example
+type: text/vnd.tiddlywiki
+
+\widget $m2.x(number)
+<div class="sib-examples-indented-div" data-number=<<number>>>
+	<div class="sib-examples-indented-div-inner">
+		<$slot $name="ts-raw"/>
+	</div>
+</div>
+\end

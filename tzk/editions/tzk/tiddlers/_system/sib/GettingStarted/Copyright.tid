@@ -1,7 +1,7 @@
 caption: Copyright
 created: 20210523153031971
 creator: soren
-modified: 20210920170823196
+modified: 20240601192822545
 modifier: soren
 tags: Meta
 title: $:/sib/GettingStarted/Copyright
@@ -23,7 +23,8 @@ Assuming you are comfortable with that, this method is recommended if you are un
 
 What should your copyright notice look like? This will normally be something like `Copyright © 1995 Your Name Here.` If you want the copyright date to automatically update, use `<<now YYYY>>` in place of the year.
 
-//Your copyright notice//: <$edit-text tiddler="$:/config/zettelkasten/copyright/UserNotice" tag="input" class="sib-copyright-input"/>
+//Your copyright notice//:
+<$edit-text tiddler="$:/config/zettelkasten/copyright/UserNotice" tag="input" class="sib-copyright-input"/>
 
 </$details>
 <$details summary="Or alter the notices yourself">

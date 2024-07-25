@@ -1,0 +1,62 @@
+created: 20240718011917219
+creator: soren
+modified: 20240718013706993
+modifier: soren
+tags: Public
+title: $:/sib/Templates/Topical/ConferenceSessionDetails
+type: text/vnd.tiddlywiki
+
+<style>
+table.conference-session {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+table.conference-session td {
+	vertical-align: top;
+}
+
+table.conference-session tr td:first-child {
+	text-align: right;
+	font-weight: bold;
+}
+
+/* override non-bold style */
+table.conference-session > tr > th a.tc-tiddlylink {
+	font-weight: bold;
+}
+</style>
+
+<table class="conference-session">
+	<tr>
+		<th colspan=2>
+			Session at
+			<$link to={{!!conference}}>
+				<$transclude $tiddler={{!!conference}} $field="caption">
+					<$text text={{!!conference}}/>
+				</$transclude>
+			</$link>
+		</th>
+	</tr>
+	<tr>
+		<td>Title</td>
+		<td>{{!!caption}}</td>
+	</tr>
+	<tr>
+		<td>Time</td>
+		<td>
+			<$wikify name="dayText" text="""<$view field="at" format="date" template="YYYY-0MM-0DD ddd" />""">
+				<$link to=<<dayText>>><<dayText>></$link>
+			</$wikify>
+			<$view field="at" format="date" template="0hh:0mm" />
+		</td>
+	</tr>
+	<tr>
+		<td>Presenter(s)</td>
+		<td><$list filter={{!!author}}><<currentTiddler>><br></$list></td>
+	</tr>
+	<tr>
+		<td>Blurb</td>
+		<td>{{!!blurb}}</td>
+	</tr>
+</table>

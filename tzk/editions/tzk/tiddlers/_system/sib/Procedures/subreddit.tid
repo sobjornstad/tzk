@@ -1,0 +1,17 @@
+created: 20210522021038565
+creator: soren
+description: Create a web link to a named subreddit, with the link text "/r/yoursubreddit".
+example: <<subreddit TiddlyWiki5>>
+modified: 20240601145956986
+modifier: soren
+tags: $:/tags/Macro
+title: $:/sib/Procedures/subreddit
+type: text/vnd.tiddlywiki
+
+\procedure subreddit(name)
+	<$m2.extlink
+		urltemplate="https://reddit.com/r/$1$/" 
+		slotvalue=<<name>>
+		text=`/r/$(name)$`
+	/>
+\end

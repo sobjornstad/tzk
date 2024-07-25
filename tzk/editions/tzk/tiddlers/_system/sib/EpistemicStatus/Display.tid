@@ -1,37 +1,44 @@
 created: 20210508223048629
 creator: soren
 description: Show the [[epistemic status|EpistemicStatuses]] of the current tiddler, if any. The status is editable in the private edition.
-modified: 20210920193540286
+modified: 20240601151953417
 modifier: soren
 tags: $:/tags/ViewTemplate
 title: $:/sib/EpistemicStatus/Display
 transcludedin: All [[idea tiddlers|ZettelkastenCardType]]: those that are not tagged with a red type tag and are not system tiddlers, except that index tiddlers are included.
 type: text/vnd.tiddlywiki
 
-\define color-style() color: $(itemColor)$;
+\whitespace trim
 
-<$list filter=<<ff EpistemicStatus>> variable=_>
-<$list filter="[all[current]!is[system]]">
-<$list filter="[all[current]tag[Idea]] [all[current]tag[Index]]" variable=_>
+\function color-string() [prefix[$:/sib/EpistemicStatus]caption{!!es}get[color]addprefix[color: ]addsuffix[;]]
 
-<div style="float: right; vertical-align: center;">
-<$list filter="[[$:/config/sib/IsPublicEdition]text[true]]" variable=_>
-	<$link to="EpistemicStatuses"><span style={{{ [prefix[$:/sib/EpistemicStatus]caption{!!es}get[color]addprefix[color: ]addsuffix[;]] }}}>epistemic status</span></$link>:
-	<$select field="es" default="">
-		<$list filter="[prefix[$:/sib/EpistemicStatus]has[caption]nsort[stackorder]]">
-			<$set name="itemColor" value={{!!color}}>
-				<option style=<<color-style>> value={{!!caption}}>{{!!caption}}</option>
-			</$set>
-		</$list>
-	</$select>
-</$list>
-<$list filter="[[$:/config/sib/IsPublicEdition]!text[true]]" variable=_>
-<$list filter="[all[current]has[es]]">
-	[[epistemic status|EpistemicStatuses]]: <span style={{{ [prefix[$:/sib/EpistemicStatus]caption{!!es}get[color]addprefix[color: ]addsuffix[;]] }}}>{{!!es}}</span>
-</$list>
-</$list>
-</div>
+<% if [m2.ff[EpistemicStatus]] %>
+<% if [all[current]!is[system]] %>
+<% if [all[current]tag[Idea]] [all[current]tag[Index]] %>
 
-</$list>
-</$list>
-</$list>
+	<div style="float: right; vertical-align: center;">
+		<% if [m2.private[]] %>
+			<$link to="EpistemicStatuses">
+				<span style={{{ [function[color-string]] }}}>
+					epistemic status
+				</span>
+			</$link>:&nbsp;
+			<$select field="es" default="">
+				<$list filter="[prefix[$:/sib/EpistemicStatus]has[caption]nsort[stackorder]]">
+					<$set name="itemColor" value={{!!color}}>
+						<option style=`color: $(itemColor)$;` value={{!!caption}}>{{!!caption}}</option>
+					</$set>
+				</$list>
+			</$select>
+		<% endif %>
+		<% if [m2.public[]] %>
+			<% if [all[current]has[es]] %>
+				[[epistemic status|EpistemicStatuses]]:&nbsp;
+				<span style={{{ [function[color-string]] }}}>{{!!es}}</span>
+			<% endif %>
+		<% endif %>
+	</div>
+
+<% endif %>
+<% endif %>
+<% endif %>

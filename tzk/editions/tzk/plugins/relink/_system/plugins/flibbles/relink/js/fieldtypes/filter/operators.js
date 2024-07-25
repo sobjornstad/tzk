@@ -17,32 +17,38 @@ exports.report = function(filterParseTree, callback, options) {
 			var operator = run.operators[j];
 			for (var index = 1; index <= operator.operands.length; index++) {
 				var operand = operator.operands[index-1];
-				var display = operator.operator === 'title'? '': operator.operator;
-				if (operator.suffix) {
-					display += ':' + operator.suffix;
-				}
+				var display = makeDisplay(operator);
 				// Now add any commas if this is a later operand
 				for (var x = 1; x < index; x++) {
 					display += ',';
 				}
 				if (operand.indirect) {
-					refHandler.report(operand.text, function(title, blurb) {
-						callback(title, (run.prefix || '') + '[' + (operator.prefix || '') + display + '{' + (blurb || '') + '}]');
+					refHandler.report(operand.text, function(title, blurb, style) {
+						callback(title, (run.prefix || '') + '[' + display + '{' + (blurb || '') + '}]', style);
 					}, options);
 				} else if (operand.variable) {
 					var macro = $tw.utils.parseMacroInvocation("<<"+operand.text+">>", 0);
-					macrocall.report(options.settings, macro, function(title, blurb) {
-						callback(title, (run.prefix || '') + '[' + (operator.prefix || '') + display + '<' + blurb + '>]');
-					}, options);
+					if (macro) {
+						macrocall.report(options.settings, macro, function(title, blurb, style) {
+							callback(title, (run.prefix || '') + '[' + display + '<' + blurb + '>]', style);
+						}, options);
+					}
 					continue;
 				} else if (operand.text) {
 					var handler = fieldType(options.settings, operator, index, options)
 					if (handler) {
-						handler.report(operand.text, function(title, blurb) {
-							if (blurb || !standaloneTitleRun(run)) {
-								callback(title, (run.prefix || '') + '[' + (operator.prefix || '') + display + '[' + (blurb || '') + ']]');
+						handler.report(operand.text, function(title, blurb, style) {
+							if (!isTitleRun(operator) || blurb) {
+								callback(title, (run.prefix || '') + '[' + display + '[' + (blurb || '') + ']]', style);
+							} else if (j === run.operators.length-1) {
+								// index will always be 1, meaning single operator run,
+								// unless the user is weird. [title[]] ignores
+								// input, so why would it ever not be 1?
+								callback(title, run.prefix, style);
 							} else {
-								callback(title, run.prefix);
+								// Special case: It's a title operator that's
+								// leading a run
+								callback(title, (run.prefix || '') + '[[]' + makeDisplay(run.operators[j+1]) + '...]', style);
 							}
 						}, options);
 					}
@@ -69,9 +75,6 @@ exports.relink = function(filterParseTree, fromTitle, toTitle, options) {
 					var handler = fieldType(options.settings, operator, index, options)
 					if (handler) {
 						entry = handler.relink(operand.text, fromTitle, toTitle, options);
-						if (entry && entry.output) {
-							operand.handler = handler.name;
-						}
 					}
 				}
 				if (entry) {
@@ -115,32 +118,37 @@ function fieldType(context, operator, index, options) {
 	return rtn;
 };
 
-function standaloneTitleRun(run) {
-	if (run.operators.length == 1) {
-		var op = run.operators[0];
-		return op.operator === 'title'
-			&& !op.prefix
-			&& !op.suffix;
-	}
-	return false;
+function makeDisplay(operator) {
+	return (operator.prefix || '') + (operator.operator === 'title'? '': operator.operator) + (operator.suffix? ':' + operator.suffix: '');
+};
+
+function isTitleRun(operator) {
+	return operator.operator === 'title'
+		&& !operator.prefix
+		&& !operator.suffix;
 };
 
 // Takes care of relinking a macro, as well as putting it back together.
 function relinkMacro(context, text, fromTitle, toTitle, options) {
 	text = "<<" + text + ">>";
 	var macro = $tw.utils.parseMacroInvocation(text, 0);
-	var entry = macrocall.relink(context, macro, text, fromTitle, toTitle, false, options);
+	var entry;
+	if (macro) {
+		entry = macrocall.relink(context, macro, text, fromTitle, toTitle, false, options);
+	}
 	if (entry && entry.output) {
-		var string = macrocall.reassemble(entry.output, text, options);
-		// We remove the surrounding brackets.
-		string = string.substring(2, string.length-2);
-		// And we make sure that no brackets remain
-		if (string.indexOf(">") >= 0) {
-			delete entry.output;
-			entry.impossible = true;
-		} else {
-			entry.output = string;
+		var string = macrocall.reassemble(entry, text, options);
+		if (string !== undefined) {
+			// We remove the surrounding brackets.
+			string = string.substring(2, string.length-2);
+			// And we make sure that no brackets remain
+			if (string.indexOf(">") < 0) {
+				entry.output = string;
+				return entry;
+			}
 		}
+		delete entry.output;
+		entry.impossible = true;
 	}
 	return entry;
 };

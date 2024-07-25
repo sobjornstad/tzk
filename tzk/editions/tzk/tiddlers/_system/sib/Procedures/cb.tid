@@ -1,0 +1,11 @@
+created: 20210807150635941
+creator: soren
+description: Create a reference to an entry in Chrono Book, linking to the ChronoBook page and showing the UOF (Unified Occurrence Format) afterwards.
+example: <<cb "10.15">>
+modified: 20240601140226793
+modifier: soren
+tags: $:/tags/Macro
+title: $:/sib/Procedures/cb
+type: text/vnd.tiddlywiki
+
+\procedure cb(uof) [[CB|ChronoBook]]&nbsp;<<uof>>

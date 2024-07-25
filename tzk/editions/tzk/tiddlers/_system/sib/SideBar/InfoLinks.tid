@@ -1,24 +1,26 @@
 created: 20210623014041787
 creator: soren
 list-after: $:/core/ui/SideBarSegments/site-subtitle
-modified: 20211107173606954
+modified: 20240601153823149
 modifier: soren
 tags: $:/tags/SideBarSegment
 title: $:/sib/SideBar/InfoLinks
 type: text/vnd.tiddlywiki
 
-\define go-random-action() <$action-navigate $to={{{[tag[Idea]!tag[PrivateChunk]!regexp[/]!tag[Stub]shuffle[]first[]]}}}/>
+\procedure go-random-action() <$action-navigate $to={{{ [tag[Idea]!tag[PrivateChunk]!regexp[/]!tag[Stub]shuffle[]first[]] }}}/>
 
-<$list filter=<<ff SidebarInfoLinks>> variable=_>
-[[about|PublicHomepage]]&nbsp;·
-[[reading|RecentlyRead]]&nbsp;·
-[[favorites|Favorites]]&nbsp;·
-<$button class="tc-tiddlylink tc-btn-invisible" actions=<<go-random-action>>>random idea</$button>
+<% if [m2.ff[SidebarInfoLinks]] %>
 
-<style>
-.gtw-sidebar-links a, .gtw-sidebar-links button {
-	color: <<color sidebar-foreground>>;
-	text-decoration: underline;
-}
-</style>
-</$list>
+	[[about|PublicHomepage]]&nbsp;·
+	[[reading|RecentlyRead]]&nbsp;·
+	[[favorites|Favorites]]&nbsp;·
+	<$button class="tc-tiddlylink tc-btn-invisible" actions=<<go-random-action>>>random idea</$button>
+
+	<style>
+	.gtw-sidebar-links a, .gtw-sidebar-links button {
+		color: <<color sidebar-foreground>>;
+		text-decoration: underline;
+	}
+	</style>
+	
+<% endif %>

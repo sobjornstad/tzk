@@ -1,11 +1,13 @@
 created: 20200511015953198
-modified: 20210622003322324
+creator: soren
+modified: 20240601152041401
+modifier: soren
 tags: $:/tags/EditTemplate
 title: $:/sib/Templates/Automatic/Publicity/EditorPublicLine
 type: text/vnd.tiddlywiki
 
-<$list filter=<<ff EditorPublicLine>> variable=_>
+<% if [m2.ff[EditorPublicLine]] %>
 	<div style="float: right; color: #5E81AC; margin-top: 1ex;">
 		<$checkbox tag=Public> Publish this tiddler</$checkbox>
 	</div>
-</$list>
+<% endif %>

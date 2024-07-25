@@ -1,19 +1,19 @@
 created: 20210329204050908
 creator: soren
 description: View all the colors in the current palette and conveniently copy their hex codes or `<<color>>` macros for use elsewhere in the wiki.
-modified: 20210920155041358
+modified: 20240601203042149
 modifier: soren
 tags: Meta Tool
 title: $:/sib/Tools/PaletteBrowser
 tooltype: maintenance
 type: text/vnd.tiddlywiki
 
-\define colorsplotch(col)
-	<div class="color-splotch" style="background: $col$;">
+\procedure colorsplotch(col)
+	<div class="color-splotch" style=`background: $(col)$;`>
 \end
 
-\define copy-hex() <$action-sendmessage $message="tm-copy-to-clipboard" $param=<<hexvalue>>/>
-\define copy-mac() <$action-sendmessage $message="tm-copy-to-clipboard" $param="""<<color $(currentTiddler)$>>"""/>
+\procedure copy-hex() <$action-sendmessage $message="tm-copy-to-clipboard" $param=<<hexvalue>>/>
+\procedure copy-mac() <$action-sendmessage $message="tm-copy-to-clipboard" $param=`<<color $(currentTiddler)$>>`/>
 
 <div style="text-align: center;">Current palette: <$link to={{$:/palette}}/></div>
 
@@ -27,7 +27,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[{$:/palette}indexes[]]">
 	<$list filter="[{$:/palette}getindex<currentTiddler>]" variable="hexvalue">
 		<tr>
-			<td><$macrocall $name=colorsplotch col=<<hexvalue>>/></td>
+			<td><$macrocall $name="colorsplotch" col=<<hexvalue>>/></td>
 			<td><<hexvalue>></td>
 		  <td><<currentTiddler>></td>
 			<td>

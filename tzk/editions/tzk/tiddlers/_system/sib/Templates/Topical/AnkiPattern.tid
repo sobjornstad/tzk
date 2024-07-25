@@ -1,14 +1,14 @@
 created: 20210312221833396
 creator: soren
-modified: 20210825162849017
+modified: 20240601154947258
 modifier: soren
 tags: 
 title: $:/sib/Templates/Topical/AnkiPattern
 type: text/vnd.tiddlywiki
 
-\define transclude-section-with-name(sect, name, isopen:"")
-<$details summary=<<__name__>> open=<<__isopen__>>>
-	<$tiddler tiddler={{{ [all[current]addsuffix[/]addsuffix<__sect__>] }}}>
+\procedure transclude-section-with-name(sect, name, isopen:"")
+<$details summary=<<name>> open=<<isopen>>>
+	<$tiddler tiddler={{{ [all[current]addsuffix[/]addsuffix<sect>] }}}>
 		<$list filter="[<isedit>match[yes]]" variable=_>
 			<div style="float: left; width: 49%;">
 				{{||$:/core/ui/EditTemplate/body/editor}}
@@ -29,8 +29,10 @@ type: text/vnd.tiddlywiki
 </$details>
 \end
 
-\define transclude-section(sect, isopen:"") <$macrocall $name="transclude-section-with-name" sect=<<__sect__>> name=<<__sect__>> isopen=<<__isopen__>>/>
+\procedure transclude-section(sect, isopen:"") <$macrocall $name="transclude-section-with-name" sect=<<sect>> name=<<sect>> isopen=<<isopen>>/>
 
-<$list filter="[[$:/config/sib/IsPublicEdition]text[true]]" emptyMessage="""<$transclude tiddler="$:/sib/Templates/Topical/AnkiPattern/View"/>""" variable=_>
+<% if [m2.private[]] %>
 	<<tabs "$:/sib/Templates/Topical/AnkiPattern/View $:/sib/Templates/Topical/AnkiPattern/Edit" default:"$:/sib/Templates/Topical/AnkiPattern/View">>
-</$list>
+<% else %>
+	<$transclude tiddler="$:/sib/Templates/Topical/AnkiPattern/View"/>
+<% endif %>

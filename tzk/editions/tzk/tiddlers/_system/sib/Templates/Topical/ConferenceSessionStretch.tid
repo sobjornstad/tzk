@@ -1,0 +1,9 @@
+created: 20240718024006740
+creator: soren
+modified: 20240718031540463
+modifier: soren
+tags: Public
+title: $:/sib/Templates/Topical/ConferenceSessionStretch
+type: text/vnd.tiddlywiki
+
+[<$view field="at" format="date" template="0hh:0mm"/>] {{!!author}}: {{!!caption}} {{||$:/sib/Templates/Topical/ReadingList/Rating}}

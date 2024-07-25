@@ -1,27 +1,25 @@
 caption: Title
 created: 20210825150825394
 creator: soren
-modified: 20210920133523652
+modified: 20240601192944709
 modifier: soren
 tags: 
 title: $:/sib/GettingStarted/Title
 type: text/vnd.tiddlywiki
 
-\define set-favicon-actions()
-<$action-sendmessage $message="tm-rename-tiddler" from={{{[[$:/Import]links[]first[]]}}} to="$:/favicon.ico"/>
-\end
+\procedure set-favicon-actions() <$action-sendmessage $message="tm-rename-tiddler" from={{{ [[$:/Import]links[]first[]] }}} to="$:/favicon.ico"/>
 
-\define favicon-cell()
-[img width=24 [$:/favicon.ico]]
-<$navigator>
-	<$browse accept="ico,png,gif"/>
-</$navigator>
-<$list filter="[[$:/Import]plugin-type[import]]">
-	<$button actions=<<set-favicon-actions>>>
-		change favicon
-		<$action-sendmessage $message="tm-perform-import" $param="$:/Import"/>
-	</$button>
-</$list>
+\procedure favicon-cell()
+	[img width=24 [$:/favicon.ico]]
+	<$navigator>
+		<$browse accept="ico,png,gif"/>
+	</$navigator>
+	<$list filter="[[$:/Import]plugin-type[import]]">
+		<$button actions=<<set-favicon-actions>>>
+			change favicon
+			<$action-sendmessage $message="tm-perform-import" $param="$:/Import"/>
+		</$button>
+	</$list>
 \end
 
 <!-- Thanks to Saq for helping figure out how to import/replace the favicon:
@@ -32,16 +30,17 @@ Let's start with some basic information.
 
 What do you want to call your Zettelkasten? The title and subtitle will appear at the top of the sidebar and in your web browser's title bar.
 
-<$set name="tv-auto-open-on-import" value="no">
-<$navigator>
+<$let tv-auto-open-on-import="no">
+	<$navigator>
 
 |!Title |<$edit-text tiddler="$:/SiteTitle" tag="input"/>|
 |!Subtitle |<$edit-text tiddler="$:/SiteSubtitle" tag="input"/>|
 
-The favicon appears next to the title in tabs, bookmarks, and other places throughout your web browser's interface. You can upload a new favicon in ICO, PNG, or GIF format.
+	The favicon appears next to the title in tabs, bookmarks, and other places throughout your web browser's interface.
+	You can upload a new favicon in ICO, PNG, or GIF format.
 
 |!Favicon |<<favicon-cell>>|
 
 
-</$navigator>
-</$set>
+	</$navigator>
+</$let>

@@ -1,0 +1,20 @@
+created: 20240528220838333
+creator: soren
+modified: 20240528221916826
+modifier: soren
+tags: 
+title: $:/sib/Search/TypeSearchItemTemplate
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+
+<div class="tc-menu-list-item">
+	<$link to=<<currentTiddler>>>
+		<$text text=<<currentTiddler>>/>
+		<div style="font-size: 80%; padding-left: 0.5em; float: right;">
+			<$list filter="[all[current]tags[]color[#ff0000]]">
+				<$macrocall $name="tag-pill" tag=<<currentTiddler>> />
+			</$list>
+		</div>
+	</$link>
+</div>

@@ -1,0 +1,11 @@
+caption: Microlink
+created: 20240611040702059
+creator: soren
+description: Show the microlink to a tiddler after # in the subtitle metadata section.
+modified: 20240611040803703
+modifier: soren
+private: yes
+public: no
+tags: 
+title: $:/config/zettelkasten/FeatureFlags/MicrolinkMetadataLine
+type: text/vnd.tiddlywiki

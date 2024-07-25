@@ -1,0 +1,11 @@
+created: 20210522021311753
+creator: soren
+description: Insert an empty div that clears any floats. Useful after large images, or to separate blockquotes using the `>` syntax.
+example: <<float-image "freezer-example.jpg">>Text wrapping beside the float <<clarify>>Text forced after the float by clarification.
+modified: 20240601140652519
+modifier: soren
+tags: $:/tags/Macro
+title: $:/sib/Procedures/clarify
+type: text/vnd.tiddlywiki
+
+\procedure clarify() <div class="clarify"/>

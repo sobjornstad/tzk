@@ -1,0 +1,11 @@
+created: 20210522022802823
+creator: soren
+description: Display a small box of color, the color being any CSS color. This macro usually only works properly at the beginning of a line.
+example: <<colorsplotch "#ffffff">> White
+modified: 20240601140837836
+modifier: soren
+tags: $:/tags/Macro
+title: $:/sib/Procedures/colorsplotch
+type: text/vnd.tiddlywiki
+
+\procedure colorsplotch(color) <div class="color-splotch" style=`background: $(color)$;`>

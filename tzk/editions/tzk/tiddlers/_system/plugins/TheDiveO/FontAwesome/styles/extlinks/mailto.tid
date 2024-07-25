@@ -1,0 +1,25 @@
+created: 20240522152316285
+creator: soren
+list-after: $:/plugins/TheDiveO/FontAwesome/styles/extlinks
+modified: 20240522153012985
+modifier: soren
+tags: $:/tags/Stylesheet
+title: $:/plugins/TheDiveO/FontAwesome/styles/extlinks/mailto
+type: text/vnd.tiddlywiki
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html
+
+<$set name="cfg" value=<<fa5-cfgpath "decorate-wk-extlinks">> >
+<$list filter=<<fa5-cfgfilterexpr>> >
+
+a[href^="mailto:"]:before {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 900;  
+  font-size: 80%;
+  content: '\f0e0\202f';
+  display: inline-block;
+}
+
+</$list>
+</$set>

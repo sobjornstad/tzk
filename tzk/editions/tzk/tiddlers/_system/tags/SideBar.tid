@@ -1,5 +1,7 @@
 created: 20201203015851994
+creator: soren
 list: $:/core/ui/SideBar/Open $:/core/ui/SideBar/Recent $:/core/ui/SideBar/Tools $:/core/ui/SideBar/More $:/sib/SideBar/Write $:/sib/SideBar/Explore
-modified: 20210522014736560
+modified: 20240406232337299
+modifier: soren
 title: $:/tags/SideBar
 type: text/vnd.tiddlywiki

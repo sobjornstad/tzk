@@ -10,13 +10,14 @@ It takes care of providing its own relink and report rules.
 
 var utils = require('$:/plugins/flibbles/relink/js/utils.js');
 var language = require('$:/plugins/flibbles/relink/js/language.js');
+var pragmaOperators = utils.getModulesByTypeAsHashmap('relinkpragma', 'name');
 
 exports.name = "relink";
 exports.types = {pragma: true};
 
 exports.init = function(parser) {
 	this.parser = parser;
-	this.matchRegExp = /^\\relink[^\S\n]+([^(\s]+)([^\r\n]*)(\r?\n)?/mg;
+	this.matchRegExp = /^\\relink[^\S\r\n]+([^(\s]+)([^\r\n]*)(\r?\n)?/mg;
 };
 
 /**This makes the widget that the macro library will later parse to determine
@@ -32,7 +33,7 @@ exports.parse = function() {
 	var error = undefined;
 	var rtn = [];
 	var self = this;
-	this.interpretSettings(function(macro, parameter, type) {
+	interpretSettings(this, function(macro, parameter, type) {
 		macroName = macro;
 		if (type && !utils.getType(type)) {
 			error = language.getString("text/plain", "Error/UnrecognizedType",
@@ -50,6 +51,7 @@ exports.parse = function() {
 				name: {type: "string", value: ""}
 			},
 			children: [],
+			isRelinkDefinition: true,
 			isMacroDefinition: true,
 			relink: relink});
 	}
@@ -67,22 +69,40 @@ exports.parse = function() {
 	return rtn;
 };
 
+exports.report = function(text, callback, options) {
+	operate(this, options);
+	for (var operator in pragmaOperators) {
+		pragmaOperators[operator].report(this, callback, options);
+	}
+};
+
 exports.relink = function(text, fromTitle, toTitle, options) {
-	var parser = this.parser;
+	operate(this, options);
+	var entry;
+	for (var operator in pragmaOperators) {
+		// Yes, this only handles one thing for now. I haven't bothered
+		// breaking up \relink into a modifiable type.
+		entry = pragmaOperators[operator].relink(this, fromTitle, toTitle, options);
+	}
+	return entry;
+};
+
+function operate(rule, options) {
+	var parser = rule.parser;
 	var currentTiddler = parser.context.widget.variables.currentTiddler.value;
-	parser.pos = this.matchRegExp.lastIndex;
-	this.interpretSettings(function(macro, parameter, type) {
+	parser.pos = rule.matchRegExp.lastIndex;
+	interpretSettings(rule, function(macro, parameter, type) {
 		options.settings.addSetting(parser.wiki, macro, parameter, type, currentTiddler);
 	});
 	// Return nothing, because this rule is ignored by the parser
 	return undefined;
 };
 
-exports.interpretSettings = function(block) {
-	var paramString = this.match[2];
+function interpretSettings(rule, block) {
+	var paramString = rule.match[2];
 	if (paramString !== "") {
-		var macro = this.match[1];
-		var reParam = /\s*([A-Za-z0-9\-_]+)(?:\s*:\s*([^\s]+))?/mg;
+		var macro = rule.match[1];
+		var reParam = /\s*([$A-Za-z0-9\-_]+)(?:\s*:\s*([^\s]+))?/mg;
 		var paramMatch = reParam.exec(paramString);
 		while (paramMatch) {
 			var parameter = paramMatch[1];

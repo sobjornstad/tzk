@@ -1,0 +1,49 @@
+created: 20240611044049361
+creator: soren
+modified: 20240611044154536
+modifier: soren
+tags: $:/tags/Stylesheet
+title: $:/sib/styles/ExampleWidget
+type: text/vnd.tiddlywiki
+
+.sib-examples-indented-div {
+  position: relative;
+  padding-left: 2.0em;  /* Adjust this value as needed for indentation */
+  /*margin-left: 1em;   Adjust this value to control the main body's horizontal offset */
+}
+
+.sib-examples-indented-div div.sib-examples-indented-div-inner::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0.59em;
+	width: 1px;
+	background-color: #00a;
+	z-index: 1;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.sib-examples-indented-div blockquote {
+	margin-left: 0;
+}
+
+.sib-examples-indented-div::before {
+  content: attr(data-number);
+  position: absolute;
+  left: 0px;                           /* Adjust this value to position the circle horizontally */
+  top: 50%;                            /* Start positioning from the middle of the parent */
+  transform: translateY(-50%);         /* Translate back by 50% of its height to center vertically */
+  background-color: #ffffff;           /* Background color of the circle */
+  border: 1px solid #00a;              /* Border color of the circle */
+  border-radius: 50%;
+  width: 20px;                         /* Adjust this value for circle size */
+  height: 20px;                        /* Adjust this value for circle size */
+  line-height: 18px;                   /* Match line height to circle size for perfect vertical alignment */
+  text-align: center;
+  color: #00a;
+  font-size: 12px;                     /* Adjust this value as needed for number size */
+  font-weight: 600;
+  z-index: 2;
+}

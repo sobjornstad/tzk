@@ -23,9 +23,11 @@ exports.report = function(text, callback, options) {
 		filter = m[1],
 		template = $tw.utils.trim(m[3]),
 		append = template ? '||' + template + '}}}' : '}}}';
-	filterHandler.report(filter, function(title, blurb) {
-		callback(title, '{{{' + blurb + append);
-	}, options);
+	var nestedOptions = Object.create(options);
+	nestedOptions.settings = this.parser.context;
+	filterHandler.report(filter, function(title, blurb, style) {
+		callback(title, '{{{' + blurb + append, style);
+	}, nestedOptions);
 	if (template) {
 		callback(template, '{{{' + $tw.utils.trim(filter).replace(/\r?\n/mg, ' ') + '||}}}');
 	}
@@ -43,8 +45,9 @@ exports.relink = function(text, fromTitle, toTitle, options) {
 		entry = {};
 	parser.pos = this.matchRegExp.lastIndex;
 	var modified = false;
-
-	var filterEntry = filterHandler.relink(filter, fromTitle, toTitle, options);
+	var nestedOptions = Object.create(options);
+	nestedOptions.settings = this.parser.context;
+	var filterEntry = filterHandler.relink(filter, fromTitle, toTitle, nestedOptions);
 	if (filterEntry !== undefined) {
 		if (filterEntry.output) {
 			filter = filterEntry.output;

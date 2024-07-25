@@ -1,0 +1,20 @@
+created: 20231128025419053
+creator: soren
+description: Insert `<wbr>` tags into a string to suggest that the browser break long CamelCase strings at word boundaries rather than at random characters. Mostly used automatically when rendering titles.
+modified: 20240601191727816
+modifier: soren
+tags: $:/tags/Macro
+title: $:/sib/Macros/camel-wrap
+type: text/vnd.tiddlywiki
+
+<!-- 
+A problem with long CamelCase titles is that if they're too long for their container, they break at any character. We'd prefer them to break at a word point.
+
+<wbr> is a “word break opportunity”. So if we call in to this macro with the current tiddler set to some CamelCase title when we want to display a neatly wrapping title, we can have the macro insert <wbr>s at each word.
+
+Based on https://heap.ch/blog/2016/01/19/camelwrap/.
+-->
+
+\define camelwrap_myreg() ([a-z0-9])([A-Z])
+\define camelwrap_wbr() $1<wbr>$2
+\define camel-wrap(humpytext) <$wikify name="mytext" text={{{ [<__humpytext__>search-replace:g:regexp<camelwrap_myreg>,<camelwrap_wbr>] }}} output="html" mode="inline"><<mytext>></$wikify>

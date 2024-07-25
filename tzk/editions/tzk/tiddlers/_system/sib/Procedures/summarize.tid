@@ -1,0 +1,16 @@
+created: 20230329151407581
+creator: soren
+description: Render a link to the specified /tiddler/, followed by its description (or another specified summary /field/)..
+example: <<summarize PeopleDontKnowWhatTheyWant>>
+modified: 20240601150324176
+modifier: soren
+tags: $:/tags/Macro
+title: $:/sib/Procedures/summarize
+type: text/vnd.tiddlywiki
+
+\procedure summarize(tiddler, field:"description")
+	<$link to=<<tiddler>>/>:&nbsp;
+	<$wikify name="text" text={{{ [<tiddler>get<field>] }}}>
+		<<text>>
+	</$wikify>
+\end

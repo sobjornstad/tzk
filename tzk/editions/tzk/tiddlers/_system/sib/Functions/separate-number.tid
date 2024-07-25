@@ -1,0 +1,20 @@
+created: 20240601203238907
+creator: soren
+description: Add commas (or another separator character) to a large number. Use `separate-number-input` at the end of a filter pipeline.
+example: <<m2.separate-number 5000000>>
+modified: 20240601205332390
+modifier: soren
+tags: $:/tags/Global
+title: $:/sib/Functions/separate-number
+type: text/vnd.tiddlywiki
+
+\define local.separate-number.regex() (\d)(?=(\d{3})+(?!\d))
+\define local.separate-number.replacement() $1$(separator)$
+
+\function m2.separate-number-input(separator:",")
+	[search-replace:g:regexp<local.separate-number.regex>,<local.separate-number.replacement>]
+\end m2.separate-number-input
+
+\function m2.separate-number(number:"", separator:",")
+	[<number>m2.separate-number-input<separator>]
+\end m2.separate-number

@@ -23,22 +23,20 @@ exports.report = function(text, callback, options) {
 
 exports.relink = function(text, fromTitle, toTitle, options) {
 	var macroInfo = getInfoFromRule(this);
-	var managedMacro = this.parser.context.getMacro(macroInfo.name);
 	this.parser.pos = macroInfo.end;
-	if (!managedMacro) {
-		// We don't manage this macro. Bye.
-		return undefined;
-	}
 	var mayBeWidget = this.parser.context.allowWidgets();
 	var names = getParamNames(this.parser, macroInfo.name, macroInfo.params, options);
 	if (names === undefined) {
 		// Needed the definition, and couldn't find it. So if a single
-		// parameter needs to placeholder, just fail.
+		// parameter doesn't work, just fail.
 		mayBeWidget = false;
 	}
 	var entry = macrocall.relink(this.parser.context, macroInfo, text, fromTitle, toTitle, mayBeWidget, options);
 	if (entry && entry.output) {
-		entry.output = macroToString(entry.output, text, names, options);
+		entry.output = macroToString(entry, text, names, this.parser, options);
+		if (entry.output === undefined) {
+			entry.impossible = true;
+		}
 	}
 	return entry;
 };
@@ -51,7 +49,7 @@ exports.relink = function(text, fromTitle, toTitle, options) {
 exports.relinkAttribute = function(parser, macro, text, fromTitle, toTitle, options) {
 	var entry = macrocall.relink(parser.context, macro, text, fromTitle, toTitle, false, options);
 	if (entry && entry.output) {
-		entry.output = macrocall.reassemble(entry.output, text, options);
+		entry.output = macrocall.reassemble(entry, text, options);
 	}
 	return entry;
 };
@@ -60,8 +58,8 @@ exports.relinkAttribute = function(parser, macro, text, fromTitle, toTitle, opti
  * Kept for backward compatibility reasons
  */
 exports.reportAttribute = function(parser, macro, callback, options) {
-	macrocall.report(parser.context, macro, function(title, blurb) {
-		callback(title, "<<" + blurb + ">>");
+	macrocall.report(parser.context, macro, function(title, blurb, style) {
+		callback(title, "<<" + blurb + ">>", style);
 	}, options);
 };
 
@@ -79,12 +77,33 @@ function getInfoFromRule(rule) {
 		};
 		macroInfo.params = parseParams(match[2], offset+macroInfo.start);
 	}
+	// post v5.3.0 changed it so name and param aren't used, but we still use
+	// them. Maybe I should migrate so that I don't either, and that it's
+	// orderedAttributes and $variable that I use.
+	if (macroInfo.name === undefined) {
+		macroInfo.name = macroInfo.attributes["$variable"].value;
+		macroInfo.params = macroInfo.orderedAttributes.slice(1);
+		var index = 0;
+		for (var i = 0; i < macroInfo.params.length; i++) {
+			var param = macroInfo.params[i];
+			if (param.name === index.toString()) {
+				// Swap out the param with one that doesn't have a name.
+				macroInfo.params[i] = {
+					start: param.start,
+					end: param.end,
+					type: param.type,
+					value: param.value
+				};
+				index++;
+			}
+		}
+	}
 	return macroInfo;
 };
 
 function mustBeAWidget(macro) {
 	for (var i = 0; i < macro.params.length; i++) {
-		if (macro.params[i].type === "macro") {
+		if (macrocall.wrapParameterValue(macro.params[i].value) === undefined) {
 			return true;
 		}
 	}
@@ -95,23 +114,49 @@ function mustBeAWidget(macro) {
  * it was parsed from, returns a new macro that maintains any syntactic
  * structuring.
  */
-function macroToString(macro, text, names, options) {
-	if (mustBeAWidget(macro)) {
-		var attrs = [];
-		for (var i = 0; i < macro.params.length; i++) {
-			var p = macro.params[i];
-			var val;
-			if (p.newValue) {
-				val = p.newValue;
-			} else {
-				val = utils.wrapAttributeValue(p.value);
-			}
-			attrs.push(" "+names[i]+"="+val);
+function macroToString(entry, text, names, parser, options) {
+	var macro = entry.output;
+	if (mustBeAWidget(macro) && parser.context.allowWidgets()) {
+		var widgetString = macroToWidgetString(macro, names);
+		if (widgetString) {
+			// It worked! return it.
+			return widgetString;
 		}
-		return "<$macrocall $name="+utils.wrapAttributeValue(macro.name)+attrs.join('')+"/>";
-	} else {
-		return macrocall.reassemble(macro, text, options);
+		entry.impossible = true;
+		// Otherwise continue on and try macrocall anyways, despite failutes.
 	}
+	return macrocall.reassemble(entry, text, options);
+};
+
+function macroToWidgetString(macro, names) {
+	var attrs = [];
+	for (var i = 0; i < macro.params.length; i++) {
+		var p = macro.params[i];
+		var val;
+		if (p.newValue) {
+			val = p.newValue;
+		} else {
+			val = utils.wrapAttributeValue(p.value);
+		}
+		if (val !== undefined) {
+			var name = p.name;
+			if (name === undefined) {
+				if (names === undefined) {
+					// Oops. We've got to give up here. We can't resolve
+					// the name of one of the parameters.
+					return undefined;
+				} else {
+					name = names[i];
+				}
+			}
+			attrs.push(" "+name+"="+val);
+		} else {
+			// Oops. There's an attribute that can't be quoted. We need
+			// to abort.
+			return undefined;
+		}
+	}
+	return "<$macrocall $name="+utils.wrapAttributeValue(macro.name)+attrs.join('')+"/>";
 };
 
 function getParamNames(parser, macroName, params, options) {

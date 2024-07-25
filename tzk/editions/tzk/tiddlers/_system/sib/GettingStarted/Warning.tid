@@ -1,7 +1,7 @@
 caption: WARNING and DISCLAIMER
 created: 20210828134445553
 creator: soren
-modified: 20210920133400209
+modified: 20240601193155293
 modifier: soren
 tags: 
 title: $:/sib/GettingStarted/Warning
@@ -13,4 +13,4 @@ In other words, it's //safe// to use tzk for your production Zettelkasten, but y
 
 !! Why?
 
-As I am still trying to figure out how to get the most value out of TiddlyWiki and my Zettelkasten, I need to preserve my ability to rapidly make changes to my tooling. Worrying about backwards compatibility, upgrades, supportability, and changing things so they work well for other users and not just me would require a significant portion of my development time and motivation, and I don't have that time to give at the moment. If I tried to supply these things, I wouldn't be able to publish this at all. (Ordinarily I would just keep the tools to myself until they were a bit more mature, but I have gotten so many curious people casting jealous looks at my [[public Zettelkasten|https://zettelkasten.sorenbjornstad.com]] that I'm making an exception.)
+I need to preserve my ability to [[rapidly make changes to my tooling|ReflexiveSystemDevelopment]]. Worrying about backwards compatibility, upgrades, supportability, and changing things so they work well for other users and not just me reduces iteration speed and mental flexibility. If I tried to supply these things, I wouldn't be able to publish this at all. (Ordinarily I would just keep the tools to myself, but I have gotten so many curious people casting jealous looks at my <a href={{$:/config/sobjornstad/PublicZettelkastenUrl}} class="tc-tiddlylink-external">public notes</a> that I'm making an exception.)

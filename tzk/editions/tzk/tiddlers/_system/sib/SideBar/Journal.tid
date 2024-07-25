@@ -1,6 +1,8 @@
 caption: Journal
 created: 20230830210720848
-modified: 20230912095822070
+creator: soren
+modified: 20240601202811918
+modifier: soren
 tags: $:/tags/MoreSideBar
 title: $:/sib/SideBar/Journal
 type: text/vnd.tiddlywiki
@@ -20,8 +22,8 @@ Today: <$link to=<<now "YYYY-0MM-0DD ddd">>/>
 ----
 
 <dl>
-<$list filter="[tag[Journal]!sort[]regexp:title<day-journal-regexp>]">
-	<dt><$link/></dt>
-	<dd>{{!!description}}</dd>
-</$list>
+	<$list filter="[tag[Journal]!sort[]regexp:title<day-journal-regexp>]">
+		<dt><$link/></dt>
+		<dd>{{!!description}}</dd>
+	</$list>
 </dl>

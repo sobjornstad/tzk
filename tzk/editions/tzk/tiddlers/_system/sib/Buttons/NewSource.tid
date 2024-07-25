@@ -3,20 +3,15 @@ created: 20200822190145295
 creator: soren
 description: Create a new source tiddler
 list-after: $:/core/ui/Buttons/new-tiddler
-modified: 20220504192240445
+modified: 20240601184444184
 modifier: soren
 tags: $:/tags/PageControls
 title: $:/sib/Buttons/NewSource
 type: text/vnd.tiddlywiki
 
-<$button class=<<tv-config-toolbar-class>> selectedClass="tc-selected" tooltip={{!!caption}}>
-	<$list filter="[<tv-config-toolbar-icons>match[yes]]">
-	{{$:/core/images/quote}}
-	</$list>
-	<$list filter="[<tv-config-toolbar-text>match[yes]]">
-	<span class="tc-btn-text"><$text text={{$:/sib/Buttons/NewSource!!caption}}/></span>
-	</$list>
-	
+\whitespace trim
+
+\procedure create-action()
   <$action-sendmessage
     $message="tm-new-tiddler"
     title="New Source"
@@ -29,4 +24,20 @@ type: text/vnd.tiddlywiki
 		completed=""
 		year=<<now YYYY>>
   />
+\end create-action
+
+<$button
+	class=<<tv-config-toolbar-class>>
+	selectedClass="tc-selected"
+	tooltip={{!!caption}}
+	actions=<<create-action>>
+>
+	<% if [<tv-config-toolbar-icons>match[yes]] %>
+		{{$:/core/images/quote}}
+	<% endif %>
+	<% if [<tv-config-toolbar-text>match[yes]] %>
+		<span class="tc-btn-text">
+			<$text text={{$:/sib/Buttons/NewSource!!caption}}/>
+		</span>
+	<% endif %>
 </$button>

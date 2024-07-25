@@ -1,0 +1,46 @@
+created: 20240211234241511
+creator: soren
+modified: 20240530233044908
+modifier: soren
+tags: 
+title: $:/sib/Templates/Topical/DatesWithRomanticInterestSidebarTab
+type: text/vnd.tiddlywiki
+
+<!--
+<$tiddler tiddler=<<currentTab>>>
+{{||$:/sib/Templates/Automatic/RomanticInterest}}
+</$tiddler>
+-->
+
+<$tiddler tiddler=<<currentTab>>>
+	<div class="sidebar-ri-status-line">
+		<h2><$link to=<<currentTiddler>>>{{!!caption}}</$link></h2>
+		<div>
+			<$let numDates={{{ [contains:ri-date-with<currentTiddler>!is[draft]count[]] }}}>
+				<<numDates>> date<% if [<numDates>!match[1]] %>s<% endif %>
+			</$let>
+		</div>
+		<div>Status: {{||$:/sib/Templates/Topical/RiStatusLine}}</div>
+	</div>
+</$tiddler>
+
+<$list filter="[tag[Date]ri-date-with<currentTab>]">
+	<dl>
+		<dt>
+			<$link to=<<currentTiddler>>><$text text={{{ [<currentTiddler>split[:]butfirst[]] }}}/></$link>
+		</dt>
+		<dd>{{!!ri-date-summary}}</dd>
+	</dl>
+</$list>
+
+<style>
+div.sidebar-ri-status-line div {
+	margin-top: 0;
+	/*margin-bottom: 4ex;*/
+	text-align: center;
+}
+div.sidebar-ri-status-line h2 {
+	margin-top: 0;
+	margin-bottom: 1ex;
+}
+</style>

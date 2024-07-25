@@ -1,10 +1,11 @@
 created: 20220505135633168
 creator: soren
-modified: 20220505135638189
+modified: 20240611004644694
 modifier: soren
 title: $:/plugins/tobibeer/preview/template
 type: text/vnd.tiddlywiki
 
+<div class="tc-title">&nbsp;<i class="fa fa-file-alt"/>&ensp;{{!!title}}</div>
 {{||$:/core/ui/ViewTemplate/subtitle}}
 {{||$:/core/ui/ViewTemplate/tags}}
 

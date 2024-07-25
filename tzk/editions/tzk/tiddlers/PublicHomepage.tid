@@ -1,7 +1,8 @@
 created: 20200507143136944
 creator: soren
-list: PublicHomepage/Navigating PublicHomepage/Organization [[PublicHomepage/Points of Interest]] [[PublicHomepage/No Warranty]] PublicHomepage/Copyright PublicHomepage/Contact [[PublicHomepage/Video Tour]]
-modified: 20221202000932702
+description: Welcome to Mosaic Muse!
+list: [[PublicHomepage/Points of Interest]] PublicHomepage/Organization PublicHomepage/Navigating [[PublicHomepage/No Warranty]] PublicHomepage/Copyright PublicHomepage/Contact [[PublicHomepage/Video Tour]]
+modified: 20240524221042670
 modifier: soren
 tags: Public Meta
 title: PublicHomepage

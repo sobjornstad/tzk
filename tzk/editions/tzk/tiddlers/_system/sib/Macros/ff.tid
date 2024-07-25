@@ -1,7 +1,8 @@
 created: 20210622002240940
-description: Transclude a filter expression that returns `yes` if the specified [[feature flag|$:/sib/Tools/FeatureFlags]] is enabled for the current edition, and nothing otherwise.
+creator: soren
+description: ''Deprecated: Use the m2.ff function instead.''
 example: <$list filter=<<ff ViewerPublicLine>> variable=_ emptyMessage="The viewer public line is off in this edition.">The viewer public line is on in this edition. Transclude it here.</$list>
-modified: 20210825145522659
+modified: 20240601191736826
 modifier: soren
 tags: $:/tags/Macro
 title: $:/sib/Macros/ff

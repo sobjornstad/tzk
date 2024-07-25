@@ -1,6 +1,6 @@
 created: 20210615030339909
 creator: soren
-modified: 20230416141202623
+modified: 20240305042953762
 modifier: soren
 tags: $:/tags/Stylesheet
 title: $:/sib/styles/body
@@ -13,7 +13,24 @@ div.tc-tiddler-edit-frame { max-width: 90em; margin-left: auto; margin-right: au
 
 div.tc-tiddler-body { max-width: 50em; margin: auto; }
 
-.tc-tiddler-frame .tc-tiddler-preview .tc-edit-texteditor { width: 69%; }
+.tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview {
+grid-template-columns: 69% 29%;
+}
+
+.tc-tiddler-preview-preview {
+  z-index: 1;
+}
+
+/*
+.tc-tiddler-frame .tc-tiddler-preview {
+/*.tc-edit-texteditor */
+  width: 69%;
+}
+
+div.tc-tiddler-preview-preview {
+	width: 29%;
+}
+*/
 
 div[data-tiddler-title*="$:/sib/Tools/ReadingInbox"] div.tc-tiddler-body, div[data-tags*="Indite"] div.tc-tiddler-body {
 	max-width: 100%;
@@ -37,10 +54,13 @@ div[data-tags*="Wide"] {
 	max-width: 75em;
 }
 
-div.tc-tiddler-preview-preview {
-	width: 29%;
-}
-
 h2:not(.tc-title) { 
 	text-align: center;
+}
+
+
+/* The standard title-bar styling handles multi-line titles very poorly; this improves the spacing. */
+.tc-titlebar {
+	line-height: 1.1em;
+	/*padding-bottom: 0.2em;*/
 }

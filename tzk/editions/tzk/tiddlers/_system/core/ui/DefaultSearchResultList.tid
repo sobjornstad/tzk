@@ -1,0 +1,50 @@
+caption: {{$:/language/Search/DefaultResults/Caption}}
+created: 20240406235423298
+creator: soren
+first-search-filter: [!is[system]search:title<userInput>sort[title]limit[250]]
+modified: 20240407000244129
+modifier: soren
+second-search-filter: [!is[system]search<userInput>sort[title]limit[250]]
+tags: $:/tags/SearchResults
+title: $:/core/ui/DefaultSearchResultList
+type: text/vnd.tiddlywiki
+
+\define plus-pao() +[tag[PAO]]
+
+\define searchResultList()
+\whitespace trim
+
+<$list filter="[<userInput>minlength[1]regexp[(?i)^(Mr|Ms|Mx|The)]]" variable=_>
+//<small>Name results:</small>//
+	<$list filter="[<userInput>minlength[1]]" variable="ignore">
+	<$list filter={{{ [<configTiddler>get[first-search-filter]addsuffix<plus-pao>] }}}>
+	<span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
+	<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+	</span>
+	</$list>
+	</$list>
+</$list>
+
+
+//<small>{{$:/language/Search/Matches/Title}}</small>//
+
+<$list filter="[<userInput>minlength[1]]" variable="ignore">
+<$list filter={{{ [<configTiddler>get[first-search-filter]] }}}>
+<span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+</span>
+</$list>
+</$list>
+
+//<small>{{$:/language/Search/Matches/All}}</small>//
+
+<$list filter="[<userInput>minlength[1]]" variable="ignore">
+<$list filter={{{ [<configTiddler>get[second-search-filter]] }}}>
+<span class={{{[<currentTiddler>addsuffix[-secondaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+</span>
+</$list>
+</$list>
+
+\end
+<<searchResultList>>

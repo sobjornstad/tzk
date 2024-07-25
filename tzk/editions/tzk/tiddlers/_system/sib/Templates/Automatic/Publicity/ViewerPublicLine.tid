@@ -1,7 +1,7 @@
 created: 20200508002211355
 creator: soren
 description: Show a checkbox to make the tiddler private or public while viewing it.
-modified: 20210825185507543
+modified: 20240601152338707
 modifier: soren
 tags: $:/tags/ViewTemplate
 title: $:/sib/Templates/Automatic/Publicity/ViewerPublicLine
@@ -9,15 +9,26 @@ transcludedin: All non-system tiddlers, in the private edition. Never, in the pu
 type: text/vnd.tiddlywiki
 
 <!-- Clear any outstanding floats or things will look really weird. This also clears for the Reference Explorer since the public checkbox is floated, so it comes outside the list widget. -->
-<div class="sib-viewer-clarify"/>
+<<clarify>>
 
-<!-- If this is a system tiddler, don't show the public line. -->
-<$list filter="[all[current]!is[system]]" variable=_>
+<!-- System tiddlers are always public -- don't show anything if system. -->
+<% if [all[current]!is[system]] %>
 
-<$list filter=<<ff ViewerPublicLine>> variable=_>
-	<div class="sib-viewer-public-line">
-		<$checkbox tag=Public> Publish this tiddler</$checkbox>
-	</div>
-</$list>
+	<% if [m2.ff[ViewerPublicLine]] %>
+		<div class="sib-viewer-public-line">
+			<$checkbox tag="Public"> Publish this tiddler</$checkbox>
+		</div>
+	<% endif %>
+	
+	<% if [m2.private[]] %>
+	<% if [all[current]get[edition]!is[blank]] %>
+		<span class="sib-viewer-private-editions">Included in Private Editions</span>:
+		<$list filter={{!!edition}}>
+			<$link to={{{ [all[current]addprefix[$:/PrivateEdition/]] }}}>
+				<<currentTiddler>>
+			</$link>
+		</$list>
+	<% endif %>
+	<% endif %>
 
-</$list>
+<% endif %>

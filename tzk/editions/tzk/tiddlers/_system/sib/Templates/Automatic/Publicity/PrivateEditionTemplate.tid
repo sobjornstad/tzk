@@ -1,0 +1,68 @@
+created: 20240523231042655
+creator: soren
+description: Show options .
+modified: 20240710220154999
+modifier: soren
+tags: $:/tags/ViewTemplate
+title: $:/sib/Templates/Automatic/Publicity/PrivateEditionTemplate
+transcludedin: All $:/PrivateEdition/* tiddlers.
+type: text/vnd.tiddlywiki
+
+\define .add-tiddler() <$action-createtiddler $basetitle=<<currentTiddler>>/>	
+
+<% if [all[current]prefix[$:/PrivateEdition/]] %>
+	<$let thisEditionKey={{{ [all[current]removeprefix[$:/PrivateEdition/]] }}}>
+		<% if [m2.private[]] %>
+
+			<% if [all[current]is[missing]] %>
+
+				''Private edition not created yet. Click to create.''
+				<$button actions=<<.add-tiddler>>>Create Private Edition</$button>
+
+			<% else %>
+					Otherwise private tiddlers included	in this edition:
+						<ul>
+							<$list filter="[contains:edition<thisEditionKey>!tag[Public]]">
+								<li><$link/></li>
+							</$list>
+						</ul>
+
+					<% if [contains:edition<thisEditionKey>tag[Public]] %>
+						The following tiddlers are explicitly included in this edition, but are now public and no longer require this metadata:
+
+						<ul>
+							<$list filter="[contains:edition<thisEditionKey>tag[Public]]">
+								<li><$link/></li>
+							</$list>
+						</ul>
+
+					<% endif %> <!-- any public tiddlers marked -->
+			<% endif %> <!-- tiddler missing/exists -->
+
+		<% else %> <!-- "public" (special public edition) -->
+
+			<div style="background-color: lightgreen; padding: 1em;">
+
+			!! Welcome {{!!caption}}!
+
+			This is a ''special magic edition'' of Mosaic Muse generated especially for you,
+			in order to offer you access to topics that are not shared with the rest of the web.
+
+			To protect Soren's and your privacy, ''please do not share the URL of this page with anyone'' --
+			it is the only means of securing access, and therefore should be treated like a password.
+
+			Find the public edition at {{$:/config/sobjornstad/PublicZettelkastenUrl}}.
+
+
+			The following tiddlers are included in your edition but not in the public edition:
+				<ul>
+					<$list filter="[contains:edition<thisEditionKey>!is[system]!tag[Public]]">
+						<li><$link/></li>
+					</$list>
+				</ul>
+
+			</div>
+
+		<% endif %> <!-- private/public -->
+	</$let>
+<% endif %> <!-- private edition tiddler -->

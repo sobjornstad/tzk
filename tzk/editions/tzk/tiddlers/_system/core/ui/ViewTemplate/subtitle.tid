@@ -1,6 +1,6 @@
 created: 20210611015734693
 creator: soren
-modified: 20230407023355475
+modified: 20240718032102900
 modifier: soren
 tags: $:/tags/ViewTemplate
 title: $:/core/ui/ViewTemplate/subtitle
@@ -22,5 +22,17 @@ type: text/vnd.tiddlywiki
 	<i class="fa fa-gem"/>&ensp;{{!!description}}
 	</div>
 </$list>
+<% if [all[current]has[pronouns]] %>
+	<div>
+		<i class="fas fa-transgender"/>&ensp;{{!!pronouns}}
+	</div>
+<% endif %>
+<% if [m2.ff[MicrolinkMetadataLine]] %>
+<% if [all[current]has[microlink]] %>
+	<div>
+		<i class="fas fa-hashtag"/>&ensp;/{{!!microlink}}
+	</div>
+<% endif %>
+<% endif %>
 </div>
 </$reveal>

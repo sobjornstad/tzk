@@ -1,14 +1,16 @@
 created: 20210522021355703
+creator: soren
 description: Provide a summary of the purpose, usage, and definition of the global macro defined in the current tiddler.
-modified: 20210523141047728
+modified: 20240601135952161
+modifier: soren
 tags: $:/tags/ViewTemplate
 title: $:/sib/Templates/Automatic/MacroDescription
 transcludedin: All tiddlers within the $:/sib/Macros namespace that are tagged <<tag $:/tags/Macro>>.
 type: text/vnd.tiddlywiki
 
-<$list filter="[all[current]prefix[$:/sib/Macros/]tag[$:/tags/Macro]]">
+<% if [all[current]prefix[$:/sib/Macros/]] [all[current]prefix[$:/sib/Procedures/]] +[tag[$:/tags/Macro]] %>
 
-!! <code><$text text={{{ [all[current]removeprefix[$:/sib/Macros/]] }}}/></code> macro
+!! <code><$text text={{{ [all[current]split[/]last[]] }}}/></code> macro
 
 ; Purpose
 : {{!!description}}
@@ -20,4 +22,4 @@ type: text/vnd.tiddlywiki
 ; Definition
 : <$codeblock code={{{ [all[current]get[text]] }}}/>
 
-</$list>
+<% endif %>

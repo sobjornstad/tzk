@@ -1,0 +1,18 @@
+created: 20220923035826684
+creator: soren
+description: Create a web link to an item in [[attopublish]], with the link text "ap #whatever".
+example: <<ap 23>>
+modified: 20240601150228386
+modifier: soren
+tags: $:/tags/Macro
+title: $:/sib/Procedures/ap
+type: text/vnd.tiddlywiki
+
+\procedure ap(refnum)
+	[[ap|attopublish]]&nbsp;
+	<$m2.extlink
+		urltemplate="https://ap.sorenbjornstad.com/#post-$1$"
+		slotvalue=<<refnum>>
+		text=<<refnum>>
+	/>
+\end

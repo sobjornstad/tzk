@@ -1,14 +1,28 @@
 caption: {{$:/language/SideBar/Recent/Caption}}
 created: 20221201233103301
 creator: soren
-modified: 20221201233146286
+modified: 20240601154652772
 modifier: soren
 tags: $:/tags/MoreSideBar
 title: $:/core/ui/MoreSideBar/Recent
 type: text/vnd.tiddlywiki
+
+\define ifEmpty() <span class="sib-recent-pane-svg-height-override">{{$:/core/images/locked-padlock}}</span>
+<!-- emptyMessage=<<ifEmpty>> -->
+
+\define timeline-link() <$link to={{!!title}}><<timeline-title>></$link>&nbsp;<% if [all[current]tag[Public]] %><span class="sib-recent-pane-svg-height-override">{{$:/core/images/globe}}</span><% endif %>
 
 For a table of recently created and updated ideas and their summaries, visit RecentIdeas.
 
 ---
 
 <$macrocall $name="timeline" format={{$:/language/RecentChanges/DateFormat}}/>
+
+<style>
+.sib-recent-pane-svg-height-override svg {
+	height: 12px;
+	width: 12px;
+	padding: 0;
+	margin-bottom: -1px;
+}
+</style>

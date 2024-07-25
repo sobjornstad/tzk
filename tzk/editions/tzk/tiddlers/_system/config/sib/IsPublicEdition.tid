@@ -1,6 +1,8 @@
-caption: Whether interface elements for personal use only should appear.
+caption: Whether interface elements for personal use only should appear. Very poorly named, but difficult to change now!
 created: 20200508003748651
-modified: 20210508232303597
+creator: soren
+modified: 20240601144414273
+modifier: soren
 tags: Meta
 title: $:/config/sib/IsPublicEdition
 type: text/vnd.tiddlywiki

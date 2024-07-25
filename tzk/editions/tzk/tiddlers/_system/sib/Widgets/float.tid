@@ -1,0 +1,13 @@
+created: 20240601142205284
+creator: soren
+description: Show an image floated to the side of the text of a tiddler. This widget is often used with the `clarify` macro, which forces further content to come after the float.
+example: <<float-image "freezer-example.jpg" width:200 side:left>> Text next to the float. <<clarify>>
+modified: 20240601142603284
+modifier: soren
+tags: $:/tags/Macro
+title: $:/sib/Widgets/float
+type: text/vnd.tiddlywiki
+
+\widget $m2.float(source, width:"400", side:"right")
+	<$image source=<<source>> width=<<width>> class=`$(side)$-float` />
+\end

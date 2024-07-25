@@ -1,0 +1,48 @@
+created: 20240305142054053
+creator: soren
+description: Edit chosen metadata fields on a set of tiddlers in a table.
+modified: 20240305142820550
+modifier: soren
+tags: Wide Tool
+title: $:/sib/Tools/FieldEditor
+tooltype: maintenance
+type: text/vnd.tiddlywiki
+
+Filter: <$edit-text tiddler="$:/temp/FieldEditorFilter" default="" tag="input"/>
+
+Field names (as tiddler list): <$edit-text tiddler="$:/temp/FieldEditorFields" default="" tag="input"/>
+
+<table class="sib-field-editor">
+	<thead>
+		<tr>
+			<th>title</th>
+			<$list filter={{$:/temp/FieldEditorFields}} variable="current-field">
+				<th><<current-field>></th>
+			</$list>
+		</tr>
+	</thead>
+	<tbody>
+		<$list filter={{$:/temp/FieldEditorFilter}}>
+			<tr>
+				<td>
+					<$link/>
+				</td>
+				<$list filter={{$:/temp/FieldEditorFields}}  variable="current-field">
+					<td>
+						<$edit-text field=<<current-field>> default="" tag="input"/>
+					</td>
+				</$list>
+			</tr>
+		</$list>
+	</tbody>
+</table>
+
+<style>
+table.sib-field-editor {
+	width: 100%;
+}
+
+table.sib-field-editor input {
+	width: 100%;
+}
+</style>

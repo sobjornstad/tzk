@@ -1,6 +1,6 @@
 created: 20210719234124096
 creator: soren
-modified: 20230822142939467
+modified: 20240305043415047
 modifier: soren
 tags: $:/tags/Stylesheet
 title: $:/sib/styles/footnote
@@ -33,7 +33,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   /*vertical-align: super;
   line-height: 1.5;*/
   margin-left: 0em;
-  color: yellow;
+  color: <<color footnote-number>>;
 }
 .refnotes-footnote.refnotes-update:after {
   color: deepskyblue;
@@ -54,7 +54,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 .refnotes-tooltip .refnotes-tooltiptext {
     visibility: hidden;
     background-color: #fff;
-    color: #222222; 
+    color: #222222;
     text-align: left;
     border-radius: 2px;
     padding: 5px 10px;

@@ -1,0 +1,4 @@
+module-type: relinksetting
+the type they really are. Sort of like how $: /DefaultTiddlers is actually
+title: $:/plugins/flibbles/relink/js/settings/exceptions.js
+type: application/javascript

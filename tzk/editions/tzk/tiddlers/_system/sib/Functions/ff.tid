@@ -1,0 +1,11 @@
+created: 20240601140936743
+creator: soren
+description: Return `yes` if the specified [[feature flag|$:/sib/Tools/FeatureFlags]] is enabled for the current edition, and nothing otherwise.
+example: <% if [m2.ff[ViewerPublicLine]] %> The viewer public line is on in this edition. Transclude it here. <% else %>The viewer public line is off in this edition.<% endif %>
+modified: 20240601150603983
+modifier: soren
+tags: $:/tags/Global
+title: $:/sib/Functions/ff
+type: text/vnd.tiddlywiki
+
+\function m2.ff(flag) [[$:/config/zettelkasten/FeatureFlags/]addsuffix<flag>get{$:/config/sib/CurrentEditionPublicity}] -[[no]]

@@ -5,7 +5,7 @@ Utility methods for relink.
 
 \*/
 
-var macroFilter =  "[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]";
+var macroFilter =  "[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]] [all[shadows+tiddlers]tag[$:/tags/Global]!has[draft.of]]";
 
 /**This works nearly identically to $tw.modules.getModulesByTypeAsHashmap
  * except that this also takes care of migrating V1 relink modules.
@@ -25,7 +25,27 @@ exports.getModulesByTypeAsHashmap = function(moduleType, nameField) {
 			}
 		}
 	});
-	return results;
+	// We've got to sort these so that behavior is consistent across different
+	// versions of TiddlyMap, whose module return order depends on version...
+	return sortModules(results);
+};
+
+function sortModules(moduleMap) {
+	var keys = Object.keys(moduleMap);
+	var sortedResults = Object.create(null);
+	keys.sort();
+	for (var i = 0; i < keys.length; i++) {
+		var key = keys[i];
+		if (moduleMap[key].after
+		&& moduleMap[key].after.some(function(requirement) { return !sortedResults[requirement]})) {
+			// Not all requirements have been met yet.
+			$tw.utils.pushTop(keys, key);
+			i--;
+		} else {
+			sortedResults[key] = moduleMap[key];
+		}
+	}
+	return sortedResults;
 };
 
 exports.getTiddlerRelinkReferences = function(wiki, title, context) {
@@ -35,9 +55,9 @@ exports.getTiddlerRelinkReferences = function(wiki, title, context) {
 	if (tiddler) {
 		try {
 			for (var relinker in getRelinkOperators()) {
-				getRelinkOperators()[relinker].report(tiddler, function(title, blurb) {
+				getRelinkOperators()[relinker].report(tiddler, function(title, blurb, style) {
 					references[title] = references[title] || [];
-					references[title].push(blurb || '');
+					references[title].push($tw.utils.extend({blurb: blurb || ''}, style));
 				}, options);
 			}
 		} catch (e) {
@@ -158,6 +178,18 @@ exports.getDefaultType = function(wiki) {
 	var defaultType = tiddler && tiddler.fields.text;
 	// make sure the default actually exists, otherwise default
 	return fieldTypes[defaultType] ? defaultType : "title";
+};
+
+exports.abridgeString = function(string, maxLength, truncLength) {
+	if (typeof string === "string") {
+		maxLength = maxLength || 3;
+		if (truncLength === undefined) {
+			truncLength = maxLength-3;
+		}
+		string = string.replace(/\s+/g, " ").trim();
+		return (string.length > maxLength)? string.substr(0, truncLength) + "..." : string;
+	}
+	return string;
 };
 
 exports.touchModifyField = function(wiki) {

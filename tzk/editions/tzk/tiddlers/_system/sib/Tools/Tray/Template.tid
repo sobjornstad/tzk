@@ -1,12 +1,12 @@
 created: 20210711192716590
 creator: soren
-modified: 20210920140956221
+modified: 20240601210947670
 modifier: soren
 tags: 
 title: $:/sib/Tools/Tray/Template
 type: text/vnd.tiddlywiki
 
-\define remove-tiddler()
+\procedure remove-tiddler()
 	<$action-listops $tiddler="$:/sib/Tools/Tray" $field="list" $filter="[enlist{$:/sib/Tools/Tray!!list}] -[all[current]]"/>
 \end
 

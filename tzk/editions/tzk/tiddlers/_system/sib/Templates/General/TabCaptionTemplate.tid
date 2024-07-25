@@ -1,0 +1,9 @@
+created: 20240211233105836
+creator: soren
+modified: 20240211233540536
+modifier: soren
+tags: 
+title: $:/sib/Templates/General/TabCaptionTemplate
+type: text/vnd.tiddlywiki
+
+{{{ [<currentTab>get[caption]else<currentTab>] }}}

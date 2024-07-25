@@ -78,6 +78,10 @@ WikiWalker.prototype.parseInlineRunUnterminated = function(options) {
 };
 
 WikiWalker.prototype.parseInlineRunTerminated = function(terminatorRegExp,options) {
+    return this.parseInlineRunTerminatedExtended(terminatorRegExp,options).tree;
+};
+
+WikiWalker.prototype.parseInlineRunTerminatedExtended = function(terminatorRegExp,options) {
 	var entries = [];
 	options = options || {};
 	terminatorRegExp.lastIndex = this.pos;
@@ -90,7 +94,10 @@ WikiWalker.prototype.parseInlineRunTerminated = function(terminatorRegExp,option
 				if (options.eatTerminator) {
 					this.pos += terminatorMatch[0].length;
 				}
-				return entries;
+				return {
+					match: terminatorMatch,
+					tree: entries
+				};
 			}
 		}
 		if (inlineRuleMatch) {
@@ -104,7 +111,7 @@ WikiWalker.prototype.parseInlineRunTerminated = function(terminatorRegExp,option
 		}
 	}
 	this.pos = this.sourceLength;
-	return entries;
+	return {tree: entries};
 
 };
 
@@ -130,9 +137,6 @@ WikiWalker.prototype.amendRules = function(type, names) {
 		only = false;
 	} else {
 		return;
-	}
-	if (only !== (names.indexOf("macrodef") >= 0) && this.options.macrodefCanBeDisabled) {
-		this.options.placeholder = undefined
 	}
 	if (only !== (names.indexOf("html") >= 0)) {
 		this.context.allowWidgets = disabled;
@@ -179,10 +183,6 @@ exports.report = function(wikitext, callback, options) {
 function WikiRelinker(type, text, fromTitle, toTitle, options) {
 	this.fromTitle = fromTitle;
 	this.toTitle = toTitle;
-	this.placeholder = options.placeholder;
-	if (this.placeholder) {
-		this.placeholder.parser = this;
-	}
 	WikiWalker.call(this, type, text, options);
 };
 

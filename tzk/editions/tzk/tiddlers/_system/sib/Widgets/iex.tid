@@ -1,0 +1,19 @@
+created: 20240601143344568
+creator: soren
+description: (i)f (ex)ists: Render the widget's content only if something exists. Pass either a tiddler name or a filter (using a filter, content appears if the filter has no results).
+example: <$m2.iex tiddler="ThisTiddler">This Tiddler exists!</$m2.iex>
+modified: 20240601222041537
+modifier: soren
+tags: $:/tags/Global
+title: $:/sib/Widgets/iex
+type: text/vnd.tiddlywiki
+
+\widget $m2.iex(tiddler:"", filter:"")
+	<% if [<filter>!is[blank]] %>
+		<$list filter="[subfilter<filter>first[]]" variable=_ >
+			<$slot $name="ts-raw"/>
+		</$list>
+	<% elseif [<tiddler>is[tiddler]] %>
+		<$slot $name="ts-raw" />
+	<% endif %>
+\end

@@ -52,11 +52,11 @@ exports.relink = function(text, fromTitle, toTitle, options) {
 		skipSource = false,
 		imageEntry;
 	if (this.nextImage.attributes.source.value === fromTitle && !canBePretty(toTitle, this.nextImage.attributes.tooltip)) {
-		if (this.parser.context.allowWidgets() && (utils.wrapAttributeValue(toTitle) || options.placeholder)) {
+		if (this.parser.context.allowWidgets() && utils.wrapAttributeValue(toTitle)) {
 			makeWidget = true;
 			builder.add("<$image", ptr, ptr+4);
 		} else {
-			// We won't be able to make a placeholder to replace
+			// We won't be able to make a wdget to replace
 			// the source attribute. We check now so we don't
 			// prematurely convert into a widget.
 			// Keep going in case other attributes need replacing.
@@ -89,8 +89,7 @@ exports.relink = function(text, fromTitle, toTitle, options) {
 				if (makeWidget) {
 					var quotedValue = utils.wrapAttributeValue(toTitle);
 					if (quotedValue === undefined) {
-						var key = options.placeholder.getPlaceholderFor(toTitle);
-						builder.add("source=<<"+key+">>", ptr, ptr+fromTitle.length);
+						builder.impossible = true;
 					} else {
 						builder.add("source="+quotedValue, ptr, ptr+fromTitle.length);
 					}
@@ -138,22 +137,22 @@ function reportAttribute(parser, attribute, callback, options) {
 	} else if (attribute.type === "indirect") {
 		ptr = text.indexOf('{{', ptr);
 		var end = ptr + attribute.textReference.length + 4;
-		refHandler.report(attribute.textReference, function(title, blurb) {
-			callback(title, '[img ' + attribute.name + '={{' + (blurb || '') + '}}]');
+		refHandler.report(attribute.textReference, function(title, blurb, style) {
+			callback(title, '[img ' + attribute.name + '={{' + (blurb || '') + '}}]', style);
 		}, options);
 	} else if (attribute.type === "filtered") {
 		ptr = text.indexOf('{{{', ptr);
 		var end = ptr + attribute.filter.length + 6;
-		filterHandler.report(attribute.filter, function(title, blurb) {
-			callback(title, '[img ' + attribute.name + '={{{' + blurb + '}}}]');
+		filterHandler.report(attribute.filter, function(title, blurb, style) {
+			callback(title, '[img ' + attribute.name + '={{{' + blurb + '}}}]', style);
 		}, options);
 	} else if (attribute.type === "macro") {
 		ptr = text.indexOf("<<", ptr);
 		var end = attribute.value.end;
 		var macro = attribute.value;
-		oldValue = attribute.value;
-		macrocall.reportAttribute(parser, macro, function(title, blurb) {
-			callback(title, '[img ' + attribute.name + '=' + blurb + ']');
+		var oldValue = attribute.value;
+		macrocall.reportAttribute(parser, macro, function(title, blurb, style) {
+			callback(title, '[img ' + attribute.name + '=' + blurb + ']', style);
 		}, options);
 	}
 	return end;
@@ -199,7 +198,7 @@ function relinkAttribute(parser, attribute, builder, fromTitle, toTitle, options
 		ptr = text.indexOf("<<", ptr);
 		var end = attribute.value.end;
 		var macro = attribute.value;
-		oldValue = attribute.value;
+		var oldValue = attribute.value;
 		var macroEntry = macrocall.relinkAttribute(parser, macro, text, fromTitle, toTitle, options);
 		if (macroEntry !== undefined) {
 			if (macroEntry.impossible) {

@@ -1,6 +1,6 @@
 created: 20230822195251601
 creator: soren
-modified: 20230824171626606
+modified: 20240629022436705
 modifier: soren
 tags: 
 title: $:/sib/Templates/Topical/JournalPersonPlaceExplorer
@@ -10,9 +10,9 @@ type: text/vnd.tiddlywiki
 	<tr>
 		<th>People</th>
 		<td>
-			<$list filter="[all[current]links[]] [prefix<currentTiddler>links[]] +[tag[PAO]sort[]]">
+			<$list filter="[all[current]links[]] [prefix<currentTiddler>links[]] +[tag[PAO]sort[title]sort[caption]]">
 				<span class="journal-item-intersep">
-					<$link/>
+					<$link><$transclude field="caption">{{!!title}}</$transclude></$link>
 				</span>
 			</$list>
 		</td>

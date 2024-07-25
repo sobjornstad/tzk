@@ -1,0 +1,29 @@
+caption: Functions
+created: 20240601191528446
+creator: soren
+modified: 20240601191617274
+modifier: soren
+tags: 
+title: $:/sib/Documentation/Functions
+type: text/vnd.tiddlywiki
+
+Click into a function to see an example of its usage and its definition.
+
+All functions are in the `m2` namespace unless otherwise noted (e.g., `ff` should be written `m2.ff`).
+
+<table>
+	<tr>
+		<th style="width: 10em;">Name</th>
+		<th>Description</th>
+	</tr>
+	<$list filter="[prefix[$:/sib/Functions/]!prefix[$:/sib/Functions/_]]">
+	<tr>
+		<td>
+			<$link to=<<currentTiddler>>>
+				<$text text={{{ [all[current]removeprefix[$:/sib/Functions/]] }}}/>
+			</$link>
+		</td>
+		<td>{{!!description}}</td>
+	</tr>
+	</$list>
+</table>

@@ -43,6 +43,13 @@ Context.prototype.getMacros = function() {
 	return this.parent.getMacros();
 };
 
+/* Exceptions are tiddlers that have text/vnd.tiddlywiki type, but should
+ * not be treated as such.
+ */
+Context.prototype.getException = function(tiddlerTitle) {
+	return this.parent.getException(tiddlerTitle);
+};
+
 Context.prototype.allowPrettylinks = function() {
 	return this.parent.allowPrettylinks();
 };
@@ -53,4 +60,23 @@ Context.prototype.allowWidgets = function() {
 
 Context.prototype.hasImports = function(value) {
 	return this.parent.hasImports(value);
+};
+
+Context.prototype.getFocus = function() {
+	if (this.parent) {
+		return this.parent.getFocus();
+	}
+};
+
+Context.prototype.getPlaceholderList = function() {
+	if (this.parent) {
+		return this.parent.getPlaceholderList();
+	}
+	return null;
+};
+
+Context.prototype.addParameter = function(parameter) {
+	if(this.parent) {
+		return this.parent.addParameter(parameter);
+	}
 };

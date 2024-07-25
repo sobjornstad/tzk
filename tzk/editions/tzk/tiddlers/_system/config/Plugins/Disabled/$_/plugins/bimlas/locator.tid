@@ -1,6 +1,8 @@
 created: 20210205013358090
-modified: 20210205014133254
+creator: soren
+modified: 20240601202717720
+modifier: soren
 title: $:/config/Plugins/Disabled/$:/plugins/bimlas/locator
 type: text/vnd.tiddlywiki
 
-no
+yes

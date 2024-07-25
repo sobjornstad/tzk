@@ -1,7 +1,7 @@
 created: 20210622001737586
 creator: soren
 description: Selectively hide and show interface elements or other features.
-modified: 20230407023023477
+modified: 20240601202918862
 modifier: soren
 tags: Meta Tool Public
 title: $:/sib/Tools/FeatureFlags
@@ -20,11 +20,11 @@ To add your own feature flag, create a new tiddler under `$:/config/zettelkasten
 		<th>Description</th>
 	</tr>
 	<$list filter="[prefix[$:/config/zettelkasten/FeatureFlags/]sort[caption]]">
-	<tr>
-		<td>{{!!caption}}</td>
-		<td><$checkbox field="private" checked="yes" unchecked="no"/></td>
-		<td><$checkbox field="public" checked="yes" unchecked="no"/></td>
-		<td>{{!!description}}</td>
-	</tr>
+		<tr>
+			<td>{{!!caption}}</td>
+			<td><$checkbox field="private" checked="yes" unchecked="no"/></td>
+			<td><$checkbox field="public" checked="yes" unchecked="no"/></td>
+			<td>{{!!description}}</td>
+		</tr>
 	</$list>
 </table>

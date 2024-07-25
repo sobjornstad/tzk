@@ -7,12 +7,16 @@ Introduces some utility methods used by Relink.
 
 var utils = require("./utils.js");
 
-exports.getTiddlerRelinkReferences = function(title) {
-	return utils.getIndexer(this).lookup(title);
+exports.getTiddlerRelinkReferences = function(title, options) {
+	var refs = utils.getIndexer(this).lookup(title);
+	return refs && blurbs(refs, options && options.hard);
 };
 
 exports.getTiddlerRelinkBackreferences = function(title) {
-	return utils.getIndexer(this).reverseLookup(title);
+	var refs = utils.getIndexer(this).reverseLookup(title);
+	// For now, I don't have the equivalent "hard" option because I'm not
+	// sure it has any value. May change this later.
+	return blurbs(refs);
 };
 
 exports.getRelinkableTitles = function() {
@@ -28,6 +32,20 @@ exports.getRelinkableTitles = function() {
 	})();
 };
 
-exports.getRelinkOrphans = function() {
-	return utils.getIndexer(this).orphans();
+exports.getRelinkOrphans = function(options) {
+	return utils.getIndexer(this).orphans(options);
+};
+
+function blurbs(refs, hardOnly) {
+	var blurbsOnly = Object.create(null);
+	for (var title in refs) {
+		for (var i = 0; i < refs[title].length; i++) {
+			var record = refs[title][i];
+			if (!hardOnly || !record.soft) {
+				blurbsOnly[title] = blurbsOnly[title] || [];
+				blurbsOnly[title].push(record.blurb);
+			}
+		}
+	}
+	return blurbsOnly;
 };

@@ -1,0 +1,13 @@
+created: 20240509110255630
+creator: soren
+description: Show a list of tiddlers that you could plausibly have wanted to be public, and allow checking a box to mark them so.
+modified: 20240509110813960
+modifier: soren
+tags: Tool
+title: $:/sib/Tools/Publicizer
+tooltype: maintenance
+type: text/vnd.tiddlywiki
+
+<$list filter="[!is[system]!tag[Public]!tag[PrivateChunk]!tag[Journal]!tag[Date]]">
+<$checkbox tag="Public"><$link/></$checkbox><br>
+</$list>

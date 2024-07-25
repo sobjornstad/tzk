@@ -1,6 +1,6 @@
 created: 20230407023231664
 creator: soren
-modified: 20230407025933910
+modified: 20240601153736265
 modifier: soren
 tags: 
 title: $:/sib/Templates/Automatic/UpdateStatus
@@ -8,33 +8,36 @@ type: text/vnd.tiddlywiki
 
 \whitespace trim
 
-\define mark-ok() <$action-setfield $timestamp="no" reviewed=<<now "YYYY0MM0DD">>/>
+\procedure mark-ok() <$action-setfield $timestamp="no" reviewed=<<now "YYYY0MM0DD">>/>
+\function is-stale() [<compareAgainst>compare:date:lt<stale-date>][all[current]tag[NeedsAttention]] [all[current]links[]match[TODO]]
 
 <!-- transcluded in $:/core/ui/ViewTemplate/subtitle -->
-<$list filter="[all[current]tag[Idea]]">
-&nbsp;
-<$wikify name="stale-date" text="""
-<$macrocall $name="dateadd" basedate=<<now "YYYY0MM0DD">> months="-6"/>
-""">
-<$vars compareAgainst={{{ [{!!modified}split[]first[8]join[]max{!!reviewed}] }}}>
-	(
-	<$list filter="[all[current]tag[Frozen]]">
-		<$link to="UpdateStatuses">
-			<span style='color: lightblue;'>frozen</span>
-		</$link>
-	</$list>
-	<$list filter="[all[current]!tag[Frozen]]">
-		<$list filter="[<compareAgainst>compare:date:lt<stale-date>][all[current]tag[NeedsAttention]] [all[current]links[]match[TODO]]" emptyMessage="""<$link to="UpdateStatuses"><span style='color: lightgreen;'>maintained</span></$link>""" variable=_>
-			<$link to="UpdateStatuses">
-				<span style='color: tomato;'>stale</span>
-			</$link>
-			<$list filter=<<ff MarkStaleUpdated>> variable=_>
-				;&nbsp;
-				<$button class="tc-tiddlylink tc-btn-invisible" actions=<<mark-ok>>>reup?</$button>
-			</$list>
-		</$list>
-	</$list>
-	)
-</$vars>
-</$wikify>
-</$list>
+<% if [all[current]tag[Idea]] %>
+	&nbsp;
+	<$wikify name="stale-date" text="""
+	<$macrocall $name="dateadd" basedate=<<now "YYYY0MM0DD">> months="-6"/>
+	""">
+		<$let compareAgainst={{{ [{!!modified}split[]first[8]join[]max{!!reviewed}] }}}>
+			(
+			<% if [all[current]tag[Frozen]] %>
+				<$link to="UpdateStatuses">
+					<span style='color: blue;'>frozen</span>
+				</$link>
+			<% else %>
+				<% if [function[is-stale]] %>
+					<$link to="UpdateStatuses">
+						<span style='color: tomato;'>stale</span>
+					</$link>
+					<% if [m2.ff[MarkStaleUpdated]] %>
+						;&nbsp;
+						<$button class="tc-tiddlylink tc-btn-invisible" actions=<<mark-ok>>>reup?</$button>
+					<% endif %>
+				<% else %>
+					<$link to="UpdateStatuses"><span style='color: green;'>maintained</span></$link>
+				<% endif %>
+			<% endif %>
+			)
+		</$let>
+	</$wikify>
+
+<% endif %>

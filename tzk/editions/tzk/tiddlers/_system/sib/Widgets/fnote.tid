@@ -1,0 +1,11 @@
+created: 20240617234017130
+creator: soren
+modified: 20240617234110167
+modifier: soren
+tags: $:/tags/Global
+title: $:/sib/Widgets/fnote
+type: text/vnd.tiddlywiki
+
+\widget $m2.fnote()
+<div class="refnotes-tooltip refnotes-footnote"><div class="refnotes-tooltiptext"><$slot $name="ts-raw"/></div></div>
+\end

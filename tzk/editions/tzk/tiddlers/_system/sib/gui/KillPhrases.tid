@@ -1,7 +1,7 @@
 created: 20210731165017938
 creator: soren
 description: Configure phrases that should cause public builds to fail.
-modified: 20210920155725847
+modified: 20240601183708551
 modifier: soren
 tags: Tool
 title: $:/sib/gui/KillPhrases
@@ -13,15 +13,15 @@ type: text/vnd.tiddlywiki
 Enter kill phrases below, one per line.
 
 <div class="kill-phrase-entry">
-<$edit-text
-  tiddler="$:/config/zettelkasten/Build/KillPhrases"
-	default=""
+	<$edit-text
+		tiddler="$:/config/zettelkasten/Build/KillPhrases"
+		default=""
 	/>
 </div>
 
 Each line is treated as a Python-dialect regular expression ([[documentation|https://docs.python.org/3/library/re.html#regular-expression-syntax]] of this dialect).
 
-Kill phrases are ''case-sensitive''. If you want to kill the build on multiple cases of a word, use a //character class// (`[sS]ecret` to allow both `secret` and `Secret`), or begin the phrase with `(?i)` to make the entire regular expression case-insensitive.}
+Kill phrases are ''case-sensitive''. If you want to kill the build on multiple cases of a word, use a //character class// (`[sS]ecret` to allow both `secret` and `Secret`), or begin the phrase with `(?i)` to make the entire regular expression case-insensitive.
 
 Kill phrases ''match substrings'': that is, “kill” will also match “skillet” and “killdeer”. If you want to match only a whole word, use `\b` (a //word boundary// marker) before and after the word, like `\bkill\b`. (This still ignores punctuation, so it will find `kill,` -- but that's probably what you want.)
 

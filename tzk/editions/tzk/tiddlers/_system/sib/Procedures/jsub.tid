@@ -1,0 +1,18 @@
+created: 20230405171215676
+creator: soren
+description: Link a subtiddler of a journal tiddler in an expando, with the caption or title as the small text.
+example: <<jsub RemNoteFiasco>>
+modified: 20240601144546831
+modifier: soren
+tags: $:/tags/Macro
+title: $:/sib/Procedures/jsub
+type: text/vnd.tiddlywiki
+
+\procedure jsub(subpart)
+	<$macrocall
+		$name="stretch-template"
+		tiddler={{{ [all[current]is[draft]then{!!draft.of}else<currentTiddler>addsuffix[/]addsuffix<subpart>] }}}
+		smallTemplate="$:/sib/Templates/Topical/JournalSubtiddlerStretch"
+		largeTemplate="$:/sib/Templates/General/IdentityTemplate"
+	/>
+\end

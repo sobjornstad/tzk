@@ -1,19 +1,19 @@
 created: 20200115225047720
 creator: soren
-modified: 20210920205010621
+modified: 20240614034111117
 modifier: soren
 tags: Meta Public
 title: OurNamingConventions
 type: text/vnd.tiddlywiki
 
-In order to help keep track of all the entries here, certain [[NamingConvention]]s are observed on tiddler titles. Titles serve as [[IdeaApi]]s, so need to be clear and consistent.
+In order to help keep track of all the entries in MosaicMuse, certain [[NamingConvention]]s are observed on tiddler titles. Titles serve as [[IdeaApi]]s, so they need to be clear and consistent.
 
 !!! Casing
 
 TiddlyWiki titles are case-sensitive, which can cause some irritation when you accidentally create tiddlers that differ only in case. These rules help to keep the capitalization consistent and avoid such confusion:
 
 * Titles should generally be WikiCamelCase (really, PascalCase, but everyone in the wiki world calls it CamelCase). However, a single-word concept or title should not have its capitalization mangled or gratuitous words added for the sole purpose of making it into a ~CamelCase title; it should simply be rendered as the single word.
-** It is, however, OK and encouraged to spell out a number or standard abbreviation where this enables a match with the ~CamelCase pattern, e.g., NineteenEightyFour. This tends to read better anyway.
+** It is, however, OK and encouraged to spell out a number or standard abbreviation where this enables a match with the ~CamelCase pattern, e.g., NineteenEightyFour.
 * When writing ~CamelCase titles, capitalization is normalized as if all components were normal words. Acronyms do not retain upper-casing or proprietary weirdness. So it is QwertyResidue, not *QWERTYResidue; TheAdoSupportTeam, not *~TheADOSupportTeam.
 ** But acronyms and proprietary weirdness not incorporated into a ~CamelCase word do retain their capitalization: [[BDFL]], not *Bdfl; [[LaTeX]], not *Latex.
 * Barring proprietary weirdness (e.g., [[xkcd]]), titles always begin with a capital letter.
@@ -22,7 +22,7 @@ TiddlyWiki titles are case-sensitive, which can cause some irritation when you a
 !!! Wording
 
 * Titles, when they are nouns, are always singular.
-** But names of organizations (e.g., TheManitouSingers) and  titles of sources (e.g., ComputerStupidities) should not have their number mangled to match.
+** But names of organizations (e.g., TheManitouSingers) and titles of sources (e.g., ComputerStupidities) should not have their number mangled to match.
 ** The last word of a phrasal title might be pluralized. This is fine as long as the title as a whole is not a plural noun. E.g., SpacedRepetitionEncouragesFloatingIdeas is fine.
 
 * `The` may not begin any title which does not refer to an organization or group of people (see //Type patterns//, below). `The` should simply be omitted in such cases; e.g., GreatGatsby, not *~TheGreatGatsby. It's often hard to remember if `The` is part of the title anyway!
@@ -35,14 +35,18 @@ TiddlyWiki titles are case-sensitive, which can cause some irritation when you a
 
 * If the tiddler is about the relationship between two things, or discusses two things, it should place those two things in alphabetical order within the title, absent a strong reason to do otherwise.
 
+
 !!! Type patterns
 
 Titles of certain [[ZettelkastenCardType]]s follow specific patterns:
 
-* //PAO//, ''^(Mr|Ms|The)[A-Z][a-zA-Z]+'': Identifies a person, author, or organization. 'The' is used for nongendered, impersonal sources.
-* //Source//, ''^[A-Z][a-zA-Z]*[0-9]{4,8}'': Identifies a source (an individual instance of a book, article, or other medium). Typically the page will note it as written by a //PAO//. The final number should be the publication date to as many digits of precision as known.
-* //Image//, ''.*\.(png|jpg|gif)$'': Identifies an image embedded in the wiki.
-* //Meta//, ''^Our[A-Z][a-zA-Z]+'': Something (like this article) that discusses the wiki rather than an idea.
+* <<tag-pill PAO>>, `^(Mr|Ms|Mx|The)[A-Z][a-zA-Z]+`: Identifies a (P)erson, (A)nimal, or (O)rganization. 'Mx' is used for non-binary people and people of unknown gender. 'The' is used for groups of people and organizations.
+* <<tag-pill Source>>, `^[A-Z][a-zA-Z]*[0-9]{4,8}`: Identifies a source (an individual instance of a book, article, or other medium). Typically the page will note it as written by a //PAO//. The final number should be the publication date, if known. Nowadays I usually only enter the year; at one time I often added the month and day as well for things like blog posts, so there are still some entries of this format.
+* <<tag-pill Image>>, `.*\.(png|jpg|gif|svg)$`: Identifies an image embedded in the wiki.
+* <<tag-pill Attachment>>, similarly with file extension: Identifies other file types such as PDFs.
+* <<tag-pill Meta>>, `^Our[A-Z][a-zA-Z]+`: Something (like this article) that discusses the wiki rather than an idea.
+* <<tag-pill Date>>, `δPersonName:Date`: This joins together a person and a day's journal entry, with the values from each separated by the colon. The δ represents the D in //Date//.
+* <<tag-pill Journal>>, `YYYY-MM-DD DDD`, where DDD represents the three-character day of the week. Journal tiddlers are named automatically on creation, so one usually need not concern oneself with their names.
 
 !!! Looser conventions
 

@@ -1,0 +1,25 @@
+created: 20210817143607812
+creator: soren
+description: Show a rating out of 5 stars, with filled stars up until the argument and empty stars to fill out the total of 5.
+example: <<star-rating 4>>
+modified: 20240601145236645
+modifier: soren
+tags: $:/tags/Macro
+title: $:/sib/Procedures/star-rating
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+
+\define open-star()  <i class="far fa-star"/>
+\define filled-star()  <i class="fa fa-star"/>
+
+\procedure star-rating(stars)
+<$list filter="[range<stars>]" variable=_>
+	<<filled-star>>
+</$list>
+<$let remainder={{{ [[5]subtract<stars>] }}}>
+	<$list filter="[range<remainder>]" variable=_>
+		<<open-star>>
+	</$list>
+</$let>
+\end

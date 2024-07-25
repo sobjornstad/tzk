@@ -1,0 +1,115 @@
+caption: Types
+created: 20240528200914205
+creator: soren
+first-search-filter: [!is[system]search:title<userInput>regexp:tags<typeRegexp>sort[title]limit[250]]
+list-before: $:/sib/Search/Locator
+modified: 20240529005535550
+modifier: soren
+second-search-filter: [!is[system]search<userInput>regexp:tags<typeRegexp>sort[title]limit[250]]
+tags: $:/tags/SearchResults
+title: $:/sib/Search/TypeSearch
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+
+\define state-tiddler() $:/temp/MeSearchState
+\define type-shortlist() Idea PAO Place Source Date Journal
+
+\define type-check(fieldName)
+	<$checkbox
+		tiddler=<<state-tiddler>>
+		listField="text"
+		checked=<<__fieldName__>>
+	>
+		<<__fieldName__>>
+	</$checkbox>
+\end
+
+\define all-full-action() <$action-listops $tiddler=<<state-tiddler>> $field="text" $filter="[color[#ff0000]is[tag]]" />
+\define all-minimal-action() <$action-setfield $tiddler=<<state-tiddler>> text=<<type-shortlist>> />
+\define none-action() <$action-setfield $tiddler=<<state-tiddler>> text="" />
+
+\define searchResultList()
+
+	&nbsp;<% if [<state-tiddler>get[expanded]match[yes]] %><$button actions=<<all-full-action>>>All</$button><% else %><$button actions=<<all-minimal-action>>>All</$button><% endif %>&nbsp;<$button actions=<<none-action>>>None</$button>&nbsp;
+	<% if [<state-tiddler>get[expanded]match[yes]] %>
+		<$button
+			setTitle=<<state-tiddler>>
+			setField=expanded
+			setTo="no"
+		>Less</$button>
+	<% else %>
+		<$button
+			setTitle=<<state-tiddler>>
+			setField=expanded
+			setTo="yes"
+		>More</$button>
+	<% endif %>
+	<br>
+	<% if [<state-tiddler>get[expanded]match[yes]] %>
+		<div class="sib-search-type-checkboxes">
+			<$list filter="[color[#ff0000]is[tag]]">
+				<div>
+					<$macrocall
+						$name="type-check"
+						fieldName=<<currentTiddler>>
+					/>
+				</div>
+			</$list>
+		</div>
+	<% else %>
+		<div class="sib-search-type-checkboxes">
+			<$list filter=<<type-shortlist>>>
+				<$macrocall $name="type-check" fieldName=<<currentTiddler>>/>
+				&nbsp;
+			</$list>
+		</div>
+	<% endif %>
+
+	//<small>{{$:/language/Search/Matches/Title}}</small>//
+
+	<% if [<userInput>minlength[1]] %>
+
+		<$let typeRegexp={{{ [<state-tiddler>get[text]enlist-input[]] +[addprefix[\b]addsuffix[\b]join[|]] }}}>
+			<$list filter={{{ [<configTiddler>get[first-search-filter]] }}}>
+			<span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
+			<$transclude tiddler="$:/sib/Search/TypeSearchItemTemplate"/>
+			</span>
+			</$list>
+		</$let>
+
+	<% endif %>
+
+	//<small>{{$:/language/Search/Matches/All}}</small>//
+
+	<% if [<userInput>minlength[1]] %>
+	
+		<$let typeRegexp={{{ [<state-tiddler>get[text]enlist-input[]] +[addprefix[\b]addsuffix[\b]join[|]] }}}>
+			<$list filter={{{ [<configTiddler>get[second-search-filter]] }}}>
+			<span class={{{[<currentTiddler>addsuffix[-secondaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
+			<$transclude tiddler="$:/sib/Search/TypeSearchItemTemplate"/>
+			</span>
+			</$list>
+		</$let>
+		
+	<% endif %>
+	
+
+\end
+
+<<searchResultList>>
+
+
+<style>
+.sib-search-type-checkboxes {
+	padding-top: 2px;
+	padding-left: 0.5em;
+	font-size: 80%;
+}
+
+/*
+.tc-block-dropdown.tc-search-drop-down a {
+	display: inline-block;
+}
+*/
+</style>

@@ -1,0 +1,27 @@
+created: 20210626162736737
+creator: soren
+description: Create a single item on a persistent checklist. State for the checklist in a given tiddler is stored in a data tiddler called $:/checkify/TiddlerName.
+example: <div class="checklist"><<check-item One>> <<check-item Two>> <<check-item Three id:3>></div>
+modified: 20240630134337020
+modifier: soren
+tags: $:/tags/Macro
+title: $:/sib/Procedures/check-item
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+\procedure check-item(text, id:"")
+<$let
+	checkbox-index={{{ [<id>!is[blank]] ~[<text>] }}}
+	tiddler-key={{{ [all[current]!is[draft]] ~[all[current]get[draft.of]] }}}
+	>
+	<$checkbox
+		tiddler={{{ [[$:/checkify/]addsuffix<tiddler-key>] }}}
+		index=<<checkbox-index>>
+		checked="yes"
+		unchecked="no"
+		default="no"
+	>&nbsp;
+		<<text>>
+	</$checkbox>
+</$let>
+\end

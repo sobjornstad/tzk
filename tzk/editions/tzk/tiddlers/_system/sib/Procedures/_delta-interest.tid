@@ -1,0 +1,20 @@
+created: 20230416155348451
+creator: soren
+description: Color and symbol for specified change of sentiment toward a romantic interest.
+modified: 20240601142928215
+modifier: soren
+tags: $:/tags/Macro
+title: $:/sib/Procedures/_delta-interest
+type: text/vnd.tiddlywiki
+
+\procedure delta-interest()
+	<% if [{!!ri-date-interest-delta}match[growing]] %>
+		<span style="color: lightblue;">🡕</span>
+	<% elseif [{!!ri-date-interest-delta}match[waning]] %>
+		<span style="color: tomato;">🡖</span>
+	<% elseif [{!!ri-date-interest-delta}match[trudging]] %>
+		<span style="color: yellow;">🡒</span>
+	<% elseif [{!!ri-date-interest-delta}is[blank]] %>
+		—
+	<% endif %>
+\end

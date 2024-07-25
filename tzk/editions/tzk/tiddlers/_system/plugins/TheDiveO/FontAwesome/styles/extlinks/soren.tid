@@ -1,0 +1,34 @@
+created: 20240522153624618
+creator: soren
+list-after: $:/plugins/TheDiveO/FontAwesome/styles/extlinks
+modified: 20240522153726645
+modifier: soren
+tags: $:/tags/Stylesheet
+title: $:/plugins/TheDiveO/FontAwesome/styles/extlinks/soren
+type: text/vnd.tiddlywiki
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html
+
+<$set name="cfg" value=<<fa5-cfgpath "decorate-wk-extlinks">> >
+<$list filter=<<fa5-cfgfilterexpr>> >
+
+a[href^="https://sorenbjornstad.com"]:before {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 900;  
+  font-size: 80%;
+  content: '\f007\202f';
+  display: inline-block;
+}
+a[href^="https://ap.sorenbjornstad.com"]:before {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 900;  
+  font-size: 80%;
+  content: '\f007\202f';
+  display: inline-block;
+}
+
+
+</$list>
+</$set>

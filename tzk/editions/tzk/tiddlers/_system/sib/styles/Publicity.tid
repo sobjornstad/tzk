@@ -1,6 +1,6 @@
 created: 20210825185232587
 creator: soren
-modified: 20210825185606721
+modified: 20240523225254202
 modifier: soren
 tags: $:/tags/Stylesheet
 title: $:/sib/styles/Publicity
@@ -8,6 +8,10 @@ type: text/vnd.tiddlywiki
 
 .sib-viewer-clarify {
 	clear: both;
+}
+
+.sib-viewer-private-editions {
+	color: orange;
 }
 
 .sib-viewer-public-line {

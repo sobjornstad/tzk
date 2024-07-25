@@ -3,21 +3,27 @@ created: 20200419143537510
 creator: soren
 description: Copy the name of this tiddler to the clipboard
 list-after: $:/core/ui/Buttons/info
-modified: 20220215235957457
+modified: 20240601184137629
 modifier: soren
 tags: $:/tags/ViewToolbar
 title: $:/sib/Buttons/CopyTitleReference
 type: text/vnd.tiddlywiki
 
 \whitespace trim
-<$button message="tm-copy-to-clipboard" param={{!!title}} tooltip={{$:/sib/Buttons/CopyTitleReference!!caption}} class=<<tv-config-toolbar-class>>>
-	<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+
+<$button
+	message="tm-copy-to-clipboard"
+	param={{!!title}}
+	tooltip={{$:/sib/Buttons/CopyTitleReference!!caption}}
+	class=<<tv-config-toolbar-class>>
+>
+	<% if [<tv-config-toolbar-icons>match[yes]] %>
 		<i class="far fa-copy" style="font-size: 160%; position:relative; bottom:-4px; left:-1px;"/>
-	</$list>
-	<$list filter="[<tv-config-toolbar-text>match[yes]]">
-	<span class="tc-btn-text">
-	<$text text=" "/>
-	<$text text={{$:/sib/Buttons/CopyTitleReference!!caption}}/>
-	</span>
-	</$list>
+	<% endif %>
+	<% if [<tv-config-toolbar-text>match[yes]] %>
+		<span class="tc-btn-text">
+			<$text text=" "/>
+			<$text text={{$:/sib/Buttons/CopyTitleReference!!caption}}/>
+		</span>
+	<% endif %>
 </$button>

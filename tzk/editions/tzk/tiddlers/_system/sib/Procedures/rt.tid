@@ -1,0 +1,18 @@
+created: 20210522020717636
+creator: soren
+description: Create a web link to an item in [[RandomThoughts]], with the link text "RT #whatever".
+example: <<rt 12345>>
+modified: 20240601150128837
+modifier: soren
+tags: $:/tags/Macro
+title: $:/sib/Procedures/rt
+type: text/vnd.tiddlywiki
+
+\procedure rt(refnum)
+	[[RT|RandomThoughts]]&nbsp;
+	<$m2.extlink
+		urltemplate=`https://randomthoughts.sorenbjornstad.com/#$1$`
+		slotvalue=<<refnum>>
+		text=<<refnum>>
+	/>
+\end

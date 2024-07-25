@@ -1,18 +1,46 @@
 created: 20200516031757915
 creator: soren
 description: General information about the number of tiddlers accumulated in the wiki.
-modified: 20210920155422635
+modified: 20240601205438098
 modifier: soren
 tags: Tool
 title: $:/sib/Tools/Statistics
 tooltype: maintenance
 type: text/vnd.tiddlywiki
 
-* <$list filter="[!is[system]count[]]"><<currentTiddler>></$list> (non-system) tiddlers
-** <$list filter="[tag[Idea]count[]]"><<currentTiddler>></$list> ideas
-** <$list filter="[tag[PAO]count[]]"><<currentTiddler>></$list> people
-** <$list filter="[tag[Source]count[]]"><<currentTiddler>></$list> sources
-** <$list filter="[tag[Sink]count[]]"><<currentTiddler>></$list> sinks
-** <$list filter="[all[tags]!is[system]count[]]"><<currentTiddler>></$list> tags
-** <$list filter="[!is[system]tag[Journal]count[]]"><<currentTiddler>></$list> journal entries
-* <$list filter="[tag[Public]count[]]"><<currentTiddler>></$list> public tiddlers <<publicAmount>>
+(''Caution'': Having this tiddler open will make large wikis run slowly. Since a lot of changes made within your wiki will change the counts here, TW has to do a bunch of extra recalculations with it open. Close it as soon as you're done.)
+
+!! Tiddler counts
+
+* <$list filter="[!is[system]count[]m2.separate-number-input[]]"><<currentTiddler>></$list> (non-system) tiddlers
+** <$list filter="[tag[Idea]count[]m2.separate-number-input[]]"><<currentTiddler>></$list> ideas
+** <$list filter="[tag[PAO]count[]m2.separate-number-input[]]"><<currentTiddler>></$list> people
+** <$list filter="[tag[Source]count[]m2.separate-number-input[]]"><<currentTiddler>></$list> sources
+** <$list filter="[tag[Sink]count[]m2.separate-number-input[]]"><<currentTiddler>></$list> sinks
+** <$list filter="[all[tags]!is[system]count[]m2.separate-number-input[]]"><<currentTiddler>></$list> tags
+** <$list filter="[!is[system]tag[Journal]count[]m2.separate-number-input[]]"><<currentTiddler>></$list> journal entries
+* <$list filter="[tag[Public]count[]m2.separate-number-input[]]"><<currentTiddler>></$list> public tiddlers <<publicAmount>>
+
+!! Word counts
+
+A “word” is a space-separated unit within a tiddler's wikitext. This means that formatting-related code within tiddlers is counted as words, but transcluded content will not be, and so the word count determined here won't necessarily match the number of words displayed when rendering the tiddler. Additionally, the individual type counts will not sum to the total count because occasional tiddlers have multiple types (e.g., a tiddler can be both an Index and an Idea).
+
+<table>
+	<th>Tiddler type</th>
+	<th>Count</th>
+	<$list filter="[is[tag]color[#ff0000]!is[system]]">
+		<tr>
+			<td><$link/></td>
+			<td><$text text={{{ [tag<currentTiddler>get[text]split[ ]splitregexp[\n]!is[blank]count[]m2.separate-number-input[]] }}}/></td>
+		</tr>
+	</$list>
+	<tr>
+			<td>//Total//</td>
+			<td><$text text={{{ [!is[system]get[text]split[ ]splitregexp[\n]!is[blank]count[]m2.separate-number-input[]] }}}/></td>
+	</tr>
+</table>
+
+!! Private/Public word counts
+
+* Public: <$text text={{{ [tag[Public]get[text]split[ ]splitregexp[\n]!is[blank]count[]m2.separate-number-input[]] }}}/>
+* Private: <$text text={{{ [!is[system]!tag[Public]get[text]split[ ]splitregexp[\n]!is[blank]count[]m2.separate-number-input[]] }}}/>
