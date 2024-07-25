@@ -348,7 +348,8 @@ def _private_people_replacement_table(
             elif delegated_publicity_status is False:
                 private_person_tiddlers.append(pt)
                 continue
-            assert delegated_publicity_status is None
+            assert delegated_publicity_status is None, \
+                f"publicity status was {delegated_publicity_status}"
 
         # Default handler.
         with pt.open() as f:

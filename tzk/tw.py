@@ -145,7 +145,7 @@ def _init_gitignore() -> None:
     .peru/
     output/
 
-    \$__StoryList.tid
+    \\$__StoryList.tid
     """).strip()
     with open(".gitignore", "w") as f:
         f.write(GITIGNORE)
