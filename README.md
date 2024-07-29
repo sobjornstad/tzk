@@ -5,12 +5,12 @@
     for maintaining personal notes
     in something approaching the Zettelkasten method.
 It’s updated periodically from whatever tooling I’m currently using
-    [in my own Zettelkasten](https://zettelkasten.sorenbjornstad.com).
+    [in my own thinking workspace](https://mosmu.se).
 As such, it’s currently considered alpha-quality;
     while it ought to be very stable and there’s no meaningful risk of data loss,
     updating to a newer version might be difficult
     and I’m unlikely to accept patches
-    unless they’re something I want in my own Zettelkasten.
+    unless they’re something I want for myself.
 This is intended primarily as a nice starting platform
     on which to build your own tooling.
 
