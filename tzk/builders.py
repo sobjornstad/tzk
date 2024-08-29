@@ -327,7 +327,7 @@ def _private_people_replacement_table(
     "Build table of private people and their transformed initials."
 
     def _initials_from_tiddler_name(name: str) -> str:
-        m = re.match(r"^(?:Mr|Ms|Mx|The)(?P<camel_case_name>.*?)\.tid", name)
+        m = re.match(r"^(?:Mr|Ms|Mx|The)(?P<camel_case_name>.+?)\.tid", name)
         assert m
         return '.'.join(i for i in m.group('camel_case_name') if i.isupper()) + '.'
 
@@ -335,7 +335,7 @@ def _private_people_replacement_table(
         initialer = _initials_from_tiddler_name
 
     tiddlers = (Path.cwd() / "tiddlers").glob("**/*.tid")
-    person_tiddlers = (i for i in tiddlers if re.match("^(Mr|Ms|Mx|The)", i.name))
+    person_tiddlers = (i for i in tiddlers if re.match(r"^(Mr|Ms|Mx|The)\w+", i.name))
     private_person_tiddlers = []
     for pt in person_tiddlers:
         # If the is_public handler is defined, call it. If not defined
@@ -515,7 +515,7 @@ def _privatize_line(line: str, replacement_table: Dict[str, str],
                         new_line = line[0:start_idx] + 'PrivatePerson' + line[end_idx:]
                 else:
                     link = line[start_idx:end_idx]
-                    raise ValueError(f"Unknown type of link '{link}'.")
+                    raise ValueError(f"Unknown type of link '{link}' in line:\n  {line}")
 
                 if new_line:
                     line = new_line
