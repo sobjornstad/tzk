@@ -335,7 +335,7 @@ def _private_people_replacement_table(
         initialer = _initials_from_tiddler_name
 
     tiddlers = (Path.cwd() / "tiddlers").glob("**/*.tid")
-    person_tiddlers = (i for i in tiddlers if re.match(r"^(Mr|Ms|Mx|The)\w+", i.name))
+    person_tiddlers = (i for i in tiddlers if re.match(r"^(Mr|Ms|Mx|The)[A-Z]\w+", i.name))
     private_person_tiddlers = []
     for pt in person_tiddlers:
         # If the is_public handler is defined, call it. If not defined
