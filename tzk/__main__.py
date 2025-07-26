@@ -277,7 +277,12 @@ class BuildCommand(CliCommand):
             traceback.print_exc()
 
         finally:
+            last_attempted_idx = idx
             for idx, step in enumerate(steps, 1):
+                if idx > last_attempted_idx:
+                    print(f"tzk: Skipping cleanup routines for steps {idx} and above, "
+                          f"as the steps were not run.")
+                    break
                 if hasattr(step, 'cleaner'):
                     print(f"tzk: Running cleanup routine registered by step {idx}...")
                     step.cleaner()
