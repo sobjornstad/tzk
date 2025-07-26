@@ -15,7 +15,10 @@ from tzk.util import pushd
 def _whoami() -> str:
     "Try to guess the user's name."
     try:
-        return subprocess.check_output(("whoami",), text=True).strip()
+        # Windows returns 'domain\username' here in many cases.
+        # If you're on *nix and you have a backslash in your username,
+        # whatever happens to you is your own fault.
+        return subprocess.check_output(("whoami",), text=True).strip().rsplit('\\', 1)[-1]
     except subprocess.CalledProcessError:
         return "user"
 
@@ -70,21 +73,17 @@ def _init_npm(wiki_name: str, tw_version_spec: str, author: str) -> None:
     at the specified version, and install the npm dependencies.
     """
     print("tzk: Creating new package.json...")
-    PACKAGE_JSON = dedent("""
-    {
-        "name": "%(wiki_name)s",
-        "version": "1.0.0",
-        "description": "My nice notes",
-        "dependencies": {
-            "tiddlywiki": "%(tw_version_spec)s"
-        },
-        "author": "%(author)s",
-        "license": "See copyright notice in wiki"
-    }
-    """).strip() % ({'tw_version_spec': tw_version_spec, 'author': author,
-                     'wiki_name': wiki_name})
     with open("package.json", "w") as f:
-        f.write(PACKAGE_JSON)
+        json.dump({
+            "name": wiki_name,
+            "version": "1.0.0",
+            "description": "My nice notes",
+            "dependencies": {
+                "tiddlywiki": tw_version_spec
+            },
+            "author": author,
+            "license": "See copyright notice in wiki"
+        }, f, indent=4)
 
     print("tzk: Installing npm packages from package.json...")
     subprocess.check_call(("npm", "install"))
