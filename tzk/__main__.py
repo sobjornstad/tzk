@@ -380,6 +380,46 @@ class ConvertCommand(CliCommand):
             raise AssertionError(f"Invalid source type {source_type}.")
 
 
+class PullCommand(CliCommand):
+    cmd = "pull"
+    help = "Pull (with stash+rebase) changes from the remote repository."
+
+    @classmethod
+    def setup_arguments(cls, parser: argparse.ArgumentParser) -> None:
+        parser.add_argument(
+            "-r", "--remote",
+            metavar="REMOTE",
+            help="Name of the Git remote to push to.",
+            default=cm().commit_remote,
+        )
+    
+    def execute(self, args: argparse.Namespace) -> None:
+        cm().require_config()
+        chdir_to_wiki()
+
+        # Sanity check: remote exists
+        if git.rc("remote", "get-url", args.remote) != 0:
+            fail(f"Remote '{args.remote}' not configured.")
+
+        # Check if an update is available
+        if git.rc("remote", "update") != 0:
+            fail("Failed to update remote repository status.")
+        current_commit = git.read("rev-parse", "HEAD")
+        upstream_commit = git.read("rev-parse", "@{u}")
+        if current_commit == upstream_commit:
+            print("No upstream changes to pull.")
+            return 0
+
+        # Pull, stashing any dirty or untracked files during the pull
+        dirty_info = git.read("status", "--porcelain")
+        if dirty_info:
+            git.exec("stash", "push", "--include-untracked", "-m",
+                     f"tzk pull: WIP on {current_commit}")
+        git.exec("pull", args.remote, "--rebase")
+        if dirty_info:
+            git.exec("stash", "pop")
+
+
 def chdir_to_wiki():
     """
     For most operations, we want the current directory to be the wiki folder.
