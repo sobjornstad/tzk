@@ -1,0 +1,13 @@
+created: 20210123155242287
+creator: soren
+modified: 20251011193014541
+modifier: soren
+tags: 
+title: $:/tzk/Templates/Topical/ReadingList/LargeTemplate
+type: text/vnd.tiddlywiki
+
+{{!!text}}
+
+<$set name=storyTiddler value=<<currentTiddler>>>
+{{||$:/tzk/refexplorer/ReferenceExplorer}}
+</$set>

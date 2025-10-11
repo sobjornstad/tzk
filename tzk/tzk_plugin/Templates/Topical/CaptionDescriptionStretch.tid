@@ -1,0 +1,9 @@
+created: 20240305141719206
+creator: soren
+modified: 20251011164747675
+modifier: soren
+tags: Public
+title: $:/tzk/Templates/Topical/CaptionDescriptionStretch
+type: text/vnd.tiddlywiki
+
+<strong><$transclude $field="caption">{{!!title}}</$transclude></strong>: {{!!description}}

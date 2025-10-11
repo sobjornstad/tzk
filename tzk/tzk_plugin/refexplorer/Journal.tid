@@ -1,0 +1,16 @@
+caption: Journal
+condition: [<storyTiddler>backlinks[]] [<storyTiddler>links[]] [<storyTiddler>tagging[]] +[filter<global-journal-subtiddler-filter>!title<storyTiddler>sort[]]
+created: 20221205033543222
+creator: soren
+modified: 20251011193315478
+modifier: soren
+tags: $:/tags/ReferenceExplorerTab
+title: $:/tzk/refexplorer/Journal
+type: text/vnd.tiddlywiki
+
+\import $:/tzk/refexplorer/GlobalJournalSubtiddlerFilter
+
+<$m2.reference-explorer
+	filter={{$:/tzk/refexplorer/Journal!!condition}}
+	caption="Journal Explorer"
+/>

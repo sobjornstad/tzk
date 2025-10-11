@@ -1,0 +1,12 @@
+caption: Macro definition
+created: 20250211045936664
+creator: soren
+modified: 20250211045937621
+modifier: soren
+tags: 
+title: $:/language/Snippets/MacroDefinition
+type: text/vnd.tiddlywiki
+
+\define macroName(param1:"default value",param2)
+Text of the macro
+\end

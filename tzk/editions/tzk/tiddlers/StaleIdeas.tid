@@ -1,0 +1,40 @@
+created: 20250610005624473
+creator: soren
+modified: 20250611151856952
+modifier: soren
+reviewed-list: test CanonicalNumber JavaScript UnicornRebellion SpyThriller ConvenientGuru DevTeamThinksOfEverything YouHadToBeThere NonsenseLiterature NuShell FrobnicatesWhizbangs PartsUnlimitedDataHub PartsUnlimitedDataWarehouse IAmYourFather MuseInspiration MagicalRealism SQL SourceControl AlmModel PolicyCenter Java Haskell DotNet ReFuctoring DefinedInterfaces SchrödingersCat GreatConReadingList ScrumMasterPoUnification ProxyProductOwner ScrumProductOwnerAbsent UserStory ScrumBugsAndDebt Mythology SwarmingMethodology WardleyMapping SolarFlare PuttingTheElseBeforeTheIf Clojure NonexistentWeekends ZFS FreeNas FreeBSD MicroState GoogleVoice MicrosoftWord
+tags: Wide Tool
+title: StaleIdeas
+type: text/vnd.tiddlywiki
+
+\procedure mark-ok() <$action-setfield $timestamp="no" reviewed=<<now "YYYY0MM0DD">>/>
+\procedure mark-reviewed() <$action-listops $tiddler="StaleIdeas" $field="reviewed-list" $subfilter="[<currentTiddler>]"/>
+\function is-stale() [<compareAgainst>compare:date:lt<stale-date>][all[current]tag[NeedsAttention]] [all[current]links[]match[TODO]]
+\function is-reviewed() [all[current]] :intersection[enlist{StaleIdeas!!reviewed-list}]
+
+<table>
+<tr>
+	<th>Actions</th>
+  <th>Tiddler</th>
+	<th>Description</th>
+	<th>Updated</th>
+</tr>
+<$list filter="[all[tiddlers]!is[system]!tag[Frozen]tag[Idea]] -[enlist{StaleIdeas!!reviewed-list}] +[sort:date[modified]]">
+<$let compareAgainst={{{ [{!!modified}split[]first[8]join[]max{!!reviewed}] }}}>
+<$wikify name="stale-date" text="""
+<$macrocall $name="dateadd" basedate=<<now "YYYY0MM0DD">> months="-6"/>
+""">
+	<% if [function[is-stale]] %>
+		<tr>
+			<td>
+				<$button class="tc-tiddlylink tc-btn-invisible" actions=<<mark-ok>>>reup</$button>&nbsp;·&nbsp;<$button class="tc-tiddlylink tc-btn-invisible" actions=<<mark-reviewed>>>reviewed</$button>
+			</td>
+			<td><$link/></td>
+			<td>{{!!description}}</td>
+			<td><$view format="date" field="modified" template="YYYY-0MM-0DD hh:mm"/></td>
+		</tr>
+	<% endif %>
+</$wikify>
+</$let>
+</$list>
+</table>

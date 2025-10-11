@@ -1,8 +1,8 @@
 caption: Clock
 created: 20210627030648862
 creator: soren
-description: Show the current time and a Pomodoro timer in the upper-right corner of the wiki.
-modified: 20240614190037785
+description: Show the current time and a Pomodoro timer in the upper-right corner of the wiki. Handy if you often work full-screen.
+modified: 20251011161456085
 modifier: soren
 private: no
 public: no

@@ -1,0 +1,32 @@
+caption: Procedures
+created: 20240601191438937
+creator: soren
+modified: 20251011201904038
+modifier: soren
+tags: 
+title: $:/tzk/Documentation/Procedures
+type: text/vnd.tiddlywiki
+
+\define local.table-list(prefix)
+	<$list filter="[all[tiddlers+shadows]prefix[$prefix$]!prefix[$prefix$_]]">
+	<tr>
+		<td>
+			<$link to=<<currentTiddler>>>
+				<$text text={{{ [all[current]removeprefix[$prefix$]] }}}/>
+			</$link>
+		</td>
+		<td>{{!!description}}</td>
+	</tr>
+	</$list>
+\end local.table-list
+
+Click into a macro to see an example of its usage and its definition.
+
+<table>
+	<tr>
+		<th style="width: 10em;">Name</th>
+		<th>Description</th>
+	</tr>
+	<<local.table-list "$:/tzk/Procedures/">>
+	<<local.table-list "$:/sib/Procedures/">>
+</table>

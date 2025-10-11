@@ -1,7 +1,9 @@
 caption: Editor public line
 created: 20210622003532452
-description: Show the "publish this tiddler" checkbox when editing a tiddler.
-modified: 20210825145437728
+creator: soren
+description: Show a “publish this tiddler” checkbox when editing a tiddler.
+modified: 20250214041230498
+modifier: soren
 private: yes
 public: no
 tags: 

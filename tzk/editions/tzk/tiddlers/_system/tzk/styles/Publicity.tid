@@ -1,0 +1,28 @@
+created: 20210825185232587
+creator: soren
+modified: 20251011162306034
+modifier: soren
+tags: $:/tags/Stylesheet
+title: $:/tzk/styles/Publicity
+type: text/vnd.tiddlywiki
+
+.sib-viewer-clarify {
+	clear: both;
+}
+
+.sib-viewer-private-editions {
+	color: orange;
+}
+
+.sib-viewer-public-line {
+	float: right;
+	color: #5E81AC;
+	margin-top: 1ex;
+}
+
+@media print
+{
+	.sib-viewer-public-line {
+		display: none;
+	}
+}

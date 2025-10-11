@@ -1,6 +1,6 @@
 created: 20210920160651222
 creator: soren
-modified: 20210920204851937
+modified: 20251011193053187
 modifier: soren
 tags: Meta Public
 title: Subtiddler
@@ -10,4 +10,4 @@ A ''subtiddler'' is a tiddler which is tightly coupled to another, larger tiddle
 
 Subtiddlers are identified by containing one or more slashes `/` in their names. The main tiddler or //supertiddler//'s title comes prior to the slash, then the subtiddler's name. There can be multiple levels of hierarchy if needed, but this is generally rare.
 
-Subtiddlers of the current tiddler appear on a [[Subtiddlers tab|$:/sib/refexplorer/Subtiddlers]] of the ReferenceExplorer.
+Subtiddlers of the current tiddler appear on a [[Subtiddlers tab|$:/tzk/refexplorer/Subtiddlers]] of the ReferenceExplorer.

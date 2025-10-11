@@ -1,6 +1,7 @@
 caption: {{$:/language/SideBar/Open/Caption}}
 created: 20201126152706945
-modified: 20201126152652516
+modified: 20251011165009905
+modifier: soren
 tags: $:/tags/SideBar
 title: $:/core/ui/SideBar/Open
 type: text/vnd.tiddlywiki
@@ -39,4 +40,4 @@ $button$
 </$tiddler>
 </div>
 
-{{$:/sib/StorySaver/Saver}}
+{{$:/tzk/StorySaver/Saver}}

@@ -1,0 +1,13 @@
+created: 20210627133302793
+creator: soren
+modified: 20251011192525603
+modifier: soren
+tags: $:/tags/StartupAction/Browser
+title: $:/tzk/RawMarkup/ClockTicker
+type: text/vnd.tiddlywiki
+
+\procedure clock-ticker()
+	<$action-setfield $tiddler="$:/temp/time/ticker" text=<<now [UTC]0hh0mm0ss>> />
+	<$action-setfield $tiddler="$:/temp/time/pomodoro-remaining" text={{{ [[$:/temp/time/pomodoro-remaining]get[text]subtract[5]] }}}/>
+\end clock-ticker
+<$action-timeout interval=5000 actions=<<clock-ticker>> />

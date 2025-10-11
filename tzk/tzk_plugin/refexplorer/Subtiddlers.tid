@@ -1,0 +1,14 @@
+caption: Subtiddlers
+condition: [all[tiddlers]prefix<storyTiddler>!field:title<storyTiddler>sort[]]
+created: 20201206210345097
+creator: soren
+modified: 20251011193053180
+modifier: soren
+tags: $:/tags/ReferenceExplorerTab
+title: $:/tzk/refexplorer/Subtiddlers
+type: text/vnd.tiddlywiki
+
+<$m2.reference-explorer
+	filter={{$:/tzk/refexplorer/Subtiddlers!!condition}}
+	caption="Subtiddler Explorer"
+/>

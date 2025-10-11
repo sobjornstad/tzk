@@ -1,0 +1,9 @@
+created: 20210307212922834
+creator: soren
+modified: 20251011161354590
+modifier: soren
+tags: $:/tags/PageControls
+title: $:/tzk/Buttons/ReadingInbox
+type: text/vnd.tiddlywiki
+
+<$button to="$:/tzk/Tools/ReadingInbox" class=<<tv-config-toolbar-class>> selectedClass="tc-selected"><i class="fa fa-inbox" style="font-size:140%; position:relative; bottom:-3px; left:-1px;"/></$button>

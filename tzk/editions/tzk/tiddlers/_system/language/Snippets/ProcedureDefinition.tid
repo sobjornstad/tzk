@@ -1,0 +1,12 @@
+caption: Procedure definition
+created: 20250211045857620
+creator: soren
+modified: 20250211045859189
+modifier: soren
+tags: 
+title: $:/language/Snippets/ProcedureDefinition
+type: text/vnd.tiddlywiki
+
+\procedure procName(param1:"default value",param2)
+Your text comes here.
+\end

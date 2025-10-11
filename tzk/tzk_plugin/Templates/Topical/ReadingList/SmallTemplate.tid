@@ -1,0 +1,10 @@
+created: 20210123155216014
+creator: soren
+modified: 20251011164926433
+modifier: soren
+tags: 
+title: $:/tzk/Templates/Topical/ReadingList/SmallTemplate
+type: text/vnd.tiddlywiki
+
+[<$link to={{!!title}}/>] //{{!!caption}}// ({{!!year}}), {{!!author}}.
+{{||$:/tzk/Templates/Topical/ReadingList/Rating}} <$list filter="[all[current]contains:bibliography[LifetimeReading]]" variable=_>([[LT|LifetimeReading]])</$list>

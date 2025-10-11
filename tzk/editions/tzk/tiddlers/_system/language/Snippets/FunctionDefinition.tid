@@ -1,0 +1,12 @@
+caption: Function definition
+created: 20250211045905441
+creator: soren
+modified: 20250211045906722
+modifier: soren
+tags: 
+title: $:/language/Snippets/FunctionDefinition
+type: text/vnd.tiddlywiki
+
+\function f.name(param1,param2:"default value") [<param1>!is[blank]else<param2>]
+
+<<f.name>>

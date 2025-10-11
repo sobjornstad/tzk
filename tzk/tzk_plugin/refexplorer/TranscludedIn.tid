@@ -1,0 +1,14 @@
+caption: Transcluded in
+condition: [<storyTiddler>backtranscludes[]] +[sort[]]
+created: 20250204171605659
+creator: soren
+modified: 20251011193101720
+modifier: soren
+tags: $:/tags/ReferenceExplorerTab
+title: $:/tzk/refexplorer/TranscludedIn
+type: text/vnd.tiddlywiki
+
+<$m2.reference-explorer
+	filter={{$:/tzk/refexplorer/TranscludedIn!!condition}}
+	caption="Transclusion Explorer"
+/>

@@ -3,7 +3,7 @@ color: #ff0000
 created: 20200115231447676
 creator: soren
 icon: $:/core/images/tag-button
-modified: 20230406024908885
+modified: 20251011161536139
 modifier: soren
 refexplorer-hide: true
 tags: Meta Public
@@ -16,7 +16,7 @@ type: text/vnd.tiddlywiki
 
 Tiddler type, the name of which stands for “''P''erson, ''A''nimal, or ''O''rganization.”
 
-See $:/sib/Tools/MissingPeople to find PAOs that have been referenced but not had a tiddler created.
+See $:/tzk/Tools/MissingPeople to find PAOs that have been referenced but not had a tiddler created.
 
 !! Linking
 

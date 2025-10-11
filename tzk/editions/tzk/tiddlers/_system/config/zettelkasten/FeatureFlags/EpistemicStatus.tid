@@ -1,8 +1,8 @@
 caption: Epistemic status
 created: 20210920193247824
 creator: soren
-description: Show the [[epistemic status|EpistemicStatus]] of the current tiddler on ideas.
-modified: 20210920193354215
+description: Show the [[epistemic status|EpistemicStatuses]] of the current tiddler on types that have one.
+modified: 20250214041156944
 modifier: soren
 private: yes
 public: yes

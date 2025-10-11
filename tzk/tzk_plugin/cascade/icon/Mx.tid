@@ -1,0 +1,9 @@
+created: 20240829025353978
+creator: soren
+modified: 20251011192218266
+modifier: soren
+tags: $:/tags/TiddlerIconFilter
+title: $:/tzk/cascade/icon/Mx
+type: text/vnd.tiddlywiki
+
+[tag[PAO]regexp[^Mx]then[fas fa-user]]

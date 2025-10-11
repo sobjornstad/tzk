@@ -1,0 +1,18 @@
+/* FIVE COLUMN MODE */
+.fivecolumns {
+   display: block;
+   column-count: 5;
+   column-gap: 0em;
+}
+
+/*
+This appears to have become standard, keeping here for now just in case
+
+.fourcolumns {
+   display:block;
+   -moz-column-count:5;
+   -moz-column-gap:0em;
+   -webkit-column-count: 5;
+   -webkit-column-gap:0em;
+}
+*/

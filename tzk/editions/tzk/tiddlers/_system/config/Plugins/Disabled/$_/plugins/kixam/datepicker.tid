@@ -1,6 +1,8 @@
 created: 20210205013308502
-modified: 20210307161239111
+creator: soren
+modified: 20241025021654905
+modifier: soren
 title: $:/config/Plugins/Disabled/$:/plugins/kixam/datepicker
 type: text/vnd.tiddlywiki
 
-no
+yes

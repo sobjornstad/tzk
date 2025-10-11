@@ -1,0 +1,14 @@
+caption: Write
+created: 20201203015757977
+creator: soren
+description: When you have some time to work on your Zettelkasten but don't have a particular task in mind, come here to see what needs doing.
+list: $:/tzk/SideBar/Write/Stub $:/core/ui/MoreSideBar/Missing NeedsAttention NeedsExcision TODO OpenQuestion $:/tzk/Tools/Tray
+modified: 20251011162539596
+modifier: soren
+tags: $:/tags/SideBar
+title: $:/tzk/SideBar/Write
+type: text/vnd.tiddlywiki
+
+<div class="tc-more-sidebar">
+<$macrocall $name="tabs" tabsList={{$:/tzk/SideBar/Write!!list}} default="$:/tzk/SideBar/Write/Stub" state="$:/state/tab/writesidebar" class="tc-vertical tc-sidebar-tabs-more" />
+</div>

@@ -1,0 +1,6 @@
+/* Fix CodeMirror hints appearing behind the story river.
+   https://groups.google.com/g/tiddlywiki/c/wznyIhGJd9U */
+
+.CodeMirror-hints {
+	z-index: 1000;
+}

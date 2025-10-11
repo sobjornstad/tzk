@@ -1,0 +1,13 @@
+created: 20210611020047183
+creator: soren
+modified: 20251011162321806
+modifier: soren
+tags: $:/tags/Stylesheet
+title: $:/tzk/styles/Subtitle
+type: text/vnd.tiddlywiki
+
+.tc-title { font-size: 0.9em; color: <<color tiddler-title-foreground>>; }
+
+.tc-subtitle { font-size: 0.9em; color: <<color tiddler-title-foreground>>; }
+
+.tc-subtitle .tc-tiddlylink { margin-right: 0; }

@@ -1,0 +1,18 @@
+created: 20230405171215676
+creator: soren
+description: Link a subtiddler of a journal tiddler in a stretchtext node, with the caption or title as the small text.
+example: <<jsub RemNoteFiasco>>
+modified: 20251011164838638
+modifier: soren
+tags: $:/tags/Macro
+title: $:/tzk/Procedures/jsub
+type: text/vnd.tiddlywiki
+
+\procedure jsub(subpart)
+	<$macrocall
+		$name="stretch-template"
+		tiddler={{{ [all[current]is[draft]then{!!draft.of}else<currentTiddler>addsuffix[/]addsuffix<subpart>] }}}
+		smallTemplate="$:/tzk/Templates/Topical/JournalSubtiddlerStretch"
+		largeTemplate="$:/tzk/Templates/General/IdentityTemplate"
+	/>
+\end

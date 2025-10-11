@@ -1,0 +1,12 @@
+created: 20240829024214012
+creator: soren
+modified: 20240927111227086
+modifier: soren
+tags: $:/tags/Global
+title: $:/Templates/Automatic/TiddlerTypeIconFa
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+\parameters (faspec)
+
+<i class=<<faspec>> style="font-size: 80%; position: relative; top: 0.2em; transform: translateY(-50%); margin-right: 0.2em;"/>

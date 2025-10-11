@@ -1,0 +1,25 @@
+created: 20200322005021864
+creator: soren
+modified: 20251011192942561
+modifier: soren
+tags: 
+title: $:/tzk/refexplorer/LinkTypeTemplate
+type: text/vnd.tiddlywiki
+
+<!--
+Here:
+	currentTiddler: The tiddler for which the ReferenceExplorer is being displayed
+	currentRecord: The related tiddler which is being processed
+-->
+<td>
+	<$list filter="
+		[<currentRecord>]
+		-[<currentTiddler>tagging[]] +[else[Tagged]]
+		-[<currentTiddler>links[]] +[else[Link]]
+		-[<currentTiddler>backlinks[]] +[else[Backlink]]
+		-[<currentTiddler>backtranscludes[]] +[else[Transcluded]]
+		-[<currentRecord>] +[else[Subtiddler]]
+	" variable="inferredType">
+		<<inferredType>>
+	</$list>
+</td>

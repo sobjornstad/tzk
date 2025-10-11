@@ -1,0 +1,41 @@
+caption: Directions
+created: 20201129175445792
+creator: soren
+modified: 20251011192125140
+modifier: soren
+tags: $:/tzk/gis/MappingTools
+title: $:/tzk/gis/DrivingDirections
+type: text/vnd.tiddlywiki
+
+\define dirUrl(lat, long) https://www.google.com/maps/embed/v1/directions?key=$(gmapsApiKey)$&origin=$(sourceLoc)$&destination=$(lat)$%2C$(long)$
+
+<% if [all[current]has[gis-lat]] %>
+
+	<div style="margin-bottom:1ex;">
+		Directions from <$link to="PrivateMetadata">home</$link> or:
+		<$edit-text tiddler="$:/temp/CurrentDirectionsSource" tag=input default="" size=56 />
+	</div>
+
+	<$let directionsSource={{{ [{$:/temp/CurrentDirectionsSource}!is[blank]encodeuri[]] ~[{PrivateMetadata##Address}encodeuri[]] }}}>
+		<% if [<directionsSource>!is[blank]] %>
+			<$let
+				gmapsApiKey={{$:/config/zettelkasten/gis/GMapsApiKey}}
+				lat={{!!gis-lat}}
+				long={{!!gis-long}}
+				sourceLoc=<<directionsSource>>
+			>
+				<iframe
+					width="600"
+					height="450"
+					frameborder="0"
+					style="border:0"
+					src=<<dirUrl>>
+					allowfullscreen></iframe>
+			</$let>
+		<% else %>
+			Please enter an address to start from,
+			or set the `Address` index of the `PrivateMetadata` data tiddler to a default address.
+		<% endif %>
+	</$let>
+
+<% endif %>

@@ -1,0 +1,14 @@
+caption: Sinks
+condition: [<storyTiddler>backlinks[]] [<storyTiddler>links[]] [<storyTiddler>tagging[]] +[tag[Sink]sort[]]
+created: 20200329154311717
+creator: soren
+modified: 20251011193035840
+modifier: soren
+tags: $:/tags/ReferenceExplorerTab
+title: $:/tzk/refexplorer/Sinks
+type: text/vnd.tiddlywiki
+
+<$m2.reference-explorer
+	filter={{$:/tzk/refexplorer/Sinks!!condition}}
+	caption="Sink Explorer"
+/>

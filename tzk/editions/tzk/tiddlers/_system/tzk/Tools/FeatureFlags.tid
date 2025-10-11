@@ -1,0 +1,51 @@
+created: 20210622001737586
+creator: soren
+description: Selectively hide and show interface elements or other features.
+modified: 20251011163408360
+modifier: soren
+tags: Meta Tool Public
+title: $:/tzk/Tools/FeatureFlags
+tooltype: configuration
+type: text/vnd.tiddlywiki
+
+\procedure edit-this()
+	\procedure act()
+		<$action-sendmessage $message="tm-edit-tiddler" $tiddler=<<currentTiddler>>/>
+	\end act
+	<$button actions=<<act>> class="tc-btn-invisible" style="font-size: 80%;">
+		<i class="fa fa-pen"/>
+	</$button>
+\end edit-this
+
+Feature flags allow many elements of the wiki to be selectively enabled and disabled. Feature flags may be set to different values in the private and public editions of your wiki.
+
+To add your own feature flag, create a new tiddler under `$:/config/zettelkasten/FeatureFlags` and set its `caption` and `description` fields to the values you'd like to see in the table below. You can then check the feature flag's value using the [[m2.ff function|$:/tzk/Functions/ff]] or [[ff macro|$:/tzk/Macros/ff]] (deprecated).
+
+<table class="ff-table">
+	<tr>
+		<th></th>
+		<th>Feature</th>
+		<th>Private</th>
+		<th>Public</th>
+		<th>Description</th>
+	</tr>
+	<$list filter="[prefix[$:/config/zettelkasten/FeatureFlags/]sort[caption]]">
+		<tr>
+			<td><<edit-this>></td>
+			<td class="ff-table-feature">{{!!caption}}</td>
+			<td class="ff-table-check"><$checkbox field="private" checked="yes" unchecked="no"/></td>
+			<td class="ff-table-check"><$checkbox field="public" checked="yes" unchecked="no"/></td>
+			<td class="ff-table-description">{{!!description}}</td>
+		</tr>
+	</$list>
+</table>
+
+<style>
+table.ff-table td.ff-table-feature {
+	width: 9em;
+}
+table.ff-table td.ff-table-check {
+  text-align: center;
+	padding-bottom: 1ex;
+}
+</style>

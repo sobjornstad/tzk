@@ -1,0 +1,43 @@
+caption: new source
+created: 20200822190145295
+creator: soren
+description: Create a new source tiddler
+list-after: $:/core/ui/Buttons/new-tiddler
+modified: 20251011161332415
+modifier: soren
+tags: $:/tags/PageControls
+title: $:/tzk/Buttons/NewSource
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+
+\procedure create-action()
+  <$action-sendmessage
+    $message="tm-new-tiddler"
+    title="New Source"
+    tags="Source"
+		caption=""
+		medium=""
+		url=""
+		readstatus="unread"
+		author=""
+		completed=""
+		year=<<now YYYY>>
+  />
+\end create-action
+
+<$button
+	class=<<tv-config-toolbar-class>>
+	selectedClass="tc-selected"
+	tooltip={{!!caption}}
+	actions=<<create-action>>
+>
+	<% if [<tv-config-toolbar-icons>match[yes]] %>
+		{{$:/core/images/quote}}
+	<% endif %>
+	<% if [<tv-config-toolbar-text>match[yes]] %>
+		<span class="tc-btn-text">
+			<$text text={{$:/tzk/Buttons/NewSource!!caption}}/>
+		</span>
+	<% endif %>
+</$button>

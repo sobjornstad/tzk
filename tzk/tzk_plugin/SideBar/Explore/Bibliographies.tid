@@ -1,0 +1,27 @@
+caption: Bibliographies
+created: 20200913180810431
+creator: soren
+modified: 20251011162532709
+modifier: soren
+tags: $:/tags/MoreSideBar
+title: $:/tzk/SideBar/Explore/Bibliographies
+type: text/vnd.tiddlywiki
+
+<div class="sib-tab-description">
+
+</div>
+
+[[Recently Read|RecentlyRead]]<br>
+[[Blogroll|Blogroll]]<br>
+<$list filter="[tag[Bibliography]!has[draft.of]]">
+	<$link to={{!!title}}>{{!!bibliography}}</$link><br>
+</$list>
+
+<style>
+.sib-tab-description {
+	font-style: italic;
+	margin-left: 2em;
+	margin-right: 2em;
+	margin-bottom: 2ex;
+}
+</style>

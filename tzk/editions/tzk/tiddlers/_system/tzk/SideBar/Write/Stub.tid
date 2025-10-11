@@ -1,0 +1,12 @@
+caption: Stubs
+created: 20200516155336361
+creator: soren
+list-after: $:/core/ui/MoreSideBar/Missing
+modified: 20251011162539592
+modifier: soren
+title: $:/tzk/SideBar/Write/Stub
+type: text/vnd.tiddlywiki
+
+<$list filter="[tag[Stub]sort[]] -[[$:/TagSaver]]" emptyMessage="No stubs right now! You're awesome!">
+	<$link to=<<currentTiddler>>><<currentTiddler>></$link><br/>
+</$list>

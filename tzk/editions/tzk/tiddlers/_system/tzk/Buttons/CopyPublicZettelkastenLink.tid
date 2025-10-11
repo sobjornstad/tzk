@@ -1,0 +1,29 @@
+caption: copy public link
+created: 20201120172611922
+creator: soren
+description: Copy a link to this tiddler in the public Zettelkasten
+list-after: $:/core/ui/Buttons/info
+modified: 20251011161215499
+modifier: soren
+tags: $:/tags/ViewToolbar
+title: $:/tzk/Buttons/CopyPublicZettelkastenLink
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+
+<$button
+	message="tm-copy-to-clipboard"
+	param=`${ [{$:/config/sobjornstad/PublicZettelkastenUrl}] }$/${ [{!!microlink}!is[blank]] ~[all[current]addprefix[#]] }$`
+	tooltip={{$:/tzk/Buttons/CopyPublicZettelkastenLink!!caption}}
+	class=<<tv-config-toolbar-class>>
+>
+	<% if [<tv-config-toolbar-icons>match[yes]] %>
+		{{$:/core/images/permalink-button}}
+	<% endif %>
+	<% if [<tv-config-toolbar-text>match[yes]] %>
+		<span class="tc-btn-text">
+			<$text text=" "/>
+			<$text text={{$:/tzk/Buttons/CopyPublicZettelkastenLink!!caption}}/>
+		</span>
+	<% endif %>
+</$button>

@@ -1,8 +1,8 @@
 caption: Microlink
 created: 20240611040702059
 creator: soren
-description: Show the microlink to a tiddler after # in the subtitle metadata section.
-modified: 20240611040803703
+description: Show the microlink of a tiddler, if present, in the subtitle metadata section.
+modified: 20250214041131017
 modifier: soren
 private: yes
 public: no

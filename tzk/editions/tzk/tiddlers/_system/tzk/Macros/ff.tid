@@ -1,0 +1,11 @@
+created: 20210622002240940
+creator: soren
+description: ''Deprecated: Use the [[m2.ff function|$:/tzk/Functions/ff]] instead.''
+example: <$list filter=<<ff ViewerPublicLine>> variable=_ emptyMessage="The viewer public line is off in this edition.">The viewer public line is on in this edition. Transclude it here.</$list>
+modified: 20251011163408360
+modifier: soren
+tags: $:/tags/Macro
+title: $:/tzk/Macros/ff
+type: text/vnd.tiddlywiki
+
+\define ff(tid) [[$:/config/zettelkasten/FeatureFlags/$tid$]get{$:/config/sib/CurrentEditionPublicity}] -[[no]]

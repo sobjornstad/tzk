@@ -1,0 +1,57 @@
+created: 20210627025415569
+creator: soren
+modified: 20251011164111868
+modifier: soren
+tags: $:/tags/TopRightBar
+title: $:/tzk/Templates/Automatic/Clock
+type: text/vnd.tiddlywiki
+
+\procedure reset-pomodoro() <$action-setfield $tiddler="$:/temp/time/pomodoro-remaining" text="1500"/>
+\procedure introspect-pomodoro()
+	<$let 
+			minutes={{{ [{$:/temp/time/pomodoro-remaining}divide[60]floor[]] }}}
+			seconds={{{ [{$:/temp/time/pomodoro-remaining}remainder[60]] }}}
+			zeroedMinutes={{{ [<minutes>addprefix[0]] }}}
+			zeroedSeconds={{{ [<seconds>addprefix[0]] }}}>
+		<$text text={{{ [<minutes>length[]match[1]then<zeroedMinutes>else<minutes>] }}}/>:<$text text={{{ [<seconds>length[]match[1]then<zeroedSeconds>else<seconds>] }}}/>
+	</$let>
+\end
+
+<% if [m2.ff[Clock]] %>
+	<$let ticker={{$:/temp/time/ticker}}>
+		<div class="sib-clock">
+			<div class="sib-clock-item"><<now "0hh12:0mm AM">></div>
+			<div class="sib-clock-item">
+				<$button
+					actions=<<reset-pomodoro>>
+					class="tc-tiddlylink tc-btn-invisible"
+					tooltip="Reset pomodoro to 25 minutes"
+				>
+					<i class="fa fa-stopwatch"/>
+				</$button>
+				<% if [{$:/temp/time/pomodoro-remaining}compare:number:gt[0]] %>
+					<<introspect-pomodoro>>
+				<% else %>
+					&nbsp;done
+				<% endif %>
+			</div>
+		</div>
+	</$let>
+<% endif %>
+
+<style>
+div.sib-clock {
+	background-color: <<color tiddler-background>>;
+	padding: 5px;
+	width: 5rem;
+}
+
+div.sib-clock-item {
+	text-align: center;
+}
+
+div.sib-clock-item button {
+	margin: 0;
+	padding: 0;
+}
+</style>

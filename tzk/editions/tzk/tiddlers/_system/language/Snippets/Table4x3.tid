@@ -1,0 +1,13 @@
+caption: Table with 4 columns by 3 rows
+created: 20250211045922334
+creator: soren
+modified: 20250211045923475
+modifier: soren
+tags: 
+title: $:/language/Snippets/Table4x3
+type: text/vnd.tiddlywiki
+
+|! |!Alpha |!Beta |!Gamma |!Delta |
+|!One | | | | |
+|!Two | | | | |
+|!Three | | | | |

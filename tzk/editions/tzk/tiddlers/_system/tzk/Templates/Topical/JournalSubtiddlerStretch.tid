@@ -1,0 +1,9 @@
+created: 20230405170908983
+creator: soren
+modified: 20251011164838627
+modifier: soren
+tags: Public
+title: $:/tzk/Templates/Topical/JournalSubtiddlerStretch
+type: text/vnd.tiddlywiki
+
+<$link to=<<currentTiddler>>><$text text={{{ [all[current]get[caption]] ~[all[current]split[/]butfirst[]join[/]] }}}/></$link>

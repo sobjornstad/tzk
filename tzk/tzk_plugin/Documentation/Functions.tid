@@ -1,0 +1,29 @@
+caption: Functions
+created: 20240601191528446
+creator: soren
+modified: 20251011201600952
+modifier: soren
+tags: 
+title: $:/tzk/Documentation/Functions
+type: text/vnd.tiddlywiki
+
+Click into a function to see an example of its usage and its definition.
+
+All functions are in the `m2` namespace unless otherwise noted (e.g., `ff` should be written `m2.ff`).
+
+<table>
+	<tr>
+		<th style="width: 10em;">Name</th>
+		<th>Description</th>
+	</tr>
+	<$list filter="[all[tiddlers+shadows]prefix[$:/tzk/Functions/]!prefix[$:/tzk/Functions/_]]">
+	<tr>
+		<td>
+			<$link to=<<currentTiddler>>>
+				<$text text={{{ [all[current]removeprefix[$:/tzk/Functions/]] }}}/>
+			</$link>
+		</td>
+		<td>{{!!description}}</td>
+	</tr>
+	</$list>
+</table>

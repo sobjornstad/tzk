@@ -3,7 +3,7 @@ color: #ff0000
 created: 20200225233351305
 creator: soren
 icon: $:/core/images/tag-button
-modified: 20210921153046753
+modified: 20251011163300837
 modifier: soren
 tags: Meta Public
 title: Tool
@@ -11,4 +11,4 @@ type: text/vnd.tiddlywiki
 
 A tiddler designed to help you work with the rest of the wiki.
 
-A list of tools can be found at [[$:/sib/Tools]].
+A list of tools can be found at [[$:/tzk/Tools]].

@@ -1,0 +1,25 @@
+created: 20210522021355703
+creator: soren
+description: Provide a summary of the purpose, usage, and definition of the global macro defined in the current tiddler.
+modified: 20251011164215648
+modifier: soren
+tags: $:/tags/ViewTemplate
+title: $:/tzk/Templates/Automatic/MacroProcedureFunctionWidgetDescription
+transcludedin: All tiddlers within the $:/sib/Macros namespace that are tagged <<tag $:/tags/Macro>>.
+type: text/vnd.tiddlywiki
+
+<% if [all[current]prefix[$:/sib/Macros/]] [all[current]prefix[$:/sib/Procedures/]] [all[current]prefix[$:/sib/Functions/]] [all[current]prefix[$:/sib/Widgets]] [all[current]prefix[$:/tzk/Macros/]] [all[current]prefix[$:/tzk/Procedures/]] [all[current]prefix[$:/tzk/Functions/]] [all[current]prefix[$:/tzk/Widgets]] %>
+
+!! <code><$text text={{{ [all[current]split[/]last[]] }}}/></code>
+
+; Purpose
+: {{!!description}}
+
+; Example
+: <pre><code><$view field="example"/></code></pre>
+: {{!!example}}
+
+; Definition
+: <$codeblock code={{{ [all[current]get[text]] }}}/>
+
+<% endif %>

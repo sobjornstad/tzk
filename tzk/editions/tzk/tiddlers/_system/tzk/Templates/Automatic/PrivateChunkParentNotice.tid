@@ -1,0 +1,13 @@
+created: 20200516175612822
+creator: soren
+description: Show a notice that this is a private chunk of another tiddler, and provide another link to the parent tiddler.
+modified: 20251011164407763
+modifier: soren
+tags: $:/tags/ViewTemplate
+title: $:/tzk/Templates/Automatic/PrivateChunkParentNotice
+transcludedin: All tiddlers tagged <<tag PrivateChunk>>.
+type: text/vnd.tiddlywiki
+
+<$list filter="[all[current]tag[PrivateChunk]]">
+		//This is a PrivateChunk of the public tiddler <$link to={{{ [all[current]split[/]first[]] }}}/>.//
+</$list>

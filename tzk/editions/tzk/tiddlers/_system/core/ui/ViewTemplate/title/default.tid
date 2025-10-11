@@ -1,0 +1,11 @@
+created: 20240829023801296
+creator: soren
+modified: 20240829023809441
+modifier: soren
+title: $:/core/ui/ViewTemplate/title/default
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+<h2 class="tc-title">
+	<$macrocall $name="camel-wrap" humpytext={{!!title}}/>
+</h2>

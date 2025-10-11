@@ -3,7 +3,7 @@ color: #ff0000
 created: 20200115231452835
 creator: soren
 icon: $:/core/images/tag-button
-modified: 20210920171016829
+modified: 20251011161637368
 modifier: soren
 refexplorer-hide: true
 tags: Meta Public
@@ -31,7 +31,7 @@ As sources often need to be reformatted, displayed in tables, searched in comple
 ; description
 : A one- or two-sentence explanation of what the source is. Optional, but highly recommended if the source is included in any bibliographies using the `bibliography` field.
 ; medium
-: Description of what kind of source this is -- `article`, `book`, `website`, `film`, etc. Use the [[RelationshipValueTool|$:/sib/Tools/RelationshipValueTool]] for a full, up-to-date list.
+: Description of what kind of source this is -- `article`, `book`, `website`, `film`, etc. Use the [[RelationshipValueTool|$:/tzk/Tools/RelationshipValueTool]] for a full, up-to-date list.
 ; rating
 : An appropriate MediaRating. Optional, but highly recommended if you've finished reading/consuming the source.
 ; url

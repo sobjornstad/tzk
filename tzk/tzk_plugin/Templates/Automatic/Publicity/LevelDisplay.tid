@@ -1,0 +1,37 @@
+created: 20200508004653657
+creator: soren
+modified: 20251011164626007
+modifier: soren
+tags: $:/tags/EditTemplate
+title: $:/tzk/Templates/Automatic/Publicity/LevelDisplay
+type: text/vnd.tiddlywiki
+
+\function editingSystemTiddler() [all[current]has[draft.of]get[draft.title]is[system]]
+
+<% if [m2.public[]] %>
+	<div style="color: orangered; font-weight: bold">
+		WARNING: You are editing the public Zettelkasten. Your changes will not be saved unless you export them manually.
+	</div>
+<% else %>
+	<% if [function[editingSystemTiddler]] %>
+		<div style="color: #d08770; float:left;">
+			<div style="width: 16px; float:left;">{{$:/core/images/theme-button}}</div>
+			<div style="padding-top: 5px; padding-left: 20px;">
+				You are editing a //system tiddler//. System tiddlers are intrinsically public.
+			</div>
+		</div>
+	<% elseif [all[current]!tag[Public]] %>
+		<div style="color: #81a1c1; float:left;">
+			<div style="width: 16px; float:left;">{{$:/core/images/locked-padlock}}</div>
+			<div style="padding-top: 5px; padding-left: 20px;">
+				You are editing a //private tiddler//.
+			</div>
+		</div>
+	<% elseif [all[current]tag[Public]] %>
+		<div style="color: #d08770; float:left;">
+			<div style="width: 16px; float:left;">{{$:/core/images/globe}}</div>
+			<div style="padding-top: 4px; padding-left: 20px;">You are editing a //public tiddler//.
+			</div>
+		</div>
+	<% endif %> <!-- editing system tiddler -->
+<% endif %> <!-- public/private -->

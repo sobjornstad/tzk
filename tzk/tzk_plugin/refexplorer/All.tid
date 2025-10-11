@@ -1,0 +1,14 @@
+caption: All
+condition: [<storyTiddler>backlinks[]] [<storyTiddler>links[]] [<storyTiddler>tagging[]] +[!title<storyTiddler>sort[]]
+created: 20200329160001633
+creator: soren
+modified: 20251011192850648
+modifier: soren
+tags: $:/tags/ReferenceExplorerTab
+title: $:/tzk/refexplorer/All
+type: text/vnd.tiddlywiki
+
+<$m2.reference-explorer
+	filter={{$:/tzk/refexplorer/All!!condition}}
+	caption="Reference Explorer (all types)"
+/>

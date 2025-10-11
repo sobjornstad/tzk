@@ -1,0 +1,9 @@
+created: 20240829025309878
+creator: soren
+modified: 20251011192212249
+modifier: soren
+tags: $:/tags/TiddlerIconFilter
+title: $:/tzk/cascade/icon/Ms
+type: text/vnd.tiddlywiki
+
+[tag[PAO]regexp[^Ms]then[fas fa-female]]

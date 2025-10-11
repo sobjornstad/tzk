@@ -1,0 +1,13 @@
+created: 20240617234017130
+creator: soren
+modified: 20251011162025423
+modifier: soren
+tags: $:/tags/Global
+title: $:/tzk/Widgets/fnote
+type: text/vnd.tiddlywiki
+
+\widget $m2.fnote()
+<$wikify name="fnote-body" text="""<$slot $name="ts-raw"/>""" output="html" mode="inline">
+	<$transclude $variable="fnote" note=<<fnote-body>>/>
+</$wikify>
+\end

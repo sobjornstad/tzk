@@ -1,0 +1,14 @@
+caption: Ideas
+condition: [<storyTiddler>backlinks[]] [<storyTiddler>links[]] [<storyTiddler>tagging[]] +[tag[Idea]!title<storyTiddler>sort[]]
+created: 20200321225433677
+creator: soren
+modified: 20251011192918587
+modifier: soren
+tags: $:/tags/ReferenceExplorerTab
+title: $:/tzk/refexplorer/Ideas
+type: text/vnd.tiddlywiki
+
+<$m2.reference-explorer
+	filter={{$:/tzk/refexplorer/Ideas!!condition}}
+	caption="Idea Explorer"
+/>

@@ -1,0 +1,38 @@
+created: 20210825121854435
+creator: soren
+description: Tools to manage your Zettelkasten.
+modified: 20251011202226664
+modifier: soren
+tags: Meta
+title: $:/tzk/Tools
+type: text/vnd.tiddlywiki
+
+\function sorter() [split[/]last[]sort[]]
+
+\widget $local.tooltype(caption, type:"")
+	<h2><<caption>></h2>
+	<% if [<type>!match[]] %>
+		<ul>
+			<$list filter="[all[tiddlers+shadows]tag[Tool]tooltype<type>sortsub<sorter>]">
+				<li>
+					<$link to=<<currentTiddler>>>
+						<$text text={{{ [all[current]split[/]last[]] }}}/></$link>: {{!!description}}
+				</li>
+			</$list>
+		</ul>
+	<% else %>
+		<$slot $name="ts-raw"/>
+	<% endif %>
+\end $local.tooltype
+
+
+<$local.tooltype caption="Documentation">
+
+* [[$:/tzk/Documentation]]: Documentation on the macros and view templates available within the Zettelkasten.
+* [[OurNamingConventions]]: Naming conventions for tiddler titles; you're expected to edit this tiddler to match the conventions you wish to use yourself.
+* [[ZettelkastenCardType]]: The types of red tags you can assign to tiddlers to get specific effects.
+
+</$local.tooltype>
+<$local.tooltype caption="Configuration" type="configuration" />
+<$local.tooltype caption="Aggregation" type="aggregator"/>
+<$local.tooltype caption="Maintenance" type="maintenance"/>

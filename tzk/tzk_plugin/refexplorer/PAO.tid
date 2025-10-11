@@ -1,0 +1,14 @@
+caption: People
+condition: [<storyTiddler>backlinks[]] [<storyTiddler>links[]] [<storyTiddler>tagging[]] [<storyTiddler>get[people]enlist-input[]] [<storyTiddler>get[author]enlist-input[]] +[tag[PAO]sort[]]
+created: 20200321230153705
+creator: soren
+modified: 20251011192953282
+modifier: soren
+tags: $:/tags/ReferenceExplorerTab
+title: $:/tzk/refexplorer/PAO
+type: text/vnd.tiddlywiki
+
+<$m2.reference-explorer
+	caption="Person/Animal/Organization Explorer"
+	filter={{$:/tzk/refexplorer/PAO!!condition}}
+/>

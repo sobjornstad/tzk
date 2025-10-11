@@ -1,0 +1,56 @@
+created: 20230727193610360
+creator: soren
+modified: 20251011161010578
+modifier: soren
+tags: 
+title: $:/tzk/Buttons/CheckpointDropdown
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+
+\procedure lingo-base() $:/language/Buttons/Excise/
+\procedure checkpoint-actions()
+	<$action-sendmessage
+		$message="tm-new-tiddler"
+		$param={{{ [<storyTiddler>get[draft.of]] }}}
+		title=<<new-title>>
+		checkpoint-message={{{ [<config-title>addsuffix[/message]get[text]] }}}
+	/>
+	<$action-deletetiddler
+	  $tiddler=`$(config-title)$/message`
+	/>
+	<$action-deletetiddler
+		$tiddler=<<dropdown-state>>
+	/>
+\end checkpoint-actions
+
+\procedure dropdown-body(config-title)
+	<p>
+		''Checkpoint the current version of this tiddler''
+	</p>
+
+	<p>
+		Message:&nbsp;<$edit-text tag="input" tiddler=`$(config-title)$/message` default="" focus="true" />
+	</p>
+
+	<$let
+		tid-to-duplicate={{{ [<storyTiddler>get[draft.of]] }}}
+		new-title={{{ [[$:/checkpoints/]addsuffix<tid-to-duplicate>addsuffix[/]addsuffix<now "[UTC]YYYY0MM0DD0hh0mm0ss0XXX">] }}}
+	>
+
+	<% if [<new-title>is[tiddler]] %>
+		<div class="tc-error">
+			<<lingo Caption/TiddlerExists>>
+		</div>
+	<% endif %>
+
+	Creating checkpoint tiddler: <<new-title>>
+
+	<$button actions=<<checkpoint-actions>>>
+		Checkpoint
+	</$button>
+
+	</$let>
+\end dropdown-body
+
+<$macrocall $name="dropdown-body" config-title=<<qualify "$:/state/Excise/">>/>

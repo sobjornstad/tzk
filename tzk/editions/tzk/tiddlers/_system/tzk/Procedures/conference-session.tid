@@ -1,0 +1,18 @@
+created: 20240718025806003
+creator: soren
+description: Create a stretchtext node for a session of a conference, placed in the conference or journal tiddler.
+example: <<conference-session ConnectingWithOurParts>>
+modified: 20251011164813892
+modifier: soren
+tags: $:/tags/Macro
+title: $:/tzk/Procedures/conference-session
+type: text/vnd.tiddlywiki
+
+\procedure conference-session(tiddler)
+	<$macrocall
+		$name="stretch-template"
+		tiddler=<<tiddler>>
+		smallTemplate="$:/tzk/Templates/Topical/ConferenceSessionStretch"
+		largeTemplate="$:/tzk/Templates/General/IdentityTemplate"
+	/>
+\end conference-session

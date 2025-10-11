@@ -1,0 +1,16 @@
+caption: Explore
+created: 20200913180105683
+creator: soren
+description: Curated public navigation menu for those less familiar with TiddlyWiki.
+extras: $:/core/ui/MoreSideBar/Tags $:/core/ui/MoreSideBar/Recent $:/tzk/SideBar/Explore/Bibliographies $:/core/ui/MoreSideBar/All $:/core/ui/MoreSideBar/Explorer
+modified: 20251011162632303
+modifier: soren
+tags: $:/tags/SideBar
+title: $:/tzk/SideBar/Explore
+type: text/vnd.tiddlywiki
+
+//To learn about navigation options, visit the [[PublicHomepage]].//
+
+<div class="tc-more-sidebar">
+<$macrocall $name="tabs" tabsList="[enlist{$:/tzk/SideBar/Explore!!extras}]" default={{$:/config/DefaultMoreSidebarTab}} state="$:/state/tab/moresidebar" class="tc-vertical tc-sidebar-tabs-more" />
+</div>
