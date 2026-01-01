@@ -1,7 +1,7 @@
 created: 20210606221940244
 creator: soren
 description: Show the [[rating|MediaRating]] of the current source tiddler, if any. The status is editable in the private edition.
-modified: 20251011192044098
+modified: 20251011201530481
 modifier: soren
 tags: $:/tags/ViewTemplate
 title: $:/tzk/MediaRating/Display
@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 
 \whitespace trim
 
-\function colorize-rating() [prefix[$:/tzk/MediaRating/]caption{!!rating}get[color]addprefix[color: ]addsuffix[;]]
+\function colorize-rating() [all[tiddlers+shadows]prefix[$:/tzk/MediaRating/]caption{!!rating}get[color]addprefix[color: ]addsuffix[;]]
 
 <% if [m2.ff[MediaRating]] %>
 <% if [all[current]!is[system]] %>
@@ -22,7 +22,7 @@ type: text/vnd.tiddlywiki
 				<span style={{{ [function[colorize-rating]] }}}>rating</span>
 			</$link>:&nbsp;
 			<$select field="rating" default="">
-				<$list filter="[prefix[$:/tzk/MediaRating]has[caption]!nsort[stackorder]]">
+				<$list filter="[all[tiddlers+shadows]prefix[$:/tzk/MediaRating]has[caption]!nsort[stackorder]]">
 					<$set name="itemColor" value={{!!color}}>
 						<option style=`color: $(itemColor)$;` value={{!!caption}}>{{!!caption}}</option>
 					</$set>

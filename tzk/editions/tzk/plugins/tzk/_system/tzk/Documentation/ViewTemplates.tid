@@ -1,14 +1,14 @@
 caption: View templates
 created: 20210523143729032
 creator: soren
-modified: 20251011164344216
+modified: 20251011201917127
 modifier: soren
 tags: 
 title: $:/tzk/Documentation/ViewTemplates
 type: text/vnd.tiddlywiki
 
 \define local.table(prefix)
-	<$list filter="[prefix[$prefix$]tag[$:/tags/ViewTemplate]sortsub<lastbit>]">
+	<$list filter="[all[tiddlers+shadows]prefix[$prefix$]tag[$:/tags/ViewTemplate]sortsub<lastbit>]">
 	<tr>
 		<td><$link to=<<currentTiddler>>><$text text={{{ [{!!caption}!is[blank]] ~[all[current]subfilter<lastbit>] }}}/></$link></td>
 		<td>{{!!description}}</td>

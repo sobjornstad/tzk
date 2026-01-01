@@ -1,7 +1,7 @@
 created: 20210508223048629
 creator: soren
 description: Show the [[epistemic status|EpistemicStatuses]] of the current tiddler, if any. The status is editable in the private edition.
-modified: 20251011192349422
+modified: 20251011201416856
 modifier: soren
 tags: $:/tags/ViewTemplate
 title: $:/tzk/EpistemicStatus/Display
@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 
 \whitespace trim
 
-\function color-string() [prefix[$:/tzk/EpistemicStatus]caption{!!es}get[color]addprefix[color: ]addsuffix[;]]
+\function color-string() [all[tiddlers+shadows]prefix[$:/tzk/EpistemicStatus]caption{!!es}get[color]addprefix[color: ]addsuffix[;]]
 
 <% if [m2.ff[EpistemicStatus]] %>
 <% if [all[current]!is[system]] %>
@@ -24,7 +24,7 @@ type: text/vnd.tiddlywiki
 				</span>
 			</$link>:&nbsp;
 			<$select field="es" default="">
-				<$list filter="[prefix[$:/tzk/EpistemicStatus]has[caption]nsort[stackorder]]">
+				<$list filter="[all[tiddlers+shadows]prefix[$:/tzk/EpistemicStatus]has[caption]nsort[stackorder]]">
 					<$set name="itemColor" value={{!!color}}>
 						<option style=`color: $(itemColor)$;` value={{!!caption}}>{{!!caption}}</option>
 					</$set>

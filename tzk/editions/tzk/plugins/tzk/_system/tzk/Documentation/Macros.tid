@@ -1,7 +1,7 @@
 caption: Macros
 created: 20210523143205876
 creator: soren
-modified: 20251011163457808
+modified: 20251011201608896
 modifier: soren
 tags: 
 title: $:/tzk/Documentation/Macros
@@ -14,7 +14,7 @@ Click into a macro to see an example of its usage and its definition.
 		<th style="width: 10em;">Name</th>
 		<th>Description</th>
 	</tr>
-	<$list filter="[prefix[$:/tzk/Macros/]tag[$:/tags/Macro]!prefix[$:/tzk/Macros/_]]">
+	<$list filter="[all[tiddlers+shadows]prefix[$:/tzk/Macros/]tag[$:/tags/Macro]!prefix[$:/tzk/Macros/_]]">
 	<tr>
 		<td><$link to=<<currentTiddler>>><$text text={{{ [all[current]removeprefix[$:/tzk/Macros/]] }}}/></$link></td>
 		<td>{{!!description}}</td>

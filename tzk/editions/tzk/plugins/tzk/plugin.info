@@ -1,0 +1,11 @@
+{
+    "title": "$:/plugins/tzk",
+    "description": "TiddlyZettelKasten alpha system tiddlers",
+    "author": "Soren Bjornstad",
+    "version": "1.3.1",
+    "core-version": ">=5.3.8",
+    "source": "https://github.com/sobjornstad/tzk",
+    "list": "readme license",
+    "plugin-type": "plugin",
+    "dependents": ""
+}

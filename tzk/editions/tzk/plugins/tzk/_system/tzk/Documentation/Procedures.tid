@@ -1,14 +1,14 @@
 caption: Procedures
 created: 20240601191438937
 creator: soren
-modified: 20251011164009537
+modified: 20251011201904038
 modifier: soren
 tags: 
 title: $:/tzk/Documentation/Procedures
 type: text/vnd.tiddlywiki
 
 \define local.table-list(prefix)
-	<$list filter="[prefix[$prefix$]!prefix[$prefix$_]]">
+	<$list filter="[all[tiddlers+shadows]prefix[$prefix$]!prefix[$prefix$_]]">
 	<tr>
 		<td>
 			<$link to=<<currentTiddler>>>

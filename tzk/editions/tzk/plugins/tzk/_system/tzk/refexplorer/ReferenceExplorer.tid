@@ -1,7 +1,7 @@
 created: 20200321225156394
 creator: soren
 description: Display the Reference Explorer, a table that shows related topics, for the current tiddler.
-modified: 20251011193014529
+modified: 20251011201747725
 modifier: soren
 tags: $:/tags/ViewTemplate
 title: $:/tzk/refexplorer/ReferenceExplorer
@@ -12,7 +12,7 @@ type: text/vnd.tiddlywiki
 
 \procedure ref-explorer()
 	<$let
-		tabList={{{ [tag[$:/tags/ReferenceExplorerTab]] :reduce[<storyTiddler>subfilter{!!condition}then<currentTiddler>addprefix[ ]addprefix<accumulator>] }}}
+		tabList={{{ [all[tiddlers+shadows]tag[$:/tags/ReferenceExplorerTab]] :reduce[<storyTiddler>subfilter{!!condition}then<currentTiddler>addprefix[ ]addprefix<accumulator>] }}}
 		myDefaultTab={{{ [<storyTiddler>has[refexplorer-starttab]get[refexplorer-starttab]addprefix[$:/tzk/refexplorer/]] ~[enlist<tabList>first[]] }}}
 	>
 		<% if [<tabList>!is[blank]] %>

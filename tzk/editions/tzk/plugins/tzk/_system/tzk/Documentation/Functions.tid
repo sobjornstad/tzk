@@ -1,7 +1,7 @@
 caption: Functions
 created: 20240601191528446
 creator: soren
-modified: 20251011163351943
+modified: 20251011201600952
 modifier: soren
 tags: 
 title: $:/tzk/Documentation/Functions
@@ -16,7 +16,7 @@ All functions are in the `m2` namespace unless otherwise noted (e.g., `ff` shoul
 		<th style="width: 10em;">Name</th>
 		<th>Description</th>
 	</tr>
-	<$list filter="[prefix[$:/tzk/Functions/]!prefix[$:/tzk/Functions/_]]">
+	<$list filter="[all[tiddlers+shadows]prefix[$:/tzk/Functions/]!prefix[$:/tzk/Functions/_]]">
 	<tr>
 		<td>
 			<$link to=<<currentTiddler>>>

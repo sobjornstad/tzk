@@ -1,7 +1,7 @@
 created: 20210825121854435
 creator: soren
 description: Tools to manage your Zettelkasten.
-modified: 20251011163308821
+modified: 20251011202226664
 modifier: soren
 tags: Meta
 title: $:/tzk/Tools
@@ -13,7 +13,7 @@ type: text/vnd.tiddlywiki
 	<h2><<caption>></h2>
 	<% if [<type>!match[]] %>
 		<ul>
-			<$list filter="[tag[Tool]tooltype<type>sortsub<sorter>]">
+			<$list filter="[all[tiddlers+shadows]tag[Tool]tooltype<type>sortsub<sorter>]">
 				<li>
 					<$link to=<<currentTiddler>>>
 						<$text text={{{ [all[current]split[/]last[]] }}}/></$link>: {{!!description}}
