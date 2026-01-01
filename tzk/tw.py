@@ -6,6 +6,7 @@ from pathlib import Path
 import signal
 import subprocess
 from textwrap import dedent
+import time
 from typing import Callable, Optional, Sequence, Literal
 
 from tzk import git
@@ -112,6 +113,11 @@ def exec_with_restart(args: Sequence[Sequence[str]], base_wiki_folder: str = Non
         first_start = True
         while True:
             restart_requested = False
+            # Write boot ID so browser can detect restarts and auto-refresh
+            boot_id = str(time.time())
+            boot_id_path = Path("tiddlers/_system/tzk/boot-id.tid")
+            boot_id_path.parent.mkdir(parents=True, exist_ok=True)
+            boot_id_path.write_text(f"title: $:/tzk/boot-id\ntype: text/plain\n\n{boot_id}")
             # start_new_session=True creates a new process group we can kill together
             process = subprocess.Popen(call_args, start_new_session=True)
             if first_start:
