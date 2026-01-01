@@ -115,12 +115,18 @@ class ListenCommand(CliCommand):
             default=cm().listen_password or "",
             help="Password to use for basic authentication, if any.",
         )
-    
+        parser.add_argument(
+            "--pidfile",
+            metavar="PATH",
+            help="Write PID to this file for signal-based restart (send SIGHUP to reload).",
+            default=None,
+        )
+
     def execute(self, args: argparse.Namespace) -> None:
         cm().require_config()
         chdir_to_wiki()
         try:
-            tw.exec(
+            tw.exec_with_restart(
                 [
                     ("listen",
                     f"host={args.host}",
@@ -128,7 +134,8 @@ class ListenCommand(CliCommand):
                     f"username={args.username}",
                     f"password={args.password}",
                     f"root-tiddler={args.root_tiddler}")
-                ]
+                ],
+                pidfile=args.pidfile,
             )
         except KeyboardInterrupt:
             # We'll terminate anyway now that we're at the end of execute() --

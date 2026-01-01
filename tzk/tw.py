@@ -3,6 +3,7 @@ import functools
 import json
 import os
 from pathlib import Path
+import signal
 import subprocess
 from textwrap import dedent
 from typing import Callable, Optional, Sequence, Literal
@@ -32,9 +33,9 @@ def _whoami() -> str:
         return "user"
 
 
-def exec(args: Sequence[Sequence[str]], base_wiki_folder: str = None) -> int:
+def _build_call_args(args: Sequence[Sequence[str]], base_wiki_folder: str = None) -> list:
     """
-    Execute a series of TiddlyWiki commands.
+    Build the command-line arguments for executing TiddlyWiki.
 
     :param args: A list of lists of CLI commands to send to TiddlyWiki.
                  The first element of each list is a TiddlyWiki CLI command,
@@ -42,9 +43,6 @@ def exec(args: Sequence[Sequence[str]], base_wiki_folder: str = None) -> int:
                  The following elements of the list are arguments to that command.
     :param base_wiki_folder: If the wiki to execute commands against is not the one
                              in the current directory, provide its path here.
-                             The current directory is the source wiki's root directory
-                             during the execution of builders,
-                             unless explicitly changed.
     """
     # must pushd into base wiki to find the tiddlywiki node_modules
     if base_wiki_folder is not None:
@@ -59,7 +57,77 @@ def exec(args: Sequence[Sequence[str]], base_wiki_folder: str = None) -> int:
         call_args.append(f"--{tw_arg[0]}")
         for inner_arg in tw_arg[1:]:
             call_args.append(inner_arg)
-    return subprocess.call(call_args)
+    return call_args
+
+
+def exec(args: Sequence[Sequence[str]], base_wiki_folder: str = None) -> int:
+    """
+    Execute a series of TiddlyWiki commands.
+
+    :param args: A list of lists of CLI commands to send to TiddlyWiki.
+                 The first element of each list is a TiddlyWiki CLI command,
+                 without the ``--``, e.g., ``savewikifolder``.
+                 The following elements of the list are arguments to that command.
+    :param base_wiki_folder: If the wiki to execute commands against is not the one
+                             in the current directory, provide its path here.
+                             The current directory is the source wiki's root directory
+                             during the execution of builders,
+                             unless explicitly changed.
+    """
+    return subprocess.call(_build_call_args(args, base_wiki_folder))
+
+
+def exec_with_restart(args: Sequence[Sequence[str]], base_wiki_folder: str = None,
+                      pidfile: str = None) -> int:
+    """
+    Execute TiddlyWiki server with SIGHUP-triggered restart support.
+
+    When SIGHUP is received, the current server process is terminated
+    and a new one is started, effectively reloading filesystem changes.
+
+    :param args: A list of lists of CLI commands to send to TiddlyWiki.
+    :param base_wiki_folder: If the wiki to execute commands against is not the one
+                             in the current directory, provide its path here.
+    :param pidfile: If provided, write the tzk process PID to this file.
+                    The file is cleaned up when the server exits.
+    """
+    call_args = _build_call_args(args, base_wiki_folder)
+    process = None
+    restart_requested = False
+
+    def handle_sighup(signum, frame):
+        nonlocal restart_requested
+        restart_requested = True
+        if process and process.poll() is None:
+            # Kill the entire process group (npx spawns node which runs tiddlywiki)
+            os.killpg(process.pid, signal.SIGTERM)
+
+    original_handler = signal.signal(signal.SIGHUP, handle_sighup)
+
+    if pidfile:
+        with open(pidfile, 'w') as f:
+            f.write(str(os.getpid()))
+
+    try:
+        first_start = True
+        while True:
+            restart_requested = False
+            # start_new_session=True creates a new process group we can kill together
+            process = subprocess.Popen(call_args, start_new_session=True)
+            if first_start:
+                print(f"Send SIGHUP to PID {os.getpid()} to restart.")
+                first_start = False
+            process.wait()
+
+            if not restart_requested:
+                break
+            print("Received update signal, restarting TiddlyWiki server...")
+
+        return process.returncode if process else 1
+    finally:
+        signal.signal(signal.SIGHUP, original_handler)
+        if pidfile and os.path.exists(pidfile):
+            os.remove(pidfile)
 
 
 def _init_tzk_config() -> None:
