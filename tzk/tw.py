@@ -131,6 +131,10 @@ def exec_with_restart(args: Sequence[Sequence[str]], base_wiki_folder: str = Non
 
         return process.returncode if process else 1
     finally:
+        # Kill the subprocess if it's still running (e.g., on Ctrl+C)
+        if process and process.poll() is None:
+            os.killpg(process.pid, signal.SIGTERM)
+            process.wait()
         signal.signal(signal.SIGHUP, original_handler)
         if pidfile and os.path.exists(pidfile):
             os.remove(pidfile)
