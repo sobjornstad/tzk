@@ -119,7 +119,7 @@ class ListenCommand(CliCommand):
             "--pidfile",
             metavar="PATH",
             help="Write PID to this file for signal-based restart (send SIGHUP to reload).",
-            default=None,
+            default=cm().listen_pidfile,
         )
 
     def execute(self, args: argparse.Namespace) -> None:

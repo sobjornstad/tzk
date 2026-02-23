@@ -46,6 +46,12 @@ listen_host = "127.0.0.1"
 #listen_username = "my_user"
 #listen_password = "my_password"
 
+# If specified, when the server starts it will write its PID to this file.
+# Sending SIGHUP to the process with this PID will cause the server to restart,
+# allowing you to modify tiddlers or other wiki content outside of the
+# TiddlyWiki web interface and have the changes picked up by the server.
+#listen_pidfile = "/tmp/tzk.pid"
+
 
 ### BUILD ###
 # Filter for tiddlers that should be included in a public export of the wiki.
