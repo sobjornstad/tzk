@@ -1,0 +1,26 @@
+(function() {
+    "use strict";
+
+    exports.name = "tzk-auto-refresh";
+    exports.after = ["startup"];
+    exports.synchronous = true;
+
+    exports.startup = function() {
+        // Only run in browser with server sync
+        if (!$tw.browser || !$tw.syncadaptor) return;
+
+        var initialBootId = $tw.wiki.getTiddlerText("$:/tzk/boot-id");
+        if (!initialBootId) return;
+
+        setInterval(function() {
+            fetch("/recipes/default/tiddlers/" + encodeURIComponent("$:/tzk/boot-id"))
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    if (data.text && data.text !== initialBootId) {
+                        location.reload();
+                    }
+                })
+                .catch(function() {}); // Ignore errors during server restart
+        }, 2000);
+    };
+})();

@@ -1,0 +1,41 @@
+caption: Full Text Results
+tags: $:/tags/SearchResults
+title: $:/plugins/hoelzro/full-text-search/search-results
+type: text/vnd.tiddlywiki
+
+\define searchResults()
+<$set name="resultCount" value="""<$count filter="[ftsearch{$(searchTiddler)$}ftsfeedback<ftsFeedback>]"/>""">
+{{$:/language/Search/Matches}}
+</$set>
+
+<$list filter="[ftsearch{$(searchTiddler)$}ftsfeedback<ftsFeedback>]" template="$:/core/ui/ListItemTemplate"/>
+\end
+
+<$set name="state" value="$:/temp/FTS-state">
+<$reveal type="match" state=<<state>> text="initialized">
+<$set name="ftsFeedback" value=<<qualify "$:/temp/fts-feedback">> >
+<<searchResults>>
+
+<$list variable="index" filter="[title<ftsFeedback>indexes[]]">
+
+<$set name="message" tiddler=<<ftsFeedback>> index=<<index>> >
+<strong style="white-space: normal"><<message>></strong>
+</$set>
+</$list>
+</$set>
+
+</$reveal>
+
+<$reveal type="match" state=<<state>> text="uninitialized">
+Search index not initialized; please <$button>
+  Click here to generate the index
+  <$fts-action-generate-index />
+</$button>
+
+</$reveal>
+<$reveal type="match" state=<<state>> text="initializing">
+Generating index...
+
+<$hoelzro-progressbar current={{$:/temp/FTS-state!!progressCurrent}} total={{$:/temp/FTS-state!!progressTotal}} />
+</$reveal>
+</$set>

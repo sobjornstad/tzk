@@ -1,0 +1,3 @@
+module-type: startup
+title: $:/tzk/AutoRefresh
+type: application/javascript

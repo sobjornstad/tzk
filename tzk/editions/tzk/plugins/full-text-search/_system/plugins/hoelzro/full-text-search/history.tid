@@ -1,0 +1,80 @@
+title: $:/plugins/hoelzro/full-text-search/history
+type: text/vnd.tiddlywiki
+
+! Release History
+
+!! 1.1.0 (2018-11-24)
+
+!!! Bug Fixes
+
+  * The plugin no longer indexes draft tiddlers
+  * Refresh query results when embedding ftsearch directly ([[GH #24|https://github.com/hoelzro/tw-full-text-search/issues/24]])
+  * Fixed a bug where wikis with `__proto__` in them would fail to load from cache
+  * Fix some query relevance issues
+  * Fix a bug where indexing didn't work on non-Node installations on Chrome
+
+!!! User-facing changes
+
+  * ~TiddlyWiki 5.1.15 is now required!
+  * Added the ability to automatically index your wiki on startup (~TiddlyWiki 5.1.16 is required for this)
+  * Added lots of examples
+  * Improved indexing for wildcards/fuzzy searches, but these are now hidden behind a configuration flag due the overhead incurred
+  * Alert the user if changing their FTS settings requires an index rebuild
+
+!!! Developer changes
+
+  * Updated to lunr 2.3.5
+  * Tests now use Jasmine 3
+
+!! 1.0.3 (2018-10-07)
+
+!!! User-facing changes
+
+  * Fixed advanced search result listing (GH #8)
+
+!!! Developer changes
+
+  * Allow wikis to disable the cache, primarily for the demo wiki that lives on hoelz.ro (GH #11)
+
+!! 1.0.2 (2018-08-02)
+
+!!! User-facing changes
+
+  * Upgraded to lunr.js 2.3.1, which includes new features like additional query operators.
+
+!! 1.0.1 (2018-06-29)
+
+!!! Bug Fixes
+
+  * Fixed a bug where incomplete lunr.js queries would throw red boxes in the user's face.  Thanks to Diego Mesa for reporting!
+
+!! 1.0.0 (2017-11-29)
+
+!!! User-facing changes
+
+  * Enabled index creation using web workers, resulting in a 10x speedup
+  * Fixed a bug causing images and other non-text data to get indexed
+  * Fixed a bug causing tags to be improperly indexed
+
+!!! Developer changes
+
+  * Upgraded the FTS plugin to lunr.js 2.1.4, plus some modifications of my own to enable mutable indexes
+  * Added tests
+  * Added an experimental feature called "query expansion" - I don't know if it'll stay around or how well it works, so there's no UI around it at the moment
+
+!! 0.0.4 (2017-06-11)
+
+Fix bug where deleted content from a tiddler would still affect search results if a
+partial index is loaded from the web storage cache.
+
+!! 0.0.3 (2017-06-06)
+
+Fix bug with web storage index serialization/deserialization.
+
+!! 0.0.2 (2017-06-02)
+
+Added stashing away current index in web storage to avoid repeated index creation/cut down on index creation time.
+
+!! 0.0.1 (2017-02-27)
+
+Basic full-text search functionality.

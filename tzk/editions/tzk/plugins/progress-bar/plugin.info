@@ -1,0 +1,11 @@
+{
+    "author": "RobHoelz",
+    "core-version": ">=5.1.13",
+    "dependents": "",
+    "description": "Progress Bar Widget",
+    "list": "readme license history",
+    "plugin-type": "plugin",
+    "source": "https://github.com/hoelzro/tw-progress-bar",
+    "title": "$:/plugins/hoelzro/progress-bar",
+    "version": "0.0.1"
+}

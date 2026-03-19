@@ -1,0 +1,11 @@
+{
+    "author": "hoelzro",
+    "core-version": ">=5.1.15",
+    "dependents": "",
+    "description": "Full text search",
+    "list": "readme license history",
+    "plugin-type": "plugin",
+    "source": "https://github.com/hoelzro/tw-full-text-search",
+    "title": "$:/plugins/hoelzro/full-text-search",
+    "version": "1.1.0-4-g954307a"
+}
