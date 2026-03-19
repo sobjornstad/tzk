@@ -69,3 +69,41 @@ the current directory will still be preferred to the ``TZK_DIRECTORY`` directory
     Otherwise tzk would prioritize the ``TZK_DIRECTORY`` over the current directory
     since the current directory doesn't contain a config file yet,
     and it would be impossible to initialize a second tzk repository.
+
+
+jj mode
+=======
+
+tzk supports `Jujutsu`_ (``jj``) for version control alongside Git.
+
+.. _Jujutsu: https://github.com/jj-vcs/jj
+
+Setting the ``vcs`` option in your tzk config to ``jj``
+will cause ``tzk`` to issue ``jj`` commands instead of ``git`` commands
+for its version control operations.
+You'll also want to set the ``commit_bookmark`` option to whatever bookmark
+represents the default branch you would normally be working / pushing from in Git,
+so ``tzk`` knows how to compare your changes against the remote
+during ``commit`` and ``pull`` operations.
+
+Notes:
+
+* ``tzk init`` always initializes a Git repository,
+  but you can easily turn it into a jj repository
+  by running ``jj git init --colocate``
+  after initializing.
+
+* ``tzk``'s definition of “on a branch” is different for jj than for Git,
+  since bookmarks do not automatically move when you commit a change in jj
+  and branches are anonymous by default.
+  If a feature of ``tzk`` wants to know if you're “on the ``master`` branch” in jj mode,
+  it checks to see if the ``master`` bookmark's change
+  is an ancestor of the current change,
+  with no forks or merges in between.
+  (If this condition is met, a ``tzk commit``
+  will auto-advance the bookmark to the current change before pushing.)
+
+* ``tzk pull`` in jj mode manually does a fetch and rebase of the current change.
+  The effect should be essentially identical to the Git version
+  (except much less fussy; no stash is required and the operation will always succeed
+  since conflicts on rebase are not errors in jj).

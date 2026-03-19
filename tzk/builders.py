@@ -22,6 +22,7 @@ import tempfile
 from typing import Callable, Dict, Generator, List, Optional, Set, Sequence, Tuple, Union
 
 from tzk import git
+from tzk import jj
 from tzk import tw
 from tzk.util import alter_tiddlywiki_info, BuildError, pushd
 
@@ -87,7 +88,7 @@ def say_hi(username: str) -> None:
 @tzk_builder
 def require_branch(branchname: str) -> None:
     """
-    Require a specific Git branch to be checked out.
+    Require a specific Git branch (or jj bookmark) to be checked out.
 
     If the branch isn't checked out, the build will fail immediately. This may
     be helpful if you want to be sure you aren't accidentally building a wiki
@@ -95,14 +96,20 @@ def require_branch(branchname: str) -> None:
 
     :param branchname: The name of the branch that must be checked out.
     """
-    if git.read("branch", "--show-current") != branchname:
-        stop(f"You may only run this build from the {branchname} branch.")
+    from tzk.config import cm
+    if cm().vcs == "jj":
+        err = jj.check_bookmark_is_ancestor(branchname)
+        if err:
+            stop(err)
+    else:
+        if git.read("branch", "--show-current") != branchname:
+            stop(f"You may only run this build from the {branchname} branch.")
 
 
 @tzk_builder
 def require_clean_working_tree() -> None:
     """
-    Require the working tree of the Git repository to be clean.
+    Require the working tree of the Git repository (or jj working copy) to be clean.
 
     If there are any unstaged changes to existing files or staged changes,
     the build will fail immediately.
@@ -113,11 +120,16 @@ def require_clean_working_tree() -> None:
     local version whenever you publish another version, this may be a useful
     requirement.
     """
+    from tzk.config import cm
     pleasecommit = "Please commit or stash them before publishing (try 'tzk commit')."
-    if git.rc("diff-index", "--quiet", "--cached", "HEAD", "--") != 0:
-        stop(f"There are staged changes. {pleasecommit}")
-    if git.rc("diff-files", "--quiet") != 0:
-        stop(f"There are uncommitted changes. {pleasecommit}")
+    if cm().vcs == "jj":
+        if jj.read("diff"):
+            stop(f"There are uncommitted changes. {pleasecommit}")
+    else:
+        if git.rc("diff-index", "--quiet", "--cached", "HEAD", "--") != 0:
+            stop(f"There are staged changes. {pleasecommit}")
+        if git.rc("diff-files", "--quiet") != 0:
+            stop(f"There are uncommitted changes. {pleasecommit}")
 
 
 @tzk_builder

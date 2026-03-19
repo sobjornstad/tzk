@@ -17,16 +17,26 @@ wiki_folder = "wiki"
 
 
 ### COMMITTING ####
+# Version control system to use: "git" (default) or "jj" (Jujutsu).
+# When set to "jj", tzk uses jj commands for commit, pull, and build validation.
+# Requires jj 0.17+ (for 'jj bookmark set').
+#vcs = "git"
+
+# jj bookmark to advance and push (jj only). Default: "master".
+#commit_bookmark = "master"
+
 # Default commit message to use with 'tzk commit'.
 # You can always use 'tzk commit -m' to use a different message on the fly.
 commit_message = "checkpoint"
 
 # Git remote to push changes to when you run 'tzk commit'.
 # If you never want to push changes, set this to the empty string ("").
-commit_remote = ""
-#commit_remote = "origin"
+commit_remote = "origin"
 
 # Uncomment if you want to abort 'tzk commit' if you're not on a specific branch.
+# If vcs is 'jj', "on the branch" means "on a change that is a descendant of the
+# bookmark, with no forks or merges in between", and a successful commit will 
+# auto-advance the bookmark.
 #commit_require_branch = "master"
 
 
@@ -35,8 +45,9 @@ commit_remote = ""
 # http://localhost:8080 in your browser.
 listen_port = 8080
 
-# Host to listen on. If you specify "0.0.0.0" it will listen to all network interfaces.
-# This is useful for allowing the wiki to be exposed to the network through a container.
+# Host to listen on.
+# The default prevents others on your local network from accessing the wiki.
+# If you specify "0.0.0.0", it will listen to all network interfaces.
 listen_host = "127.0.0.1"
 
 # Uncomment if you want to require HTTP basic authentication when serving your wiki.

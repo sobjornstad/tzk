@@ -9,6 +9,7 @@ from typing import Optional
 
 from tzk.config import cm, DEFAULT_INIT_OPTS
 from tzk import git
+from tzk import jj
 from tzk import tw
 from tzk.util import (BuildError, fail, numerize, require_dependencies, pushd,
                       TZK_VERSION)
@@ -67,6 +68,13 @@ class CommitCommand(CliCommand):
     def execute(self, args: argparse.Namespace) -> None:
         cm().require_config()
         chdir_to_wiki()
+
+        if cm().vcs == "jj":
+            self._execute_jj(args)
+        else:
+            self._execute_git(args)
+
+    def _execute_git(self, args: argparse.Namespace) -> None:
         if cm().commit_require_branch:
             current_branch = git.read("rev-parse", "--abbrev-ref", "HEAD")
             if current_branch != cm().commit_require_branch:
@@ -77,6 +85,44 @@ class CommitCommand(CliCommand):
         git.exec("add", "-A")
         if git.rc("commit", "-m", args.message) == 0 and args.remote and not args.local:
             git.exec("push", args.remote)
+
+    def _execute_jj(self, args: argparse.Namespace) -> None:
+        bookmark = cm().commit_bookmark or "master"
+        remote = args.remote
+
+        # Check commit_require_branch: verify bookmark is ancestor of @ via linear path
+        if cm().commit_require_branch:
+            err = jj.check_bookmark_is_ancestor(cm().commit_require_branch)
+            if err:
+                fail(err)
+
+        # Check for working copy changes and commit
+        has_changes = bool(jj.read("diff", "--stat"))
+        if has_changes:
+            jj.exec("commit", "-m", args.message)
+
+        # Verify linear topology between bookmark and @- before advancing
+        err = jj.check_bookmark_is_ancestor(bookmark, "@-")
+        if err:
+            fail(err)
+
+        bookmark_at = jj.read("log", "-r", bookmark,
+                              "--no-graph", "-T", "commit_id")
+        target_at = jj.read("log", "-r", "@-",
+                            "--no-graph", "-T", "commit_id")
+        if bookmark_at == target_at:
+            # Message should always be correct because if has_changes,
+            # we would have done a commit and this would result in moving the target
+            # without the bookmark, so we'll always have to do this step
+            # if there was something to commit.
+            print("Nothing to commit or push.")
+            return
+
+        jj.exec("bookmark", "set", bookmark, "-r", "@-")
+
+        # Finally, push changes if requested.
+        if remote and not args.local:
+            jj.exec("git", "push", "--remote", remote, "--bookmark", bookmark)
 
 
 class ListenCommand(CliCommand):
@@ -404,6 +450,12 @@ class PullCommand(CliCommand):
         cm().require_config()
         chdir_to_wiki()
 
+        if cm().vcs == "jj":
+            self._execute_jj(args)
+        else:
+            self._execute_git(args)
+
+    def _execute_git(self, args: argparse.Namespace) -> None:
         # Sanity check: remote exists
         if git.rc("remote", "get-url", args.remote) != 0:
             fail(f"Remote '{args.remote}' not configured.")
@@ -425,6 +477,13 @@ class PullCommand(CliCommand):
         git.exec("pull", args.remote, "--rebase")
         if dirty_info:
             git.exec("stash", "pop")
+
+    def _execute_jj(self, args: argparse.Namespace) -> None:
+        bookmark = cm().commit_bookmark or "master"
+        remote = args.remote
+
+        jj.exec("git", "fetch", "--remote", remote)
+        jj.exec("rebase", "-d", f"{bookmark}@{remote}")
 
 
 def chdir_to_wiki():
