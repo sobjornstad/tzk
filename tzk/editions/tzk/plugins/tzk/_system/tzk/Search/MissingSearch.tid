@@ -1,0 +1,45 @@
+caption: Missing
+created: 20260416192306634
+creator: soren
+first-search-filter: [all[missing]search:title<userInput>!is[system]sort[title]limit[250]]
+list-after: $:/tzk/Search/TypeSearch
+modified: 20260416192306634
+modifier: soren
+tags: $:/tags/SearchResults
+title: $:/tzk/Search/MissingSearch
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+
+\define searchResultList()
+
+	<% if [<userInput>minlength[1]] %>
+
+		<$list filter={{{ [<configTiddler>get[first-search-filter]] }}} emptyMessage="//No missing tiddlers match.//">
+			<span class={{{[<currentTiddler>addsuffix[-primaryList]] -[<searchListState>get[text]] +[then[]else[tc-list-item-selected]] }}}>
+				<$transclude tiddler="$:/tzk/Search/MissingSearchItemTemplate"/>
+			</span>
+		</$list>
+
+	<% endif %>
+
+\end
+
+<<searchResultList>>
+
+
+<style>
+.sib-search-missing-item {
+	margin-bottom: 0.3em;
+}
+
+.sib-search-missing-backlinks {
+	font-size: 80%;
+	padding-left: 1em;
+	color: #666;
+}
+
+.sib-search-missing-backlinks a {
+	margin-right: 0.3em;
+}
+</style>

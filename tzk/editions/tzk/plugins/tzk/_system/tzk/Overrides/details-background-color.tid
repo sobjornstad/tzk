@@ -6,4 +6,4 @@ tags: $:/tags/Macro
 title: $:/tzk/Overrides/details-background-color
 type: text/vnd.tiddlywiki
 
-\procedure details-background-color() <<colour tiddler-info-tab-background>>
+\procedure details-background-color() <<colour tiddler-info-background>>

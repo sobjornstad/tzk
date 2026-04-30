@@ -56,7 +56,7 @@ function getSubscriptions(widget, user, token) {
 						if (data['reason'] === "Invalid token") {
 							alert("Your access code is invalid or missing. Please choose 'send a new one' and try the new access code you are emailed.")
 						} else {
-							alert("Unknown error viewing subscriptions. Please contact zettelkasten@sorenbjornstad.com for assistance.");
+							alert("Unknown error viewing subscriptions. Please contact mosaicmuse@sorenbjornstad.com for assistance.");
 						}
 						return false;
 				} else {

@@ -1,12 +1,33 @@
 created: 20240601195324030
 creator: soren
-modified: 20251011193114293
+modified: 20260729223821000
 modifier: soren
 tags: $:/tags/Global
 title: $:/tzk/refexplorer/Widget
 type: text/vnd.tiddlywiki
 
+<!--
+	Marker shown before each entry's title when the RefExplorerStaleness
+	feature flag is on. The empty span in the fallback branch keeps titles
+	aligned across marked and unmarked rows. See $:/tzk/Functions/staleness.
+-->
+\procedure m2.staleness-marker(tid)
+	<$let recordStatus={{{ [function[m2.update-status],<tid>] }}}>
+		<% if [<recordStatus>match[frozen]] %>
+			<span class="m2-staleness m2-staleness-frozen" title="Frozen: deliberately not kept up to date"><i class="fas fa-snowflake"/></span>
+		<% elseif [<recordStatus>match[flagged]] %>
+			<span class="m2-staleness m2-staleness-flagged" title="Flagged: tagged NeedsAttention, or contains a TODO"><i class="fas fa-flag"/></span>
+		<% elseif [<recordStatus>match[out-of-date]] %>
+			<span class="m2-staleness m2-staleness-out-of-date" title="Out of date: not updated or reviewed in 6 months"><i class="fas fa-hourglass-half"/></span>
+		<% else %>
+			<span class="m2-staleness"/>
+		<% endif %>
+	</$let>
+\end m2.staleness-marker
+
 \widget $m2.reference-explorer(caption, filter)
+	<!-- Resolved once per table rather than once per row. -->
+	<$let showStaleness={{{ [m2.ff[RefExplorerStaleness]then[yes]] ~[[no]] }}}>
 	<table class="ideas-table">
 		<caption class="ideas-table-caption"><<caption>></caption>
 		<thead>
@@ -21,7 +42,7 @@ type: text/vnd.tiddlywiki
 			<$list filter=<<filter>> variable="currentRecord">
 				<tr>
 					<td>
-						<$link to=<<currentRecord>> style="color: white;"/>
+						<% if [<showStaleness>match[yes]] %><$transclude $variable="m2.staleness-marker" tid=<<currentRecord>>/><% endif %><$link to=<<currentRecord>> style="color: white;"/>
 					</td>
 					{{||$:/tzk/refexplorer/LinkTypeTemplate}}
 					<td>
@@ -36,4 +57,5 @@ type: text/vnd.tiddlywiki
 			</$list>
 		</tbody>
 	</table>
+	</$let>
 \end $m2.reference-explorer

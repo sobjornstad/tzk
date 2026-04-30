@@ -1,7 +1,7 @@
 created: 20250211045109879
 creator: soren
 first-search-filter: [subfilter<tagListFilter>!is[system]search:title<userInput>sort[]sort[color]]
-modified: 20250211045342498
+modified: 20260218162144273
 modifier: soren
 second-search-filter: [subfilter<tagListFilter>is[system]search:title<userInput>]
 tags: $:/tags/Macro
@@ -150,7 +150,7 @@ The second ESC tries to close the "draft tiddler"
 	</div>
 	<div class="tc-block-dropdown-wrapper">
 		<%if [<tf.tagpicker-dropdown-id>has[text]] %>
-			<div class="tc-block-dropdown tc-block-tags-dropdown fourcolumns">
+			<div class="tc-block-dropdown tc-block-tags-dropdown fivecolumns">
 				<$transclude $variable="tag-picker-listTags" filter=<<nonSystemTagsFilter>> suffix="-primaryList" empty={{$:/language/EditTemplate/Tags/EmptyMessage}}/>
 				<hr>
 				<$transclude $variable="tag-picker-listTags" filter=<<systemTagsFilter>> suffix="-secondaryList" empty=""/>

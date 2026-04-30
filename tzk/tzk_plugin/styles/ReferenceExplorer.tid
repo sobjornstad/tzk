@@ -1,6 +1,6 @@
 created: 20210721020857476
 creator: soren
-modified: 20251011162313072
+modified: 20260729223821000
 modifier: soren
 tags: $:/tags/Stylesheet
 title: $:/tzk/styles/ReferenceExplorer
@@ -53,6 +53,29 @@ table.ideas-table tr:nth-child(even) {
 
 table.ideas-table a {
 	color: <<color foreground>>;
+}
+
+/* Update-status markers before each title; see $:/tzk/Functions/staleness.
+   Fixed width so titles line up whether or not a row carries a marker. */
+.m2-staleness {
+	display: inline-block;
+	width: 1.4em;
+	margin-right: 0.2em;
+	font-size: 0.85em;
+	text-align: center;
+	opacity: 0.8;
+}
+
+.m2-staleness-out-of-date {
+	color: #8a7a55;
+}
+
+.m2-staleness-flagged {
+	color: tomato;
+}
+
+.m2-staleness-frozen {
+	color: blue;
 }
 
 @media print

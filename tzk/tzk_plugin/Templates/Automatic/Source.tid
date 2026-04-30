@@ -1,7 +1,7 @@
 created: 20200808023836194
 creator: soren
 description: Display a table of fields and other information about the source described by this tiddler.
-modified: 20251011164805967
+modified: 20260623204736879
 modifier: soren
 tags: $:/tags/ViewTemplate
 title: $:/tzk/Templates/Automatic/Source
@@ -77,6 +77,14 @@ type: text/vnd.tiddlywiki
 			</$list>
 		</td>
 	</tr>
+	<% if [all[current]has[whenuseful]] %>
+	<tr>
+		<th>When Useful</th>
+		<td>
+			{{!!whenuseful}}
+		</td>
+	</tr>
+	<% endif %>
 </table>
 
 <style>

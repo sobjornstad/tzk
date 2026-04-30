@@ -1,6 +1,6 @@
 created: 20240829024845326
 creator: soren
-modified: 20240927111256290
+modified: 20260421134205620
 modifier: soren
 title: $:/core/ui/TiddlerIcon
 type: text/vnd.tiddlywiki
@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 \whitespace trim
 <$let tiddlerIcon={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]] }}}>
 <$list filter="[<tiddlerIcon>!is[blank]]" variable="ignore">
-	<% if [all[current]regexp[^fas]]] %>
+	<% if [<tiddlerIcon>prefix[fa]] %>
 		<$transclude $tiddler="$:/Templates/Automatic/TiddlerTypeIconFa" faspec=<<tiddlerIcon>>/>
 	<% else %>
 		<$transclude tiddler=<<tiddlerIcon>>/>

@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 
 Each tiddler has an ''update status'' which aims to give a rough idea of whether you can rely on the information in that tiddler to be aligned with my current thinking. See DocumentationStates for inspiration.
 
-For now update statuses are something of an experiment and apply only to idea tiddlers; I may expand the system if it works well.
+For now, update statuses are something of an experiment and apply only to idea tiddlers; I may expand the system if it works well.
 
 ; <span style="color: lightgreen;">maintained</span>
 : The tiddler describes an idea, opinion, etc., that can change over time, and has been touched within the preceding 6 months. It's probably not wildly out of date.

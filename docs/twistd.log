@@ -1,0 +1,58 @@
+2026-04-30T10:55:13-0500 [-] Unable to write to plugin cache /usr/lib/python3.14/site-packages/twisted/plugins/dropin.cache: error number 13
+2026-04-30T10:55:13-0500 [twisted.scripts._twistd_unix.UnixAppLogger#info] twistd 24.7.0 (/usr/bin/python 3.14.3) starting up.
+2026-04-30T10:55:13-0500 [twisted.scripts._twistd_unix.UnixAppLogger#info] reactor class: twisted.internet.epollreactor.EPollReactor.
+2026-04-30T10:55:13-0500 [stderr#error] Traceback (most recent call last):
+2026-04-30T10:55:13-0500 [stderr#error]   File "/usr/lib/python3.14/site-packages/twisted/internet/tcp.py", line 1346, in startListening
+2026-04-30T10:55:13-0500 [stderr#error]     skt.bind(addr)
+2026-04-30T10:55:13-0500 [stderr#error]     ~~~~~~~~^^^^^^
+2026-04-30T10:55:13-0500 [stderr#error] OSError: [Errno 98] Address already in use
+2026-04-30T10:55:13-0500 [stderr#error] During handling of the above exception, another exception occurred:
+2026-04-30T10:55:13-0500 [stderr#error] Traceback (most recent call last):
+2026-04-30T10:55:13-0500 [stderr#error]   File "/home/soren/.local/bin/twistd", line 8, in <module>
+2026-04-30T10:55:13-0500 [stderr#error]     sys.exit(run())
+2026-04-30T10:55:13-0500 [stderr#error]              ~~~^^
+2026-04-30T10:55:13-0500 [stderr#error]   File "/usr/lib/python3.14/site-packages/twisted/scripts/twistd.py", line 35, in run
+2026-04-30T10:55:13-0500 [stderr#error]     app.run(runApp, ServerOptions)
+2026-04-30T10:55:13-0500 [stderr#error]     ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+2026-04-30T10:55:13-0500 [stderr#error]   File "/usr/lib/python3.14/site-packages/twisted/application/app.py", line 673, in run
+2026-04-30T10:55:13-0500 [stderr#error]     runApp(config)
+2026-04-30T10:55:13-0500 [stderr#error]     ~~~~~~^^^^^^^^
+2026-04-30T10:55:13-0500 [stderr#error]   File "/usr/lib/python3.14/site-packages/twisted/scripts/twistd.py", line 29, in runApp
+2026-04-30T10:55:13-0500 [stderr#error]     runner.run()
+2026-04-30T10:55:13-0500 [stderr#error]     ~~~~~~~~~~^^
+2026-04-30T10:55:13-0500 [stderr#error]   File "/usr/lib/python3.14/site-packages/twisted/application/app.py", line 374, in run
+2026-04-30T10:55:13-0500 [stderr#error]     self.postApplication()
+2026-04-30T10:55:13-0500 [stderr#error]     ~~~~~~~~~~~~~~~~~~~~^^
+2026-04-30T10:55:13-0500 [stderr#error]   File "/usr/lib/python3.14/site-packages/twisted/scripts/_twistd_unix.py", line 254, in postApplication
+2026-04-30T10:55:13-0500 [stderr#error]     self.startApplication(self.application)
+2026-04-30T10:55:13-0500 [stderr#error]     ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+2026-04-30T10:55:13-0500 [stderr#error]   File "/usr/lib/python3.14/site-packages/twisted/scripts/_twistd_unix.py", line 444, in startApplication
+2026-04-30T10:55:13-0500 [stderr#error]     service.IService(application).privilegedStartService()
+2026-04-30T10:55:13-0500 [stderr#error]     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+2026-04-30T10:55:13-0500 [stderr#error]   File "/usr/lib/python3.14/site-packages/twisted/application/service.py", line 271, in privilegedStartService
+2026-04-30T10:55:13-0500 [stderr#error]     service.privilegedStartService()
+2026-04-30T10:55:13-0500 [stderr#error]     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+2026-04-30T10:55:13-0500 [stderr#error]   File "/usr/lib/python3.14/site-packages/twisted/application/service.py", line 271, in privilegedStartService
+2026-04-30T10:55:13-0500 [stderr#error]     service.privilegedStartService()
+2026-04-30T10:55:13-0500 [stderr#error]     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+2026-04-30T10:55:13-0500 [stderr#error]   File "/usr/lib/python3.14/site-packages/twisted/application/internet.py", line 396, in privilegedStartService
+2026-04-30T10:55:13-0500 [stderr#error]     raisedNow[0].raiseException()
+2026-04-30T10:55:13-0500 [stderr#error]     ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+2026-04-30T10:55:13-0500 [stderr#error]   File "/usr/lib/python3.14/site-packages/twisted/python/failure.py", line 535, in raiseException
+2026-04-30T10:55:13-0500 [stderr#error]     raise self.value.with_traceback(self.tb)
+2026-04-30T10:55:13-0500 [stderr#error] twisted.internet.error.CannotListenError: Couldn't listen on any:8080: [Errno 98] Address already in use.
+2026-04-30T10:55:16-0500 [-] Unable to write to plugin cache /usr/lib/python3.14/site-packages/twisted/plugins/dropin.cache: error number 13
+2026-04-30T10:55:16-0500 [twisted.scripts._twistd_unix.UnixAppLogger#info] twistd 24.7.0 (/usr/bin/python 3.14.3) starting up.
+2026-04-30T10:55:16-0500 [twisted.scripts._twistd_unix.UnixAppLogger#info] reactor class: twisted.internet.epollreactor.EPollReactor.
+2026-04-30T10:55:16-0500 [-] Site starting on 2020
+2026-04-30T10:55:16-0500 [twisted.web.server.Site#info] Starting factory <twisted.web.server.Site object at 0x7f116a864c20>
+2026-04-30T10:55:24-0500 [twisted.python.log#info] "192.168.1.160" - - [30/Apr/2026:15:55:23 +0000] "GET / HTTP/1.1" 200 6660522 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+2026-04-30T10:55:25-0500 [twisted.python.log#info] "192.168.1.160" - - [30/Apr/2026:15:55:24 +0000] "OPTIONS / HTTP/1.1" 501 150 "http://192.168.1.29:2020/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+2026-04-30T10:55:25-0500 [twisted.python.log#info] "192.168.1.160" - - [30/Apr/2026:15:55:24 +0000] "GET /favicon.ico HTTP/1.1" 404 145 "http://192.168.1.29:2020/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+2026-04-30T10:56:23-0500 [twisted.web.http.HTTPChannel#info] Timing out client: IPv4Address(type='TCP', host='192.168.1.160', port=49710)
+2026-04-30T10:56:25-0500 [twisted.web.http.HTTPChannel#info] Timing out client: IPv4Address(type='TCP', host='192.168.1.160', port=62783)
+2026-04-30T12:00:39-0500 [twisted.python.log#info] "192.168.1.160" - - [30/Apr/2026:17:00:39 +0000] "GET /$:/favicon.ico HTTP/1.1" 404 145 "http://192.168.1.29:2020/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+2026-04-30T12:01:39-0500 [twisted.web.http.HTTPChannel#info] Timing out client: IPv4Address(type='TCP', host='192.168.1.160', port=26194)
+2026-04-30T12:17:28-0500 [twisted.python.log#info] "192.168.1.160" - - [30/Apr/2026:17:17:27 +0000] "GET / HTTP/1.1" 200 6657482 "http://192.168.1.29:2020/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+2026-04-30T12:17:28-0500 [twisted.python.log#info] "192.168.1.160" - - [30/Apr/2026:17:17:28 +0000] "OPTIONS / HTTP/1.1" 501 150 "http://192.168.1.29:2020/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+2026-04-30T12:17:28-0500 [twisted.python.log#info] "192.168.1.160" - - [30/Apr/2026:17:17:28 +0000] "HEAD / HTTP/1.1" 304 - "http://192.168.1.29:2020/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"

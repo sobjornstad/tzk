@@ -16,7 +16,7 @@ type: text/vnd.tiddlywiki
 !! Fields
 
 ; description
-: When possible, the main idea of a tiddler should be summed up into a sentence or two and placed in the `description` field. This be displayed next to a gem icon underneath the tiddler's title, and it will appear in a tooltip when you hover over the tiddler in the ReferenceExplorer. (If no `description` field is available, a short excerpt of the beginning of the tiddler is shown in this tooltip.)
+: When possible, the main idea of a tiddler should be summed up into a sentence or two and placed in the `description` field. This will be displayed next to a gem icon underneath the tiddler's title, and it will appear in a tooltip when you hover over the tiddler in the ReferenceExplorer. (If no `description` field is available, a short excerpt of the beginning of the tiddler is shown in this tooltip.)
 ; es
 : The [[epistemic status|EpistemicStatuses]] of this idea, if one is appropriate. This may be chosen from the drop-down in the upper-right of the tiddler in view mode.
 ; universe

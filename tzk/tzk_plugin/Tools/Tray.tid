@@ -2,7 +2,8 @@ caption: Tray
 created: 20210701023215046
 creator: soren
 description: Items we're currently working on but don't need to leave open. Drag and drop a link to a tiddler to add it.
-modified: 20260215000025862
+list: SharedNotesImpossible UnusualCategoryTaxThreads [[attraction Cas/me conversation]] RemnoteReturn2026 AutofocusSoftDelete PlanelySlower InditeLlms WeirdMeIntroduction SoloRoadTripTips
+modified: 20260429190344536
 modifier: soren
 tags: Meta Tool
 title: $:/tzk/Tools/Tray
@@ -11,4 +12,4 @@ type: text/vnd.tiddlywiki
 
 Stuff I'm working on but don't need to keep open:
 
-<<list-links-draggable "$:/config/tzk/Tools/Tray" itemTemplate:"$:/tzk/Tools/Tray/Template">>
+<<list-links-draggable "$:/tzk/Tools/Tray" itemTemplate:"$:/tzk/Tools/Tray/Template">>

@@ -11,7 +11,7 @@ setuptools.setup(
     name="tzk",
     version="0.5.1",
     author="Soren I. Bjornstad",
-    author_email="zettelkasten@sorenbjornstad.com",
+    author_email="mosaicmuse@sorenbjornstad.com",
     description="Build tool for TiddlyWiki Zettelkasten",
     long_description=long_description,
     long_description_content_type="text/markdown",

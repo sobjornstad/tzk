@@ -1,0 +1,58 @@
+created: 20260729223125000
+creator: soren
+description: Determine the [[update status|UpdateStatuses]] of a tiddler: whether it is frozen, flagged for attention, out of date, or maintained.
+example: <$text text={{{ [function[m2.update-status],<currentTiddler>] }}}/>
+modified: 20260729223125000
+modifier: soren
+tags: $:/tags/Global
+title: $:/tzk/Functions/staleness
+type: text/vnd.tiddlywiki
+
+<!--
+	The single source of truth for update statuses. Consumed by
+	$:/tzk/Templates/Automatic/UpdateStatus (the header badge),
+	$:/tzk/Tools/StaleIdeas, and $:/tzk/refexplorer/Widget.
+
+	Every function takes the tiddler to examine as a parameter rather than
+	reading <<currentTiddler>>, because the Reference Explorer needs to ask
+	about a *row* while currentTiddler is still the host tiddler.
+
+	Keep all of these in this one tiddler. If a function name fails to
+	resolve, TiddlyWiki's `function` operator returns its entire input list
+	instead of erroring, so a half-loaded definition would silently mark
+	everything stale.
+-->
+
+<!-- A tiddler is out of date once it has gone this long untouched. -->
+\function m2.stale-cutoff() [<dateadd months:-6 template:YYYY0MM0DD>]
+
+<!-- Later of `modified` and `reviewed`, as YYYYMMDD. Not `max`/`maxall`:
+     those are numeric, so a 17-character `reviewed` timestamp would beat a
+     later 8-character date purely on digit count. -->
+\function m2.last-touched(tid)
+	[<tid>get[modified]split[]first[8]join[]] [<tid>get[reviewed]] +[!sort[]first[]]
+\end m2.last-touched
+
+<!-- Explicitly marked as wanting work. -->
+\function m2.flagged(tid)
+	[<tid>tag[NeedsAttention]] [<tid>links[]match[TODO]] +[limit[1]]
+\end m2.flagged
+
+<!-- Simply gone untouched for too long. -->
+\function m2.out-of-date(tid)
+	[function[m2.last-touched],<tid>compare:date:lt<m2.stale-cutoff>]
+\end m2.out-of-date
+
+<!-- The historical two-way rule: anything that isn't maintained. -->
+\function m2.is-stale(tid)
+	[function[m2.flagged],<tid>] [function[m2.out-of-date],<tid>] +[limit[1]]
+\end m2.is-stale
+
+<!-- Exactly one of: none (not an idea), frozen, flagged, out-of-date, maintained. -->
+\function m2.update-status(tid)
+	 [<tid>!tag[Idea]then[none]]
+	~[<tid>tag[Frozen]then[frozen]]
+	~[function[m2.flagged],<tid>then[flagged]]
+	~[function[m2.out-of-date],<tid>then[out-of-date]]
+	~[[maintained]]
+\end m2.update-status

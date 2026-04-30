@@ -1,0 +1,25 @@
+created: 20260416192306634
+creator: soren
+modified: 20260416192306634
+modifier: soren
+tags: 
+title: $:/tzk/Search/MissingSearchItemTemplate
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+
+<div class="tc-menu-list-item sib-search-missing-item">
+	<$link to=<<currentTiddler>>>
+		<$text text=<<currentTiddler>>/>
+	</$link>
+	<div class="sib-search-missing-backlinks">
+		<$list filter="[<currentTiddler>backlinks[]!is[system]limit[5]]" variable="src">
+			<$link to=<<src>>><$text text=<<src>>/></$link>
+		</$list>
+		<$list filter="[<currentTiddler>backlinks[]!is[system]count[]]" variable="total">
+			<$list filter="[<total>compare:number:gt[5]]" variable="ignore">
+				//…and <$text text={{{ [<total>subtract[5]] }}}/> more//
+			</$list>
+		</$list>
+	</div>
+</div>

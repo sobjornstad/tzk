@@ -1,15 +1,13 @@
 {
-    "author": "Tobias Beer",
-    "core-version": ">=5.1.9",
-    "created": "20220505135225785",
-    "dependents": "",
+    "title": "$:/plugins/tobibeer/appear",
     "description": "Create popups, sliders or accordion menus with the appear widget.",
+    "author": "Tobias Beer",
+    "version": "0.6.2",
+    "core-version": ">=5.1.9",
+    "source": "https://github.com/tobibeer/tw5-appear",
     "documentation": "https://tobibeer.github.io/tw5-appear",
-    "list": "readme",
-    "modified": "20220505135225785",
     "plugin-type": "plugin",
     "requires": "",
-    "source": "https://github.com/tobibeer/tw5-appear",
-    "title": "$:/plugins/tobibeer/appear",
-    "version": "0.6.2"
+    "list": "readme",
+    "dependents": ""
 }
