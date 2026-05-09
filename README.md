@@ -18,6 +18,21 @@ Some basic knowledge of [TiddlyWiki](https://tiddlywiki.com)
     is necessary and assumed.
 
 
+AI use
+------
+
+Most of tzk was written before the advent of AI coding agents
+that understood TiddlyWiki well enough to be useful.
+Since they became useful,
+I have been using Claude Code to make many if not most of the changes to tzk
+(both the Python CLI and the TiddlyWiki tiddlers).
+However, I retain a strong understanding of how all its parts fit together;
+I use Claude more as a debugger and a “high-level editor” here
+than as a vibecoding tool.
+
+All of tzk’s documentation is human-written.
+
+
 Documentation / Installation
 ----------------------------
 
