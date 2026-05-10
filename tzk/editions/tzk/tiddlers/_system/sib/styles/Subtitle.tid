@@ -8,6 +8,4 @@ type: text/vnd.tiddlywiki
 
 .tc-title { font-size: 0.9em; color: <<color tiddler-title-foreground>>; }
 
-.tc-subtitle { font-size: 0.9em; color: <<color tiddler-title-foreground>>; }
-
 .tc-subtitle .tc-tiddlylink { margin-right: 0; }
